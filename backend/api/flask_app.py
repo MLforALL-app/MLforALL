@@ -1,9 +1,8 @@
 from visual import dummyvisual
 from predict import dummypredict
-import flask
-from flask import request, jsonify
+from flask import Flask, request, jsonify
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 app.config["DEBUG"] = True
 
 
@@ -24,4 +23,4 @@ def predict():
 
 # when uploading to pythonanywhere,
 # comment this line out
-# app.run()
+app.run()
