@@ -9,11 +9,13 @@ body {
 		"Helvetica Neue", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background: url(images/background.jpg) no-repeat;
+	/* background: url(images/background.jpg) no-repeat;
 	background-size: 100%;
 	background-position: bottom;
 	background-color: #e2e1e1;
 	min-height: 100%;
+	*/
+	background-color: #e7f1f8;
 }
 
 form {
@@ -47,4 +49,8 @@ input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
 		monospace;
+}
+
+.hearts {
+	color: #e25555;
 }
