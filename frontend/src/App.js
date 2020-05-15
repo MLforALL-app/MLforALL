@@ -5,6 +5,7 @@ import Dashboard from "./components/dashboard/dashboard";
 import ProjectDetails from "./components/projects/projectdetails";
 import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
+import CreateProject from "./components/projects/createproject";
 //import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
 					<Route path="/project/:id" component={ProjectDetails} />
 					<Route path="/signin" component={SignIn} />
 					<Route path="/signup" component={SignUp} />
+					<Route path="/create" component={CreateProject} />
 				</Switch>
 			</div>
 		</BrowserRouter>
