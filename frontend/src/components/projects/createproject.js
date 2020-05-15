@@ -15,7 +15,8 @@ class CreateProject extends Component {
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(this.state);
+		this.props.createProject(this.state);
+		this.props.history.push("/");
 	};
 
 	render() {
@@ -26,6 +27,7 @@ class CreateProject extends Component {
 					<div className="input-field">
 						<label htmlFor="title">Title</label>
 						<input
+							autocomplete="off"
 							type="text"
 							id="title"
 							onChange={this.handleChange}
@@ -37,6 +39,7 @@ class CreateProject extends Component {
 							className="materialize-textarea"
 							cols="30"
 							rows="10"
+							id="content"
 							onChange={this.handleChange}
 						></textarea>
 					</div>
