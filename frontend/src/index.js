@@ -19,6 +19,7 @@ import {
 } from "react-redux-firebase";
 import fbConfig from "./config/fbConfig";
 import firebase from "firebase/app";
+//import cute from "./images/loadingcute.gif";
 
 const store = createStore(
 	rootReducer,
@@ -42,9 +43,20 @@ const rrfProps = {
 	sessions: "sessions"
 };
 
+// Update this to update loading screen
 function AuthIsLoaded({ children }) {
 	const auth = useSelector((state) => state.firebase.auth);
-	if (!isLoaded(auth)) return <div>Loading Screen...</div>;
+	if (!isLoaded(auth))
+		return (
+			<div style={{ textAlign: "center" }}>
+				<h6>Loading MLforAll...</h6>
+				{/*<img src={cute}></img>
+				<p>
+					{" "}
+					We appreciate your patience! Zesty Machine Learning Models
+					are on their way. </p> */}
+			</div>
+		);
 	return children;
 }
 
