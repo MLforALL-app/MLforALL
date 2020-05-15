@@ -6,7 +6,7 @@ class LandingPage extends Component {
 	render() {
 		const { auth } = this.props;
 		// Route Protection
-		if (auth.uid) return <Redirect to="/dashboard" />;
+		//if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
 			<div className="container" style={{ textAlign: "center " }}>
 				<h1> What is ML for All? </h1>

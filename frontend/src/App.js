@@ -6,7 +6,7 @@ import ProjectDetails from "./components/projects/projectdetails";
 import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
 import CreateProject from "./components/projects/createproject";
-//import LandingPage from "./components/info/landing";
+import LandingPage from "./components/info/landing";
 //import "./App.css";
 
 function App() {
@@ -20,7 +20,7 @@ function App() {
 					<Route path="/signin" component={SignIn} />
 					<Route path="/signup" component={SignUp} />
 					<Route path="/create" component={CreateProject} />
-					{/* <Route exact path="/" component={LandingPage} /> */}
+					<Route exact path="/" component={LandingPage} />
 				</Switch>
 			</div>
 		</BrowserRouter>
