@@ -1,4 +1,5 @@
 .DS_store
 .ipynb_checkpoints/
-backend/firebase/firebase.html
 *.sav
+frontend/src/config/fbConfig.js
+
