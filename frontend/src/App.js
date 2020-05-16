@@ -1,28 +1,30 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-
-import Home from "./components/Home";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Error from "./components/Error";
-import Navigation from "./components/Navigation";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Navbar from "./components/layouts/Navbar";
+import Dashboard from "./components/dashboard/dashboard";
+import ProjectDetails from "./components/projects/projectdetails";
+import SignIn from "./components/auth/Signin";
+import SignUp from "./components/auth/Signup";
+import CreateProject from "./components/projects/createproject";
+import LandingPage from "./components/info/landing";
+//import "./App.css";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <div>
-        <Navigation />
-        <Switch>
-          <Route path="/" component={Home} exact />
-          <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
-          <Route component={Error} />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<div className="App">
+				<Navbar />
+				<Switch>
+					<Route path="/dashboard" component={Dashboard} />
+					<Route path="/project/:id" component={ProjectDetails} />
+					<Route path="/signin" component={SignIn} />
+					<Route path="/signup" component={SignUp} />
+					<Route path="/create" component={CreateProject} />
+					<Route exact path="/" component={LandingPage} />
+				</Switch>
+			</div>
+		</BrowserRouter>
+	);
 }
 
 export default App;
