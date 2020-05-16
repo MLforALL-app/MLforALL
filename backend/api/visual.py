@@ -15,29 +15,29 @@ def dummyvisual():
         "Comment": "Visualization data and calculations will go here"
     }
 
-def getvisual(csv, type, variables, color = 'blue'):
+def getvisual(csv, gr, variables, color = 'blue'):
     assert(type(csv) == str)
     assert(type(variables) == list)
     df = pd.read_csv(csv)
-    filename = csv[:-4] + '_' + type + '.png'
+    filename = csv[:-4] + '_' + gr + '.png'
     graph = None
-    if type == 'hist':
+    if gr == 'hist':
         assert(len(variables) == 1)
         assert(variables[0] != None)
         #make a histogram with the x
         to_plot = df[variables[0]].values
         graph = sns.distplot(to_plot, color)
-    elif type == 'scat':
+    elif gr == 'scat':
         assert(len(variables) == 2 and variables[0] != None and variables[1] != None)
         graph = sns.scatterplot(x=variables[0], y=variables[1], data = df, color = color)
-    elif type == 'lmplot':
+    elif gr == 'lmplot':
         assert(len(variables) == 2 and variables[0] != None and variables[1] != None)
         #uses scatter + linear regression
         graph = sns.lmplot(x=variables[0], y=variables[1], data = df, color = color)
-    elif type == 'pairplot':
+    elif gr == 'pairplot':
         #uses all variables passed in variables
         graph = sns.pairplot(df[variables], plot_kws={'color':color})
-    elif type == 'heatmap':
+    elif gr == 'heatmap':
         #for finding coorelations
         coor = df[variables].cirr(method = 'pearson')
         cols = variables

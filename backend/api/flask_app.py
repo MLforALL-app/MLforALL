@@ -28,7 +28,11 @@ def visual():
 def predict():
     return jsonify(dummypredict())
 
-
+@app.route('/descriptive', methods=['Get'])
+def predict():
+    #this is a route for getting descriptive statistics about the dataframe 
+    #necessary to help users make informed decisions when creating models
+    return None
 # when uploading to pythonanywhere,
 # comment this line out
 app.run()
