@@ -1,3 +1,17 @@
+const appendProjectToUser = (projID, firestore, uid) => {
+	const userRef = firestore.collection("users").doc(uid);
+	userRef.get().then((doc) => {
+		const userData = doc.data();
+		// is there cleaner way to do this besides push?
+		var updated = userData.projects;
+		const length = updated.push(projID);
+		userRef.update({
+			...userData,
+			projects: updated
+		});
+	});
+};
+
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		// make async call to database
@@ -13,8 +27,9 @@ export const createProject = (project) => {
 				authorID,
 				createdAt: new Date()
 			})
-			.then(() => {
-				// tehn do this
+			.then((t) => {
+				// Add projectID to user
+				appendProjectToUser(t.id, firestore, authorID);
 				dispatch({ type: "CREATE_PROJECT", project });
 			})
 			.catch((err) => {
