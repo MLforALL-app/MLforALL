@@ -1,3 +1,5 @@
 .DS_store
 .ipynb_checkpoints/
+*.sav
 frontend/src/config/fbConfig.js
+
