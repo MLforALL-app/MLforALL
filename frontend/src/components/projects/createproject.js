@@ -30,7 +30,7 @@ class CreateProject extends Component {
 					<div className="input-field">
 						<label htmlFor="title">Title</label>
 						<input
-							autocomplete="off"
+							autoComplete="off"
 							type="text"
 							id="title"
 							onChange={this.handleChange}

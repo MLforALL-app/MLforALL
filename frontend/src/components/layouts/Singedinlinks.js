@@ -7,17 +7,23 @@ const Signedinlinks = (props) => {
 	return (
 		<ul className="right">
 			<li>
-				<NavLink to="/dashboard">Home</NavLink>{" "}
+				<NavLink to="/dashboard">All Models</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to="/create">New Project</NavLink>{" "}
+				<NavLink to={"/me/" + props.auth.uid} key={props.auth.uid}>
+					My Models
+				</NavLink>
+			</li>
+			<li>
+				<NavLink to="/create">Create Model</NavLink>{" "}
 			</li>
 			<li>
 				<a onClick={props.signOut}> Logout </a>
 			</li>
 			<li>
 				<NavLink
-					to="/dashboard"
+					to={"/me/" + props.auth.uid}
+					key={props.auth.uid}
 					className="btn btn-floating blue lighten-1"
 				>
 					{props.profile.initials}
