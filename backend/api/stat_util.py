@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np 
 from flask import jsonify
-
+from sklearn.metrics import confusion_matrix 
 
 #one hot encoding
 def one_hot(csv, cols, debug = False):
@@ -41,7 +41,16 @@ def get_descripive(csv, cols):
         descriptive_list[col] = stats
     return descriptive_list
 
-        
+#TODO this will either have to be added to our build and pickle, or we might have to tag our train and test set in the csv.
+def get_confusion_matrix(model, df, X, y):
+    #given a csv and a model lets see how it is classifything things
+    predictions = []
+    for col in X: 
+        predictions.append(model.predict(col))
+    con_mat = confusion_matrix(y, predictions)
+    #this is an array, I will have to create a representation later 
+    return con_mat
+
 def test_onehot():
     csv = 'Pokemon.csv'
     cols = ['Legendary', 'Generation']

@@ -55,15 +55,11 @@ def build_and_pickle(target_parameter, df_variables, csv_name, debug = False):
     pickle.dump(gnb, open(gnbfile, 'wb'))    
     svcfile = 'svc_' + csv_name[0:-4] + '.sav'
     files_created.append(svcfile)
-    pickle.dump(svc, open(svcfile, 'wb')) 
-    if(debug): 
-        test_pickle(logregfile, X_test, y_test)
-        test_pickle(treefile, X_test, y_test)
-        test_pickle(knnfile, X_test, y_test)
-        test_pickle(ldafile, X_test, y_test)
-        test_pickle(gnbfile, X_test, y_test)
-        test_pickle(svcfile, X_test, y_test)
-    return files_created
+    pickle.dump(svc, open(svcfile, 'wb'))
+    score = {}
+    for mdl in files_created:
+        score[mdl] = get_score(mdl, X_test, y_test)
+    return [files_created, score]
 
 
 
@@ -89,10 +85,11 @@ def build_gnb(X, y):
 def build_SVC(X, y):
     return SVC().fit(X,y)
 
-def test_pickle(filename, x , y):
+def get_score(filename, x , y):
     loaded_model = pickle.load(open(filename, 'rb'))
     result = loaded_model.score(x, y)
     print(result)
+    return result
 
 def runtests():
     #this test function relies on the top50 csv being in the same folder. 
