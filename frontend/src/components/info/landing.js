@@ -8,12 +8,12 @@ const intro = () => {
 			<h1> What is ML for All? </h1>
 			<p>
 				{" "}
-				ML For All is a platform designed by two ambitious students
-				seeking to spread the excitment behind machine learning models
-				to people from all kinds of backgrounds. ML for All simplifies
-				the math and the small details and grants you freedom to make
-				observations, draw conclusions, and create visualizations about
-				data.
+				ML For All is a platform designed by two ambitious students,
+				Davis and Len, seeking to spread the excitment behind machine
+				learning models to people from all kinds of backgrounds. ML for
+				All simplifies the math and the small details and grants you
+				freedom to make observations, draw conclusions, and create
+				visualizations about data.
 			</p>
 		</div>
 	);
