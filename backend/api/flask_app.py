@@ -16,8 +16,11 @@ def store():
     #once we know what implement fetching the csv from firebase, that'll go in the call
     return jsonify()
 
+
 @app.route('/visual', methods=['GET'])
 def visual():
+    #api call should pass in what kind of graph, a way to get the csv, 
+    #and what data for what axis
     return jsonify(dummyvisual())
 
 
