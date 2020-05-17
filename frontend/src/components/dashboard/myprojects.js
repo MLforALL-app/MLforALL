@@ -4,14 +4,16 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+//import fetchMine from "./fetchmine";
 
 class MyProjects extends Component {
 	render() {
 		const { projects, auth } = this.props;
-		// TODO: change const projects so its only this user's projects
+		//const projects = fetchMine(auth.uid);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/signin" />;
 		// otws good to go
+		// TODO: change const projects so its only this user's projects
 		return (
 			<div>
 				<span style={{ textAlign: "center" }}>
@@ -20,7 +22,7 @@ class MyProjects extends Component {
 				<div className="dashboard container">
 					<div className="row">
 						<div className="col s16 m10">
-							<ProjectList projects={projects} />
+							<ProjectList projects={projects} uid={auth.uid} />
 						</div>
 					</div>
 				</div>
