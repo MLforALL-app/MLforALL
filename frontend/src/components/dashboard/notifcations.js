@@ -1,6 +1,8 @@
 import React from "react";
 import moment from "moment";
 
+// TODO: MAKE NOTIFICATIONS BAR HORIZONTAL
+
 const Notifications = (props) => {
 	const { notifications } = props;
 	return (
