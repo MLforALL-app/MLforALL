@@ -15,6 +15,7 @@ class Dashboard extends Component {
 		return (
 			<div className="dashboard container">
 				<div className="row">
+					<h3> Look at other people's projects </h3>
 					<div className="col s20 m10">
 						<Notifications notifications={notifications} />
 					</div>
