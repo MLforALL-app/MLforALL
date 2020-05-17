@@ -45,3 +45,4 @@ notebook/top50.csv
 
 # backend api
 api/__pycache__
+api/mlforall-admin-sdk.json
