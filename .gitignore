@@ -3,3 +3,32 @@
 *.sav
 frontend/src/config/fbConfig.js
 
+# Begin CRA Generated .gitignore
+
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+frontend/node_modules
+frontend/.pnp
+frontend.pnp.js
+
+# testing
+frontend/coverage
+
+# firebase config
+frontend/config/fbConfig.js
+
+# production
+frontend/build
+frontend/dist
+
+# misc
+frontend.DS_Store
+frontend.env.local
+frontend.env.development.local
+frontend.env.test.local
+frontend.env.production.local
+
+frontendnpm-debug.log*
+frontendyarn-debug.log*
+frontendyarn-error.log*
