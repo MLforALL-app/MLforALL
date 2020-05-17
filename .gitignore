@@ -32,3 +32,10 @@ frontend.env.production.local
 frontendnpm-debug.log*
 frontendyarn-debug.log*
 frontendyarn-error.log*
+
+# note book stuff
+notebook/__pycache__
+notebook/mlforall-admin-sdk.js
+notebook/Pokemon.csv
+notebook/simple_top50.csv
+notebook/top50.csv
