@@ -39,3 +39,6 @@ notebook/mlforall-admin-sdk.json
 notebook/Pokemon.csv
 notebook/simple_top50.csv
 notebook/top50.csv
+
+# vscode
+.vscode
