@@ -42,4 +42,6 @@ notebook/top50.csv
 
 # api stuff
 api/__pycache__
-api/mlforall-admin-sdk.json
+api/stats/__pycache__
+api/flask/__pycache__
+api/flask/mlforall-admin-sdk.json
