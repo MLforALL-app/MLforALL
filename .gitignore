@@ -35,7 +35,7 @@ frontendyarn-error.log*
 
 # note book stuff
 notebook/__pycache__
-notebook/mlforall-admin-sdk.js
+notebook/mlforall-admin-sdk.json
 notebook/Pokemon.csv
 notebook/simple_top50.csv
 notebook/top50.csv
