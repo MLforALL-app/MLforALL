@@ -42,3 +42,6 @@ notebook/top50.csv
 
 # vscode
 .vscode
+
+# backend api
+api/__pycache__
