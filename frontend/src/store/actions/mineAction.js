@@ -35,7 +35,8 @@ export const fetchMine = (auth) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
 		const myproj = getMyList(uid, firestore); // list of project id's
-	return myproj.map(getProject(firestore));
+		return myproj
+			.map(getProject(firestore))
 			.then((snapshot) => {
 				// Add projectID to user
 				appendProjectToUser(snapshot.id, firestore, authorID);
