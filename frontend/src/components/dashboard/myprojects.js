@@ -17,7 +17,7 @@ class MyProjects extends Component {
 		return (
 			<div>
 				<span style={{ textAlign: "center" }}>
-					<h3> You got some awesome projects! </h3>
+					<h3> Here are your projects! </h3>
 				</span>
 				<div className="dashboard container">
 					<div className="row">
