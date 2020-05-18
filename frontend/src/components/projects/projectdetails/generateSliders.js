@@ -2,12 +2,16 @@ import PredictSlider from "./predictslide";
 import React from "react";
 
 function getslides(variables) {
-	var output = [];
-	variables.forEach((v) => {
-		//console.log("Making ", v.name);
-		output.push(PredictSlider(v.name, v.lo, v.hi));
-	});
-	return <div>{output}</div>;
+	if (variables.length > 0) {
+		var output = [];
+		variables.forEach((v) => {
+			//console.log("Making ", v.name);
+			output.push(PredictSlider(v.name, v.lo, v.hi));
+		});
+		return <div>{output}</div>;
+	} else {
+		return <p> NO SLIDERS YET </p>;
+	}
 }
 
 const GenerateSliders = (project) => {

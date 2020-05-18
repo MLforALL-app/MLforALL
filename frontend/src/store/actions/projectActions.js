@@ -59,7 +59,8 @@ export const createProject = (project) => {
 				authorID: uid,
 				createdAt: date,
 				csvName: csvName,
-				models: []
+				models: [],
+				variables: []
 			})
 			.then((snapshot) => {
 				// Instead we will opt for querying

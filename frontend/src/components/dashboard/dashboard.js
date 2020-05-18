@@ -15,15 +15,9 @@ class Dashboard extends Component {
 		return (
 			<div className="dashboard container">
 				<div className="row">
-					<div className="col s20 m10">
-						<Notifications notifications={notifications} />
-					</div>
+					<Notifications notifications={notifications} />
 				</div>
-				<div className="row">
-					<div className="col s12 m6">
-						<ProjectList projects={projects} />
-					</div>
-				</div>
+				<ProjectList projects={projects} />
 			</div>
 		);
 	}

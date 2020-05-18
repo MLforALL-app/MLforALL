@@ -20,11 +20,7 @@ class MyProjects extends Component {
 					<h3> Here are your projects! </h3>
 				</span>
 				<div className="dashboard container">
-					<div className="row">
-						<div className="col s16 m10">
-							<ProjectList projects={projects} uid={auth.uid} />
-						</div>
-					</div>
+					<ProjectList projects={projects} uid={auth.uid} />
 				</div>
 			</div>
 		);
