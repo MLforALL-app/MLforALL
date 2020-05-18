@@ -15,9 +15,11 @@ function mapDepends(projects, uid) {
 function makeLink(proj) {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
-		<Link to={"/project/" + proj.id} key={proj.id}>
-			<ProjectSummary project={proj} />{" "}
-		</Link>
+		<div className="col s6" key={proj.id}>
+			<Link to={"/project/" + proj.id}>
+				<ProjectSummary project={proj} />{" "}
+			</Link>
+		</div>
 	);
 }
 
@@ -38,15 +40,15 @@ function grouped(projects) {
 function mapPairs(pair) {
 	if (pair.length < 2) {
 		return (
-			<div className="row">
-				<div className="col s6">{makeLink(pair[0])}</div>
+			<div className="row" key={pair[0].id}>
+				{makeLink(pair[0])}
 			</div>
 		);
 	} else {
 		return (
-			<div className="row">
-				<div className="col s6">{makeLink(pair[0])}</div>
-				<div className="col s6">{makeLink(pair[1])}</div>
+			<div className="row" key={pair[0].id}>
+				{makeLink(pair[0])}
+				{makeLink(pair[1])}
 			</div>
 		);
 	}

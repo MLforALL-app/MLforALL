@@ -5,8 +5,7 @@ import moment from "moment";
 
 const makeNotif = (item) => {
 	return (
-		<div className="col s4">
-			{" "}
+		<div className="col s4" key={item.id}>
 			<span className="blue-text">{item.user} </span>
 			<span>{item.content}</span>
 			<div className="note-date grey-text">
@@ -18,6 +17,7 @@ const makeNotif = (item) => {
 
 const Notifications = (props) => {
 	const { notifications } = props;
+	console.log("NOTIF PROPS", props);
 	return (
 		<div className="section">
 			<div className="card z-depth-0">
