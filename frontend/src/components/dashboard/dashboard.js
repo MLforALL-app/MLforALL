@@ -17,6 +17,15 @@ class Dashboard extends Component {
 				<div className="row">
 					<Notifications notifications={notifications} />
 				</div>
+				<div className="row">
+					<div className="card z-depth-0">
+						<div className="card-content">
+							<span className="card-title">
+								<h3>Community Projects</h3>
+							</span>
+						</div>
+					</div>
+				</div>
 				<ProjectList projects={projects} />
 			</div>
 		);
