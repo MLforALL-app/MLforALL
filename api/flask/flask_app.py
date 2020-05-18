@@ -49,7 +49,7 @@ def visual():
     return jsonify(dummyvisual())
 
 
-@app.route('/descriptive', methods=['Get'])
+@app.route('/descriptive', methods=['GET'])
 def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
