@@ -21,7 +21,7 @@ function makeLink(proj) {
 	);
 }
 
-function grouped(projects, i) {
+function grouped(projects) {
 	const group = [];
 	for (var i = 0; i < projects.length; i++) {
 		if (i < projects.length - 1) {
@@ -36,22 +36,19 @@ function grouped(projects, i) {
 }
 
 function mapPairs(pair) {
-	if (pair.length == 1) {
+	if (pair.length < 2) {
 		return (
 			<div className="row">
 				<div className="col s6">{makeLink(pair[0])}</div>
 			</div>
 		);
-	} else if (pair.length == 2) {
+	} else {
 		return (
 			<div className="row">
 				<div className="col s6">{makeLink(pair[0])}</div>
 				<div className="col s6">{makeLink(pair[1])}</div>
 			</div>
 		);
-	} else {
-		console.log("SOMETHING WRONG");
-		return <p> Sorry something wrong </p>;
 	}
 }
 

@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React from "react";
+// import React, { Component } from "react";
 import GenerateSliders from "./generateSliders";
 import DescCard from "./descCard";
 import CSVCard from "./csvCard";
@@ -8,10 +9,12 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import ResultCard from "./resultCard";
 
+/*
 const onDragDrop = () => {
 	// will need this function to update props at this level
 	// change project details to class intake props
 };
+*/
 
 // TODO Try to convert this to project with states
 
