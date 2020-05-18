@@ -4,7 +4,7 @@ import React from "react";
 function getslides(variables) {
 	var output = [];
 	variables.forEach((v) => {
-		console.log("Making ", v.name);
+		//console.log("Making ", v.name);
 		output.push(PredictSlider(v.name, v.lo, v.hi));
 	});
 	return <div>{output}</div>;

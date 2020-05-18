@@ -6,16 +6,21 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import ResultCard from "./resultCard";
 
 const onDragDrop = () => {
 	// will need this function to update props at this level
 	// change project details to class intake props
 };
 
+// TODO Try to convert this to project with states
+
 const ProjectDetails = (props) => {
 	const { auth, project } = props;
-	console.log("PROPS", props);
-	console.log("PROJECT", project);
+	//console.log("PROPS", props);
+	//console.log("PROJECT", project);
+	const model = "trash";
+	const result = "pizza";
 	if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
@@ -26,6 +31,12 @@ const ProjectDetails = (props) => {
 				</div>
 				<div className="row">
 					<div className="col s12">{GenerateSliders(project)}</div>
+				</div>
+				<div className="row">
+					{" "}
+					<div className="col s12">
+						{ResultCard({ model: model, output: result })}
+					</div>
 				</div>
 			</div>
 		);
