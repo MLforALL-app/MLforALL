@@ -48,6 +48,8 @@ export const createProject = (project) => {
 		const lname = getState().firebase.profile.lastName;
 		const uid = getState().firebase.auth.uid;
 		const date = new Date();
+		// Will need some way to accomplish this
+		const csvName = "dummy.csv";
 		firestore
 			.collection("projects")
 			.add({
@@ -55,7 +57,10 @@ export const createProject = (project) => {
 				authorFirstName: fname,
 				authorLastName: lname,
 				authorID: uid,
-				createdAt: date
+				createdAt: date,
+				csvName: csvName,
+				models: [],
+				variables: []
 			})
 			.then((snapshot) => {
 				// Instead we will opt for querying

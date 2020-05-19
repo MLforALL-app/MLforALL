@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import Navbar from "./components/layouts/Navbar";
 import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
-import ProjectDetails from "./components/projects/projectdetails";
+import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
 import CreateProject from "./components/projects/createproject";

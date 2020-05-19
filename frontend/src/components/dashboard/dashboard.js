@@ -14,17 +14,13 @@ class Dashboard extends Component {
 		// otws good to go
 		return (
 			<div className="dashboard container">
+				<span style={{ textAlign: "center" }}>
+					<h3> See other people's projects! </h3>
+				</span>
 				<div className="row">
-					<h3> Look at other people's projects </h3>
-					<div className="col s20 m10">
-						<Notifications notifications={notifications} />
-					</div>
+					<Notifications notifications={notifications} />
 				</div>
-				<div className="row">
-					<div className="col s12 m6">
-						<ProjectList projects={projects} />
-					</div>
-				</div>
+				<ProjectList projects={projects} />
 			</div>
 		);
 	}
