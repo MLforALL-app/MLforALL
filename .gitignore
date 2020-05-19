@@ -43,9 +43,9 @@ notebook/top50.csv
 
 # api stuff
 api/__pycache__
-api/stats/__pycache__
-api/flask/__pycache__
-api/flask/mlforall-admin-sdk.json
+api/src/local_stats/__pycache__
+api/src/__pycache__
+api/src/mlforall-admin-sdk.json
 # vscode
 .vscode
 
