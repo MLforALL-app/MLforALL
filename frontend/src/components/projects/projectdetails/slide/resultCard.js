@@ -68,7 +68,6 @@ const ResultCard = (uid, project, model, inputs) => {
 						</span>
 						<span style={{ textAlign: "center" }}>
 							<p>
-								{console.log("INPUTS", inputToString(inputs))}
 								{output === ""
 									? "---"
 									: "Given these inputs of" +

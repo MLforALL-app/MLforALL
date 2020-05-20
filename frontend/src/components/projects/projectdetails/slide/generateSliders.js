@@ -1,5 +1,5 @@
 import PredictSlider from "./predictslide";
-import Dropdown from "../dropdown";
+import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import React from "react";
 
@@ -18,7 +18,7 @@ const initInputs = (variables) => {
 // Begin compononent
 const GenerateSliders = (project, uid) => {
 	const [model, setModel] = React.useState("");
-	const handleChange = (event) => {
+	const handleDropChange = (event) => {
 		setModel(event.target.value);
 	};
 
@@ -69,7 +69,7 @@ const GenerateSliders = (project, uid) => {
 								{model === "" ? "no model selected" : model}{" "}
 							</span>
 							<div className="row">
-								{Dropdown(project, model, handleChange)}
+								{Dropdown(project, model, handleDropChange)}
 							</div>
 							<div className="row">
 								<div className="col s12">

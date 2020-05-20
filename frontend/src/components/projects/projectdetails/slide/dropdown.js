@@ -29,43 +29,48 @@ const nameMapper = (name) => {
 	}
 };
 
-const getMenuItems = (models) => {
-	if (models.length < 1) {
-		return <MenuItem value="">No models yet</MenuItem>;
+const getFirst = (models, startVal) => {
+	if (startVal === "") {
+		return "";
 	} else {
-		var result = [
+		return (
 			<MenuItem key={models[0]} value={nameMapper(models[0])}>
-				{" "}
 				{nameMapper(models[0])}
 			</MenuItem>
-		];
-		for (var i = 1; i < models.length; i++) {
-			var name = nameMapper(models[i]);
-			result.push(
-				<MenuItem key={models[i]} value={name}>
-					{" "}
-					{name}{" "}
-				</MenuItem>
-			);
-		}
-		return result;
+		);
 	}
+};
+
+const getMenuItems = (models) => {
+	var result = [];
+	for (var i = 1; i < models.length; i++) {
+		var name = nameMapper(models[i]);
+		result.push(
+			<MenuItem key={models[i]} value={name}>
+				{" "}
+				{name}{" "}
+			</MenuItem>
+		);
+	}
+	return result;
 };
 
 const Dropdown = (project, model, handleChange) => {
 	const classes = useStyles();
-
+	const modList = project.models;
+	const startVal = modList.length < 1 ? "" : nameMapper(modList[0]);
+	console.log("START VAL", startVal);
 	return (
 		<div style={{ textAlign: "center" }}>
 			<FormControl className={classes.formControl}>
 				<Select
-					labelId="demo-simple-select-placeholder-label-label"
-					id="demo-simple-select-placeholder-label"
 					value={model}
 					onChange={handleChange}
 					displayEmpty
+					defaultValue={startVal}
 					className={classes.selectEmpty}
 				>
+					{getFirst(project.models, startVal)}
 					{getMenuItems(project.models)}
 				</Select>
 				<FormHelperText>Model</FormHelperText>
