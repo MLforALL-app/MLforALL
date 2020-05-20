@@ -18,7 +18,16 @@ const Signedinlinks = (props) => {
 				<NavLink to="/create">Create Model</NavLink>{" "}
 			</li>
 			<li>
-				<a onClick={props.signOut}> Logout </a>
+				<button
+					style={{
+						border: "None",
+						color: "white",
+						backgroundColor: "transparent"
+					}}
+					onClick={props.signOut}
+				>
+					Logout
+				</button>
 			</li>
 			<li>
 				<NavLink
