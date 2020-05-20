@@ -1,4 +1,5 @@
 import PredictSlider from "./predictslide";
+import SimpleSelect from "./dropdown";
 import React from "react";
 
 function getslides(variables) {
@@ -15,15 +16,26 @@ function getslides(variables) {
 }
 
 const GenerateSliders = (project) => {
+	const [model, setModel] = React.useState("");
+	const handleChange = (event) => {
+		setModel(event.target.value);
+	};
+	console.log("THE PROJECT IS", project);
 	return (
 		<div className="card z-depth-0">
 			<div className="card-content">
-				<span className="card-title"> Test This Model!</span>
-				<p>
-					{" "}
-					Put some input values here and see what your model predicts!
-				</p>
-				<div style={{ padding: "5rem" }}>
+				<span className="card-title">Testing: {model} </span>
+				<div className="row">
+					{SimpleSelect(project, model, handleChange)}
+				</div>
+				<div className="row">
+					<div className="col s12">
+						Put some input values here and see what your model
+						predicts!{" "}
+					</div>
+				</div>
+
+				<div style={{ paddingLeft: "5rem", paddingRight: "5rem" }}>
 					{getslides(project.variables)}
 				</div>
 			</div>
