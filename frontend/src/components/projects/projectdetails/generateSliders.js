@@ -24,7 +24,9 @@ const GenerateSliders = (project) => {
 	return (
 		<div className="card z-depth-0">
 			<div className="card-content">
-				<span className="card-title">Testing: {model} </span>
+				<span className="card-title">
+					Testing: {model === "" ? "no model selected" : model}{" "}
+				</span>
 				<div className="row">
 					{SimpleSelect(project, model, handleChange)}
 				</div>

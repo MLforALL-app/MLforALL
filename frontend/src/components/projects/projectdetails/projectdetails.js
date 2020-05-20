@@ -1,6 +1,6 @@
 import React from "react";
 // import React, { Component } from "react";
-import SimpleSelect from "./dropdown";
+// import SimpleSelect from "./dropdown";
 import GenerateSliders from "./generateSliders";
 import DescCard from "./descCard";
 import CSVCard from "./csvCard";

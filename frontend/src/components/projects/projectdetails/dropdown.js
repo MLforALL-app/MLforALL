@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
 const nameMapper = (name) => {
 	switch (name) {
 		case "log_reg":
-			return "Logisitic Regression";
+			return "Logistic Regression";
 		case "gnb":
 			return "Gauss Naive Bayes";
 		case "knn":
