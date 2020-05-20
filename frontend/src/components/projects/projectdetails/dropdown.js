@@ -52,15 +52,9 @@ const getMenuItems = (models) => {
 	}
 };
 
-export default function SimpleSelect(project, model, handleChange) {
+const Dropdown = (project, model, handleChange) => {
 	const classes = useStyles();
-	/*
-    const [model, setModel] = React.useState("");
 
-	const handleChange = (event) => {
-		setModel(event.target.value);
-	};
-    */
 	return (
 		<div style={{ textAlign: "center" }}>
 			<FormControl className={classes.formControl}>
@@ -78,4 +72,6 @@ export default function SimpleSelect(project, model, handleChange) {
 			</FormControl>
 		</div>
 	);
-}
+};
+
+export default Dropdown;

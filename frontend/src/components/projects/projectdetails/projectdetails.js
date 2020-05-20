@@ -8,7 +8,6 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
-import ResultCard from "./resultCard";
 
 /*
 const onDragDrop = () => {
@@ -21,11 +20,6 @@ const onDragDrop = () => {
 
 const ProjectDetails = (props) => {
 	const { auth, project } = props;
-	//const [inputs, setInputs] = React.useState("");
-	//console.log("PROPS", props);
-	//console.log("PROJECT", project);
-	const model = "pizza";
-	const result = "pizza";
 	if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
@@ -34,15 +28,7 @@ const ProjectDetails = (props) => {
 					<div className="col s6">{DescCard(project)}</div>
 					<div className="col s6">{CSVCard(project)}</div>
 				</div>
-				<div className="row">
-					<div className="col s12">{GenerateSliders(project)}</div>
-				</div>
-				<div className="row">
-					{" "}
-					<div className="col s12">
-						{ResultCard({ model: model, output: result })}
-					</div>
-				</div>
+				{GenerateSliders(project, auth.uid)}
 			</div>
 		);
 	} else {
