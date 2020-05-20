@@ -95,9 +95,7 @@ const GenerateSliders = (project, uid) => {
 				</div>
 			</div>
 			<div className="row">
-				<div className="col s12">
-					{ResultCard(uid, project, model, inputs)}{" "}
-				</div>
+				{ResultCard(uid, project, model, inputs)}{" "}
 			</div>
 		</div>
 	);

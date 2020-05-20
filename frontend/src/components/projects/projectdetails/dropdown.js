@@ -31,7 +31,7 @@ const nameMapper = (name) => {
 
 const getMenuItems = (models) => {
 	if (models.length < 1) {
-		return <MenuItem value="nada">No models yet</MenuItem>;
+		return <MenuItem value="">No models yet</MenuItem>;
 	} else {
 		var result = [
 			<MenuItem key={models[0]} value={nameMapper(models[0])}>
