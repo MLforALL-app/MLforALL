@@ -1,22 +1,11 @@
 import React from "react";
-// import React, { Component } from "react";
-// import SimpleSelect from "./dropdown";
-import GenerateSliders from "./generateSliders";
-import DescCard from "./descCard";
-import CSVCard from "./csvCard";
+import GenerateSliders from "./slide/generateSliders";
+import DescCard from "./cards/descCard";
+import CSVCard from "./cards/csvCard";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
-
-/*
-const onDragDrop = () => {
-	// will need this function to update props at this level
-	// change project details to class intake props
-};
-*/
-
-// TODO Try to convert this to project with states
 
 const ProjectDetails = (props) => {
 	const { auth, project } = props;

@@ -1,5 +1,5 @@
 import PredictSlider from "./predictslide";
-import Dropdown from "./dropdown";
+import Dropdown from "../dropdown";
 import ResultCard from "./resultCard";
 import React from "react";
 
