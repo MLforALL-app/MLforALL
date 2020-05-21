@@ -85,7 +85,6 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 					<div className="card-content">
 						{" "}
 						<span className="card-title center">
-							{console.log("THIS IS OUTPUT", output)}
 							{output ? output.data : ""}
 						</span>
 						<span style={{ textAlign: "center" }}>

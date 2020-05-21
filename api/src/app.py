@@ -1,7 +1,8 @@
 import os
 from visual import dummyvisual
 from predict import predict
-from firebase import make_path, bucket_init, get_pickle
+from build import build_and_pickle
+import firebase as fb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -31,18 +32,38 @@ def predict_from_model():
     model = req_data['model']
     inputs = req_data['inputs']
     # Get firebase stuff
-    path = make_path(uid, project, model)
-    bucket = bucket_init()
+    path = fb.make_path(uid, project, model)
+    bucket = fb.bucket_init()
     # Get loaded model
-    loaded_model = get_pickle(bucket, path)
+    loaded_model = fb.get_pickle(bucket, path)
     return jsonify(predict(loaded_model, inputs))
 
 
-# giv csv, store model
-@app.route('/store', methods=['GET'])
+# assume csv has been made, now upload models
+@app.route('/store', methods=['POST'])
 def store():
     # once we know what implement fetching the csv from firebase, that'll go in the call
-    return None
+    req_data = request.get_json()
+    # Brackets require these fields to be present
+    # Sort of a safety contract to ensure we always have valid path
+    uid = req_data['uid']
+    project = req_data['project']
+    model_list = req_data['modelList']
+    target_param = req_data['targetParameter']
+    df_vars = req_data['dfVariables']
+    csv_name = req_data['csvName']
+
+    # Get firebase stuff
+    bucket = fb.bucket_init()
+    try:
+        for model in model_list:
+            df = fb.get_csv(bucket, fb.make_path(uid, project, csv_name))
+            pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
+            fb.send_pickle(bucket, pickle_bytes,
+                           fb.make_path(uid, project, model))
+        return "it worked"
+    except TypeError:
+        return "it failed"
 
 
 @app.route('/visual', methods=['GET'])

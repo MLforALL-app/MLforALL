@@ -1,45 +1,3 @@
-/*
-
-const appendProjectToUser = (projID, firestore, uid) => {
-	const userRef = firestore.collection("users").doc(uid);
-	userRef
-		.get()
-		.then((doc) => {
-			const userData = doc.data();
-			// is there cleaner way to do this besides push?
-			var updated = userData.projectList;
-			const length = updated.push(projID);
-			userRef.update({
-				...userData,
-				projects: updated
-			});
-		})
-		.catch((err) => {
-			console.log("Uh oh something wrong with appending list", err);
-		});
-};
-
-*/
-/*
-const addUserProject = (projID, firestore, uid, proj, fname, lname, date) => {
-	firestore
-		.collection("users")
-		.doc(uid)
-		.collection("user_projects")
-		.doc(projID)
-		.set({
-			...proj,
-			authorFirstName: fname,
-			authorLastName: lname,
-			authorID: uid,
-			createdAt: date
-		})
-		.then()
-		.catch();
-	console.log("USER PROJECT ADDED");
-};
-*/
-
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -63,18 +21,6 @@ export const createProject = (project) => {
 				variables: []
 			})
 			.then((snapshot) => {
-				// Instead we will opt for querying
-				// Add projectID to user
-				// appendProjectToUser(snapshot.id, firestore, authorID);
-				/*addUserProject(
-					snapshot.id,
-					firestore,
-					uid,
-					project,
-					fname,
-					lname,
-					date
-				);*/
 				dispatch({ type: "CREATE_PROJECT", project });
 			})
 			.catch((err) => {
