@@ -11,19 +11,19 @@ class CreateProject extends Component {
 	};
 
 	handleChange = (e) => {
-		if(e.target.id != "csvName"){
+		if (e.target.id !== "csvName") {
 			this.setState({
 				[e.target.id]: e.target.value
 			});
-		}else{
+		} else {
 			//this puts the csv file in the state before we create project
 			this.setState({
 				[e.target.id]: e.target.files[0]
-			})
+			});
 		}
 
 		console.log(this.state);
-		console.log(this.state.csvName)
+		console.log(this.state.csvName);
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -47,21 +47,24 @@ class CreateProject extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-               		<div class = "file-field input-field">
-                  		<div class = "btn blue lighten-1 z-depth-0">
-                     		<span>Browse</span>
-                     		<input type = "file" 
-								   type="file"
-								   id="csvName"
-								   onChange={this.handleChange}
+					<div class="file-field input-field">
+						<div class="btn blue lighten-1 z-depth-0">
+							<span>Browse</span>
+							<input
+								type="file"
+								id="csvName"
+								onChange={this.handleChange}
 							/>
-                  		</div>
-                  
-                  		<div class = "file-path-wrapper">
-                     		<input class = "file-path validate" type = "text"
-                        	placeholder = "Upload .csv file" />
-                 		 </div>
-               		</div>
+						</div>
+
+						<div class="file-path-wrapper">
+							<input
+								class="file-path validate"
+								type="text"
+								placeholder="Upload .csv file"
+							/>
+						</div>
+					</div>
 					<div className="input-field">
 						<label htmlFor="content">Project Content</label>
 						<textarea
