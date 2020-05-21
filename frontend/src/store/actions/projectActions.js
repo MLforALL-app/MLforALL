@@ -18,7 +18,7 @@ export const createProject = (project) => {
 				createdAt: date,
 				csvName: csvName,
 				models: [],
-				variables: {}
+				variables: []
 			})
 			.then((snapshot) => {
 				dispatch({ type: "CREATE_PROJECT", project });
