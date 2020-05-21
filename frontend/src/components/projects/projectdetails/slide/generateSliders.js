@@ -3,6 +3,27 @@ import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import React from "react";
 
+const nameMapper = (name) => {
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression";
+		case "gnb":
+			return "Gauss Naive Bayes";
+		case "knn":
+			return "K-Nearest Neighbors";
+		case "svm":
+			return "Support Vector Machine";
+		case "clf":
+			return "Decision Tree Classifier";
+		case "lda":
+			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
+};
+
 // Initialize our state with average values for datasets
 const initInputs = (variables) => {
 	var inputs = {};
@@ -65,11 +86,15 @@ const GenerateSliders = (project, uid) => {
 					<div className="card z-depth-0">
 						<div className="card-content">
 							<span className="card-title">
-								Testing:{" "}
-								{model === "" ? "no model selected" : model}{" "}
+								Testing: {nameMapper(model)}
 							</span>
 							<div className="row">
-								{Dropdown(project, model, handleDropChange)}
+								{Dropdown(
+									project,
+									model,
+									handleDropChange,
+									nameMapper
+								)}
 							</div>
 							<div className="row">
 								<div className="col s12">
@@ -95,7 +120,7 @@ const GenerateSliders = (project, uid) => {
 				</div>
 			</div>
 			<div className="row">
-				{ResultCard(uid, project, model, inputs)}{" "}
+				{ResultCard(uid, project, model, inputs, nameMapper)}{" "}
 			</div>
 		</div>
 	);

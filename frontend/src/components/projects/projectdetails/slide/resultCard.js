@@ -9,7 +9,30 @@ const inputToString = (inputs) => {
 	return pretty.join();
 };
 
-const ResultCard = (uid, project, model, inputs) => {
+const showResults = (output, inputs, model, nameMapper) => {
+	if (output === "") {
+		return <p> ~~choose your inputs~~ </p>;
+	} else {
+		return (
+			<p>
+				Given these inputs of
+				<span style={{ color: "green" }}>
+					{inputToString(inputs)}
+				</span>{" "}
+				your selected model of
+				<span style={{ color: "blue" }}>
+					{model === ""
+						? " NO MODEL SELECTED "
+						: " " + nameMapper(model)}
+				</span>{" "}
+				would predict it to be:{" "}
+				<span style={{ color: "red" }}>{output.data}</span>
+			</p>
+		);
+	}
+};
+
+const ResultCard = (uid, project, model, inputs, nameMapper) => {
 	const [output, setOutput] = React.useState("");
 
 	const handleSubmit = (event) => {
@@ -25,11 +48,11 @@ const ResultCard = (uid, project, model, inputs) => {
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
-					console.log("THIS IS RESULT", res);
+					//console.log("THIS IS RESULT", res);
 					setOutput(res);
 				})
 				.catch((err) => {
-					console.log("THIS IS AN ERROR", err);
+					//console.log("THIS IS AN ERROR", err);
 					setOutput("Sorry there are some errors with are server.");
 				});
 		} else {
@@ -66,17 +89,7 @@ const ResultCard = (uid, project, model, inputs) => {
 							{output ? output.data : ""}
 						</span>
 						<span style={{ textAlign: "center" }}>
-							<p>
-								{output === ""
-									? "---"
-									: "Given these inputs of" +
-									  inputToString(inputs) +
-									  (model === ""
-											? " NO MODEL SELECTED "
-											: " " + model) +
-									  " would predict it to be: " +
-									  output}
-							</p>
+							{showResults(output, inputs, model, nameMapper)}
 						</span>
 					</div>
 				</div>
