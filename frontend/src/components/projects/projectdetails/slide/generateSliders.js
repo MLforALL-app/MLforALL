@@ -68,6 +68,7 @@ const GenerateSliders = (project, uid) => {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
+				console.log("THIS IS VARIABLE", v);
 				var n = v.name;
 				output.push(
 					PredictSlider(n, v.lo, v.hi, hsc(v), hic(v), inputs[n])

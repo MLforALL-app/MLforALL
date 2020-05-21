@@ -21,7 +21,7 @@ export default function PredictSlider(
 		{ value: q2, label: q2.toString() },
 		{ value: q3, label: q3.toString() }
 	];
-
+	console.log("THIS IS PARAM", param);
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
