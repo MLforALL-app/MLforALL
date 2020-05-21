@@ -4,12 +4,17 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
 
-export default function PredictSlider(param, lo, hi) {
+export default function PredictSlider(
+	param,
+	lo,
+	hi,
+	handleSliderChange,
+	handleInputChange,
+	value
+) {
 	const q2 = (hi - lo) / 2;
 	const q1 = q2 / 2;
 	const q3 = q2 + q1;
-
-	const [value, setValue] = React.useState(q2);
 
 	const marks = [
 		{ value: q1, label: q1.toString() },
@@ -17,16 +22,8 @@ export default function PredictSlider(param, lo, hi) {
 		{ value: q3, label: q3.toString() }
 	];
 
-	const handleSliderChange = (event, newValue) => {
-		setValue(newValue);
-	};
-
-	const handleInputChange = (event) => {
-		setValue(event.target.value === "" ? "" : Number(event.target.value));
-	};
-
 	return (
-		<div>
+		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
 				{param}
 			</Typography>
@@ -41,7 +38,7 @@ export default function PredictSlider(param, lo, hi) {
 						max={hi}
 					/>
 				</Grid>
-				<Grid item>
+				<Grid item key={"input_" + param}>
 					<Input
 						value={value}
 						margin="dense"
