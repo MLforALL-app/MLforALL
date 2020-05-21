@@ -34,7 +34,7 @@ const getFirst = (models, startVal) => {
 		return "";
 	} else {
 		return (
-			<MenuItem key={models[0]} value={nameMapper(models[0])}>
+			<MenuItem key={models[0]} value={models[0]}>
 				{nameMapper(models[0])}
 			</MenuItem>
 		);
@@ -46,7 +46,7 @@ const getMenuItems = (models) => {
 	for (var i = 1; i < models.length; i++) {
 		var name = nameMapper(models[i]);
 		result.push(
-			<MenuItem key={models[i]} value={name}>
+			<MenuItem key={models[i]} value={models[i]}>
 				{" "}
 				{name}{" "}
 			</MenuItem>

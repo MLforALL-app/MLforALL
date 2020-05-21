@@ -23,9 +23,12 @@ const ResultCard = (uid, project, model, inputs) => {
 			};
 			console.log("THIS IS PATH", path);
 			axios
-				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, {
+				/*	.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, 
 					path
-				})
+				)*/ .post(
+					"http://0.0.0.0:8080/predict",
+					path
+				)
 				.then((res) => {
 					console.log("THIS IS RESULT", res);
 					setOutput(res);
@@ -64,7 +67,8 @@ const ResultCard = (uid, project, model, inputs) => {
 					<div className="card-content">
 						{" "}
 						<span className="card-title center">
-							{output ? output : ""}
+							{console.log("THIS IS OUTPUT", output)}
+							{output ? output.data : ""}
 						</span>
 						<span style={{ textAlign: "center" }}>
 							<p>
