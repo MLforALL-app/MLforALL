@@ -12,22 +12,24 @@ export default function PredictSlider(
 	handleInputChange,
 	value
 ) {
-	const q2 = (hi - lo) / 2;
-	const q1 = q2 / 2;
-	const q3 = q2 + q1;
+	const q2 = (hi + lo) / 2;
+	const q1 = (lo + q2) / 2;
+	const q3 = (hi + q2) / 2;
 
 	const marks = [
 		{ value: q1, label: q1.toString() },
 		{ value: q2, label: q2.toString() },
 		{ value: q3, label: q3.toString() }
 	];
-	console.log("THIS IS PARAM", param);
+	const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
+	//console.log("THIS IS RANGE", range);
+	const stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
 				{param}
 			</Typography>
-			<Grid container spacing={2} alignItems="center">
+			<Grid container spacing={1} alignItems="center">
 				<Grid item xs>
 					<Slider
 						value={typeof value === "number" ? value : 0}
@@ -36,6 +38,7 @@ export default function PredictSlider(
 						marks={marks}
 						min={lo}
 						max={hi}
+						step={stepSize}
 					/>
 				</Grid>
 				<Grid item key={"input_" + param}>

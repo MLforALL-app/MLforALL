@@ -44,11 +44,11 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				model,
 				inputs: Object.values(inputs)
 			};
-			console.log("THIS IS PATH", path);
+			//console.log("THIS IS PATH", path);
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
-					//console.log("THIS IS RESULT", res);
+					console.log("THIS IS RESULT", res);
 					setOutput(res);
 				})
 				.catch((err) => {

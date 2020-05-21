@@ -29,7 +29,7 @@ const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
 		// console.log("Current Var", v);
-		inputs[v.name] = (v.hi - v.lo) / 2;
+		inputs[v.name] = (v.hi + v.lo) / 2;
 		// console.log(inputs[v.name]);
 	});
 	// console.log("INITIAL INPUTS", inputs);
@@ -68,7 +68,6 @@ const GenerateSliders = (project, uid) => {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				console.log("THIS IS VARIABLE", v);
 				var n = v.name;
 				output.push(
 					PredictSlider(n, v.lo, v.hi, hsc(v), hic(v), inputs[n])
