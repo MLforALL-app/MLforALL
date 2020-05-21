@@ -1,6 +1,6 @@
 FROM python:3.7
 
-RUN pip install Flask flask gunicorn pandas sklearn firebase-admin seaborn numpy
+RUN pip install Flask flask gunicorn pandas sklearn firebase-admin seaborn numpy flask_cors
 
 COPY src/ app/ 
 
