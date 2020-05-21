@@ -39,13 +39,14 @@ notebook/mlforall-admin-sdk.json
 notebook/Pokemon.csv
 notebook/simple_top50.csv
 notebook/top50.csv
-
+notebook/kaggle.json
 
 # api stuff
 api/__pycache__
 api/src/local_stats/__pycache__
 api/src/__pycache__
 api/src/mlforall-admin-sdk.json
+api/src/kaggle.json
 # vscode
 .vscode
 
