@@ -17,7 +17,7 @@ export default function PredictSlider(
 	handleInputChange,
 	value
 ) {
-	console.log(varObj);
+	// console.log(varObj);
 	const param = varObj.name;
 	const hi = clean(varObj.hi);
 	const lo = clean(varObj.lo);

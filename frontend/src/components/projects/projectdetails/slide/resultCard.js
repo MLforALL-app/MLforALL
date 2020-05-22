@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const inputToString = (inputs) => {
 	const entries = Object.entries(inputs);
@@ -32,8 +33,30 @@ const showResults = (output, inputs, model, nameMapper) => {
 	}
 };
 
+const loader = (loading, output, inputs, model, nameMapper) => {
+	if (loading) {
+		return (
+			<div className="container center">
+				<CircularProgress />
+			</div>
+		);
+	} else {
+		return (
+			<div>
+				<span className="card-title center">
+					{output ? output.data : ""}
+				</span>
+				<span style={{ textAlign: "center" }}>
+					{showResults(output, inputs, model, nameMapper)}
+				</span>
+			</div>
+		);
+	}
+};
+
 const ResultCard = (uid, project, model, inputs, nameMapper) => {
-	const [output, setOutput] = React.useState("");
+	const [output, setOutput] = useState("");
+	const [loading, setLoading] = useState(false);
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -44,20 +67,25 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				model,
 				inputs: Object.values(inputs)
 			};
-			//console.log("THIS IS PATH", path);
+			setLoading(true);
+			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
 					console.log("THIS IS RESULT", res);
 					setOutput(res);
+					setLoading(false);
 				})
 				.catch((err) => {
 					//console.log("THIS IS AN ERROR", err);
 					setOutput("Sorry there are some errors with are server.");
+					setLoading(false);
 				});
 		} else {
 			setOutput("error, please choose a model first");
 		}
+
+		// console.log("EXIT AXIOS LOADING STATE,", loading);
 	};
 
 	return (
@@ -83,13 +111,7 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 			<div className="col s9">
 				<div className="card z-depth-0">
 					<div className="card-content">
-						{" "}
-						<span className="card-title center">
-							{output ? output.data : ""}
-						</span>
-						<span style={{ textAlign: "center" }}>
-							{showResults(output, inputs, model, nameMapper)}
-						</span>
+						{loader(loading, output, inputs, model, nameMapper)}
 					</div>
 				</div>
 			</div>

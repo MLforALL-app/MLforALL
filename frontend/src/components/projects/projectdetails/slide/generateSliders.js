@@ -39,7 +39,7 @@ const initInputs = (variables) => {
 // Begin compononent
 const GenerateSliders = (project, uid) => {
 	const startVal = project.models.length < 1 ? "" : project.models[0];
-	console.log("START VAL", startVal);
+	// console.log("START VAL", startVal);
 	const [model, setModel] = React.useState(startVal);
 	const handleDropChange = (event) => {
 		setModel(event.target.value);
@@ -70,7 +70,7 @@ const GenerateSliders = (project, uid) => {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				console.log("THIS IS V", v);
+				// console.log("THIS IS V", v);
 				output.push(PredictSlider(v, hsc(v), hic(v), inputs[v.name]));
 			});
 			return <div>{output}</div>;
