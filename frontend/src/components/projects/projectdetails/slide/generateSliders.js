@@ -38,7 +38,9 @@ const initInputs = (variables) => {
 
 // Begin compononent
 const GenerateSliders = (project, uid) => {
-	const [model, setModel] = React.useState("");
+	const startVal = project.models.length < 1 ? "" : project.models[0];
+	console.log("START VAL", startVal);
+	const [model, setModel] = React.useState(startVal);
 	const handleDropChange = (event) => {
 		setModel(event.target.value);
 	};

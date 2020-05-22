@@ -16,8 +16,9 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const Dropdown = (project, model, handleChange, nameMapper) => {
+const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 	const classes = useStyles();
+
 	const getMenuItems = (models, nameMapper) => {
 		if (models.length === 0) {
 			return (
@@ -45,7 +46,7 @@ const Dropdown = (project, model, handleChange, nameMapper) => {
 		<div style={{ textAlign: "center" }}>
 			<FormControl className={classes.formControl}>
 				<Select
-					value={model}
+					value={currentModel}
 					onChange={handleChange}
 					displayEmpty
 					className={classes.selectEmpty}
