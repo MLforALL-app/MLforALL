@@ -2,6 +2,7 @@ import os
 from visual import dummyvisual
 from predict import predict
 from build import build_and_pickle
+from variables import send_vars
 import firebase as fb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -47,7 +48,8 @@ def store():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']
-    project = req_data['project']
+    title = req_data['title']
+    proj_id = req_data['projectID']
     model_list = req_data['modelList']
     target_param = req_data['targetParameter']
     df_vars = req_data['dfVariables']
@@ -55,12 +57,16 @@ def store():
 
     # Get firebase stuff
     bucket = fb.bucket_init()
+    db = fb.firestore.client()
+
     try:
+        # populate storage with models
         for model in model_list:
-            df = fb.get_csv(bucket, fb.make_path(uid, project, csv_name))
+            df = fb.get_csv(bucket, fb.make_path(uid, title, csv_name))
             pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
             fb.send_pickle(bucket, pickle_bytes,
-                           fb.make_path(uid, project, model))
+                           fb.make_path(uid, title, model))
+        send_vars(df, db, proj_id, df_vars)
         return "it worked"
     except TypeError:
         return "it failed"
