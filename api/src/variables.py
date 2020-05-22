@@ -6,8 +6,8 @@ def get_information(df, input_variable):
     ref = df.describe()[input_variable]
     info = {
         "name": input_variable,
-        "lo": ref[3] - ref[2],
-        "hi": ref[7] + ref[2],
+        "lo": ref[3],
+        "hi": ref[7],
         "q1": ref[4],
         "q2": ref[5],
         "q3": ref[6]

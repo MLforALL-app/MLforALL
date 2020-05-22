@@ -28,10 +28,10 @@ def predict_from_model():
     req_data = request.get_json()
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
-    uid = req_data['uid']
-    project = req_data['project']
-    model = req_data['model']
-    inputs = req_data['inputs']
+    uid = req_data['uid']  # user id
+    project = req_data['project']  # project title
+    model = req_data['model']  # desired model name
+    inputs = req_data['inputs']  # df vars / x_predict
     # Get firebase stuff
     path = fb.make_path(uid, project, model)
     bucket = fb.bucket_init()
@@ -47,13 +47,13 @@ def store():
     req_data = request.get_json()
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
-    uid = req_data['uid']
-    title = req_data['title']
-    proj_id = req_data['projectID']
-    model_list = req_data['modelList']
-    target_param = req_data['targetParameter']
-    df_vars = req_data['dfVariables']
-    csv_name = req_data['csvName']
+    uid = req_data['uid']  # user id
+    title = req_data['title']  # project title, ie spotify
+    proj_id = req_data['projectID']  # unique project hash
+    model_list = req_data['modelList']  # list of models user uses
+    target_param = req_data['targetParameter']  # output
+    df_vars = req_data['dfVariables']  # inputs
+    csv_name = req_data['csvName']  # name of uploaded csv
 
     # Get firebase stuff
     bucket = fb.bucket_init()
@@ -62,10 +62,12 @@ def store():
     try:
         # populate storage with models
         for model in model_list:
+            # retrieve the csv everytime due to some weird "key errors"
             df = fb.get_csv(bucket, fb.make_path(uid, title, csv_name))
             pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(uid, title, model))
+       # update firestore with descriptive stats
         send_vars(df, db, proj_id, df_vars)
         return "it worked"
     except TypeError:
@@ -76,7 +78,7 @@ def store():
 def visual():
     # api call should pass in what kind of graph, a way to get the csv,
     # and what data for what axis
-    return jsonify(dummyvisual())
+    return None
 
 
 @app.route('/descriptive', methods=['GET'])

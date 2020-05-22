@@ -10,6 +10,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 
 
+# NEED TO FIGURE OUT WHAT TO DO W REGARDS TO TRAIN/TEST SPLIT
+
+
 def build_logistic_regression(X, y):
     logreg = LogisticRegression()
     logreg.fit(X, y)

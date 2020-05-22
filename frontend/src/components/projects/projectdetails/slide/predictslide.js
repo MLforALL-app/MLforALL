@@ -4,17 +4,26 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
 
+const clean = (n) => {
+	if (n < 1 && n >= 0) {
+		return n.toFixed(3);
+	} else {
+		return Math.ceil(n);
+	}
+};
 export default function PredictSlider(
-	param,
-	lo,
-	hi,
+	varObj,
 	handleSliderChange,
 	handleInputChange,
 	value
 ) {
-	const q2 = (hi + lo) / 2;
-	const q1 = (lo + q2) / 2;
-	const q3 = (hi + q2) / 2;
+	console.log(varObj);
+	const param = varObj.name;
+	const hi = clean(varObj.hi);
+	const lo = clean(varObj.lo);
+	const q1 = clean(varObj.q1);
+	const q2 = clean(varObj.q2);
+	const q3 = clean(varObj.q3);
 
 	const marks = [
 		{ value: q1, label: q1.toString() },
