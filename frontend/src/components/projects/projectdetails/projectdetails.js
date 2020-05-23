@@ -2,6 +2,10 @@ import React from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Button from "@material-ui/core/Button";
+import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteProject from "./confirmDel";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -18,12 +22,25 @@ const ProjectDetails = (props) => {
 					<div className="col s6">{CSVCard(project)}</div>
 				</div>
 				{GenerateSliders(project, auth.uid)}
+				<div className="row">
+					<div className="col s12">
+						<div className="container center">
+							<Button
+								variant="contained"
+								color="secondary"
+								startIcon={<DeleteIcon />}
+							>
+								Broken delte button don't use this lol
+							</Button>
+						</div>
+					</div>
+				</div>
 			</div>
 		);
 	} else {
 		return (
 			<div className="container center">
-				<p> Error Loading Project </p>
+				<CircularProgress />
 			</div>
 		);
 	}
@@ -42,9 +59,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect([
-		{
-			collection: "projects"
-		}
-	])
+	firestoreConnect([{ collection: "projects" }])
 )(ProjectDetails);
