@@ -9,7 +9,6 @@ Making visualizations, machine learning, and data analysis easier for you!
 - ReactJS 
 - Redux
 #### Backend: 
-- Firebase Authentication, Firestore, Storage
-- Flask 
-- Google Cloud Storage
-- PythonAnywhere
+- Firebase Authentication, Firestore
+- Flask RestAPI
+- Google Cloud Platform, Storage
