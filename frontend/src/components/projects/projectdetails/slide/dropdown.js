@@ -16,62 +16,42 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const nameMapper = (name) => {
-	switch (name) {
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		default:
-			return "TODO: add more";
-	}
-};
-
-const getFirst = (models, startVal) => {
-	if (startVal === "") {
-		return "";
-	} else {
-		return (
-			<MenuItem key={models[0]} value={nameMapper(models[0])}>
-				{nameMapper(models[0])}
-			</MenuItem>
-		);
-	}
-};
-
-const getMenuItems = (models) => {
-	var result = [];
-	for (var i = 1; i < models.length; i++) {
-		var name = nameMapper(models[i]);
-		result.push(
-			<MenuItem key={models[i]} value={name}>
-				{" "}
-				{name}{" "}
-			</MenuItem>
-		);
-	}
-	return result;
-};
-
-const Dropdown = (project, model, handleChange) => {
+const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 	const classes = useStyles();
-	const modList = project.models;
-	const startVal = modList.length < 1 ? "" : nameMapper(modList[0]);
-	console.log("START VAL", startVal);
+
+	const getMenuItems = (models, nameMapper) => {
+		if (models.length === 0) {
+			return (
+				<MenuItem key={"none"} value={""}>
+					{" "}
+					There are no models available for this project
+				</MenuItem>
+			);
+		} else {
+			var result = [];
+			for (var i = 0; i < models.length; i++) {
+				var name = nameMapper(models[i]);
+				result.push(
+					<MenuItem key={models[i]} value={models[i]}>
+						{" "}
+						{name}{" "}
+					</MenuItem>
+				);
+			}
+			return result;
+		}
+	};
+
 	return (
 		<div style={{ textAlign: "center" }}>
 			<FormControl className={classes.formControl}>
 				<Select
-					value={model}
+					value={currentModel}
 					onChange={handleChange}
 					displayEmpty
-					defaultValue={startVal}
 					className={classes.selectEmpty}
 				>
-					{getFirst(project.models, startVal)}
-					{getMenuItems(project.models)}
+					{getMenuItems(project.models, nameMapper)}
 				</Select>
 				<FormHelperText>Model</FormHelperText>
 			</FormControl>

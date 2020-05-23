@@ -1,5 +1,5 @@
-import { storage } from "../../config/fbConfig.js";
 
+import { storage } from "../../config/fbConfig.js";
 
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
@@ -29,18 +29,6 @@ export const createProject = (project) => {
 				variables: []
 			})
 			.then((snapshot) => {
-				// Instead we will opt for querying
-				// Add projectID to user
-				// appendProjectToUser(snapshot.id, firestore, authorID);
-				/*addUserProject(
-					snapshot.id,
-					firestore,
-					uid,
-					project,
-					fname,
-					lname,
-					date
-				);*/
 				dispatch({ type: "CREATE_PROJECT", project });
 				success = true;
 			})
@@ -62,14 +50,29 @@ export const createProject = (project) => {
 	};
 };
 
-/*
+export const deleteProject = (project) => {
+	return (dispatch, getState, { getFirestore }) => {
+		// make async call to database
+		const projectID = "something";
+		const firestore = getFirestore();
+		firestore
+			.collection("projects")
+			.delete(projectID)
+			.then((snapshot) => {
+				dispatch({ type: "DELETE_PROJECT" });
+			})
+			.catch((err) => {
+				dispatch({ type: "DELETE_PROJECT_ERROR", err });
+			});
+		/*// Create a reference to the file to delete
+			var desertRef = storageRef.child('images/desert.jpg');
 
-Note to self from youtube comment
-
-Joel Greek
-1 year ago
-You probably figured this out already since you wrote this 4 months ago but maybe someone else who watches this video now will ask the same question:
-One could probably do this in the firestore cloud I guess. (Lesson 32), if you set the 'allow read, write: if request.auth.uid != userId'
-Not sure if this is best practice, (probably not), but it works. cheers!
-
-*/
+			// Delete the file
+			desertRef.delete().then(function() {
+			// File deleted successfully
+			}).catch(function(error) {
+			// Uh-oh, an error occurred!
+			});
+ */
+	};
+};

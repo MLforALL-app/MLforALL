@@ -4,30 +4,41 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
 
+const clean = (n) => {
+	if (n < 1 && n >= 0) {
+		return n.toFixed(3);
+	} else {
+		return Math.ceil(n);
+	}
+};
 export default function PredictSlider(
-	param,
-	lo,
-	hi,
+	varObj,
 	handleSliderChange,
 	handleInputChange,
 	value
 ) {
-	const q2 = (hi - lo) / 2;
-	const q1 = q2 / 2;
-	const q3 = q2 + q1;
+	// console.log(varObj);
+	const param = varObj.name;
+	const hi = clean(varObj.hi);
+	const lo = clean(varObj.lo);
+	const q1 = clean(varObj.q1);
+	const q2 = clean(varObj.q2);
+	const q3 = clean(varObj.q3);
 
 	const marks = [
 		{ value: q1, label: q1.toString() },
 		{ value: q2, label: q2.toString() },
 		{ value: q3, label: q3.toString() }
 	];
-
+	const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
+	//console.log("THIS IS RANGE", range);
+	const stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
 				{param}
 			</Typography>
-			<Grid container spacing={2} alignItems="center">
+			<Grid container spacing={1} alignItems="center">
 				<Grid item xs>
 					<Slider
 						value={typeof value === "number" ? value : 0}
@@ -36,6 +47,7 @@ export default function PredictSlider(
 						marks={marks}
 						min={lo}
 						max={hi}
+						step={stepSize}
 					/>
 				</Grid>
 				<Grid item key={"input_" + param}>

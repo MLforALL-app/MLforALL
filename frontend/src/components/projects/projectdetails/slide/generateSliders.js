@@ -3,12 +3,33 @@ import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import React from "react";
 
+const nameMapper = (name) => {
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression";
+		case "gnb":
+			return "Gauss Naive Bayes";
+		case "knn":
+			return "K-Nearest Neighbors";
+		case "svm":
+			return "Support Vector Machine";
+		case "clf":
+			return "Decision Tree Classifier";
+		case "lda":
+			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
+};
+
 // Initialize our state with average values for datasets
 const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
 		// console.log("Current Var", v);
-		inputs[v.name] = (v.hi - v.lo) / 2;
+		inputs[v.name] = v.q2;
 		// console.log(inputs[v.name]);
 	});
 	// console.log("INITIAL INPUTS", inputs);
@@ -17,7 +38,9 @@ const initInputs = (variables) => {
 
 // Begin compononent
 const GenerateSliders = (project, uid) => {
-	const [model, setModel] = React.useState("");
+	const startVal = project.models.length < 1 ? "" : project.models[0];
+	// console.log("START VAL", startVal);
+	const [model, setModel] = React.useState(startVal);
 	const handleDropChange = (event) => {
 		setModel(event.target.value);
 	};
@@ -47,10 +70,8 @@ const GenerateSliders = (project, uid) => {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				var n = v.name;
-				output.push(
-					PredictSlider(n, v.lo, v.hi, hsc(v), hic(v), inputs[n])
-				);
+				// console.log("THIS IS V", v);
+				output.push(PredictSlider(v, hsc(v), hic(v), inputs[v.name]));
 			});
 			return <div>{output}</div>;
 		} else {
@@ -65,11 +86,15 @@ const GenerateSliders = (project, uid) => {
 					<div className="card z-depth-0">
 						<div className="card-content">
 							<span className="card-title">
-								Testing:{" "}
-								{model === "" ? "no model selected" : model}{" "}
+								Testing: {nameMapper(model)}
 							</span>
 							<div className="row">
-								{Dropdown(project, model, handleDropChange)}
+								{Dropdown(
+									project,
+									model,
+									handleDropChange,
+									nameMapper
+								)}
 							</div>
 							<div className="row">
 								<div className="col s12">
@@ -95,7 +120,7 @@ const GenerateSliders = (project, uid) => {
 				</div>
 			</div>
 			<div className="row">
-				{ResultCard(uid, project, model, inputs)}{" "}
+				{ResultCard(uid, project, model, inputs, nameMapper)}{" "}
 			</div>
 		</div>
 	);
