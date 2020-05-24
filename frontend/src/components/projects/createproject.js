@@ -47,8 +47,8 @@ class CreateProject extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-					<div class="file-field input-field">
-						<div class="btn blue lighten-1 z-depth-0">
+					<div className="file-field input-field">
+						<div className="btn blue lighten-1 z-depth-0">
 							<span>Browse</span>
 							<input
 								type="file"
@@ -57,9 +57,9 @@ class CreateProject extends Component {
 							/>
 						</div>
 
-						<div class="file-path-wrapper">
+						<div className="file-path-wrapper">
 							<input
-								class="file-path validate"
+								className="file-path validate"
 								type="text"
 								placeholder="Upload .csv file"
 							/>
