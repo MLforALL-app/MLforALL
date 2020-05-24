@@ -25,13 +25,17 @@ const ProjectDetails = (props) => {
 				<div className="row">
 					<div className="col s12">
 						<div className="container center">
-							<Button
-								variant="contained"
-								color="secondary"
-								startIcon={<DeleteIcon />}
-							>
-								Broken delte button don't use this lol
-							</Button>
+							{auth.uid !== project.authorID ? (
+								<div></div>
+							) : (
+								<Button
+									variant="contained"
+									color="secondary"
+									startIcon={<DeleteIcon />}
+								>
+									Broken delte button don't use this lol
+								</Button>
+							)}
 						</div>
 					</div>
 				</div>
