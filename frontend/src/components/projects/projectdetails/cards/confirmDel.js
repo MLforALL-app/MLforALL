@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -12,15 +11,18 @@ const DeleteProject = (props) => {
 	const handleClickOpen = () => {
 		setOpen(true);
 	};
-
 	const handleClose = () => {
 		setOpen(false);
+	};
+	const handleDelete = () => {
+		setOpen(false);
+		console.log("TODO HANDLE DELETE");
 	};
 	return (
 		<span>
 			<button
 				className="btn-flat waves-effect waves-light"
-				style={{ display: "inline" }}
+				style={{ display: "inline", color: "red" }}
 				onClick={handleClickOpen}
 			>
 				DELETE
@@ -42,20 +44,20 @@ const DeleteProject = (props) => {
 					</DialogContentText>
 				</DialogContent>
 				<DialogActions>
-					<Button
+					<button
+						className="btn-flat waves-effect waves-light"
+						style={{ display: "inline", color: "green" }}
 						onClick={handleClose}
-						color="primary"
-						variant="contained"
 					>
-						No
-					</Button>
-					<Button
-						onClick={handleClose}
-						color="primary"
-						variant="contained"
+						Keep It!
+					</button>
+					<button
+						className="btn-flat waves-effect waves-light"
+						style={{ display: "inline", color: "red" }}
+						onClick={handleDelete}
 					>
-						Yes, Delete This Model
-					</Button>
+						Delete Forever {" :("}
+					</button>
 				</DialogActions>
 			</Dialog>
 		</span>
