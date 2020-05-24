@@ -93,16 +93,21 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 			<div className="col s3">
 				<div className="card z-depth-0">
 					<div className="card-content">
-						<span className="card-title">Result:</span>
 						<div className="center">
 							<button
-								className="btn waves-effect waves-light blue"
+								style={{ borderRadius: "50px" }}
+								className="btn-large waves-effect waves-light blue lighten-1"
 								type="submit"
 								name="action"
 								onClick={handleSubmit}
 							>
-								Predict!
-								<i className="material-icons right">cached</i>
+								<span
+									style={{
+										fontSize: "1.4rem"
+									}}
+								>
+									PREDICT
+								</span>
 							</button>
 						</div>
 					</div>

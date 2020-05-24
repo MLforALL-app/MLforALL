@@ -11,9 +11,11 @@ const DescCard = (project) => {
 			<div className="card-action grey lighten-4 grey-text">
 				<div>
 					Posted with <span className="hearts">&hearts;</span> by{" "}
-					{project.authorFirstName} {project.authorLastName}
+					<span style={{ fontWeight: "bold" }}>
+						{project.authorFirstName} {project.authorLastName}
+					</span>{" "}
+					on {moment(project.createdAt.toDate()).format("LLL")}
 				</div>
-				<div>{moment(project.createdAt.toDate()).format("LLL")}</div>
 			</div>
 		</div>
 	);

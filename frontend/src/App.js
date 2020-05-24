@@ -8,7 +8,7 @@ import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
 import CreateProject from "./components/projects/createproject";
 import LandingPage from "./components/info/landing";
-//import "./App.css";
+import "./App.css";
 
 function App() {
 	return (
