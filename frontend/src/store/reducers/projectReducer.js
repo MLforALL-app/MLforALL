@@ -14,6 +14,11 @@ const projectReducer = (state = initState, action) => {
 		case "DELETE_PROJECT_ERROR":
 			console.log("Delete project error", action.error);
 			return state;
+		case "UPLOAD_CSV":
+			console.log("Uploaded CSV");
+			return state;
+		case "UPLOAD_CSV_ERROR":
+			console.log("Upload CSV error");
 		default:
 			console.log("Default case");
 			return state;

@@ -1,5 +1,5 @@
 
-import { storage } from "../../config/fbConfig.js";
+//import { storage } from "../../config/fbConfig.js";
 
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
@@ -36,19 +36,43 @@ export const createProject = (project) => {
 				dispatch({ type: "CREATE_PROJECT_ERROR", err });
 			});
 		console.log(success);
+		/*
 		//Project is created, now we have to upload the file 
 		const csvPath = getState().firebase.auth.uid + "/" + project.title + "/" + csvName;
 		
 		var csvRef = storage.ref(csvPath);
 		csvRef.put(csvToUpload)
 		   .then((snapshot) => {
+				dispatch({ type: "UPLOAD_CSV" });
 				console.log("uploaded csv!");
+
 		   })
 		   .catch((err) => {
+			dispatch({ type: "UPLOAD_CSV_ERROR", err });
 			   console.log("csv upload error");
-		   });
+		   }); */
 	};
 };
+
+export const uploadCSV = (csvName, projName) => {
+	return (dispatch, getState, {getFirebase}) => {
+		console.log(csvName);
+		const firebase = getFirebase();
+		const csvPath = getState().firebase.auth.uid + "/" + projName + "/" + csvName.name;
+		var csvRef = firebase.storage().ref(csvPath);
+		csvRef.put(csvName)
+		.then((snapshot) => {
+			 console.log("uploaded csv!");
+			 dispatch({ type: "UPLOAD_CSV" });
+		})
+		.catch((err) => {
+			dispatch({ type: "UPLOAD_CSV_ERROR" });
+			console.log("csv upload error");
+		});
+		
+	}
+
+}
 
 export const deleteProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
