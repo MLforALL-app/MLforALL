@@ -1,4 +1,3 @@
-
 import { storage } from "../../config/fbConfig.js";
 
 export const createProject = (project) => {
@@ -36,21 +35,23 @@ export const createProject = (project) => {
 				dispatch({ type: "CREATE_PROJECT_ERROR", err });
 			});
 		console.log(success);
-		//Project is created, now we have to upload the file 
-		const csvPath = getState().firebase.auth.uid + "/" + project.title + "/" + csvName;
-		
+		//Project is created, now we have to upload the file
+		const csvPath =
+			getState().firebase.auth.uid + "/" + project.title + "/" + csvName;
+
 		var csvRef = storage.ref(csvPath);
-		csvRef.put(csvToUpload)
-		   .then((snapshot) => {
+		csvRef
+			.put(csvToUpload)
+			.then((snapshot) => {
 				console.log("uploaded csv!");
-		   })
-		   .catch((err) => {
-			   console.log("csv upload error");
-		   });
+			})
+			.catch((err) => {
+				console.log("csv upload error");
+			});
 	};
 };
 
-export const deleteProject = (project) => {
+export const deleteMLProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
 		const projectID = "something";
@@ -60,9 +61,11 @@ export const deleteProject = (project) => {
 			.delete(projectID)
 			.then((snapshot) => {
 				dispatch({ type: "DELETE_PROJECT" });
+				console.log("RECIEVED DELETE ACTION IN ACTIONS");
 			})
 			.catch((err) => {
 				dispatch({ type: "DELETE_PROJECT_ERROR", err });
+				console.log("SHOULD REACH HERE DUE TO INVALID PROJECT ID");
 			});
 		/*// Create a reference to the file to delete
 			var desertRef = storageRef.child('images/desert.jpg');

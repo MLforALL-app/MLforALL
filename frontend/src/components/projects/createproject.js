@@ -28,6 +28,8 @@ class CreateProject extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.createProject(this.state);
+		// can we do something like
+		// this.props.history.push("/me") to get to UID?
 		this.props.history.push("/dashboard");
 	};
 
