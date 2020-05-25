@@ -22,7 +22,7 @@ class DeleteProject extends Component {
 		return () => {
 			this.setState({ open: false });
 			this.props.deleteMLProject(id, auth, project);
-			this.props.history.push("/dashboard");
+			// this.props.history.push("/dashboard");
 		};
 	};
 
