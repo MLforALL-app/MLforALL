@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
+
+import DisplayCSV from "./displayCSV";
+
 
 class BuildProject  extends Component {
+
+
     render () {
-        if (!this.props.projID)  return (
-			<div className="container center">
-				<CircularProgress />
-			</div>
-		);   
 
         return (
             <div className="container">
@@ -18,16 +17,18 @@ class BuildProject  extends Component {
                    Our step by step exploratory data analysis process will allow you to make educated decisions when
                    choosing and creating machine learning models. 
                 </p>
-
+                {console.log(this.props)}
+                <DisplayCSV csv = {this.props.proj.csvName} />
             </div>
         );
     }
 }
 
 const mapStateToProps = (state) => {
+    console.log(state);
     return {
         projID : state.project.curUserProjID,
-        proj : state.project.curProj
+        proj : state.project.curUserProj
     }
 }
 

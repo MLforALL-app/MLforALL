@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import CreateProject from "./createproject";
 import BuildProject from "./buildproject";
-
+import DisplayCSV from "./displayCSV";
+import CircularProgress from "@material-ui/core/CircularProgress";
 class CreateProjectContainer extends Component {
     state = {
         project_initialized: false,
@@ -20,14 +21,25 @@ class CreateProjectContainer extends Component {
 
     render () {
         const { auth } = this.props;
-        if (!auth.uid) return <Redirect to="/signin" />;     
+        if (!auth.uid) return <Redirect to="/signin" />;    
+        
+        if (this.state.project_initialized === false){
+            return(
+                <CreateProject initProject={this.initProject} />
+            );
+        }
+        if (this.props.projID === "init" || this.props.proj === "init")  
+            return(
+                    <div className="container center">
+                        <CircularProgress />
+                    </div>
+            );
+         
+            
         return (
             <div>
-             {this.state.project_initialized == false ?
-               <CreateProject initProject={this.initProject} />
-              :
-              <BuildProject/>
-             }
+             
+                <BuildProject/>
             </div>
  
         );

@@ -1,6 +1,6 @@
 const initState = {
-	curUserProjID : "",
-	curUserProj : "",
+	curUserProjID : "init",
+	curUserProj : "init",
 };
 
 const projectReducer = (state = initState, action) => {

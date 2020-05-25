@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createProject, uploadCSV } from "../../store/actions/projectActions";
-import { Redirect } from "react-router-dom";
+
 
 class CreateProject extends Component {
 	state = {
