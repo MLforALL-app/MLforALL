@@ -13,6 +13,14 @@ const inputToString = (inputs) => {
 const showResults = (output, inputs, model, nameMapper) => {
 	if (output === "") {
 		return <p> ~~choose your inputs~~ </p>;
+	} else if (output === "Server Error") {
+		return (
+			<p>
+				{" "}
+				There's been an error with our servers. Sorry about that! We'll
+				get it fixed soon.{" :)"}
+			</p>
+		);
 	} else {
 		return (
 			<p>
@@ -78,11 +86,11 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				})
 				.catch((err) => {
 					//console.log("THIS IS AN ERROR", err);
-					setOutput("Sorry there are some errors with are server.");
+					setOutput("Server Error");
 					setLoading(false);
 				});
 		} else {
-			setOutput("error, please choose a model first");
+			setOutput("Choose A Model");
 		}
 
 		// console.log("EXIT AXIOS LOADING STATE,", loading);
@@ -93,16 +101,21 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 			<div className="col s3">
 				<div className="card z-depth-0">
 					<div className="card-content">
-						<span className="card-title">Result:</span>
 						<div className="center">
 							<button
-								className="btn waves-effect waves-light blue"
+								style={{ borderRadius: "50px" }}
+								className="btn-large waves-effect waves-light blue lighten-1"
 								type="submit"
 								name="action"
 								onClick={handleSubmit}
 							>
-								Predict!
-								<i className="material-icons right">cached</i>
+								<span
+									style={{
+										fontSize: "1.4rem"
+									}}
+								>
+									PREDICT
+								</span>
 							</button>
 						</div>
 					</div>

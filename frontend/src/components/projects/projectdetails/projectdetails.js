@@ -3,37 +3,24 @@ import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
-// import DeleteProject from "./confirmDel";
+import "./pjdetails.css";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 const ProjectDetails = (props) => {
-	const { auth, project } = props;
-	if (!auth.uid) return <Redirect to="/signin" />;
+	const { id, auth, project } = props;
+	// if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
 			<div className="container section project-details">
 				<div className="row">
-					<div className="col s6">{DescCard(project)}</div>
-					<div className="col s6">{CSVCard(project)}</div>
+					<div className="col s12">{DescCard(project)}</div>
 				</div>
 				{GenerateSliders(project, auth.uid)}
 				<div className="row">
-					<div className="col s12">
-						<div className="container center">
-							<Button
-								variant="contained"
-								color="secondary"
-								startIcon={<DeleteIcon />}
-							>
-								Broken delte button don't use this lol
-							</Button>
-						</div>
-					</div>
+					<div className="col s12">{CSVCard(id, auth, project)}</div>
 				</div>
 			</div>
 		);
@@ -52,7 +39,8 @@ const mapStateToProps = (state, ownProps) => {
 	const projects = state.firestore.data.projects;
 	const project = projects ? projects[id] : null;
 	return {
-		project: project,
+		id,
+		project,
 		auth: state.firebase.auth
 	};
 };

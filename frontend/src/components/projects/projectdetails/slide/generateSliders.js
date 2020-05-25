@@ -96,13 +96,6 @@ const GenerateSliders = (project, uid) => {
 									nameMapper
 								)}
 							</div>
-							<div className="row">
-								<div className="col s12">
-									Put some input values here and see what your
-									model predicts!
-								</div>
-							</div>
-
 							<div
 								style={{
 									paddingLeft: "5rem",
@@ -115,6 +108,10 @@ const GenerateSliders = (project, uid) => {
 									handleInputChange
 								)}
 							</div>
+						</div>
+						<div className="card-action grey lighten-4 grey-text">
+							Input your guesses here and see what your model
+							predicts!
 						</div>
 					</div>
 				</div>

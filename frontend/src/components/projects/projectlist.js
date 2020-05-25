@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 function mapDepends(projects, uid) {
 	if (projects && uid) {
-		console.log("MAP DEPENDS if", projects);
+		// console.log("MAP DEPENDS if", projects);
 		return projects.filter((p) => p.authorID === uid);
 	} else {
-		console.log("MAP DEPENDS else", projects);
+		// console.log("MAP DEPENDS else", projects);
 		return projects;
 	}
 }

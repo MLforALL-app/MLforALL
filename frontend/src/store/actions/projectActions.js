@@ -1,6 +1,3 @@
-
-//import { storage } from "../../config/fbConfig.js";
-
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -49,35 +46,44 @@ export const uploadCSV = (csvName, projName) => {
 		.catch((err) => {
 			dispatch({ type: "UPLOAD_CSV_ERROR" });
 			console.log("csv upload error");
-		});
-		
-	}
+		});		
+	};
+};
 
-}
-
-export const deleteProject = (project) => {
-	return (dispatch, getState, { getFirestore }) => {
+export const deleteMLProject = (id, auth, project) => {
+	return (dispatch, getState, { getFirestore, getFirebase }) => {
+		// get todelete files
+		const delCSV = project.csvName;
+		console.log("DEL CSV", delCSV);
+		// might be a source of bugs in the future
+		var delVars = Object.values(project.models);
+		console.log("TYPE OF DEL VARS", typeof delVars);
+		delVars.push(delCSV);
+		console.log("TO DELETE", delVars);
 		// make async call to database
-		const projectID = "something";
 		const firestore = getFirestore();
+		console.log("STORAGE PATH", auth.uid + "/" + project.title);
 		firestore
 			.collection("projects")
-			.delete(projectID)
+			.doc(id)
+			.delete()
 			.then((snapshot) => {
-				dispatch({ type: "DELETE_PROJECT" });
+				dispatch({ type: "DELETE_PROJECT_DOC" });
 			})
 			.catch((err) => {
-				dispatch({ type: "DELETE_PROJECT_ERROR", err });
+				dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
 			});
-		/*// Create a reference to the file to delete
-			var desertRef = storageRef.child('images/desert.jpg');
-
-			// Delete the file
-			desertRef.delete().then(function() {
-			// File deleted successfully
-			}).catch(function(error) {
-			// Uh-oh, an error occurred!
-			});
- */
+		const storageRef = getFirebase().storage();
+		delVars.forEach((filename) => {
+			storageRef
+				.ref(auth.uid + "/" + project.title + "/" + filename)
+				.delete()
+				.then(() => {
+					console.log("Delete correctly from storage");
+				})
+				.catch((err) => {
+					console.log("uh oh spagetthio", err);
+				});
+		});
 	};
 };

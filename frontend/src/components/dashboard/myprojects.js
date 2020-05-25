@@ -11,9 +11,11 @@ class MyProjects extends Component {
 		const { projects, auth } = this.props;
 		//const projects = fetchMine(auth.uid);
 		// Route Protection
-		if (!auth.uid) return <Redirect to="/signin" />;
+		if (!auth.uid) return <Redirect to="/dashboard" />;
+		// maybe instead of redirecting, we can have another sign up page here
 		// otws good to go
 		// TODO: change const projects so its only this user's projects
+		// pass this in to project list uid={auth.uid}
 		return (
 			<div>
 				<span style={{ textAlign: "center" }}>

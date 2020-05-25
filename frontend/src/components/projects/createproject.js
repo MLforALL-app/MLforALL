@@ -31,9 +31,10 @@ class CreateProject extends Component {
 		console.log(this.props);
 		this.props.uploadCSV(this.state.csvName, this.state.title);
 		this.props.createProject(this.state);
+		// can we do something like
+		// this.props.history.push("/me") to get to UID?
 		this.props.initProject();
 		//this.props.history.push("/dashboard");
-
 	};
 
 	render() {
