@@ -10,7 +10,7 @@ import { compose } from "redux";
 // import { Redirect } from "react-router-dom";
 
 const ProjectDetails = (props) => {
-	const { auth, project } = props;
+	const { id, auth, project } = props;
 	// if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
@@ -20,7 +20,7 @@ const ProjectDetails = (props) => {
 				</div>
 				{GenerateSliders(project, auth.uid)}
 				<div className="row">
-					<div className="col s12">{CSVCard(auth, project)}</div>
+					<div className="col s12">{CSVCard(id, auth, project)}</div>
 				</div>
 			</div>
 		);
@@ -39,7 +39,8 @@ const mapStateToProps = (state, ownProps) => {
 	const projects = state.firestore.data.projects;
 	const project = projects ? projects[id] : null;
 	return {
-		project: project,
+		id,
+		project,
 		auth: state.firebase.auth
 	};
 };

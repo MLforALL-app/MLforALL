@@ -18,15 +18,18 @@ class DeleteProject extends Component {
 	handleClose = (e) => {
 		this.setState({ open: false });
 	};
-	handleDelete = (project) => {
+	handleDelete = (id, auth, project) => {
 		return () => {
 			this.setState({ open: false });
-			deleteMLProject(project);
+			this.props.deleteMLProject(id, auth, project);
+			this.props.history.push("/dashboard");
 		};
 	};
 
 	render() {
-		const { auth, project } = this.props;
+		const { id, auth, project } = this.props;
+		console.log("THIS IS SPARTA", id);
+		console.log("THIS IS AUTH SPARTA", auth);
 		return (
 			<span>
 				<button
@@ -63,7 +66,7 @@ class DeleteProject extends Component {
 						<button
 							className="btn-flat waves-effect waves-light"
 							style={{ display: "inline", color: "red" }}
-							onClick={this.handleDelete(project)}
+							onClick={this.handleDelete(id, auth, project)}
 						>
 							Delete Forever {" :("}
 						</button>
@@ -76,14 +79,14 @@ class DeleteProject extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		auth: state.firebase.auth,
-		project: state.firebase.project
+		auth: state.firebase.auth
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteMLProject: (project) => dispatch(deleteMLProject(project))
+		deleteMLProject: (id, auth, project) =>
+			dispatch(deleteMLProject(id, auth, project))
 	};
 };
 

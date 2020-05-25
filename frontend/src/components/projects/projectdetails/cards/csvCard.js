@@ -1,7 +1,7 @@
 import React from "react";
 import DeleteProject from "./confirmDel";
 
-const CSVCard = (auth, project) => {
+const CSVCard = (id, auth, project) => {
 	return (
 		<div className="card z-depth-0">
 			<div className="card-content">
@@ -17,7 +17,7 @@ const CSVCard = (auth, project) => {
 				</a>
 
 				{auth.uid === project.authorID ? (
-					<DeleteProject />
+					<DeleteProject auth={auth} id={id} project={project} />
 				) : (
 					<span></span>
 				)}
