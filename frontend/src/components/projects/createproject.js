@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createProject } from "../../store/actions/projectActions";
-import { Redirect } from "react-router-dom";
+import { createProject, uploadCSV } from "../../store/actions/projectActions";
+
 
 class CreateProject extends Component {
 	state = {
@@ -22,20 +22,22 @@ class CreateProject extends Component {
 			});
 		}
 
-		console.log(this.state);
-		console.log(this.state.csvName);
+		//console.log(this.state);
+		//console.log(this.state.csvName);
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
+		console.log(this.state.csvName);
+		console.log(this.props);
+		this.props.uploadCSV(this.state.csvName, this.state.title);
 		this.props.createProject(this.state);
 		// can we do something like
 		// this.props.history.push("/me") to get to UID?
-		this.props.history.push("/dashboard");
+		this.props.initProject();
+		//this.props.history.push("/dashboard");
 	};
 
 	render() {
-		const { auth } = this.props;
-		if (!auth.uid) return <Redirect to="/signin" />;
 		return (
 			<div className="container">
 				<form onSubmit={this.handleSubmit} className="white">
@@ -78,9 +80,11 @@ class CreateProject extends Component {
 						></textarea>
 					</div>
 					<div className="input-field">
-						<button className="btn blue lighten-1 z-depth-0">
+						<button className="btn blue lighten-1 z-depth-0" >
 							Create
 						</button>
+
+						
 					</div>
 				</form>
 			</div>
@@ -96,7 +100,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		createProject: (project) => dispatch(createProject(project))
+		createProject: (project) => dispatch(createProject(project)),
+		uploadCSV: (csv, projTitle) => dispatch(uploadCSV(csv, projTitle))
 	};
 };
 
