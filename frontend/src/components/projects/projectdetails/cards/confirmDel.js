@@ -28,8 +28,8 @@ class DeleteProject extends Component {
 
 	render() {
 		const { id, auth, project } = this.props;
-		console.log("THIS IS SPARTA", id);
-		console.log("THIS IS AUTH SPARTA", auth);
+		// console.log("THIS IS SPARTA", id);
+		// console.log("THIS IS AUTH SPARTA", auth);
 		return (
 			<span>
 				<button
