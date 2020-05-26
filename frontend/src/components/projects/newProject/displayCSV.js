@@ -124,8 +124,7 @@ class DisplayCSV extends Component {
 			csvName: this.props.curUserProj.csvName
 		};
 		axios
-			/*.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)*/
-			.post(`http://0.0.0.0:8080/store`, path)
+			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
 				console.log("Successfully created project models?");
@@ -133,7 +132,6 @@ class DisplayCSV extends Component {
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
 			});
-		// TODO UPDATE FIREBASE FIELD FOR MODELS
 	};
 	componentDidMount = () => {
 		this.initCSV();
