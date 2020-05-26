@@ -49,14 +49,16 @@ class CreateProject extends Component {
 	// THIS WILL GO WITH PAPA
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
 		this.setState((prevState) => {
-			console.log("PREV STATE", prevState);
-			console.log("DATAKEY", dataKey);
-			console.log("EVENT", event);
 			var newInputs = prevState.inputs;
 			newInputs[dataKey] = !newInputs[dataKey];
-			console.log("NEW INPUTS", newInputs);
 			return { ...prevState, inputs: newInputs };
 		});
+	};
+	// THIS WILL GO WITH PAPA
+	filterInputs = (inputState) => {
+		return Object.entries(inputState)
+			.filter(([key, val]) => val)
+			.map(([key, val]) => key + ", ");
 	};
 	// THIS WILL GO WITH PAPA
 	handleDropdown = (event) => {
@@ -177,6 +179,17 @@ class CreateProject extends Component {
 						<span></span>
 					) : (
 						<div>
+							<h5>
+								{" "}
+								This project will take{" "}
+								<span style={{ color: "blue" }}>
+									{this.filterInputs(this.state.inputs)}
+								</span>{" "}
+								to attempt to predict{" "}
+								<span style={{ color: "red" }}>
+									{this.state.output}
+								</span>
+							</h5>
 							<FormControl>
 								<Select
 									value={this.state.output}
