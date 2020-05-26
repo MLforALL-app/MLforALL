@@ -4,22 +4,12 @@ import {
 	createProject,
 	uploadCSV
 } from "../../../store/actions/projectActions";
-import Papa from "papaparse";
-import { Column, Table } from "react-virtualized";
-import "react-virtualized/styles.css"; // only needs to be imported once
-import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 
 class CreateProject extends Component {
 	state = {
 		title: "",
 		content: "",
-		csvName: "",
-		temporary: [], // this will go w papa
-		inputs: {}, // this will go w papa
-		output: "" // this will go w papa
+		csvName: ""
 	};
 
 	handleChange = (e) => {
@@ -44,82 +34,6 @@ class CreateProject extends Component {
 		// this.props.history.push("/me") to get to UID?
 		this.props.initProject();
 		//this.props.history.push("/dashboard");
-	};
-
-	// THIS WILL GO WITH PAPA
-	handleHeaderClick = ({ columnData, dataKey, event }) => {
-		this.setState((prevState) => {
-			var newInputs = prevState.inputs;
-			newInputs[dataKey] = !newInputs[dataKey];
-			return { ...prevState, inputs: newInputs };
-		});
-	};
-	// THIS WILL GO WITH PAPA
-	filterInputs = (inputState) => {
-		return Object.entries(inputState)
-			.filter(([key, val]) => val)
-			.map(([key, val]) => key + ", ");
-	};
-	// THIS WILL GO WITH PAPA
-	handleDropdown = (event) => {
-		this.setState({ output: event.target.value });
-	};
-	// THIS WILL GO WITH PAPA
-	getMenuItems = (headers) => {
-		var menuitems = [];
-		headers.forEach((h) => {
-			menuitems.push(
-				<MenuItem key={h} value={h}>
-					{h}
-				</MenuItem>
-			);
-		});
-		return menuitems;
-	};
-	// THIS WILL GO WITH PAPA
-	getColumns = (keyList) => {
-		//console.log("KEYLIST", keyList);
-		var columns = [];
-		keyList.forEach((key) => {
-			columns.push(
-				<Column label={key} dataKey={key} key={key} width={900} />
-			);
-			// setting width to 900 will cause overflow and force proper alignment
-		});
-		//console.log("Updated keylist", keyList);
-		return columns;
-	};
-	// THIS WILL GO WITH PAPA
-	initInputs = (inputs) => {
-		var inputState = {};
-		inputs.forEach((i) => {
-			inputState[i] = false;
-		});
-		// console.log("INPUT STATE", inputState);
-		return inputState;
-	};
-	// THIS WILL GO WITH PAPA
-	bigPapa = (url) => {
-		Papa.parse(
-			"https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/UDjMojFqWHOdW0fCIJPMNPScQ9p1%2FPokemon%2FPokemon.csv?alt=media&token=12fd7a18-6517-4fc8-836e-68e69632b41e",
-			{
-				download: true,
-				worker: true,
-				header: true,
-				complete: (results) => {
-					this.setState({
-						temporary: results.data
-					});
-					const inputState = this.initInputs(
-						Object.keys(results.data[0])
-					);
-					this.setState({
-						inputs: inputState
-					});
-					console.log("All done!", results);
-				}
-			}
-		);
 	};
 
 	render() {
@@ -166,64 +80,10 @@ class CreateProject extends Component {
 					</div>
 					<div className="input-field">
 						<button className="btn blue lighten-1 z-depth-0">
-							Create
+							Begin The Process
 						</button>
 					</div>
-					<button
-						onClick={this.bigPapa}
-						className="btn red darken-2 z-depth-0"
-					>
-						TESTING PAPA
-					</button>
-					{this.state.temporary.length === 0 ? (
-						<span></span>
-					) : (
-						<div>
-							<h5>
-								{" "}
-								This project will take{" "}
-								<span style={{ color: "blue" }}>
-									{this.filterInputs(this.state.inputs)}
-								</span>{" "}
-								to attempt to predict{" "}
-								<span style={{ color: "red" }}>
-									{this.state.output}
-								</span>
-							</h5>
-							<FormControl>
-								<Select
-									value={this.state.output}
-									onChange={this.handleDropdown}
-									displayEmpty
-								>
-									{this.getMenuItems(
-										Object.keys(this.state.temporary[0])
-									)}
-								</Select>
-								<FormHelperText>
-									Output Parameter
-								</FormHelperText>
-							</FormControl>
-							<Table
-								width={900}
-								height={400}
-								headerHeight={20}
-								rowHeight={30}
-								onHeaderClick={this.handleHeaderClick}
-								rowCount={this.state.temporary.length}
-								rowGetter={({ index }) =>
-									this.state.temporary[index]
-								}
-							>
-								{this.getColumns(
-									Object.keys(this.state.temporary[0])
-								)}
-							</Table>
-						</div>
-					)}
 				</form>
-				{console.log("OUTPUT", this.state.output)}
-				{console.log("INPUTS", this.state.inputs)}
 			</div>
 		);
 	}

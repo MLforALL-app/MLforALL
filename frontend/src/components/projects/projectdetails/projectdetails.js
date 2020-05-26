@@ -9,7 +9,7 @@ import { compose } from "redux";
 // import { Redirect } from "react-router-dom";
 
 const ProjectDetails = (props) => {
-	const { auth, project } = props;
+	const { id, auth, project } = props;
 	// if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
@@ -20,7 +20,7 @@ const ProjectDetails = (props) => {
 				{GenerateSliders(project, auth.uid)}
 				<div className="row">
 					<div className="col s12">
-						<CSVCard />
+						<CSVCard id={id} auth={auth} project={project} />
 					</div>
 				</div>
 			</div>

@@ -1,8 +1,7 @@
 import React from "react";
 import DeleteProject from "./confirmDel";
 
-const CSVCard = (props) => {
-	const { id, auth, project } = this.props;
+const CSVCard = ({ id, auth, project }) => {
 	return (
 		<div className="card z-depth-0">
 			<div className="card-content">
