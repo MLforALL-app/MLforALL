@@ -11,35 +11,9 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 import axios from "axios";
-
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
-};
+import ModelCheck from "./modelcheck";
 
 class DisplayCSV extends Component {
-	state = {
-		csvArray: [],
-		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
-		inputs: {},
-		output: ""
-	};
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
 		return Object.entries(objState)
@@ -53,6 +27,13 @@ class DisplayCSV extends Component {
 		});
 		return objState;
 	};
+	// State
+	state = {
+		csvArray: [],
+		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
+		inputs: {},
+		output: ""
+	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
 		this.setState((prevState) => {
@@ -63,6 +44,14 @@ class DisplayCSV extends Component {
 	};
 	handleDropdown = (event) => {
 		this.setState({ output: event.target.value });
+	};
+	handleModelToggle = (value) => () => {
+		console.log("VALUE IN HANDLE TOGGLE", value);
+		this.setState((prevState) => {
+			var newModels = prevState.models;
+			newModels[value] = !newModels[value];
+			return { ...prevState, models: newModels };
+		});
 	};
 	// get functions to populate things on page
 	getMenuItems = (headers) => {
@@ -95,9 +84,7 @@ class DisplayCSV extends Component {
 				this.setState({
 					csvArray: results.data
 				});
-				const inputState = this.initInputs(
-					Object.keys(results.data[0])
-				);
+				const inputState = this.initObj(Object.keys(results.data[0]));
 				this.setState({
 					inputs: inputState
 				});
@@ -127,26 +114,18 @@ class DisplayCSV extends Component {
 	// handle submitting the project
 	handleSubmit = (e) => {
 		e.preventDefault();
-		console.log("Submit event", e);
-		console.log("INPUT INFO:");
-		console.log("UID", this.props.auth.uid);
-		console.log("PROJID", this.props.projID);
-		console.log("PROJTITLE", this.props.curUserProj.title);
-		console.log("MODELS CHOSEN", this.state.models);
-		console.log("OUTPUT PARAM", this.state.output);
-		console.log("INPUT PARAMS", this.filterInputs(this.props.inputs));
-		console.log("CSV NAME", this.props.curUserProj.csvName);
 		const path = {
 			uid: this.props.auth.uid,
 			projectID: this.props.projID,
 			title: this.props.curUserProj.title,
-			modelList: this.state.models,
+			modelList: this.filterObj(this.state.models),
 			targetParameter: this.state.output,
-			dfVariables: this.filterInputs(this.props.inputs),
+			dfVariables: this.filterObj(this.state.inputs),
 			csvName: this.props.curUserProj.csvName
 		};
 		axios
-			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
+			/*.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)*/
+			.post(`http://0.0.0.0:8080/store`, path)
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
 				console.log("Successfully created project models?");
@@ -154,55 +133,85 @@ class DisplayCSV extends Component {
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
 			});
+		// TODO UPDATE FIREBASE FIELD FOR MODELS
 	};
 	componentDidMount = () => {
 		this.initCSV();
+		console.log(
+			"INITILA OBJ",
+			this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
+		);
 	};
 	render() {
 		return (
-			<div>
+			<div className="displaycsv">
 				{this.state.csvArray.length === 0 ? (
 					<CircularProgress />
 				) : (
-					<div>
-						<h5>
-							{" "}
-							This project will take{" "}
-							<span style={{ color: "blue" }}>
-								{this.filterInputs(this.state.inputs)}
-							</span>{" "}
-							to attempt to predict{" "}
-							<span style={{ color: "red" }}>
-								{this.state.output}
-							</span>
-						</h5>
-						<FormControl>
-							<Select
-								value={this.state.output}
-								onChange={this.handleDropdown}
-								displayEmpty
+					<div className="isactive">
+						<div className="row">
+							<h5>
+								{" "}
+								This project will take{" "}
+								<span style={{ color: "blue" }}>
+									{this.filterObj(this.state.inputs)}
+								</span>{" "}
+								to attempt to predict{" "}
+								<span style={{ color: "red" }}>
+									{this.state.output}
+								</span>
+							</h5>
+							<div className="col s8">
+								{console.log(
+									"THIS IS MODELS",
+									this.state.models
+								)}
+								<ModelCheck
+									filterObj={this.filterObj}
+									handleToggle={this.handleModelToggle}
+									models={this.state.models}
+								/>
+							</div>
+							<div className="col s4">
+								<FormControl>
+									<Select
+										value={this.state.output}
+										onChange={this.handleDropdown}
+										displayEmpty
+									>
+										{this.getMenuItems(
+											Object.keys(this.state.csvArray[0])
+										)}
+									</Select>
+									<FormHelperText>
+										Output Parameter
+									</FormHelperText>
+								</FormControl>
+								<button
+									onClick={this.handleSubmit}
+									className="btn blue lighten-1 z-depth-0"
+								>
+									Build the model!
+								</button>
+							</div>
+						</div>
+						<div className="row">
+							<Table
+								width={900}
+								height={400}
+								headerHeight={30}
+								rowHeight={25}
+								onHeaderClick={this.handleHeaderClick}
+								rowCount={this.state.csvArray.length}
+								rowGetter={({ index }) =>
+									this.state.csvArray[index]
+								}
 							>
-								{this.getMenuItems(
+								{this.getColumns(
 									Object.keys(this.state.csvArray[0])
 								)}
-							</Select>
-							<FormHelperText>Output Parameter</FormHelperText>
-						</FormControl>
-						<Table
-							width={900}
-							height={400}
-							headerHeight={30}
-							rowHeight={25}
-							onHeaderClick={this.handleHeaderClick}
-							rowCount={this.state.csvArray.length}
-							rowGetter={({ index }) =>
-								this.state.csvArray[index]
-							}
-						>
-							{this.getColumns(
-								Object.keys(this.state.csvArray[0])
-							)}
-						</Table>
+							</Table>
+						</div>
 					</div>
 				)}
 			</div>
@@ -214,7 +223,8 @@ const mapStatetoProps = (state) => {
 	// console.log("LOOK AT ME", state);
 	return {
 		auth: state.firebase.auth,
-		curUserProj: state.project.curUserProj
+		curUserProj: state.project.curUserProj,
+		projID: state.project.curUserProjID
 	};
 };
 
