@@ -1,15 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Papa from "papaparse";
 import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 
 class DisplayCSV extends Component {
 	state = {
-		parsedCsv: ""
+		csvArray: []
 	};
 	componentDidMount = () => {
-		console.log(this.props.csv);
+		// console.log(this.props.csv);
 		this.initCSV();
 	};
 
@@ -24,22 +23,19 @@ class DisplayCSV extends Component {
 		csvRef
 			.getDownloadURL()
 			.then((url) => {
-				//PAPA PARSE
-				console.log(url);
-				console.log("CSV DISPLAY LOGGING ABOVE");
+				console.log("This the url", url);
 			})
-			.catch(function (error) {
-				// Handle any errors
+			.catch((err) => {
+				console.log("SOMETHING wrong uhOh", err);
 			});
 	};
-
 	render() {
 		return <div></div>;
 	}
 }
 
 const mapStatetoProps = (state) => {
-	console.log("LOOK AT ME", state);
+	// console.log("LOOK AT ME", state);
 	return {
 		auth: state.firebase.auth,
 		curUserProj: state.project.curUserProj

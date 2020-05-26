@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import CreateProject from "./createproject";
 import BuildProject from "./buildproject";
-import DisplayCSV from "./displayCSV";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class CreateProjectContainer extends Component {

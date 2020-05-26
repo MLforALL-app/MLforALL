@@ -4,12 +4,22 @@ import {
 	createProject,
 	uploadCSV
 } from "../../../store/actions/projectActions";
+import Papa from "papaparse";
+import { Column, Table } from "react-virtualized";
+import "react-virtualized/styles.css"; // only needs to be imported once
+import MenuItem from "@material-ui/core/MenuItem";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 
 class CreateProject extends Component {
 	state = {
 		title: "",
 		content: "",
-		csvName: ""
+		csvName: "",
+		temporary: [], // this will go w papa
+		inputs: {}, // this will go w papa
+		output: "" // this will go w papa
 	};
 
 	handleChange = (e) => {
@@ -23,9 +33,6 @@ class CreateProject extends Component {
 				[e.target.id]: e.target.files[0]
 			});
 		}
-
-		//console.log(this.state);
-		//console.log(this.state.csvName);
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
@@ -37,6 +44,80 @@ class CreateProject extends Component {
 		// this.props.history.push("/me") to get to UID?
 		this.props.initProject();
 		//this.props.history.push("/dashboard");
+	};
+
+	// THIS WILL GO WITH PAPA
+	handleHeaderClick = ({ columnData, dataKey, event }) => {
+		this.setState((prevState) => {
+			console.log("PREV STATE", prevState);
+			console.log("DATAKEY", dataKey);
+			console.log("EVENT", event);
+			var newInputs = prevState.inputs;
+			newInputs[dataKey] = !newInputs[dataKey];
+			console.log("NEW INPUTS", newInputs);
+			return { ...prevState, inputs: newInputs };
+		});
+	};
+	// THIS WILL GO WITH PAPA
+	handleDropdown = (event) => {
+		this.setState({ output: event.target.value });
+	};
+	// THIS WILL GO WITH PAPA
+	getMenuItems = (headers) => {
+		var menuitems = [];
+		headers.forEach((h) => {
+			menuitems.push(
+				<MenuItem key={h} value={h}>
+					{h}
+				</MenuItem>
+			);
+		});
+		return menuitems;
+	};
+	// THIS WILL GO WITH PAPA
+	getColumns = (keyList) => {
+		//console.log("KEYLIST", keyList);
+		var columns = [];
+		keyList.forEach((key) => {
+			columns.push(
+				<Column label={key} dataKey={key} key={key} width={900} />
+			);
+			// setting width to 900 will cause overflow and force proper alignment
+		});
+		//console.log("Updated keylist", keyList);
+		return columns;
+	};
+	// THIS WILL GO WITH PAPA
+	initInputs = (inputs) => {
+		var inputState = {};
+		inputs.forEach((i) => {
+			inputState[i] = false;
+		});
+		// console.log("INPUT STATE", inputState);
+		return inputState;
+	};
+	// THIS WILL GO WITH PAPA
+	bigPapa = (url) => {
+		Papa.parse(
+			"https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/UDjMojFqWHOdW0fCIJPMNPScQ9p1%2FSpotify%2Fsimple_top50.csv?alt=media&token=5f55645b-1884-47ee-b504-5e7f835cfa20",
+			{
+				download: true,
+				worker: true,
+				header: true,
+				complete: (results) => {
+					this.setState({
+						temporary: results.data
+					});
+					const inputState = this.initInputs(
+						Object.keys(results.data[0])
+					);
+					this.setState({
+						inputs: inputState
+					});
+					console.log("All done!", results);
+				}
+			}
+		);
 	};
 
 	render() {
@@ -86,7 +167,48 @@ class CreateProject extends Component {
 							Create
 						</button>
 					</div>
+					<button
+						onClick={this.bigPapa}
+						className="btn red darken-2 z-depth-0"
+					>
+						TESTING PAPA
+					</button>
+					{this.state.temporary.length === 0 ? (
+						<span></span>
+					) : (
+						<div>
+							<FormControl>
+								<Select
+									value={this.state.output}
+									onChange={this.handleDropdown}
+									displayEmpty
+								>
+									{this.getMenuItems(
+										Object.keys(this.state.temporary[0])
+									)}
+								</Select>
+								<FormHelperText>Model</FormHelperText>
+							</FormControl>
+							<Table
+								width={900}
+								height={400}
+								headerHeight={20}
+								rowHeight={30}
+								onHeaderClick={this.handleHeaderClick}
+								rowCount={this.state.temporary.length}
+								rowGetter={({ index }) =>
+									this.state.temporary[index]
+								}
+							>
+								{this.getColumns(
+									Object.keys(this.state.temporary[0])
+								)}
+							</Table>
+						</div>
+					)}
 				</form>
+				{console.log("OUTPUT", this.state.output)}
+				{console.log("INPUTS", this.state.inputs)}
 			</div>
 		);
 	}
