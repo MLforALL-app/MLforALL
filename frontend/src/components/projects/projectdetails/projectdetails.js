@@ -2,7 +2,6 @@ import React from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import "./pjdetails.css";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -10,7 +9,7 @@ import { compose } from "redux";
 // import { Redirect } from "react-router-dom";
 
 const ProjectDetails = (props) => {
-	const { id, auth, project } = props;
+	const { auth, project } = props;
 	// if (!auth.uid) return <Redirect to="/signin" />;
 	if (project) {
 		return (
@@ -20,16 +19,14 @@ const ProjectDetails = (props) => {
 				</div>
 				{GenerateSliders(project, auth.uid)}
 				<div className="row">
-					<div className="col s12">{CSVCard(id, auth, project)}</div>
+					<div className="col s12">
+						<CSVCard />
+					</div>
 				</div>
 			</div>
 		);
 	} else {
-		return (
-			<div className="container center">
-				<CircularProgress />
-			</div>
-		);
+		return <div className="container center">Error Loading Project</div>;
 	}
 };
 
