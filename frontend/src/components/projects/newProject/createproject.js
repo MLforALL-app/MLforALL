@@ -101,7 +101,7 @@ class CreateProject extends Component {
 	// THIS WILL GO WITH PAPA
 	bigPapa = (url) => {
 		Papa.parse(
-			"https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/UDjMojFqWHOdW0fCIJPMNPScQ9p1%2FSpotify%2Fsimple_top50.csv?alt=media&token=5f55645b-1884-47ee-b504-5e7f835cfa20",
+			"https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/UDjMojFqWHOdW0fCIJPMNPScQ9p1%2FPokemon%2FPokemon.csv?alt=media&token=12fd7a18-6517-4fc8-836e-68e69632b41e",
 			{
 				download: true,
 				worker: true,
@@ -200,7 +200,9 @@ class CreateProject extends Component {
 										Object.keys(this.state.temporary[0])
 									)}
 								</Select>
-								<FormHelperText>Model</FormHelperText>
+								<FormHelperText>
+									Output Parameter
+								</FormHelperText>
 							</FormControl>
 							<Table
 								width={900}
