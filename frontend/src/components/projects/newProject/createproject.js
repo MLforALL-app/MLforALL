@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createProject, uploadCSV } from "../../store/actions/projectActions";
-
+import {
+	createProject,
+	uploadCSV
+} from "../../../store/actions/projectActions";
 
 class CreateProject extends Component {
 	state = {
@@ -80,11 +82,9 @@ class CreateProject extends Component {
 						></textarea>
 					</div>
 					<div className="input-field">
-						<button className="btn blue lighten-1 z-depth-0" >
+						<button className="btn blue lighten-1 z-depth-0">
 							Create
 						</button>
-
-						
 					</div>
 				</form>
 			</div>
