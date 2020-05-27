@@ -18,10 +18,10 @@ class MyProjects extends Component {
 		// pass this in to project list uid={auth.uid}
 		return (
 			<div>
-				<span style={{ textAlign: "center" }}>
-					<h3> Here are your projects! </h3>
-				</span>
 				<div className="dashboard container">
+					<span className="purple-text">
+						<h1> My projects. </h1>
+					</span>
 					<ProjectList projects={projects} uid={auth.uid} />
 				</div>
 			</div>

@@ -11,7 +11,7 @@ const CSVCard = ({ id, auth, project }) => {
 					Ideally this is where some of our renderCSV stuff will go
 				</p>
 			</div>
-			<div className="card-action grey lighten-4 grey-text">
+			<div className="card-action">
 				<a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
 					Download/reference link here
 				</a>

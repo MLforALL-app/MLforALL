@@ -109,7 +109,7 @@ const GenerateSliders = (project, uid) => {
 								)}
 							</div>
 						</div>
-						<div className="card-action grey lighten-4 grey-text">
+						<div className="card-action">
 							Input your guesses here and see what your model
 							predicts!
 						</div>

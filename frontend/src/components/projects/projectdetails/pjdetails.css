@@ -1,3 +1,22 @@
 .card {
 	border-radius: 25px;
+	background-color: white;
+	color: black;
+}
+.card-action {
+	border-bottom-left-radius: 25px !important;
+	border-bottom-right-radius: 25px !important;
+	background-color: #382980 !important;
+	color: white;
+}
+
+.purple-text {
+	color: #382980 !important;
+}
+
+.project-summary {
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }

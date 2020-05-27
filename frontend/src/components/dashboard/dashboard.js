@@ -15,10 +15,10 @@ class Dashboard extends Component {
 		// otws good to go
 		return (
 			<div className="dashboard container">
-				<span style={{ textAlign: "center" }}>
-					<h3> See other people's projects! </h3>
-				</span>
 				<div className="row">
+					<span className="purple-text">
+						<h1> Explore. </h1>
+					</span>
 					<Notifications notifications={notifications} />
 				</div>
 				<ProjectList projects={projects} />

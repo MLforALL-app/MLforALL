@@ -4,7 +4,6 @@ import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
 import "./pjdetails.css";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 // import { Redirect } from "react-router-dom";
@@ -30,7 +29,7 @@ const ProjectDetails = (props) => {
 		return (
 			<div className="container center">
 				Error Loading Project. Redirecting to dashboard.{" "}
-				<Redirect to="/dashboard" />
+				{/*<Redirect to="/dashboard" />*/}
 			</div>
 		);
 	}

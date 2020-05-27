@@ -3,15 +3,29 @@ import moment from "moment";
 
 const ProjectSummary = ({ project }) => {
 	return (
-		<div className="card z-depth-0 project-summary">
-			<div className="card-content grey-text text-darken-3">
-				<span className="card-title"> {project.title} </span>
-				<p>
-					{project.authorFirstName} {project.authorLastName}{" "}
-				</p>
-				<p className="grey-text">
-					{moment(project.createdAt.toDate()).calendar()}
-				</p>
+		<div className="project-summary">
+			<div className="card">
+				<div className="card-content">
+					<span className="card-title"> {project.title} </span>
+					<p>
+						{project.content.length > 100
+							? project.content.substr(0, 100) + "..."
+							: project.content}
+					</p>
+				</div>
+				<div className="card-action">
+					<div style={{ float: "left" }}>
+						{moment(project.createdAt.toDate()).format("M/D/YYYY")}
+					</div>
+					<div style={{ float: "right" }}>
+						{" "}
+						made with <span className="hearts">
+							&hearts;
+						</span> by {project.authorFirstName}{" "}
+						{project.authorLastName}
+					</div>
+					<div style={{ clear: "both" }}></div>
+				</div>
 			</div>
 		</div>
 	);

@@ -15,7 +15,7 @@ body {
 	background-color: #e2e1e1;
 	min-height: 100%;
 	*/
-	background-color: #e7f1f8;
+	background-color: rgb(251, 251, 251);
 }
 
 form {
@@ -23,7 +23,6 @@ form {
 	padding-bottom: calc(8px + 2vh + 0.2vw);
 	padding-left: calc(15px + 3vh + 0.7vw);
 	padding-right: calc(15px + 3vh + 0.7vw);
-	margin-top: calc(25px + 5vh + 1vw);
 }
 
 form button,
@@ -52,5 +51,5 @@ code {
 }
 
 .hearts {
-	color: #e25555;
+	color: #db91b6;
 }
