@@ -33,7 +33,7 @@ def predict_from_model():
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
     # Get firebase stuff
-    path = fb.make_path(uid, project, model)
+    path = fb.make_path(str(uid), str(project), str(model))
     bucket = fb.bucket_init()
     # Get loaded model
     loaded_model = fb.get_pickle(bucket, path)
@@ -63,12 +63,13 @@ def store():
         # populate storage with models
         for model in model_list:
             # retrieve the csv everytime due to some weird "key errors"
-            df = fb.get_csv(bucket, fb.make_path(uid, title, csv_name))
+            df = fb.get_csv(bucket, fb.make_path(
+                str(uid), str(title), str(csv_name)))
             pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
             fb.send_pickle(bucket, pickle_bytes,
-                           fb.make_path(uid, title, model))
+                           fb.make_path(str(uid), str(title), str(model)))
        # update firestore with descriptive stats
-        send_vars(df, db, proj_id, df_vars)
+        send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
     except TypeError:
         return "it failed"

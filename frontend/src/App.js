@@ -6,7 +6,7 @@ import MyProjects from "./components/dashboard/myprojects";
 import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
-import CreateProjectContainer from "./components/projects/newprojectpage.js";
+import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import LandingPage from "./components/info/landing";
 import "./App.css";
 

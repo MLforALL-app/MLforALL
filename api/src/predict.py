@@ -17,4 +17,8 @@ def floatCast(num):
 def predict(loaded_model, prediction_variables):
     X_predict = [list(map(floatCast, prediction_variables))]
     guess = loaded_model.predict(X_predict)
-    return guess[0]
+    # issues with jsonify and numpy Int64
+    if(isinstance(guess[0], str)):
+        return guess[0]
+    else:
+        return float(guess[0])

@@ -1,6 +1,6 @@
 const initState = {
-	curUserProjID : "init",
-	curUserProj : "init",
+	curUserProjID: "init",
+	curUserProj: "init"
 };
 
 const projectReducer = (state = initState, action) => {
@@ -10,11 +10,9 @@ const projectReducer = (state = initState, action) => {
 			console.log(state);
 			return {
 				...state,
-				curUserProjID : action.snapshot["id"],
-				curUserProj : action.project
-
-			}; 
-			
+				curUserProjID: action.snapshot["id"],
+				curUserProj: action.project
+			};
 		case "CREATE_PROJECT_ERROR":
 			console.log("Create project error", action.error);
 			return state;
@@ -35,6 +33,7 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "UPLOAD_CSV_ERROR":
 			console.log("Upload CSV error");
+			return state;
 		default:
 			console.log("Default case");
 			return state;

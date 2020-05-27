@@ -83,7 +83,7 @@ const GenerateSliders = (project, uid) => {
 		<div className="predict">
 			<div className="row">
 				<div className="col s12">
-					<div className="card z-depth-0">
+					<div className="card z-depth-1">
 						<div className="card-content">
 							<span className="card-title">
 								Testing: {nameMapper(model)}
@@ -109,7 +109,7 @@ const GenerateSliders = (project, uid) => {
 								)}
 							</div>
 						</div>
-						<div className="card-action grey lighten-4 grey-text">
+						<div className="card-action">
 							Input your guesses here and see what your model
 							predicts!
 						</div>

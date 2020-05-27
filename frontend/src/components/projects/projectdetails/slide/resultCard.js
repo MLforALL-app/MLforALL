@@ -10,7 +10,7 @@ const inputToString = (inputs) => {
 	return pretty.join();
 };
 
-const showResults = (output, inputs, model, nameMapper) => {
+const showResults = (output, inputs, model, targetParam, nameMapper) => {
 	if (output === "") {
 		return <p> ~~choose your inputs~~ </p>;
 	} else if (output === "Server Error") {
@@ -34,14 +34,15 @@ const showResults = (output, inputs, model, nameMapper) => {
 						? " NO MODEL SELECTED "
 						: " " + nameMapper(model)}
 				</span>{" "}
-				would predict it to be:{" "}
+				would predict{" "}
+				<span style={{ color: "purple" }}> {targetParam} </span>to be:{" "}
 				<span style={{ color: "red" }}>{output.data}</span>
 			</p>
 		);
 	}
 };
 
-const loader = (loading, output, inputs, model, nameMapper) => {
+const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
 	if (loading) {
 		return (
 			<div className="container center">
@@ -55,7 +56,13 @@ const loader = (loading, output, inputs, model, nameMapper) => {
 					{output ? output.data : ""}
 				</span>
 				<span style={{ textAlign: "center" }}>
-					{showResults(output, inputs, model, nameMapper)}
+					{showResults(
+						output,
+						inputs,
+						model,
+						targetParam,
+						nameMapper
+					)}
 				</span>
 			</div>
 		);
@@ -75,6 +82,7 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				model,
 				inputs: Object.values(inputs)
 			};
+			console.log("THIS IS PATH", path);
 			setLoading(true);
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
@@ -99,12 +107,12 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 	return (
 		<div className="results">
 			<div className="col s3">
-				<div className="card z-depth-0">
+				<div className="card z-depth-1">
 					<div className="card-content">
 						<div className="center">
 							<button
 								style={{ borderRadius: "50px" }}
-								className="btn-large waves-effect waves-light blue lighten-1"
+								className="btn-large waves-effect waves-light"
 								type="submit"
 								name="action"
 								onClick={handleSubmit}
@@ -114,7 +122,7 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 										fontSize: "1.4rem"
 									}}
 								>
-									PREDICT
+									Generate
 								</span>
 							</button>
 						</div>
@@ -122,9 +130,16 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				</div>
 			</div>
 			<div className="col s9">
-				<div className="card z-depth-0">
+				<div className="card z-depth-1">
 					<div className="card-content">
-						{loader(loading, output, inputs, model, nameMapper)}
+						{loader(
+							loading,
+							output,
+							inputs,
+							model,
+							project.targetParam,
+							nameMapper
+						)}
 					</div>
 				</div>
 			</div>

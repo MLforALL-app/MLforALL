@@ -6,6 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { deleteMLProject } from "../../../../store/actions/projectActions";
 import { connect } from "react-redux";
+// import { Redirect } from "react-router-dom";
 
 class DeleteProject extends Component {
 	state = {
@@ -22,7 +23,7 @@ class DeleteProject extends Component {
 		return () => {
 			this.setState({ open: false });
 			this.props.deleteMLProject(id, auth, project);
-			// this.props.history.push("/dashboard");
+			// return <Redirect to="/dashboard" />;
 		};
 	};
 
@@ -34,10 +35,10 @@ class DeleteProject extends Component {
 			<span>
 				<button
 					className="btn-flat waves-effect waves-light"
-					style={{ display: "inline", color: "red" }}
+					style={{ display: "inline" }}
 					onClick={this.handleClickOpen}
 				>
-					DELETE
+					<span className="hearts">DELETE</span>
 				</button>
 				<Dialog
 					open={this.state.open}

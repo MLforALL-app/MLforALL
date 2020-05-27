@@ -12,11 +12,10 @@ const Navbar = (props) => {
 		<Signedoutlinks />
 	);
 	return (
-		<nav className="nav-wrapper grey darken-3">
+		<nav className="nav-wrapper ">
 			<div className="container">
 				<Link to="/" className="brand-logo">
-					{" "}
-					MLforAll
+					<span className="purple-text">MLforALL</span>
 				</Link>
 				{links}
 			</div>
