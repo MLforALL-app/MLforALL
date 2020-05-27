@@ -5,13 +5,19 @@ function Signedoutlinks() {
 	return (
 		<ul className="right">
 			<li>
-				<NavLink to="/dashboard">All Models</NavLink>{" "}
+				<NavLink to="/">
+					<span className="purple-text">About</span>
+				</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to="/signup">Sign Up</NavLink>{" "}
+				<NavLink to="/signup">
+					<span className="purple-text">Sign Up</span>
+				</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to="/signin">Login</NavLink>
+				<NavLink to="/signin">
+					<span className="purple-text">Sign In</span>
+				</NavLink>
 			</li>
 		</ul>
 	);

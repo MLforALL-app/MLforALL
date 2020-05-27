@@ -25,5 +25,12 @@
 	padding-bottom: 10px;
 }
 .nav-wrapper {
-	background-color: transparent;
+	background-color: rgb(240, 240, 240);
+}
+.right a:hover,
+.right button:hover {
+	background: #db91b67e;
+}
+.hearts {
+	color: #db91b6;
 }
