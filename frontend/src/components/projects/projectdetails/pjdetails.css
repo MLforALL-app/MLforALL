@@ -61,3 +61,8 @@ form {
 .MuiSlider-root {
 	color: #db91b6 !important;
 }
+.footer-copyright {
+	color: white;
+	font-size: 0.8rem;
+	background-color: #382980;
+}

@@ -8,6 +8,7 @@ import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import LandingPage from "./components/info/landing";
+import Footer from "./components/info/footer";
 import "./App.css";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 					<Route path="/create" component={CreateProjectContainer} />
 					<Route exact path="/" component={LandingPage} />
 				</Switch>
+				<Footer />
 			</div>
 		</BrowserRouter>
 	);

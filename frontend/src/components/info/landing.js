@@ -8,7 +8,7 @@ const intro = () => {
 			<h1> What is ML for All? </h1>
 			<p>
 				{" "}
-				ML For All is a platform designed by two ambitious students,
+				ML For All is a platform designed by three ambitious students,
 				Davis, Joseph, and Len, seeking to spread the excitment behind
 				machine learning models to people from all kinds of backgrounds.
 				ML for All simplifies the math and the small details and grants
