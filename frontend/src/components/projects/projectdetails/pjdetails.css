@@ -14,9 +14,16 @@
 	color: #382980 !important;
 }
 
+.btn-floating {
+	background-color: #382980;
+}
+
 .project-summary {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
 	padding-top: 10px;
 	padding-bottom: 10px;
+}
+.nav-wrapper {
+	background-color: transparent;
 }
