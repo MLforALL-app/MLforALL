@@ -69,7 +69,7 @@ def store():
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(str(uid), str(title), str(model)))
        # update firestore with descriptive stats
-        send_vars(df, db, proj_id, df_vars, model_list)
+        send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
     except TypeError:
         return "it failed"

@@ -19,12 +19,13 @@ export const createProject = (project) => {
 				authorID: uid,
 				createdAt: date,
 				csvName: csvName,
+				targetParam: "",
 				models: [],
 				variables: []
 			})
 			.then((snapshot) => {
 				//console.log(snapshot);
-				dispatch({ type: "CREATE_PROJECT", project, snapshot});
+				dispatch({ type: "CREATE_PROJECT", project, snapshot });
 			})
 			.catch((err) => {
 				dispatch({ type: "CREATE_PROJECT_ERROR", err });
@@ -33,20 +34,22 @@ export const createProject = (project) => {
 };
 
 export const uploadCSV = (csvName, projName) => {
-	return (dispatch, getState, {getFirebase}) => {
+	return (dispatch, getState, { getFirebase }) => {
 		console.log(csvName);
 		const firebase = getFirebase();
-		const csvPath = getState().firebase.auth.uid + "/" + projName + "/" + csvName.name;
+		const csvPath =
+			getState().firebase.auth.uid + "/" + projName + "/" + csvName.name;
 		var csvRef = firebase.storage().ref(csvPath);
-		csvRef.put(csvName)
-		.then((snapshot) => {
-			 console.log("uploaded csv!");
-			 dispatch({ type: "UPLOAD_CSV" });
-		})
-		.catch((err) => {
-			dispatch({ type: "UPLOAD_CSV_ERROR" });
-			console.log("csv upload error");
-		});		
+		csvRef
+			.put(csvName)
+			.then((snapshot) => {
+				console.log("uploaded csv!");
+				dispatch({ type: "UPLOAD_CSV" });
+			})
+			.catch((err) => {
+				dispatch({ type: "UPLOAD_CSV_ERROR" });
+				console.log("csv upload error");
+			});
 	};
 };
 

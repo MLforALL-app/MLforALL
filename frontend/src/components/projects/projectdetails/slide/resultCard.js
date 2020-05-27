@@ -10,7 +10,7 @@ const inputToString = (inputs) => {
 	return pretty.join();
 };
 
-const showResults = (output, inputs, model, nameMapper) => {
+const showResults = (output, inputs, model, targetParam, nameMapper) => {
 	if (output === "") {
 		return <p> ~~choose your inputs~~ </p>;
 	} else if (output === "Server Error") {
@@ -34,14 +34,15 @@ const showResults = (output, inputs, model, nameMapper) => {
 						? " NO MODEL SELECTED "
 						: " " + nameMapper(model)}
 				</span>{" "}
-				would predict it to be:{" "}
+				would predict{" "}
+				<span style={{ color: "purple" }}> {targetParam} </span>to be:{" "}
 				<span style={{ color: "red" }}>{output.data}</span>
 			</p>
 		);
 	}
 };
 
-const loader = (loading, output, inputs, model, nameMapper) => {
+const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
 	if (loading) {
 		return (
 			<div className="container center">
@@ -55,7 +56,13 @@ const loader = (loading, output, inputs, model, nameMapper) => {
 					{output ? output.data : ""}
 				</span>
 				<span style={{ textAlign: "center" }}>
-					{showResults(output, inputs, model, nameMapper)}
+					{showResults(
+						output,
+						inputs,
+						model,
+						targetParam,
+						nameMapper
+					)}
 				</span>
 			</div>
 		);
@@ -125,7 +132,14 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 			<div className="col s9">
 				<div className="card z-depth-0">
 					<div className="card-content">
-						{loader(loading, output, inputs, model, nameMapper)}
+						{loader(
+							loading,
+							output,
+							inputs,
+							model,
+							project.targetParam,
+							nameMapper
+						)}
 					</div>
 				</div>
 			</div>
