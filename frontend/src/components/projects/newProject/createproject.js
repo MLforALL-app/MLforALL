@@ -65,6 +65,7 @@ class CreateProject extends Component {
 								className="file-path validate"
 								type="text"
 								placeholder="Upload .csv file"
+								accept=".csv"
 							/>
 						</div>
 					</div>
@@ -84,6 +85,36 @@ class CreateProject extends Component {
 						</button>
 					</div>
 				</form>
+				<div className="card z-depth-0">
+					<span className="card-title">
+						Need Help Finding a Dataset?
+					</span>
+					<div className="card-content">
+						<ul>
+							<li>
+								<a href="https://www.kaggle.com/datasets">
+									Check out Kaggle,
+								</a>
+							</li>
+							<li>
+								<a href="https://data.world/">
+									data.world (needs login),
+								</a>
+							</li>
+							<li>
+								<a href="https://registry.opendata.aws/">
+									Amazon's open registry,
+								</a>
+							</li>
+							<li>
+								<a href="https://datasetsearch.research.google.com/">
+									{" "}
+									or Google's dataset search engine!
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
 			</div>
 		);
 	}

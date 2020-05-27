@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Papa from "papaparse";
 import { Column, Table } from "react-virtualized";
+import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
+import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
@@ -12,6 +14,17 @@ import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
+
+// styling for materialUI
+const useDropStyles = makeStyles((theme) => ({
+	formControl: {
+		margin: theme.spacing(1),
+		minWidth: 500
+	},
+	selectEmpty: {
+		marginTop: theme.spacing(2)
+	}
+}));
 
 class DisplayCSV extends Component {
 	// Our flip boolean object data structure thing functions
@@ -32,7 +45,9 @@ class DisplayCSV extends Component {
 		csvArray: [],
 		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
 		inputs: {},
-		output: ""
+		output: "",
+		redirect: false,
+		loading: false
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
@@ -114,6 +129,7 @@ class DisplayCSV extends Component {
 	// handle submitting the project
 	handleSubmit = (e) => {
 		e.preventDefault();
+		this.setState({ loading: true });
 		const path = {
 			uid: this.props.auth.uid,
 			projectID: this.props.projID,
@@ -127,7 +143,8 @@ class DisplayCSV extends Component {
 			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
-				console.log("Successfully created project models?");
+				this.setState({ redirect: true });
+				// console.log("Successfully created project models?");
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
@@ -135,14 +152,19 @@ class DisplayCSV extends Component {
 	};
 	componentDidMount = () => {
 		this.initCSV();
-		console.log(
+		/*console.log(
 			"INITILA OBJ",
 			this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
-		);
+		);*/
 	};
 	render() {
 		return (
 			<div className="displaycsv">
+				{this.state.redirect ? (
+					<Redirect to="/dashboard" />
+				) : (
+					<span></span>
+				)}
 				{this.state.csvArray.length === 0 ? (
 					<CircularProgress />
 				) : (
@@ -171,11 +193,14 @@ class DisplayCSV extends Component {
 								/>
 							</div>
 							<div className="col s4">
-								<FormControl>
+								<FormControl
+									className={useDropStyles().formControl}
+								>
 									<Select
 										value={this.state.output}
 										onChange={this.handleDropdown}
 										displayEmpty
+										className={useDropStyles.selectEmpty}
 									>
 										{this.getMenuItems(
 											Object.keys(this.state.csvArray[0])
@@ -191,6 +216,11 @@ class DisplayCSV extends Component {
 								>
 									Build the model!
 								</button>
+								{this.state.loading ? (
+									<CircularProgress />
+								) : (
+									<span></span>
+								)}
 							</div>
 						</div>
 						<div className="row">
