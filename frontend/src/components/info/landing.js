@@ -22,6 +22,7 @@ const intro = () => {
 const video = () => {
 	return (
 		<iframe
+			title="pre-release demo"
 			width="560"
 			height="315"
 			src="https://www.youtube.com/embed/CswRqTuqzHQ"
