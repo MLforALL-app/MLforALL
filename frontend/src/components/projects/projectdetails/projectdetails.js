@@ -10,7 +10,7 @@ import { compose } from "redux";
 
 const ProjectDetails = (props) => {
 	const { id, auth, project } = props;
-	// if (!auth.uid) return <Redirect to="/signin" />;
+	if (!auth.uid) return <Redirect to="/signup" />;
 	if (project) {
 		return (
 			<div className="container section project-details">
