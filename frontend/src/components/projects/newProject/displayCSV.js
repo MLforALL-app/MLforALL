@@ -229,7 +229,7 @@ class DisplayCSV extends Component {
 								<div className="row">
 									<button
 										onClick={this.handleSubmit}
-										className="btn blue lighten-1 z-depth-0"
+										className="btn z-depth-0"
 									>
 										Build the model!
 									</button>

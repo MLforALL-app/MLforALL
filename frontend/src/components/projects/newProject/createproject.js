@@ -40,10 +40,11 @@ class CreateProject extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<form onSubmit={this.handleSubmit} className="white">
-						<h4 className="grey-text text-darken-3">
-							Create Project
-						</h4>
+					<form
+						onSubmit={this.handleSubmit}
+						className="white z-depth-1"
+					>
+						<h4 className="purple-text">Create Project</h4>
 						<div className="input-field">
 							<label htmlFor="title">Title</label>
 							<input
@@ -54,7 +55,7 @@ class CreateProject extends Component {
 							/>
 						</div>
 						<div className="file-field input-field">
-							<div className="btn blue lighten-1 z-depth-0">
+							<div className="btn z-depth-0">
 								<span>Browse</span>
 								<input
 									type="file"
@@ -83,7 +84,7 @@ class CreateProject extends Component {
 							></textarea>
 						</div>
 						<div className="input-field">
-							<button className="btn blue lighten-1 z-depth-0">
+							<button className="btn z-depth-0">
 								Begin The Process
 							</button>
 						</div>

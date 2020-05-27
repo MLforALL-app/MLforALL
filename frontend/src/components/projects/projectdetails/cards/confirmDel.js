@@ -35,10 +35,10 @@ class DeleteProject extends Component {
 			<span>
 				<button
 					className="btn-flat waves-effect waves-light"
-					style={{ display: "inline", color: "red" }}
+					style={{ display: "inline" }}
 					onClick={this.handleClickOpen}
 				>
-					DELETE
+					<span className="hearts">DELETE</span>
 				</button>
 				<Dialog
 					open={this.state.open}

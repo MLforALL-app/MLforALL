@@ -18,6 +18,21 @@
 	background-color: #382980;
 }
 
+.btn {
+	background-color: #382980;
+}
+.btn:focus,
+.btn:hover {
+	background-color: #885c95;
+}
+.btn-large {
+	background-color: #382980;
+}
+.btn-large:focus,
+.btn-large:hover {
+	background-color: #885c95;
+}
+
 .project-summary {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
@@ -33,4 +48,13 @@
 }
 .hearts {
 	color: #db91b6;
+}
+a {
+	color: #382980;
+}
+form {
+	border-radius: 25px;
+}
+.MuiCircularProgress-colorPrimary {
+	color: #db91b6 !important;
 }

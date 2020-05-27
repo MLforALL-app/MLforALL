@@ -26,8 +26,11 @@ class SignUp extends Component {
 		if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
 			<div className="container">
-				<form onSubmit={this.handleSubmit} className="white">
-					<h4 className="grey-text text-darken-3">Sign Up</h4>
+				<form onSubmit={this.handleSubmit} className="white z-depth-1">
+					<span className="purple-text">
+						<h4>Sign Up</h4>
+					</span>
+
 					<div className="input-field">
 						<label htmlFor="firstName">First Name</label>
 						<input
@@ -61,9 +64,7 @@ class SignUp extends Component {
 						/>
 					</div>
 					<div className="input-field">
-						<button className="btn blue lighten-1 z-depth-0">
-							Sign Up
-						</button>
+						<button className="btn z-depth-0">Sign Up</button>
 						<div className="red-text center">
 							{authError ? <p>{authError}</p> : null}
 						</div>

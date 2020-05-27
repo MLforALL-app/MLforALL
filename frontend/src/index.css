@@ -23,6 +23,7 @@ form {
 	padding-bottom: calc(8px + 2vh + 0.2vw);
 	padding-left: calc(15px + 3vh + 0.7vw);
 	padding-right: calc(15px + 3vh + 0.7vw);
+	margin-top: calc(25px + 5vh + 1vw);
 }
 
 form button,

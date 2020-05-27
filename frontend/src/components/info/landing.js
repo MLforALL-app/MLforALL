@@ -46,10 +46,7 @@ class LandingPage extends Component {
 				) : (
 					<div>
 						<h3> What are you waiting for? </h3>
-						<NavLink
-							to="/signup"
-							className="btn z-depth-0 blue lighten-1"
-						>
+						<NavLink to="/signup" className="btn z-depth-0 ">
 							Sign Up
 						</NavLink>
 					</div>
