@@ -17,6 +17,8 @@ frontend/coverage
 
 # firebase config
 frontend/config/fbConfig.js
+frontend/.firebase
+frontend/functions/node_modules
 
 # production
 frontend/build
