@@ -43,12 +43,12 @@ export const uploadCSV = (csvName, projName) => {
 		csvRef
 			.put(csvName)
 			.then((snapshot) => {
-				console.log("uploaded csv!");
+				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
 			})
 			.catch((err) => {
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
-				console.log("csv upload error");
+				//console.log("csv upload error");
 			});
 	};
 };

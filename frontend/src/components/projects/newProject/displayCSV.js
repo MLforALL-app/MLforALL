@@ -141,6 +141,7 @@ class DisplayCSV extends Component {
 			.then((url) => {
 				console.log("This the url", url);
 				this.bigPapa(url); // populates the csvArray state
+				this.setState({ error: false });
 			})
 			.catch((err) => {
 				console.log("SOMETHING wrong uhOh", err);

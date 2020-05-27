@@ -37,7 +37,11 @@ class BuildProject extends Component {
 					</div>
 				</div>
 				{console.log("PROPS", this.props)}
-				<DisplayCSV csv={this.props.proj.csvName} />
+				{this.props.csvLoaded ? (
+					<DisplayCSV csv={this.props.proj.csvName} />
+				) : (
+					<span></span>
+				)}
 			</div>
 		);
 	}
@@ -48,7 +52,8 @@ const mapStateToProps = (state) => {
 	return {
 		auth: state.firebase.auth,
 		projID: state.project.curUserProjID,
-		proj: state.project.curUserProj
+		proj: state.project.curUserProj,
+		csvLoaded: state.project.csvLoaded
 	};
 };
 

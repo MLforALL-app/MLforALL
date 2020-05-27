@@ -1,6 +1,7 @@
 const initState = {
 	curUserProjID: "init",
-	curUserProj: "init"
+	curUserProj: "init",
+	csvLoaded: false
 };
 
 const projectReducer = (state = initState, action) => {
@@ -30,7 +31,7 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "UPLOAD_CSV":
 			console.log("Uploaded CSV");
-			return state;
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_ERROR":
 			console.log("Upload CSV error");
 			return state;
