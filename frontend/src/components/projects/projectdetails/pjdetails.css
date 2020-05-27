@@ -58,3 +58,6 @@ form {
 .MuiCircularProgress-colorPrimary {
 	color: #db91b6 !important;
 }
+.MuiSlider-root {
+	color: #db91b6 !important;
+}
