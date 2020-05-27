@@ -86,10 +86,10 @@ class CreateProject extends Component {
 					</div>
 				</form>
 				<div className="card z-depth-0">
-					<span className="card-title">
-						Need Help Finding a Dataset?
-					</span>
 					<div className="card-content">
+						<span className="card-title">
+							Need Help Finding a Dataset?
+						</span>
 						<ul>
 							<li>
 								<a href="https://www.kaggle.com/datasets">
