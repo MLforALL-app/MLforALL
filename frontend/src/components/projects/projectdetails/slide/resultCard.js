@@ -75,6 +75,7 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 				model,
 				inputs: Object.values(inputs)
 			};
+			console.log("THIS IS PATH", path);
 			setLoading(true);
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios

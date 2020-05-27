@@ -24,6 +24,6 @@ def get_variables(df, input_list):
 
 def send_vars(df, db, proj_id, input_list, model_list):
     project_ref = db.collection("projects").document(proj_id)
-    project_ref.update({"variables": get_variables(df, input_list)})
-    project_ref.update({"models": model_list})
+    project_ref.update({"variables": get_variables(
+        df, input_list), "models": model_list})
     return None
