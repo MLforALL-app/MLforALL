@@ -57,7 +57,6 @@ const ModelCheck = ({ filterObj, handleToggle, models }) => {
 
 	return (
 		<div>
-			<p>{"Selected :" + filterObj(models)}</p>
 			<List className={classes.root}>
 				{makeListItem("log_reg", "description")}
 				{makeListItem("knn", "description")}

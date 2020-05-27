@@ -4,7 +4,7 @@ import Papa from "papaparse";
 import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
-import { makeStyles } from "@material-ui/core/styles";
+// import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
@@ -15,18 +15,37 @@ import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
 
-// styling for materialUI
-const useDropStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 500
-	},
-	selectEmpty: {
-		marginTop: theme.spacing(2)
-	}
-}));
+const addSpace = (list) => {
+	return list.map((s) => s + " ");
+};
 
 class DisplayCSV extends Component {
+	// card to show what user is picking
+	getStatus = (inputs, output, models) => {
+		return (
+			<div className="card z-depth-0">
+				<div className="card-content">
+					<span className="card-title">
+						{this.state.error
+							? "Something went Wrong"
+							: "What Your Model Does"}{" "}
+					</span>
+					<span>
+						This model will take these parameters:{" "}
+						<span style={{ color: "blue" }}>
+							{addSpace(inputs)}
+						</span>{" "}
+						to attempt to predict{" "}
+						<span style={{ color: "red" }}>{output}</span> using
+						these algorithms:{" "}
+						<span style={{ color: "purple" }}>
+							{addSpace(models)}
+						</span>
+					</span>
+				</div>
+			</div>
+		);
+	};
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
 		return Object.entries(objState)
@@ -47,7 +66,8 @@ class DisplayCSV extends Component {
 		inputs: {},
 		output: "",
 		redirect: false,
-		loading: false
+		loading: false,
+		error: false
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
@@ -124,12 +144,13 @@ class DisplayCSV extends Component {
 			})
 			.catch((err) => {
 				console.log("SOMETHING wrong uhOh", err);
+				this.setState({ error: true });
 			});
 	};
 	// handle submitting the project
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.setState({ loading: true });
+		this.setState({ loading: true, error: false });
 		const path = {
 			uid: this.props.auth.uid,
 			projectID: this.props.projID,
@@ -148,6 +169,8 @@ class DisplayCSV extends Component {
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
+				this.setState({ loading: false });
+				this.setState({ error: true });
 			});
 	};
 	componentDidMount = () => {
@@ -170,22 +193,14 @@ class DisplayCSV extends Component {
 				) : (
 					<div className="isactive">
 						<div className="row">
-							<h5>
-								{" "}
-								This project will take{" "}
-								<span style={{ color: "blue" }}>
-									{this.filterObj(this.state.inputs)}
-								</span>{" "}
-								to attempt to predict{" "}
-								<span style={{ color: "red" }}>
-									{this.state.output}
-								</span>
-							</h5>
+							{this.getStatus(
+								this.filterObj(this.state.inputs),
+								this.state.output,
+								this.filterObj(this.state.models)
+							)}
+						</div>
+						<div className="row">
 							<div className="col s8">
-								{console.log(
-									"THIS IS MODELS",
-									this.state.models
-								)}
 								<ModelCheck
 									filterObj={this.filterObj}
 									handleToggle={this.handleModelToggle}
@@ -193,34 +208,37 @@ class DisplayCSV extends Component {
 								/>
 							</div>
 							<div className="col s4">
-								<FormControl
-									className={useDropStyles().formControl}
-								>
-									<Select
-										value={this.state.output}
-										onChange={this.handleDropdown}
-										displayEmpty
-										className={useDropStyles.selectEmpty}
+								<div className="row">
+									<FormControl>
+										<Select
+											value={this.state.output}
+											onChange={this.handleDropdown}
+											displayEmpty
+										>
+											{this.getMenuItems(
+												Object.keys(
+													this.state.csvArray[0]
+												)
+											)}
+										</Select>
+										<FormHelperText>
+											Output Parameter
+										</FormHelperText>
+									</FormControl>
+								</div>
+								<div className="row">
+									<button
+										onClick={this.handleSubmit}
+										className="btn blue lighten-1 z-depth-0"
 									>
-										{this.getMenuItems(
-											Object.keys(this.state.csvArray[0])
-										)}
-									</Select>
-									<FormHelperText>
-										Output Parameter
-									</FormHelperText>
-								</FormControl>
-								<button
-									onClick={this.handleSubmit}
-									className="btn blue lighten-1 z-depth-0"
-								>
-									Build the model!
-								</button>
-								{this.state.loading ? (
-									<CircularProgress />
-								) : (
-									<span></span>
-								)}
+										Build the model!
+									</button>
+									{this.state.loading ? (
+										<CircularProgress />
+									) : (
+										<span></span>
+									)}
+								</div>
 							</div>
 						</div>
 						<div className="row">

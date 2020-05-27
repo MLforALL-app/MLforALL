@@ -19,26 +19,42 @@ const intro = () => {
 	);
 };
 
+const video = () => {
+	return (
+		<iframe
+			width="560"
+			height="315"
+			src="https://www.youtube.com/embed/CswRqTuqzHQ"
+			frameborder="0"
+			allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+		></iframe>
+	);
+};
+
 class LandingPage extends Component {
 	render() {
 		const { auth } = this.props;
 		// Route Protection
-		if (auth.uid) {
-			return intro();
-		} else {
-			return (
-				<div className="container" style={{ textAlign: "center " }}>
-					{intro()}
-					<h3> What are you waiting for? </h3>
-					<NavLink
-						to="/signup"
-						className="btn z-depth-0 blue lighten-1"
-					>
-						Sign Up
-					</NavLink>
-				</div>
-			);
-		}
+
+		return (
+			<div className="container" style={{ textAlign: "center " }}>
+				{intro()}
+				{auth.uid ? (
+					video()
+				) : (
+					<div>
+						<h3> What are you waiting for? </h3>
+						<NavLink
+							to="/signup"
+							className="btn z-depth-0 blue lighten-1"
+						>
+							Sign Up
+						</NavLink>
+					</div>
+				)}
+			</div>
+		);
 	}
 }
 

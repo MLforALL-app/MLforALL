@@ -39,80 +39,97 @@ class CreateProject extends Component {
 	render() {
 		return (
 			<div className="container">
-				<form onSubmit={this.handleSubmit} className="white">
-					<h4 className="grey-text text-darken-3">Create Project</h4>
-					<div className="input-field">
-						<label htmlFor="title">Title</label>
-						<input
-							autoComplete="off"
-							type="text"
-							id="title"
-							onChange={this.handleChange}
-						/>
-					</div>
-					<div className="file-field input-field">
-						<div className="btn blue lighten-1 z-depth-0">
-							<span>Browse</span>
+				<div className="row">
+					<form onSubmit={this.handleSubmit} className="white">
+						<h4 className="grey-text text-darken-3">
+							Create Project
+						</h4>
+						<div className="input-field">
+							<label htmlFor="title">Title</label>
 							<input
-								type="file"
-								id="csvName"
+								autoComplete="off"
+								type="text"
+								id="title"
 								onChange={this.handleChange}
 							/>
 						</div>
+						<div className="file-field input-field">
+							<div className="btn blue lighten-1 z-depth-0">
+								<span>Browse</span>
+								<input
+									type="file"
+									id="csvName"
+									onChange={this.handleChange}
+								/>
+							</div>
 
-						<div className="file-path-wrapper">
-							<input
-								className="file-path validate"
-								type="text"
-								placeholder="Upload .csv file"
-								accept=".csv"
-							/>
+							<div className="file-path-wrapper">
+								<input
+									className="file-path validate"
+									type="text"
+									placeholder="Upload .csv file"
+									accept=".csv"
+								/>
+							</div>
 						</div>
-					</div>
-					<div className="input-field">
-						<label htmlFor="content">Project Content</label>
-						<textarea
-							className="materialize-textarea"
-							cols="30"
-							rows="10"
-							id="content"
-							onChange={this.handleChange}
-						></textarea>
-					</div>
-					<div className="input-field">
-						<button className="btn blue lighten-1 z-depth-0">
-							Begin The Process
-						</button>
-					</div>
-				</form>
-				<div className="card z-depth-0">
-					<div className="card-content">
-						<span className="card-title">
-							Need Help Finding a Dataset?
-						</span>
-						<ul>
-							<li>
-								<a href="https://www.kaggle.com/datasets">
-									Check out Kaggle,
-								</a>
-							</li>
-							<li>
-								<a href="https://data.world/">
-									data.world (needs login),
-								</a>
-							</li>
-							<li>
-								<a href="https://registry.opendata.aws/">
-									Amazon's open registry,
-								</a>
-							</li>
-							<li>
-								<a href="https://datasetsearch.research.google.com/">
-									{" "}
-									or Google's dataset search engine!
-								</a>
-							</li>
-						</ul>
+						<div className="input-field">
+							<label htmlFor="content">Project Content</label>
+							<textarea
+								className="materialize-textarea"
+								cols="30"
+								rows="10"
+								id="content"
+								onChange={this.handleChange}
+							></textarea>
+						</div>
+						<div className="input-field">
+							<button className="btn blue lighten-1 z-depth-0">
+								Begin The Process
+							</button>
+						</div>
+					</form>
+				</div>
+				<div className="row">
+					<div className="card z-depth-0">
+						<div className="card-content">
+							<span className="card-title">
+								Choosing a Dataset
+							</span>
+							To create a project, you'll need a .csv file to be
+							your dataset. As of now, ML for All only works to
+							create classification models, creating models based
+							off of NUMERICAL inputs and to some TEXT / NUMBER
+							output. For example, ML for All can take datasets of
+							height and weight of athletes to predict bench press
+							(NUMBER output) or the sport they play (TEXT
+							output), but cannot take the sport they play (TEXT
+							input) to predict anything.
+							<br />
+							<span className="card-title"> Finding CSV's</span>
+							<ul>
+								<li>
+									<a href="https://www.kaggle.com/datasets">
+										Check out Kaggle,
+									</a>
+								</li>
+								<li>
+									<a href="https://data.world/">
+										data.world (needs login),
+									</a>
+								</li>
+								<li>
+									<a href="https://registry.opendata.aws/">
+										Amazon's open registry,
+									</a>
+								</li>
+								<li>
+									<a href="https://datasetsearch.research.google.com/">
+										{" "}
+										or Google's dataset search engine!
+									</a>
+								</li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
