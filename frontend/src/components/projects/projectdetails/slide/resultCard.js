@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
+// Pretty Print a list of input parameters and their values
 const inputToString = (inputs) => {
 	const entries = Object.entries(inputs);
 	const pretty = entries.map(([key, value]) => {
@@ -10,6 +11,7 @@ const inputToString = (inputs) => {
 	return pretty.join();
 };
 
+// Text to display the results of a guess
 const showResults = (output, inputs, model, targetParam, nameMapper) => {
 	if (output === "") {
 		return <p> ~~choose your inputs~~ </p>;
@@ -42,6 +44,7 @@ const showResults = (output, inputs, model, targetParam, nameMapper) => {
 	}
 };
 
+// Second order function to show results (function above) or loading sign
 const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
 	if (loading) {
 		return (
@@ -69,42 +72,55 @@ const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
 	}
 };
 
+/* REQUIRES: uid (?), project to be a valid firestore reference, model
+ *			 the current model that is being used for prediction,
+ *			 inputs an object with params as keys and values as field,
+ * 			 and nameMapper a total str -> str function
+ * ENSURES: a card display the results of a Predict API call */
+
 const ResultCard = (uid, project, model, inputs, nameMapper) => {
+	// States to keep track of outputresult, if something is loading, and
+	// that particular's requests Inputs and Models
 	const [output, setOutput] = useState("");
 	const [loading, setLoading] = useState(false);
-	const [resInputs, setResInputs] = useState([]);
+	const [resInputs, setResInputs] = useState({});
 	const [resModel, setResModel] = useState("");
 
+	// Event handler for when user presses "Generate" button
 	const handleSubmit = (event) => {
+		event.preventDefault();
+		// Update the inputs/models ur showing
 		setResInputs(inputs);
 		setResModel(model);
-		event.preventDefault();
 		if (model !== "") {
+			// create path for API Post Request
 			const path = {
 				uid: project.authorID,
 				project: project.title,
 				model,
 				inputs: Object.values(inputs)
 			};
-			console.log("THIS IS PATH", path);
+			// console.log("THIS IS PATH", path);
 			setLoading(true);
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
-					console.log("THIS IS RESULT", res);
+					//console.log("THIS IS RESULT", res);
+					// If things work, set the output and stop loading
 					setOutput(res);
 					setLoading(false);
 				})
 				.catch((err) => {
 					//console.log("THIS IS AN ERROR", err);
+					// If things don't work, server error and stop loading
 					setOutput("Server Error");
 					setLoading(false);
 				});
 		} else {
+			// user has not picked a model yet
 			setOutput("Choose A Model");
 		}
-
 		// console.log("EXIT AXIOS LOADING STATE,", loading);
 	};
 

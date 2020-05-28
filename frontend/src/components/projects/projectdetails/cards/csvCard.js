@@ -1,6 +1,8 @@
 import React from "react";
 import DeleteProject from "./confirmDel";
 
+// COMPONENT To Show the CSV Card information. This is where the
+// delete project functionality is housed
 const CSVCard = ({ id, auth, project }) => {
 	return (
 		<div className="card z-depth-1">

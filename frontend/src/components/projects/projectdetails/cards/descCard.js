@@ -1,7 +1,8 @@
 import React from "react";
 import moment from "moment";
 
-const DescCard = (project) => {
+// DESCRIPTION CARD
+const DescCard = ({ project }) => {
 	return (
 		<div className="card z-depth-1">
 			<div className="card-content">

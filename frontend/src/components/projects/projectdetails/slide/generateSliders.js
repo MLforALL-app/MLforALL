@@ -3,6 +3,7 @@ import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import React from "react";
 
+// Helper function so model names get printed nicer
 const nameMapper = (name) => {
 	switch (name) {
 		case "":
@@ -36,18 +37,27 @@ const initInputs = (variables) => {
 	return inputs;
 };
 
-// Begin compononent
-const GenerateSliders = (project, uid) => {
+/* REQUIRES: project a valid reference to Firebase firestore document,
+ *			 uid the userID for current user
+ * ENSURES: higher order function to create components for sliders and
+ * 			result display */
+
+const GenerateSliders = ({ project, uid }) => {
+	// Set initial model to be the first one
 	const startVal = project.models.length < 1 ? "" : project.models[0];
 	// console.log("START VAL", startVal);
 	const [model, setModel] = React.useState(startVal);
+
+	// event handler for when model dropdown menu changes
 	const handleDropChange = (event) => {
 		setModel(event.target.value);
 	};
 
-	const initial = initInputs(project.variables);
-	const [inputs, setInputs] = React.useState(initial);
-	// hsc and hic are higher order functions to allow for generality of event handlers
+	// initialize the inputs
+	const [inputs, setInputs] = React.useState(initInputs(project.variables));
+
+	// hsc and hic are higher order functions to allow for generality
+	// of event handlers
 	const handleSliderChange = (v) => {
 		// console.log("YOUR INPUTS", inputs);
 		return (event, newValue) => {
@@ -65,7 +75,8 @@ const GenerateSliders = (project, uid) => {
 		};
 	};
 
-	// Helper function to generalize the generation of slides
+	// Higher order fn to create a PredictSlider for each of our variables
+	// using generalized event handlers so we can alter state from here
 	function getslides(variables, hsc, hic) {
 		if (variables.length > 0) {
 			var output = [];
@@ -122,7 +133,5 @@ const GenerateSliders = (project, uid) => {
 		</div>
 	);
 };
-
-/* watch out for ordering inconsistencies with Object.values and the API input */
 
 export default GenerateSliders;

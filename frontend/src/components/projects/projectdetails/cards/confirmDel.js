@@ -8,29 +8,30 @@ import { deleteMLProject } from "../../../../store/actions/projectActions";
 import { connect } from "react-redux";
 // import { Redirect } from "react-router-dom";
 
+// DELETE button in csvCard to handle deleting projects
 class DeleteProject extends Component {
+	// State to keep track of if our pop up is open
 	state = {
 		open: false
 	};
 
+	// Event handlers to open and close the popup
 	handleClickOpen = (e) => {
 		this.setState({ open: true });
 	};
 	handleClose = (e) => {
 		this.setState({ open: false });
 	};
+	// if we choose to delete, make a dispatch to REDUX
 	handleDelete = (id, auth, project) => {
 		return () => {
 			this.setState({ open: false });
 			this.props.deleteMLProject(id, auth, project);
-			// return <Redirect to="/dashboard" />;
 		};
 	};
 
 	render() {
 		const { id, auth, project } = this.props;
-		// console.log("THIS IS SPARTA", id);
-		// console.log("THIS IS AUTH SPARTA", auth);
 		return (
 			<span>
 				<button
@@ -78,12 +79,15 @@ class DeleteProject extends Component {
 	}
 }
 
+// For this component, we want to pass in auth as a prop
+// from the Redux state
 const mapStateToProps = (state) => {
 	return {
 		auth: state.firebase.auth
 	};
 };
 
+// We want to associate a dispatch call to the project action deleteMLProject
 const mapDispatchToProps = (dispatch) => {
 	return {
 		deleteMLProject: (id, auth, project) =>
