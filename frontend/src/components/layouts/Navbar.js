@@ -16,8 +16,12 @@ const Navbar = (props) => {
 		<nav className="nav-wrapper ">
 			<div className="container">
 				<Link to="/" className="brand-logo">
-					<img src = {logo} alt = "Machine Learning for all Logo" style = {{height : "2rem"}}/>
-					<span className="purple-text">forALL</span>
+					<img
+						src={logo}
+						alt="Machine Learning for all Logo"
+						style={{ height: "2rem" }}
+					/>
+					<span className="purple-text"> forALL</span>
 				</Link>
 				{links}
 			</div>
@@ -29,6 +33,5 @@ const mapStateToProps = (state) => {
 	//console.log(state);
 	return { auth: state.firebase.auth, profile: state.firebase.profile };
 };
-
 
 export default connect(mapStateToProps)(Navbar);

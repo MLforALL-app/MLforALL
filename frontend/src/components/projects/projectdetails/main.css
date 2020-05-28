@@ -1,32 +1,52 @@
+h1 {
+	/* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+	font-family: "Roboto", sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.12rem;
+}
+
+/* Fix for the flying logo */
+@media only screen and (min-width: 565px) {
+	.brand-logo {
+		left: 15% !important;
+	}
+}
+@media only screen and (max-width: 565px) {
+	.brand-logo,
+	.btn-floating {
+		display: none !important;
+	}
+}
+
+.card-action {
+	border-bottom-left-radius: 30px !important;
+	border-bottom-right-radius: 30px !important;
+	background-color: #283593 !important;
+	color: white;
+}
 .card {
-	border-radius: 25px;
+	border-radius: 30px;
 	background-color: white;
 	color: black;
 }
-.card-action {
-	border-bottom-left-radius: 25px !important;
-	border-bottom-right-radius: 25px !important;
-	background-color: #382980 !important;
-	color: white;
-}
 
 .purple-text {
-	color: #382980 !important;
+	color: #283593 !important;
 }
 
 .btn-floating {
-	background-color: #382980;
+	background-color: #283593;
 }
 
 .btn {
-	background-color: #382980;
+	background-color: #283593;
 }
 .btn:focus,
 .btn:hover {
 	background-color: #885c95;
 }
 .btn-large {
-	background-color: #382980;
+	background-color: #283593;
 }
 .btn-large:focus,
 .btn-large:hover {
@@ -47,23 +67,17 @@
 	background: #db91b67e;
 }
 .hearts {
-	color: #db91b6;
+	color: #f8bbd0;
 }
 a {
-	color: #382980;
+	color: #283593;
 }
 form {
-	border-radius: 25px;
+	border-radius: 30px;
 }
 .MuiCircularProgress-colorPrimary {
-	color: #db91b6 !important;
+	color: #f8bbd0 !important;
 }
 .MuiSlider-root {
-	color: #db91b6 !important;
-}
-.footer-copyright {
-	color: white;
-	font-size: 0.8rem;
-	background-color: #382980;
-	margin-bottom: 0;
+	color: #f8bbd0 !important;
 }
