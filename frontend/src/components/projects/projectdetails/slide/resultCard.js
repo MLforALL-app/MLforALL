@@ -72,12 +72,16 @@ const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
 const ResultCard = (uid, project, model, inputs, nameMapper) => {
 	const [output, setOutput] = useState("");
 	const [loading, setLoading] = useState(false);
+	const [resInputs, setResInputs] = useState([]);
+	const [resModel, setResModel] = useState("");
 
 	const handleSubmit = (event) => {
+		setResInputs(inputs);
+		setResModel(model);
 		event.preventDefault();
 		if (model !== "") {
 			const path = {
-				uid : project.authorID,
+				uid: project.authorID,
 				project: project.title,
 				model,
 				inputs: Object.values(inputs)
@@ -135,8 +139,8 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 						{loader(
 							loading,
 							output,
-							inputs,
-							model,
+							resInputs,
+							resModel,
 							project.targetParam,
 							nameMapper
 						)}
