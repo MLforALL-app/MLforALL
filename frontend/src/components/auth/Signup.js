@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 
 class SignUp extends Component {
+	// State to keep track of what user types
 	state = {
 		email: "",
 		password: "",
@@ -11,18 +12,23 @@ class SignUp extends Component {
 		lastName: ""
 	};
 
+	// eventHandler to update our state the way text has
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value
 		});
 	};
+
+	// Call REDUX action signIn to sign user in given state
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.props.signUp(this.state);
 	};
 
 	render() {
+		// from props, retrieve authError and auth objects
 		const { authError, auth } = this.props;
+		// route protection, shouldn't be able to sign in again
 		if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
 			<div className="container">

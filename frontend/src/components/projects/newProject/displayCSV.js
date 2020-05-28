@@ -182,10 +182,11 @@ class DisplayCSV extends Component {
 		);*/
 	};
 	render() {
+		const { auth } = this.props;
 		return (
 			<div className="displaycsv">
 				{this.state.redirect ? (
-					<Redirect to="/dashboard" />
+					<Redirect to={"me/" + auth.uid} />
 				) : (
 					<span></span>
 				)}
