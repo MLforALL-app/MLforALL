@@ -3,8 +3,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import headerImg from "../../pictures/headerland.png";
 import "./landing.css";
-import * as Scroll from "react-scroll";
+import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
+import SignIn from "../auth/Signin";
 
 const lorem = () => {
 	return (
@@ -20,10 +21,6 @@ const lorem = () => {
 		</div>
 	);
 };
-let Link = Scroll.Link;
-let Element = Scroll.Element;
-let Events = Scroll.Events;
-let scrollSpy = Scroll.scrollSpy;
 
 const header = () => {
 	return (
@@ -33,14 +30,14 @@ const header = () => {
 				backgroundImage: `url(${headerImg})`
 			}}
 		>
-			<div className="col s12 m6">
+			<div className="col s12 m7">
 				<div className="container land-head">
 					<div className="header-subrow">
 						<h1>
 							<span className="purple-text">MLforALL</span>
 						</h1>
 					</div>
-					<div className="heade-subrow">
+					<div className="header-subrow">
 						<Link to="learn" smooth={true} duration={500}>
 							<div className="btn waves-effect waves-light anchor">
 								Learn More
@@ -56,26 +53,20 @@ const header = () => {
 					</div>
 				</div>
 			</div>
-			<div className="col s6"></div>
+			<div className="col s0 m 5"></div>
 		</div>
 	);
 };
 
 class JoeLand extends Component {
-	componentDidMount = () => {
-		Events.scrollEvent.register("begin", function (to, element) {
-			//console.log("begin", arguments);
-		});
-
-		Events.scrollEvent.register("end", function (to, element) {
-			//console.log("end", arguments);
-		});
-
-		scrollSpy.update();
+	state = {
+		upin: true
 	};
-	componentWillUnmount = () => {
-		Events.scrollEvent.remove("begin");
-		Events.scrollEvent.remove("end");
+	handleClick = () => {
+		this.setState((prevState) => {
+			var old = prevState.upin;
+			return { ...prevState, upin: !old };
+		});
 	};
 	render() {
 		// const { auth } = this.props;
@@ -101,7 +92,13 @@ class JoeLand extends Component {
 				{lorem()}
 				{lorem()}
 				<Element name="sign" className="element"></Element>
-				<SignUp />
+				<div
+					className="btn waves-effect waves-light anchor"
+					onClick={this.handleClick}
+				>
+					{!this.state.upin ? "Sign Up Instead" : "Sign In Instead"}
+				</div>
+				{this.state.upin ? <SignUp /> : <SignIn />}
 				{lorem()}
 				{lorem()}
 				{lorem()}
