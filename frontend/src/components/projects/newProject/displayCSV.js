@@ -81,7 +81,7 @@ class DisplayCSV extends Component {
 		this.setState({ output: event.target.value });
 	};
 	handleModelToggle = (value) => () => {
-		console.log("VALUE IN HANDLE TOGGLE", value);
+		//console.log("VALUE IN HANDLE TOGGLE", value);
 		this.setState((prevState) => {
 			var newModels = prevState.models;
 			newModels[value] = !newModels[value];
@@ -123,7 +123,7 @@ class DisplayCSV extends Component {
 				this.setState({
 					inputs: inputState
 				});
-				console.log("All done!", results);
+				//console.log("All done!", results);
 			}
 		});
 	};
@@ -139,12 +139,12 @@ class DisplayCSV extends Component {
 		csvRef
 			.getDownloadURL()
 			.then((url) => {
-				console.log("This the url", url);
+				//console.log("This the url", url);
 				this.bigPapa(url); // populates the csvArray state
 				this.setState({ error: false });
 			})
 			.catch((err) => {
-				console.log("SOMETHING wrong uhOh", err);
+				//console.log("SOMETHING wrong uhOh", err);
 				this.setState({ error: true });
 			});
 	};
@@ -164,12 +164,12 @@ class DisplayCSV extends Component {
 		axios
 			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
 			.then((res) => {
-				console.log("THIS IS RESULT", res);
+				//console.log("THIS IS RESULT", res);
 				this.setState({ redirect: true });
 				// console.log("Successfully created project models?");
 			})
 			.catch((err) => {
-				console.log("THIS IS AN ERROR", err);
+				//console.log("THIS IS AN ERROR", err);
 				this.setState({ loading: false });
 				this.setState({ error: true });
 			});

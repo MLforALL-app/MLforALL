@@ -35,7 +35,7 @@ export const createProject = (project) => {
 
 export const uploadCSV = (csvName, projName) => {
 	return (dispatch, getState, { getFirebase }) => {
-		console.log(csvName);
+		//console.log(csvName);
 		const firebase = getFirebase();
 		const csvPath =
 			getState().firebase.auth.uid + "/" + projName + "/" + csvName.name;
@@ -57,15 +57,15 @@ export const deleteMLProject = (id, auth, project) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
-		console.log("DEL CSV", delCSV);
+		//console.log("DEL CSV", delCSV);
 		// might be a source of bugs in the future
 		var delVars = Object.values(project.models);
-		console.log("TYPE OF DEL VARS", typeof delVars);
+		//console.log("TYPE OF DEL VARS", typeof delVars);
 		delVars.push(delCSV);
-		console.log("TO DELETE", delVars);
+		//console.log("TO DELETE", delVars);
 		// make async call to database
 		const firestore = getFirestore();
-		console.log("STORAGE PATH", auth.uid + "/" + project.title);
+		//console.log("STORAGE PATH", auth.uid + "/" + project.title);
 		firestore
 			.collection("projects")
 			.doc(id)
@@ -82,10 +82,10 @@ export const deleteMLProject = (id, auth, project) => {
 				.ref(auth.uid + "/" + project.title + "/" + filename)
 				.delete()
 				.then(() => {
-					console.log("Delete correctly from storage");
+					//console.log("Delete correctly from storage");
 				})
 				.catch((err) => {
-					console.log("uh oh spagetthio", err);
+					//console.log("uh oh spagetthio", err);
 				});
 		});
 	};
