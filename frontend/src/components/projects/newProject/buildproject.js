@@ -7,7 +7,7 @@ class BuildProject extends Component {
 		return (
 			<div className="container">
 				<div className="row">
-					<div className="card z-depth-0">
+					<div className="card z-depth-1">
 						<div className="card-content">
 							<span className="card-title">
 								Creating a machine learning model
@@ -24,7 +24,7 @@ class BuildProject extends Component {
 					</div>
 				</div>
 				<div className="row">
-					<div className="card z-depth-0">
+					<div className="card z-depth-1">
 						<div className="card-content">
 							<span className="card-title">Instructions</span>
 							<p>

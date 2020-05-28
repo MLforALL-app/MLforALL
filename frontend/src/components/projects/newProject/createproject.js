@@ -89,7 +89,7 @@ class CreateProject extends Component {
 					</form>
 				</div>
 				<div className="row">
-					<div className="card z-depth-0">
+					<div className="card z-depth-1">
 						<div className="card-content">
 							<span className="card-title">
 								Choosing a Dataset

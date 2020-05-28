@@ -23,7 +23,7 @@ class DisplayCSV extends Component {
 	// card to show what user is picking
 	getStatus = (inputs, output, models) => {
 		return (
-			<div className="card z-depth-0">
+			<div className="card z-depth-1">
 				<div className="card-content">
 					<span className="card-title">
 						{this.state.error
