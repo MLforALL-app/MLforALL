@@ -60,7 +60,9 @@ h1 {
 	padding-bottom: 10px;
 }
 .nav-wrapper {
-	background-color: rgb(240, 240, 240);
+	background-color: #eeeeee;
+	border-width: 0px;
+	box-shadow: 0 0 0 0;
 }
 .right a:hover,
 .right button:hover {

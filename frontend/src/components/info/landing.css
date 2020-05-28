@@ -1,0 +1,13 @@
+.row {
+	width: 100%;
+	overflow: "hidden";
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #cecece;
+}
+
+@media only screen and (max-width: 565px) {
+	.row {
+		background-image: none !important;
+	}
+}

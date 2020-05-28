@@ -8,6 +8,7 @@ import SignIn from "./components/auth/Signin";
 import SignUp from "./components/auth/Signup";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import LandingPage from "./components/info/landing";
+import JoeLand from "./components/info/joeLand";
 // import Footer from "./components/info/footer";
 import "./App.css";
 
@@ -23,6 +24,7 @@ function App() {
 					<Route path="/signin" component={SignIn} />
 					<Route path="/signup" component={SignUp} />
 					<Route path="/create" component={CreateProjectContainer} />
+					<Route exact path="/joeland" component={JoeLand} />
 					<Route exact path="/" component={LandingPage} />
 				</Switch>
 				{/*<Footer />*/}
