@@ -1,13 +1,31 @@
-.row {
+.header-row {
 	width: 100%;
 	overflow: "hidden";
 	background-size: cover;
 	background-repeat: no-repeat;
-	background-color: #cecece;
+	background-color: #eeeeee;
+}
+
+.land-head {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	height: calc(10rem + 25vw + 60px);
 }
 
 @media only screen and (max-width: 565px) {
 	.row {
 		background-image: none !important;
 	}
+}
+
+.anchor {
+	width: 200px;
+	border-radius: 50px;
+}
+
+.header-subrow {
+	padding: 10px;
 }
