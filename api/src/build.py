@@ -40,6 +40,16 @@ def build_SVC(X, y):
 
 
 def build_and_pickle(df, target_parameter, df_variables, pickle_name, debug=False):
+    """
+    Function that will take a dataframe, input variables, output parameter, and 
+    kind of model to train a sklearn ml model to 
+    REQUIRES: df a valid pandas data frame,
+              target_parameter a key that exists in df that user wants to output
+              df_variables a list of valid keys in df that user wants as input
+              pickle_name the name of the model user wants to train
+    ENSURES: Byte representation of a trained model based off of given parameters
+    """
+
     target = df[target_parameter]
     col_name_list = list(df.columns)
 

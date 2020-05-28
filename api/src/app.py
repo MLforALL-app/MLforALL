@@ -35,7 +35,7 @@ def predict_from_model():
     # Get firebase stuff
     path = fb.make_path(str(uid), str(project), str(model))
     bucket = fb.bucket_init()
-    # Get loaded model
+    # Get loaded model and predict
     loaded_model = fb.get_pickle(bucket, path)
     return jsonify(predict(loaded_model, inputs))
 
@@ -65,10 +65,12 @@ def store():
             # retrieve the csv everytime due to some weird "key errors"
             df = fb.get_csv(bucket, fb.make_path(
                 str(uid), str(title), str(csv_name)))
+            # get the saved model in byte form
             pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
+            # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(str(uid), str(title), str(model)))
-       # update firestore with descriptive stats
+       # update firestore with descriptive stats (IQR)
         send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
     except TypeError:
