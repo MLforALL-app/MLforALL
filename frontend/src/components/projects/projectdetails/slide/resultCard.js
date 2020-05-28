@@ -77,7 +77,7 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 		event.preventDefault();
 		if (model !== "") {
 			const path = {
-				uid,
+				uid : project.authorID,
 				project: project.title,
 				model,
 				inputs: Object.values(inputs)
