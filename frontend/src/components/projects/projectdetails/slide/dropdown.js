@@ -6,6 +6,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
+// Helper React Hook to set styles for Dropdown Menu
 const useStyles = makeStyles((theme) => ({
 	formControl: {
 		margin: theme.spacing(1),
@@ -15,6 +16,12 @@ const useStyles = makeStyles((theme) => ({
 		marginTop: theme.spacing(2)
 	}
 }));
+
+/* REQUIRES: project a firestore object, currentModel the ml alg currently
+ * 			 selected, handleChange a handler inherited from parent to control
+ * 			 parent state, and nameMapper a prettyPrint str->str fn
+ * ENSURES: dropdown menu of existing models for a project in firestore whose
+ * 			changes alter the parent component's state. */
 
 const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 	const classes = useStyles();
