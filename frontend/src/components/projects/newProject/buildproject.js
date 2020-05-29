@@ -1,11 +1,29 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import DisplayCSV from "./displayCSV";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
+import { useSelector } from 'react-redux';
 
 class BuildProject extends Component {
 	render() {
 		return (
 			<div className="container">
+				<div className="row">
+					<div className="card z-depth-1">
+						<div className="card-content">
+							<span className="card-title">
+							{this.props.project ? 
+								this.props.project.title
+							:
+							""}
+							</span>
+							<p>
+								
+							</p>
+						</div>
+					</div>
+				</div>
 				<div className="row">
 					<div className="card z-depth-1">
 						<div className="card-content">
@@ -47,14 +65,27 @@ class BuildProject extends Component {
 	}
 }
 
-const mapStateToProps = (state) => {
-	//console.log(state);
+const mapStateToProps = (state,  props) => {
+	console.log(state);
+	console.log(state.firestore.data);
+	let pid = props.match.params.id;
+	console.log();
 	return {
+		projectID : pid,
+		project: state.firestore.data.projects && state.firestore.data.projects[pid],
 		auth: state.firebase.auth,
-		projID: state.project.curUserProjID,
-		proj: state.project.curUserProj,
 		csvLoaded: state.project.csvLoaded
 	};
 };
 
-export default connect(mapStateToProps)(BuildProject);
+
+
+export default compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		if (!props.auth) return [];
+		return [
+			{ collection: 'projects', doc: props.match.params.id}
+		];
+	})
+	)(BuildProject);
