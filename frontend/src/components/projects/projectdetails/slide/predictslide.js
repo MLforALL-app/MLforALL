@@ -5,6 +5,7 @@ import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
 
 // Helper function to clean up long numbers for labels
+/*
 const clean = (n) => {
 	if (n < 1 && n >= 0) {
 		return n.toFixed(3);
@@ -12,6 +13,7 @@ const clean = (n) => {
 		return Math.ceil(n);
 	}
 };
+*/
 
 /* REQUIRES: varObj some object with name, lo, hi, q1, q2, q3 fields
  *			 handleSliderChange a valid handler to control states in
@@ -27,11 +29,17 @@ export default function PredictSlider(
 ) {
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
+	const hi = varObj.hi;
+	const lo = varObj.lo;
+	const q1 = varObj.q1;
+	const q2 = varObj.q2;
+	const q3 = varObj.q3;
+	/*
 	const hi = clean(varObj.hi);
 	const lo = clean(varObj.lo);
 	const q1 = clean(varObj.q1);
 	const q2 = clean(varObj.q2);
-	const q3 = clean(varObj.q3);
+	const q3 = clean(varObj.q3); */
 
 	// List of points we want to mark
 	const marks = [
