@@ -9,6 +9,9 @@ import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
 import { NavLink } from "react-router-dom";
 
+const emptyDiv = () => {
+	return <div style={{ height: "200px" }}></div>;
+};
 const header = (auth) => {
 	return (
 		<div
@@ -183,6 +186,7 @@ class JoeLand extends Component {
 				<Element name="signup" className="element">
 					{landSign(auth)}
 				</Element>
+				{emptyDiv()}
 			</div>
 		);
 	}
