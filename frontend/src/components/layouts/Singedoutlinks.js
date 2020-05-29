@@ -11,24 +11,32 @@ function Signedoutlinks() {
 				</NavLink>{" "}
 			</li>
 			<li>
-				<Link to="goal" smooth={true} duration={500}>
-					<span className="purple-text">Goal</span>
-				</Link>{" "}
+				<div className="anchor-link">
+					<Link to="goal" smooth={true} duration={500}>
+						<span className="purple-text">Goal</span>
+					</Link>{" "}
+				</div>
 			</li>
 			<li>
-				<Link to="who" smooth={true} duration={500}>
-					<span className="purple-text">Who</span>
-				</Link>{" "}
+				<div className="anchor-link">
+					<Link to="who" smooth={true} duration={500}>
+						<span className="purple-text">Who</span>
+					</Link>{" "}
+				</div>
 			</li>
 			<li>
-				<Link to="how" smooth={true} duration={500}>
-					<span className="purple-text">How</span>
-				</Link>{" "}
+				<div className="anchor-link">
+					<Link to="how" smooth={true} duration={500}>
+						<span className="purple-text">How</span>
+					</Link>{" "}
+				</div>
 			</li>
 			<li>
-				<Link to="signup" smooth={true} duration={500}>
-					<span className="purple-text">Sign Up</span>
-				</Link>{" "}
+				<div className="anchor-link">
+					<Link to="signup" smooth={true} duration={500}>
+						<span className="purple-text">Sign Up</span>
+					</Link>{" "}
+				</div>
 			</li>
 			<li>
 				<NavLink to="/signin">

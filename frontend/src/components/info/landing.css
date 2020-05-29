@@ -48,7 +48,8 @@
 	.goals {
 		padding-bottom: calc(30vh + 50vw);
 	}
-	#learn-more-landing {
+	#learn-more-landing,
+	.anchor-link {
 		display: none;
 	}
 }

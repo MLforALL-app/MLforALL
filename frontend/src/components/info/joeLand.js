@@ -101,9 +101,9 @@ const video = () => {
 				width="560"
 				height="315"
 				src="https://www.youtube.com/embed/CswRqTuqzHQ"
-				frameborder="0"
+				frameBorder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
+				allowFullScreen
 			></iframe>
 		</div>
 	);
