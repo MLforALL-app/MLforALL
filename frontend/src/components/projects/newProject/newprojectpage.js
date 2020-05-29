@@ -7,34 +7,28 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 
 class CreateProjectContainer extends Component {
 	state = {
-		project_initialized: false,
 		project_id: ""
 	};
-
-	initProject = () => {
-		this.setState({
-			project_initialized: true
-		});
-		console.log("project initialized");
-	};
+	
+	goToProjectEdit = () => {
+		this.props.history.push("/edit/" +  this.props.projID);
+	}
 
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 
-		if (this.state.project_initialized === false) {
-			return <CreateProject initProject={this.initProject} />;
+		if (this.props.projID === "init" || this.props.proj === "init") {
+			return <CreateProject />;
 		}
-		if (this.props.projID === "init" || this.props.proj === "init")
-			return (
-				<div className="container center">
-					<CircularProgress />
-				</div>
-			);
 
 		return (
 			<div>
-				<BuildProject />
+				<div className="input-field">
+							<button className="btn z-depth-0" onClick={this.goToProjectEdit()}>
+								Go to Your Project!
+							</button>
+				</div>
 			</div>
 		);
 	}

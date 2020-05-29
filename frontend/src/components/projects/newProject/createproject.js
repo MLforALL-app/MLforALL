@@ -7,30 +7,21 @@ import {
 
 class CreateProject extends Component {
 	state = {
-		title: "",
-		content: "",
-		csvName: ""
+		title: ""
 	};
 
 	handleChange = (e) => {
-		if (e.target.id !== "csvName") {
-			this.setState({
-				[e.target.id]: e.target.value
-			});
-		} else {
-			//this puts the csv file in the state before we create project
-			this.setState({
-				[e.target.id]: e.target.files[0]
-			});
-		}
+		this.setState({
+			[e.target.id]: e.target.value
+		});
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
-		this.props.uploadCSV(this.state.csvName, this.state.title);
+		//this.props.uploadCSV(this.state.csvName, this.state.title);
 		this.props.createProject(this.state);
 		// can we do something like
 		// this.props.history.push("/me") to get to UID?
-		this.props.initProject();
+		//this.props.initProject();
 		//this.props.history.push("/dashboard");
 	};
 
@@ -52,35 +43,6 @@ class CreateProject extends Component {
 								onChange={this.handleChange}
 							/>
 						</div>
-						<div className="file-field input-field">
-							<div className="btn z-depth-0">
-								<span>Browse</span>
-								<input
-									type="file"
-									id="csvName"
-									onChange={this.handleChange}
-								/>
-							</div>
-
-							<div className="file-path-wrapper">
-								<input
-									className="file-path validate"
-									type="text"
-									placeholder="Upload .csv file"
-									accept=".csv"
-								/>
-							</div>
-						</div>
-						<div className="input-field">
-							<label htmlFor="content">Project Content</label>
-							<textarea
-								className="materialize-textarea"
-								cols="30"
-								rows="10"
-								id="content"
-								onChange={this.handleChange}
-							></textarea>
-						</div>
 						<div className="input-field">
 							<button className="btn z-depth-0">
 								Begin The Process
@@ -94,15 +56,11 @@ class CreateProject extends Component {
 							<span className="card-title">
 								Choosing a Dataset
 							</span>
-							To create a project, you'll need a .csv file to be
-							your dataset. As of now, ML for All only works to
-							create classification models, creating models based
-							off of NUMERICAL inputs and to some TEXT / NUMBER
-							output. For example, ML for All can take datasets of
-							height and weight of athletes to predict bench press
-							(NUMBER output) or the sport they play (TEXT
-							output), but cannot take the sport they play (TEXT
-							input) to predict anything.
+							To get your project started, type in a project name 
+							and click initialize project. If this is your first 
+							project, don't worry! There will be plenty of 
+							explanation and recourses provided as you get 
+							started. 
 							<br />
 							<span className="card-title"> Finding CSV's</span>
 							<ul>

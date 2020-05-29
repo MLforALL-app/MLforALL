@@ -1,3 +1,14 @@
+//initialize a project without any propietart information
+export const initProject = (project) => {
+	return (dispatch, getState, { getFirestore }) => {
+		const firestore = getFirestore();
+		const fname = getState().firebase.profile.firstName;
+		const lname = getState().firebase.profile.lastName;
+		const uid = getState().firebase.auth.uid;
+		const date = new Date();
+	};
+};
+
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -7,9 +18,9 @@ export const createProject = (project) => {
 		const uid = getState().firebase.auth.uid;
 		const date = new Date();
 		// We get the csv name from the csv project (called csvName for conveinence)
-		const csvName = project.csvName.name;
+		//const csvName = project.csvName.name;
 		//Store the file to upload for later
-		project["csvName"] = csvName;
+		//project["csvName"] = csvName;
 		firestore
 			.collection("projects")
 			.add({
@@ -18,7 +29,7 @@ export const createProject = (project) => {
 				authorLastName: lname,
 				authorID: uid,
 				createdAt: date,
-				csvName: csvName,
+				csvName: "",
 				targetParam: "",
 				models: [],
 				variables: []
