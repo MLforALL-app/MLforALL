@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import DisplayCSV from "./displayCSV";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { useSelector } from 'react-redux';
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import UploadCSV from "./uploadcsv"
 class BuildProject extends Component {
 	state = {
 		projectState : "init"
@@ -44,7 +44,7 @@ class BuildProject extends Component {
 		const {project, auth, projectID} = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 		if (!project) return <CircularProgress/>
-		
+		if (auth.uid !== project.authorID) return <Redirect to={"/me/" + auth.uid}/> 
 		return (
 			<div className="container">
 				<div className="row">
@@ -61,39 +61,49 @@ class BuildProject extends Component {
 						</div>
 					</div>
 				</div>
-				<div className="row">
-					<div className="card z-depth-1">
-						<div className="card-content">
-							<span className="card-title">
-								Creating a machine learning model
-							</span>
-							<p>
-								Now that we have initialized your project and
-								data, we can begin some exploratory data
-								analysis. Our step by step exploratory data
-								analysis process (still in development) will
-								allow you to make educated decisions when
-								choosing and creating machine learning models.
-							</p>
+				
+				{this.state.projectState === 1 ? 
+					(
+					<div>
+						<div className="row">
+							<div className="card z-depth-1">
+								<div className="card-content">
+									<span className="card-title">Instructions</span>
+									<p>
+										To Start your project. You have to upload 
+										some data to perform you analysis on. Currently,
+										we only accept .csv data. Bellow are some websites
+										with free datasets for you to explore. If you are just learning, 
+										you can select one of our beginner datasets from the list below.
+									</p>
+								</div>
+							</div>
 						</div>
+						<UploadCSV project = {project} projectID = {projectID}/>
 					</div>
-				</div>
-				<div className="row">
-					<div className="card z-depth-1">
-						<div className="card-content">
-							<span className="card-title">Instructions</span>
-							<p>
-								TO CHOOSE INPUT PARAMETERS, click on the headers
-								on the table below. TO CHOOSE OUTPUT PARAMETER,
-								use the dropdown on the right. TO CHOOSE ML
-								MODELS, use the checklist to the left.
-							</p>
-						</div>
-					</div>
-				</div>
 
+					)
+					:
+					(<span></span>)
+				}
 				{this.state.projectState >= 2 ? (
-					<DisplayCSV project={project} id ={projectID}/>
+					<div className = "container"> 
+						<div className="row">
+							<div className="card z-depth-1">
+								<div className="card-content">
+									<span className="card-title">Instructions</span>
+									<p>
+										TO CHOOSE INPUT PARAMETERS, click on the headers
+										on the table below. TO CHOOSE OUTPUT PARAMETER,
+										use the dropdown on the right. TO CHOOSE ML
+										MODELS, use the checklist to the left.
+									</p>
+								</div>
+							</div>
+						</div>
+						<DisplayCSV project={project} id ={projectID}/>
+					</div>
+					
 				) : (
 					<span></span>
 				)}
