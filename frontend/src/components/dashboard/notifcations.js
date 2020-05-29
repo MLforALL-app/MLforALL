@@ -19,7 +19,7 @@ const Notifications = (props) => {
 	const { notifications } = props;
 	//console.log("NOTIF PROPS", props);
 	return (
-		<div className="section">
+		<div className="section notif-card">
 			<div className="card">
 				<div className="card-content">
 					<span className="card-title">Notifications</span>

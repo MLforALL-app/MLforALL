@@ -20,7 +20,8 @@ h6 {
 }
 @media only screen and (max-width: 565px) {
 	.brand-logo,
-	.btn-floating {
+	.btn-floating,
+	.notif-card {
 		display: none !important;
 	}
 }
