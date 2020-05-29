@@ -35,6 +35,10 @@ const projectReducer = (state = initState, action) => {
 		case "UPLOAD_CSV_ERROR":
 			//console.log("Upload CSV error");
 			return state;
+		case "UPDATE_CSV_NAME":
+			return state;
+		case "UPDATE_CSV_NAME_ERROR":
+			return state;
 		default:
 			//console.log("Default case");
 			return state;

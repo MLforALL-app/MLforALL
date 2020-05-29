@@ -132,7 +132,7 @@ class DisplayCSV extends Component {
 		const csvPath =
 			this.props.project.authorID +
 			"/" +
-			this.props.project.title +
+			this.props.id +
 			"/" +
 			this.props.project.csvName;
 		var csvRef = firebase.storage().ref(csvPath);
