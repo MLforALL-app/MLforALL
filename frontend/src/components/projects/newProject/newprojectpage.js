@@ -6,31 +6,25 @@ import BuildProject from "./buildproject";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 class CreateProjectContainer extends Component {
-	state = {
-		project_id: ""
-	};
+	
 	
 	goToProjectEdit = () => {
 		this.props.history.push("/edit/" +  this.props.projID);
 	}
 
+	componentDidUpdate(prevProps) {
+		if (this.props.projID !== prevProps.projID) {
+		  this.goToProjectEdit();
+		}
+	  }
+
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
-
-		if (this.props.projID === "init" || this.props.proj === "init") {
-			return <CreateProject />;
-		}
-
 		return (
-			<div>
-				<div className="input-field">
-							<button className="btn z-depth-0" onClick={this.goToProjectEdit()}>
-								Go to Your Project!
-							</button>
-				</div>
-			</div>
+			<CreateProject />
 		);
+ 		
 	}
 }
 

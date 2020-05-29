@@ -31,6 +31,7 @@ export const createProject = (project) => {
 				createdAt: date,
 				csvName: "",
 				targetParam: "",
+				content: "",
 				models: [],
 				variables: []
 			})
