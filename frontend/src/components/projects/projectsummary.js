@@ -15,14 +15,11 @@ const ProjectSummary = ({ project }) => {
 				</div>
 				<div className="card-action">
 					<div style={{ float: "left" }}>
-						{moment(project.createdAt.toDate()).format("M/D/YYYY")}
+						{moment(project.createdAt.toDate()).calendar()}
 					</div>
 					<div style={{ float: "right" }}>
-						{" "}
-						made with <span className="hearts">
-							&hearts;
-						</span> by {project.authorFirstName}{" "}
-						{project.authorLastName}
+						{project.authorFirstName} {project.authorLastName}{" "}
+						<span className="hearts">&hearts;</span>
 					</div>
 					<div style={{ clear: "both" }}></div>
 				</div>
