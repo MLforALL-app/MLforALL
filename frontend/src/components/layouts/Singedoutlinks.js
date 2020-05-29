@@ -1,23 +1,34 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { Link } from "react-scroll";
 
 function Signedoutlinks() {
 	return (
 		<ul className="right">
 			<li>
-				<NavLink to="/joeland">
-					<span className="purple-text">joeland</span>
+				<NavLink to="/" smooth={true} duration={500}>
+					<span className="purple-text">Home</span>
 				</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to="/">
-					<span className="purple-text">About</span>
-				</NavLink>{" "}
+				<Link to="goal" smooth={true} duration={500}>
+					<span className="purple-text">Goal</span>
+				</Link>{" "}
 			</li>
 			<li>
-				<NavLink to="/signup">
+				<Link to="who" smooth={true} duration={500}>
+					<span className="purple-text">Who</span>
+				</Link>{" "}
+			</li>
+			<li>
+				<Link to="how" smooth={true} duration={500}>
+					<span className="purple-text">How</span>
+				</Link>{" "}
+			</li>
+			<li>
+				<Link to="signup" smooth={true} duration={500}>
 					<span className="purple-text">Sign Up</span>
-				</NavLink>{" "}
+				</Link>{" "}
 			</li>
 			<li>
 				<NavLink to="/signin">

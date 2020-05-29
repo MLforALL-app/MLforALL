@@ -20,7 +20,7 @@ class CreateProjectContainer extends Component {
 
 	render() {
 		const { auth } = this.props;
-		if (!auth.uid) return <Redirect to="/signin" />;
+		if (!auth.uid) return <Redirect to="/" />;
 
 		if (this.state.project_initialized === false) {
 			return <CreateProject initProject={this.initProject} />;

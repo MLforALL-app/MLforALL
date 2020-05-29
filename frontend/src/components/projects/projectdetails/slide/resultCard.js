@@ -131,7 +131,6 @@ const ResultCard = (uid, project, model, inputs, nameMapper) => {
 					<div className="card-content">
 						<div className="center">
 							<button
-								style={{ borderRadius: "50px" }}
 								className="btn-large waves-effect waves-light"
 								type="submit"
 								name="action"

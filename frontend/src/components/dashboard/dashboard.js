@@ -11,7 +11,7 @@ class Dashboard extends Component {
 		const { projects, auth, notifications } = this.props;
 		//console.log("This is auth", auth);
 		// Route Protection
-		if (!auth.uid) return <Redirect to="/signin" />;
+		if (!auth.uid) return <Redirect to="/" />;
 		// otws good to go
 		return (
 			<div className="dashboard container">

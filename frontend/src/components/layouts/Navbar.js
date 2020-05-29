@@ -5,6 +5,7 @@ import Signedoutlinks from "./Singedoutlinks";
 import { connect } from "react-redux";
 import logo from "../../pictures/logo.png";
 
+// use parent div className = "navbar-fixed" if you want sticky
 const Navbar = (props) => {
 	const { auth, profile } = props;
 	const links = auth.uid ? (
@@ -13,7 +14,7 @@ const Navbar = (props) => {
 		<Signedoutlinks />
 	);
 	return (
-		<nav className="nav-wrapper ">
+		<nav className="nav-wrapper">
 			<div className="container">
 				<Link to="/" className="brand-logo">
 					<img
