@@ -38,14 +38,12 @@ const initInputs = (variables) => {
 	return inputs;
 };
 
-/* REQUIRES: project a valid reference to Firebase firestore document,
- *			 uid the userID for current user
+/* REQUIRES: passed in props be a project a valid reference to Firebase
+ * 			 firestore document, and uid the userID for current user
  * ENSURES: higher order function to create components for sliders and
  * 			result display */
-
 class GenerateSliders extends Component {
 	// Set initial model to be the first one
-
 	state = {
 		model:
 			this.props.project.models.length < 1
@@ -139,59 +137,47 @@ class GenerateSliders extends Component {
 		}
 	}
 	render() {
-		console.log("PROPS", this.props);
 		return (
 			<div className="predict">
-				<div className="row">
-					<div className="col s12">
-						<div className="card z-depth-1">
-							<div className="card-content">
-								<span className="card-title">
-									Testing: {nameMapper(this.state.model)}
-								</span>
-								<div className="row">
+				<div className="row slider-row">
+					<div className="container">
+						<div className="col s12">
+							<div className="slider-title">
+								<h5>
+									Type of model:{" "}
 									{Dropdown(
 										this.props.project,
 										this.state.model,
 										this.handleDropChange,
 										nameMapper
 									)}
-								</div>
+								</h5>
+							</div>
+							<div className="slider-contain">
+								{this.getslides(
+									this.props.project.variables,
+									this.handleSliderChange,
+									this.handleInputChange
+								)}
 								<div
+									className="row"
 									style={{
-										paddingLeft: "5rem",
-										paddingRight: "5rem"
+										paddingTop: "2rem",
+										textAlign: "right"
 									}}
 								>
-									{this.getslides(
-										this.props.project.variables,
-										this.handleSliderChange,
-										this.handleInputChange
-									)}
 									<button
-										className="btn-large waves-effect waves-light"
-										type="submit"
-										name="action"
+										className="btn waves-effect waves-light anchor"
 										onClick={this.handleSubmit}
 									>
-										<span
-											style={{
-												fontSize: "1.4rem"
-											}}
-										>
-											Generate
-										</span>
+										<b>Generate</b>
 									</button>
 								</div>
-							</div>
-							<div className="card-action">
-								Input your guesses here and see what your model
-								predicts!
 							</div>
 						</div>
 					</div>
 				</div>
-				<div className="row">
+				<div className="row slider-row">
 					{ResultCard(
 						this.state.resModel,
 						this.state.resInputs,

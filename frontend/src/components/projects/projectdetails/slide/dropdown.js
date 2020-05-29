@@ -1,7 +1,6 @@
 import React from "react";
 //import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
@@ -36,7 +35,7 @@ const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 	};
 
 	return (
-		<div style={{ textAlign: "center" }}>
+		<span style={{ display: "inline-block", textAlign: "center" }}>
 			<FormControl>
 				<Select
 					value={currentModel}
@@ -45,9 +44,8 @@ const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 				>
 					{getMenuItems(project.models, nameMapper)}
 				</Select>
-				<FormHelperText>Model</FormHelperText>
 			</FormControl>
-		</div>
+		</span>
 	);
 };
 

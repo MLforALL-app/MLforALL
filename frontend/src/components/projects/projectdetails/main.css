@@ -1,9 +1,15 @@
 h1,
-h2 {
+h2,
+h4,
+h6 {
 	/* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
 	font-family: "Roboto", sans-serif;
 	font-weight: 600;
 	letter-spacing: 0.12rem;
+}
+
+.pres {
+	font-size: 1.2rem;
 }
 
 /* Fix for the flying logo */
@@ -38,7 +44,6 @@ h2 {
 .btn-floating {
 	background-color: #283593;
 }
-
 .btn {
 	background-color: #283593;
 	border-radius: 30px;
@@ -93,5 +98,25 @@ form {
 	color: #f8bbd0 !important;
 }
 .MuiSlider-root {
-	color: #f8bbd0 !important;
+	color: #283593 !important;
+}
+.MuiMenuItem-root {
+	font-size: 1.1rem !important;
+}
+.MuiSelect-root {
+	font-size: 1.5rem !important;
+	color: #283593 !important;
+	font-weight: 600 !important;
+	padding-bottom: 0px !important;
+}
+.slider-title {
+	padding-top: 2rem;
+}
+.slider-row {
+	background-color: #eeeeee;
+}
+.slider-contain {
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	min-height: 10rem;
 }
