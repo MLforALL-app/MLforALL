@@ -1,21 +1,9 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 //import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-
-// Helper React Hook to set styles for Dropdown Menu
-const useStyles = makeStyles((theme) => ({
-	formControl: {
-		margin: theme.spacing(1),
-		minWidth: 500
-	},
-	selectEmpty: {
-		marginTop: theme.spacing(2)
-	}
-}));
 
 /* REQUIRES: project a firestore object, currentModel the ml alg currently
  * 			 selected, handleChange a handler inherited from parent to control
@@ -24,8 +12,6 @@ const useStyles = makeStyles((theme) => ({
  * 			changes alter the parent component's state. */
 
 const Dropdown = (project, currentModel, handleChange, nameMapper) => {
-	const classes = useStyles();
-
 	const getMenuItems = (models, nameMapper) => {
 		if (models.length === 0) {
 			return (
@@ -51,12 +37,11 @@ const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 
 	return (
 		<div style={{ textAlign: "center" }}>
-			<FormControl className={classes.formControl}>
+			<FormControl>
 				<Select
 					value={currentModel}
 					onChange={handleChange}
 					displayEmpty
-					className={classes.selectEmpty}
 				>
 					{getMenuItems(project.models, nameMapper)}
 				</Select>

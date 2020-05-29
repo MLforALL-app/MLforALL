@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import axios from "axios";
+import React from "react";
+// import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Pretty Print a list of input parameters and their values
@@ -78,85 +78,18 @@ const loader = (loading, output, inputs, model, targetParam, nameMapper) => {
  * 			 and nameMapper a total str -> str function
  * ENSURES: a card display the results of a Predict API call */
 
-const ResultCard = (uid, project, model, inputs, nameMapper) => {
-	// States to keep track of outputresult, if something is loading, and
-	// that particular's requests Inputs and Models
-	const [output, setOutput] = useState("");
-	const [loading, setLoading] = useState(false);
-	const [resInputs, setResInputs] = useState({});
-	const [resModel, setResModel] = useState("");
-
-	// Event handler for when user presses "Generate" button
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		// Update the inputs/models ur showing
-		setResInputs(inputs);
-		setResModel(model);
-		if (model !== "") {
-			// create path for API Post Request
-			const path = {
-				uid: project.authorID,
-				project: project.title,
-				model,
-				inputs: Object.values(inputs)
-			};
-			// console.log("THIS IS PATH", path);
-			setLoading(true);
-			// console.log("BEFORE AXIOS, LOADING", loading);
-			axios
-				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
-				.then((res) => {
-					//console.log("THIS IS RESULT", res);
-					// If things work, set the output and stop loading
-					setOutput(res);
-					setLoading(false);
-				})
-				.catch((err) => {
-					//console.log("THIS IS AN ERROR", err);
-					// If things don't work, server error and stop loading
-					setOutput("Server Error");
-					setLoading(false);
-				});
-		} else {
-			// user has not picked a model yet
-			setOutput("Choose A Model");
-		}
-		// console.log("EXIT AXIOS LOADING STATE,", loading);
-	};
-
+const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 	return (
 		<div className="results">
-			<div className="col s3">
-				<div className="card z-depth-1">
-					<div className="card-content">
-						<div className="center">
-							<button
-								className="btn-large waves-effect waves-light"
-								type="submit"
-								name="action"
-								onClick={handleSubmit}
-							>
-								<span
-									style={{
-										fontSize: "1.4rem"
-									}}
-								>
-									Generate
-								</span>
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="col s9">
+			<div className="col s12">
 				<div className="card z-depth-1">
 					<div className="card-content">
 						{loader(
 							loading,
 							output,
-							resInputs,
-							resModel,
-							project.targetParam,
+							inputs,
+							model,
+							target,
 							nameMapper
 						)}
 					</div>
