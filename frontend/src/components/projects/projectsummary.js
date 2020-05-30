@@ -5,7 +5,7 @@ const ProjectSummary = ({ project }) => {
 	return (
 		<div className="project-summary">
 			<div className="card">
-				<div className="card-content">
+				<div className="card-content content-sum">
 					<span className="card-title"> {project.title} </span>
 					<p>
 						{project.content.length > 100
