@@ -37,6 +37,9 @@ h6 {
 	background-color: white;
 	color: black;
 }
+.card-content {
+	height: 150px;
+}
 
 .purple-text {
 	color: #283593 !important;
