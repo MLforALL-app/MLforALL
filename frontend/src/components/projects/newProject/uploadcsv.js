@@ -21,7 +21,7 @@ class UploadCSV extends Component {
             <div className = "row">
                 <form className="card z-depth-1"
                       onSubmit={this.handleSubmit}>
-                <span className="card-title purple-text">Upload Data 😄</span>
+                <span className="card-title purple-text">Upload Data <span role = "img" aria-label="smile">😄</span></span>
                     <div className="file-field input-field">
                     
                         <div className="btn z-depth-0" style={{ borderRadius: "50px" }}>

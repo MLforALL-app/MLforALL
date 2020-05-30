@@ -8,7 +8,8 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv"
 class BuildProject extends Component {
 	state = {
-		projectState : "init"
+		projectState : "init",
+		waitForCSVUpload : false
 	}
 	determineProjectState = () => {
 		if(!this.props.project){
@@ -27,15 +28,40 @@ class BuildProject extends Component {
 		}
 		
 	}
-
+	componentDidMount = () => {
+		//figure out if the csv already has been uploaded or will be uploaded
+		let project_process = this.determineProjectState();
+		if(project_process < 2){
+			this.setState({
+				waitForCSVUpload : false
+			});
+		}
+	}
 	componentDidUpdate = () => {
 		console.log(this.props.project);
+		console.log(this.props.csvLoaded);
+		console.log(this.state);
 		let project_process = this.determineProjectState();
 		console.log(project_process);
 		if(this.state.projectState !== project_process){
+			if(this.state.projectState === 0){
+				if(project_process < 2){
+					console.log("DOING THIS THING");
+					this.setState({
+						waitForCSVUpload : true
+					});
+				}
+			}
 			this.setState({
 				projectState : project_process
 			});
+		}
+		if (this.state.waitForCSVUpload && this.props.csvLoaded){
+			console.log("SETTING TO FALSE");
+			this.setState({
+				waitForCSVUpload : false, 
+			});
+
 		}
 	}
 
@@ -101,7 +127,13 @@ class BuildProject extends Component {
 								</div>
 							</div>
 						</div>
-						<DisplayCSV project={project} id ={projectID}/>
+						{
+							(!this.state.waitForCSVUpload) ? 
+							<DisplayCSV project={project} id ={projectID}/>
+							:
+							<span></span>
+						}
+						
 					</div>
 					
 				) : (
@@ -121,6 +153,7 @@ const mapStateToProps = (state,  props) => {
 		projectID : pid,
 		project: state.firestore.data.projects && state.firestore.data.projects[pid],
 		auth: state.firebase.auth,
+		csvLoaded : state.project.csvLoaded 
 	};
 };
 

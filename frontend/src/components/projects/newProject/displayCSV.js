@@ -154,22 +154,23 @@ class DisplayCSV extends Component {
 		this.setState({ loading: true, error: false });
 		const path = {
 			uid: this.props.auth.uid,
-			projectID: this.props.projectID,
-			title: this.props.proj.title,
+			projectID: this.props.id,
+			title: this.props.project.title,
 			modelList: this.filterObj(this.state.models),
 			targetParameter: this.state.output,
 			dfVariables: this.filterObj(this.state.inputs),
 			csvName: this.props.project.csvName
 		};
+		console.log(path);
 		axios
 			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
 			.then((res) => {
-				//console.log("THIS IS RESULT", res);
+				console.log("THIS IS RESULT", res);
 				this.setState({ redirect: true });
-				// console.log("Successfully created project models?");
+			    console.log("Successfully created project models?");
 			})
 			.catch((err) => {
-				//console.log("THIS IS AN ERROR", err);
+				console.log("THIS IS AN ERROR", err);
 				this.setState({ loading: false });
 				this.setState({ error: true });
 			});
@@ -186,7 +187,7 @@ class DisplayCSV extends Component {
 		return (
 			<div className="displaycsv">
 				{this.state.redirect ? (
-					<Redirect to={"me/" + auth.uid} />
+					<Redirect to={"/project/" + this.props.id} />
 				) : (
 					<span></span>
 				)}
