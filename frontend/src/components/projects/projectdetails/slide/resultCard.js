@@ -8,7 +8,8 @@ const inputToString = (inputs) => {
 	const pretty = entries.map(([key, value]) => {
 		return (
 			<div>
-				{key} = <span className="purple-text">{String(value)}</span>{" "}
+				{key} ={" "}
+				<span className="purple-text pres">{String(value)}</span>{" "}
 			</div>
 		);
 	});
@@ -64,16 +65,10 @@ const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 								{nameMapper(model)}{" "}
 							</span>
 						</b>
-						<div className="header-subrow">
-							{showResults(
-								output,
-								inputs,
-								model,
-								target,
-								nameMapper
-							)}
-						</div>
 					</p>
+					<div className="header-subrow">
+						{showResults(output, inputs, model, target, nameMapper)}
+					</div>
 				</span>
 			)}
 		</div>
