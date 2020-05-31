@@ -54,7 +54,7 @@ export default function PredictSlider(
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
-				{param}
+				<b>{param}</b>
 			</Typography>
 			<Grid container spacing={1} alignItems="center">
 				<Grid item xs>

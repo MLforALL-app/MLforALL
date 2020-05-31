@@ -5,10 +5,10 @@ import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
 import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
-import SignUp from "./components/auth/Signup";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
-import LandingPage from "./components/info/landing";
+import JoeLand from "./components/info/joeLand";
 import BuildProject from "./components/projects/newProject/buildproject"
+
 // import Footer from "./components/info/footer";
 import "./App.css";
 
@@ -23,9 +23,8 @@ function App() {
 					<Route path="/project/:id" component={ProjectDetails} />
 					<Route path="/edit/:id" component={BuildProject} />
 					<Route path="/signin" component={SignIn} />
-					<Route path="/signup" component={SignUp} />
 					<Route path="/create" component={CreateProjectContainer} />
-					<Route exact path="/" component={LandingPage} />
+					<Route exact path="/" component={JoeLand} />
 				</Switch>
 				{/*<Footer />*/}
 			</div>

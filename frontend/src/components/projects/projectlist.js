@@ -15,7 +15,7 @@ function mapDepends(projects, uid) {
 function makeLink(proj) {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
-		<div className="col s6" key={proj.id}>
+		<div className="col s12 m6" key={proj.id}>
 			<Link to={"/project/" + proj.id}>
 				<ProjectSummary project={proj} />{" "}
 			</Link>

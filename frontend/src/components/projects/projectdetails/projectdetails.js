@@ -19,17 +19,13 @@ const ProjectDetails = (props) => {
 	if (!auth.uid) return <Redirect to="/" />;
 	if (project) {
 		return (
-			<div className="container section project-details">
-				<div className="row">
-					<div className="col s12">
-						<DescCard project={project} />
-					</div>
+			<div className="project-details">
+				<div className="row container">
+					<DescCard project={project} />
 				</div>
 				<GenerateSliders project={project} uid={auth.uid} />
-				<div className="row">
-					<div className="col s12">
-						<CSVCard id={id} auth={auth} project={project} />
-					</div>
+				<div className="row container">
+					<CSVCard id={id} auth={auth} project={project} />
 				</div>
 			</div>
 		);

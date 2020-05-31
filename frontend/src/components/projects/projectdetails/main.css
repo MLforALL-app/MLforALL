@@ -1,36 +1,77 @@
+h1,
+h2,
+h4,
+h6 {
+	/* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+	font-family: "Roboto", sans-serif;
+	font-weight: 600;
+	letter-spacing: 0.12rem;
+}
+
+.pres {
+	font-size: 1.2rem;
+}
+
+/* Fix for the flying logo */
+@media only screen and (min-width: 565px) {
+	.brand-logo {
+		left: 15% !important;
+	}
+}
+@media only screen and (max-width: 565px) {
+	.brand-logo,
+	.btn-floating,
+	.notif-card {
+		display: none !important;
+	}
+}
+
+.card-action {
+	border-bottom-left-radius: 30px !important;
+	border-bottom-right-radius: 30px !important;
+	background-color: #283593 !important;
+	color: white;
+}
 .card {
-	border-radius: 25px;
+	border-radius: 30px;
 	background-color: white;
 	color: black;
 }
-.card-action {
-	border-bottom-left-radius: 25px !important;
-	border-bottom-right-radius: 25px !important;
-	background-color: #382980 !important;
-	color: white;
+.content-sum {
+	height: 150px;
 }
 
 .purple-text {
-	color: #382980 !important;
+	color: #283593 !important;
 }
 
 .btn-floating {
-	background-color: #382980;
+	background-color: #283593;
 }
-
 .btn {
-	background-color: #382980;
+	background-color: #283593;
+	border-radius: 30px;
 }
 .btn:focus,
 .btn:hover {
-	background-color: #885c95;
+	background-color: #6e689be0;
+}
+.btn-sec {
+	background-color: #f8bbd0;
+	color: black;
+	border-radius: 30px;
+}
+.btn-sec:focus,
+.btn-sec:hover {
+	background-color: #ffdce8ed;
 }
 .btn-large {
-	background-color: #382980;
+	border-radius: 30px;
+	background-color: #283593;
 }
 .btn-large:focus,
 .btn-large:hover {
-	background-color: #885c95;
+	background-color: #6e689be0;
 }
 
 .project-summary {
@@ -40,30 +81,46 @@
 	padding-bottom: 10px;
 }
 .nav-wrapper {
-	background-color: rgb(240, 240, 240);
+	background-color: #eeeeee;
+	border-width: 0px;
+	box-shadow: 0 0 0 0;
 }
 .right a:hover,
 .right button:hover {
 	background: #db91b67e;
 }
 .hearts {
-	color: #db91b6;
+	color: #f8bbd0;
 }
 a {
-	color: #382980;
+	color: #283593;
 }
 form {
-	border-radius: 25px;
+	border-radius: 30px;
 }
 .MuiCircularProgress-colorPrimary {
-	color: #db91b6 !important;
+	color: #f8bbd0 !important;
 }
 .MuiSlider-root {
-	color: #db91b6 !important;
+	color: #283593 !important;
 }
-.footer-copyright {
-	color: white;
-	font-size: 0.8rem;
-	background-color: #382980;
-	margin-bottom: 0;
+.MuiMenuItem-root {
+	font-size: 1.1rem !important;
+}
+.MuiSelect-root {
+	font-size: 1.5rem !important;
+	color: #283593 !important;
+	font-weight: 600 !important;
+	padding-bottom: 0px !important;
+}
+.slider-title {
+	padding-top: 2rem;
+}
+.slider-row {
+	background-color: #eeeeee;
+}
+.slider-contain {
+	padding-top: 1.2rem;
+	padding-bottom: 1.2rem;
+	min-height: 10rem;
 }

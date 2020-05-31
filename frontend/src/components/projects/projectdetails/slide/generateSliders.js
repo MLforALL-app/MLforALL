@@ -1,7 +1,8 @@
+import React, { Component } from "react";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
-import React from "react";
+import axios from "axios";
 
 // Helper function so model names get printed nicer
 const nameMapper = (name) => {
@@ -37,101 +38,158 @@ const initInputs = (variables) => {
 	return inputs;
 };
 
-/* REQUIRES: project a valid reference to Firebase firestore document,
- *			 uid the userID for current user
+/* REQUIRES: passed in props be a project a valid reference to Firebase
+ * 			 firestore document, and uid the userID for current user
  * ENSURES: higher order function to create components for sliders and
  * 			result display */
-
-const GenerateSliders = ({ project, uid }) => {
+class GenerateSliders extends Component {
 	// Set initial model to be the first one
-	const startVal = project.models.length < 1 ? "" : project.models[0];
-	// console.log("START VAL", startVal);
-	const [model, setModel] = React.useState(startVal);
+	state = {
+		model:
+			this.props.project.models.length < 1
+				? ""
+				: this.props.project.models[0],
+		inputs: initInputs(this.props.project.variables),
+		output: "",
+		loading: false,
+		resInputs: {},
+		resModel: ""
+	};
 
 	// event handler for when model dropdown menu changes
-	const handleDropChange = (event) => {
-		setModel(event.target.value);
+	handleDropChange = (event) => {
+		this.setState({ model: event.target.value });
 	};
-
-	// initialize the inputs
-	const [inputs, setInputs] = React.useState(initInputs(project.variables));
-
 	// hsc and hic are higher order functions to allow for generality
 	// of event handlers
-	const handleSliderChange = (v) => {
+	handleSliderChange = (v) => {
 		// console.log("YOUR INPUTS", inputs);
 		return (event, newValue) => {
-			setInputs({ ...inputs, [v.name]: newValue });
-		};
-	};
-	const handleInputChange = (v) => {
-		//console.log("YOUR INPUTS", inputs);
-		return (event) => {
-			setInputs({
-				...inputs,
-				[v.name]:
-					event.target.value === "" ? "" : Number(event.target.value)
+			this.setState((prevState) => {
+				var alterState = prevState;
+				alterState.inputs[v.name] = newValue;
+				return alterState;
 			});
 		};
 	};
-
+	handleInputChange = (v) => {
+		//console.log("YOUR INPUTS", inputs);
+		return (event) => {
+			const newValue =
+				event.target.value === "" ? "" : Number(event.target.value);
+			this.setState((prevState) => {
+				var alterState = prevState;
+				alterState.inputs[v.name] = newValue;
+				return alterState;
+			});
+		};
+	};
+	// Event handler for when user presses "Generate" button
+	handleSubmit = (event) => {
+		event.preventDefault();
+		// Update the inputs/models ur showing
+		this.setState({
+			resInputs: this.state.inputs,
+			resModel: this.state.model
+		});
+		if (this.state.model !== "") {
+			// create path for API Post Request
+			const path = {
+				uid: this.props.project.authorID,
+				project: this.props.project.title,
+				model: this.state.model,
+				inputs: Object.values(this.state.inputs)
+			};
+			// console.log("THIS IS PATH", path);
+			this.setState({ loading: true });
+			// console.log("BEFORE AXIOS, LOADING", loading);
+			axios
+				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
+				.then((res) => {
+					//console.log("THIS IS RESULT", res);
+					// If things work, set the output and stop loading
+					this.setState({ output: res, loading: false });
+				})
+				.catch((err) => {
+					//console.log("THIS IS AN ERROR", err);
+					// If things don't work, server error and stop loading
+					this.setState({ output: "Server Error", loading: false });
+				});
+		} else {
+			// user has not picked a model yet
+			this.setState({ output: "Choose a model" });
+		}
+		// console.log("EXIT AXIOS LOADING STATE,", loading);
+	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	function getslides(variables, hsc, hic) {
+	getslides(variables, hsc, hic) {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				// console.log("THIS IS V", v);
-				output.push(PredictSlider(v, hsc(v), hic(v), inputs[v.name]));
+				output.push(
+					PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
+				);
 			});
 			return <div>{output}</div>;
 		} else {
 			return <p> NO SLIDERS YET </p>;
 		}
 	}
-
-	return (
-		<div className="predict">
-			<div className="row">
-				<div className="col s12">
-					<div className="card z-depth-1">
-						<div className="card-content">
-							<span className="card-title">
-								Testing: {nameMapper(model)}
-							</span>
-							<div className="row">
-								{Dropdown(
-									project,
-									model,
-									handleDropChange,
-									nameMapper
-								)}
+	render() {
+		return (
+			<div className="predict">
+				<div className="row slider-row">
+					<div className="container">
+						<div className="col s12">
+							<div className="slider-title">
+								<h5>
+									Type of model:{" "}
+									{Dropdown(
+										this.props.project,
+										this.state.model,
+										this.handleDropChange,
+										nameMapper
+									)}
+								</h5>
 							</div>
-							<div
-								style={{
-									paddingLeft: "5rem",
-									paddingRight: "5rem"
-								}}
-							>
-								{getslides(
-									project.variables,
-									handleSliderChange,
-									handleInputChange
+							<div className="slider-contain">
+								{this.getslides(
+									this.props.project.variables,
+									this.handleSliderChange,
+									this.handleInputChange
 								)}
+								<div
+									className="row"
+									style={{
+										paddingTop: "2rem",
+										textAlign: "right"
+									}}
+								>
+									<button
+										className="btn waves-effect waves-light anchor"
+										onClick={this.handleSubmit}
+									>
+										<b>Generate</b>
+									</button>
+								</div>
 							</div>
-						</div>
-						<div className="card-action">
-							Input your guesses here and see what your model
-							predicts!
 						</div>
 					</div>
 				</div>
+				<div className="row slider-row">
+					{ResultCard(
+						this.state.resModel,
+						this.state.resInputs,
+						this.state.output,
+						this.props.project.targetParam,
+						this.state.loading,
+						nameMapper
+					)}{" "}
+				</div>
 			</div>
-			<div className="row">
-				{ResultCard(uid, project, model, inputs, nameMapper)}{" "}
-			</div>
-		</div>
-	);
-};
+		);
+	}
+}
 
 export default GenerateSliders;

@@ -49,7 +49,7 @@ class SignIn extends Component {
 						/>
 					</div>
 					<div className="input-field">
-						<button className="btn z-depth-0">Login</button>
+						<button className="btn z-depth-0 anchor">Login</button>
 						<div className="red-text center">
 							{authError ? <p>{authError}</p> : null}
 						</div>
