@@ -23,15 +23,16 @@ class DeleteProject extends Component {
 		this.setState({ open: false });
 	};
 	// if we choose to delete, make a dispatch to REDUX
-	handleDelete = (pid, auth, project) => {
+	handleDelete = (pid, auth, project, history) => {
 		return () => {
 			this.setState({ open: false });
 			this.props.deleteMLProject(pid, auth, project);
+			history.push(`/me/${auth.uid}`);
 		};
 	};
 
 	render() {
-		const { pid, auth, project } = this.props;
+		const { pid, auth, project, history } = this.props;
 		return (
 			<span>
 				<button
@@ -68,7 +69,12 @@ class DeleteProject extends Component {
 						<button
 							className="btn-flat waves-effect waves-light"
 							style={{ display: "inline", color: "red" }}
-							onClick={this.handleDelete(pid, auth, project)}
+							onClick={this.handleDelete(
+								pid,
+								auth,
+								project,
+								history
+							)}
 						>
 							Delete Forever {" :("}
 						</button>

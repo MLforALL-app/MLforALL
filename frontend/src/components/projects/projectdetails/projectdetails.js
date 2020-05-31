@@ -14,7 +14,7 @@ import "./main.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
-	const { id, auth, project } = props;
+	const { id, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
 	if (project) {
@@ -25,7 +25,12 @@ const ProjectDetails = (props) => {
 				</div>
 				<GenerateSliders project={project} uid={auth.uid} pid={id} />
 				<div className="row container">
-					<CSVCard pid={id} auth={auth} project={project} />
+					<CSVCard
+						pid={id}
+						auth={auth}
+						project={project}
+						history={history}
+					/>
 				</div>
 			</div>
 		);

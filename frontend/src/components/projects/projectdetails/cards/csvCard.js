@@ -26,7 +26,7 @@ const edit = (setRedirect) => {
 
 // COMPONENT To Show the CSV Card information. This is where the
 // delete project functionality is housed
-const CSVCard = ({ pid, auth, project }) => {
+const CSVCard = ({ pid, auth, project, history }) => {
 	const [redirect, setRedirect] = useState(false);
 	const owner = auth.uid === project.authorID;
 	return (
@@ -47,7 +47,12 @@ const CSVCard = ({ pid, auth, project }) => {
 			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
 			{owner ? (
 				<span>
-					<DeleteProject auth={auth} pid={pid} project={project} />
+					<DeleteProject
+						auth={auth}
+						pid={pid}
+						project={project}
+						history={history}
+					/>
 					{edit(setRedirect)}
 				</span>
 			) : (
