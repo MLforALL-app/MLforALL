@@ -1,3 +1,6 @@
+
+
+
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -7,9 +10,9 @@ export const createProject = (project) => {
 		const uid = getState().firebase.auth.uid;
 		const date = new Date();
 		// We get the csv name from the csv project (called csvName for conveinence)
-		const csvName = project.csvName.name;
+		//const csvName = project.csvName.name;
 		//Store the file to upload for later
-		project["csvName"] = csvName;
+		//project["csvName"] = csvName;
 		firestore
 			.collection("projects")
 			.add({
@@ -18,8 +21,9 @@ export const createProject = (project) => {
 				authorLastName: lname,
 				authorID: uid,
 				createdAt: date,
-				csvName: csvName,
+				csvName: "",
 				targetParam: "",
+				content: "",
 				models: [],
 				variables: []
 			})
@@ -33,15 +37,15 @@ export const createProject = (project) => {
 	};
 };
 
-export const uploadCSV = (csvName, projName) => {
+export const uploadCSV = (csv, project, id) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
 		const csvPath =
-			getState().firebase.auth.uid + "/" + projName + "/" + csvName.name;
+			getState().firebase.auth.uid + "/" + id + "/" + csv.name;
 		var csvRef = firebase.storage().ref(csvPath);
 		csvRef
-			.put(csvName)
+			.put(csv)
 			.then((snapshot) => {
 				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
@@ -52,6 +56,26 @@ export const uploadCSV = (csvName, projName) => {
 			});
 	};
 };
+
+export const updateCsvName = (csv, project, id) => {
+	return (dispatch, getState, { getFirestore }) => {
+		const firestore = getFirestore();
+		const projectRef = firestore.collection('projects').doc(id);
+
+		projectRef.set({
+			csvName : csv.name
+
+		}, { merge : true})
+		.then((snapshot) => {
+			//console.log(snapshot);
+			dispatch({ type: "UPDATE_CSV_NAME"});
+		})
+		.catch((err) => {
+			dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
+		});
+
+	}
+}
 
 export const deleteMLProject = (id, auth, project) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
