@@ -64,12 +64,12 @@ def store():
         for model in model_list:
             # retrieve the csv everytime due to some weird "key errors"
             df = fb.get_csv(bucket, fb.make_path(
-                str(uid), str(title), str(csv_name)))
+                str(uid), str(proj_id), str(csv_name)))
             # get the saved model in byte form
             pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
             # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
-                           fb.make_path(str(uid), str(title), str(model)))
+                           fb.make_path(str(uid), str(proj_id), str(model)))
        # update firestore with descriptive stats (IQR)
         send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
