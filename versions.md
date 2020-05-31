@@ -1,7 +1,7 @@
 # Version Releases
 
 
-### 0.0.2:
+### 0.0.3:
 
 -   Released Saturday, May 30 2020, 10:56 PM EDT
 -   Implemented Joe's styles, made seperate routing for "edit"-ing project.
