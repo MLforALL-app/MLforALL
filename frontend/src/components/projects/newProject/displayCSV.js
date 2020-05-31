@@ -167,7 +167,7 @@ class DisplayCSV extends Component {
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
 				this.setState({ redirect: true });
-			    console.log("Successfully created project models?");
+				console.log("Successfully created project models?");
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
@@ -183,7 +183,6 @@ class DisplayCSV extends Component {
 		);*/
 	};
 	render() {
-		const { auth } = this.props;
 		return (
 			<div className="displaycsv">
 				{this.state.redirect ? (
@@ -271,8 +270,7 @@ class DisplayCSV extends Component {
 const mapStatetoProps = (state) => {
 	// console.log("LOOK AT ME", state);
 	return {
-		auth: state.firebase.auth,
-
+		auth: state.firebase.auth
 	};
 };
 
