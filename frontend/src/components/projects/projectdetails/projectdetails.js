@@ -14,19 +14,20 @@ import "./main.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
-	const { id, auth, project, history } = props;
+	const { pid, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
+	if (!auth.emailVerified) return <Redirect to={`/v/${pid}`} />;
 	if (project) {
 		return (
 			<div className="project-details">
 				<div className="row container">
 					<DescCard project={project} />
 				</div>
-				<GenerateSliders project={project} uid={auth.uid} pid={id} />
+				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
 				<div className="row container">
 					<CSVCard
-						pid={id}
+						pid={pid}
 						auth={auth}
 						project={project}
 						history={history}
@@ -48,11 +49,11 @@ const ProjectDetails = (props) => {
  * auth object, and project object. We get the entire projects
  * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id;
+	const pid = ownProps.match.params.pid;
 	const projects = state.firestore.data.projects;
-	const project = projects ? projects[id] : null;
+	const project = projects ? projects[pid] : null;
 	return {
-		id,
+		pid,
 		project,
 		auth: state.firebase.auth
 	};

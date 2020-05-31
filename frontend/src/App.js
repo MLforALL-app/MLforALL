@@ -5,9 +5,11 @@ import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
 import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
+import Forgot from "./components/auth/resetPass";
+import VerifyEmailProject from "./components/auth/verify";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import JoeLand from "./components/info/joeLand";
-import BuildProject from "./components/projects/newProject/buildproject"
+import BuildProject from "./components/projects/newProject/buildproject";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
@@ -20,9 +22,11 @@ function App() {
 				<Switch>
 					<Route path="/me/:uid" component={MyProjects} />
 					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/project/:id" component={ProjectDetails} />
-					<Route path="/edit/:id" component={BuildProject} />
+					<Route path="/project/:pid" component={ProjectDetails} />
+					<Route path="/edit/:pid" component={BuildProject} />
+					<Route path="/v/:pid" component={VerifyEmailProject} />
 					<Route path="/signin" component={SignIn} />
+					<Route path="/forgot" component={Forgot} />
 					<Route path="/create" component={CreateProjectContainer} />
 					<Route exact path="/" component={JoeLand} />
 				</Switch>

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import {
 	createProject,
 	uploadCSV
@@ -26,8 +27,11 @@ class CreateProject extends Component {
 	};
 
 	render() {
+		const { auth } = this.props;
 		return (
 			<div className="container">
+				{auth.uid ? <span></span> : <Redirect to="/" />}
+				{auth.emailVerified ? <p></p> : <Redirect to="/v/create" />}
 				<div className="row">
 					<form
 						onSubmit={this.handleSubmit}
@@ -56,11 +60,11 @@ class CreateProject extends Component {
 							<span className="card-title">
 								Choosing a Dataset
 							</span>
-							To get your project started, type in a project name 
-							and click initialize project. If this is your first 
-							project, don't worry! There will be plenty of 
-							explanation and recourses provided as you get 
-							started. 
+							To get your project started, type in a project name
+							and click initialize project. If this is your first
+							project, don't worry! There will be plenty of
+							explanation and recourses provided as you get
+							started.
 							<br />
 							<span className="card-title"> Finding CSV's</span>
 							<ul>
