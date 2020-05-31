@@ -29,11 +29,11 @@ def predict_from_model():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    project = req_data['project']  # project title
+    pid = req_data['projId'] # project id 
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
     # Get firebase stuff
-    path = fb.make_path(str(uid), str(project), str(model))
+    path = fb.make_path(str(uid), str(pid), str(model))
     bucket = fb.bucket_init()
     # Get loaded model and predict
     loaded_model = fb.get_pickle(bucket, path)

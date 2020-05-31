@@ -96,7 +96,7 @@ class GenerateSliders extends Component {
 			// create path for API Post Request
 			const path = {
 				uid: this.props.project.authorID,
-				project: this.props.project.title,
+				projId: this.props.pid,
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
