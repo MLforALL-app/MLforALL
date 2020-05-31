@@ -26,7 +26,7 @@ class DeleteProject extends Component {
 	handleDelete = (pid, auth, project, history) => {
 		return () => {
 			this.setState({ open: false });
-			this.props.deleteMLProject(pid, auth, project);
+			this.props.deleteMLProject(pid, auth.uid, project);
 			history.push(`/me/${auth.uid}`);
 		};
 	};
