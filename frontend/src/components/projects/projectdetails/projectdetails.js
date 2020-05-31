@@ -23,9 +23,9 @@ const ProjectDetails = (props) => {
 				<div className="row container">
 					<DescCard project={project} />
 				</div>
-				<GenerateSliders project={project} uid={auth.uid} pid={id}/>
+				<GenerateSliders project={project} uid={auth.uid} pid={id} />
 				<div className="row container">
-					<CSVCard id={id} auth={auth} project={project} />
+					<CSVCard pid={id} auth={auth} project={project} />
 				</div>
 			</div>
 		);

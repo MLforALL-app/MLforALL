@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
 import DeleteProject from "./confirmDel";
 
 const printVarNames = (variables) => {
@@ -9,9 +10,25 @@ const shorten = (s) => {
 	return s.length < 30 ? s : s.substr(0, 27) + "...";
 };
 
+const edit = (setRedirect) => {
+	return (
+		<button
+			className="btn-flat waves-effect waves-light"
+			style={{ display: "inline" }}
+			onClick={() => {
+				setRedirect(true);
+			}}
+		>
+			<span className="purple-text">Edit</span>
+		</button>
+	);
+};
+
 // COMPONENT To Show the CSV Card information. This is where the
 // delete project functionality is housed
-const CSVCard = ({ id, auth, project }) => {
+const CSVCard = ({ pid, auth, project }) => {
+	const [redirect, setRedirect] = useState(false);
+	const owner = auth.uid === project.authorID;
 	return (
 		<div className="col s12" style={{ textAlign: "right" }}>
 			<h4>
@@ -27,8 +44,12 @@ const CSVCard = ({ id, auth, project }) => {
 					</p>
 				</div>
 			</div>
-			{auth.uid === project.authorID ? (
-				<DeleteProject auth={auth} id={id} project={project} />
+			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
+			{owner ? (
+				<span>
+					<DeleteProject auth={auth} pid={pid} project={project} />
+					{edit(setRedirect)}
+				</span>
 			) : (
 				<span></span>
 			)}{" "}
