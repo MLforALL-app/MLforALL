@@ -91,6 +91,9 @@ const MakeDrawer = ({ sections }) => {
 									{obj.title}
 								</Typography>
 								<Typography paragraph>{obj.content}</Typography>
+								<Typography paragraph>{obj.preimg}</Typography>
+								<img src={obj.imgurl} alt={obj.preimg} />
+								<Typography paragraph>{obj.postimg}</Typography>
 							</Element>
 						);
 					});
