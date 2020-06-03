@@ -22,7 +22,9 @@ const Navbar = (props) => {
 						alt="Machine Learning for all Logo"
 						style={{ height: "2rem" }}
 					/>
-					<span className="purple-text"> forALL</span>
+					<span className="purple-text">
+						<b> forALL</b>
+					</span>
 				</Link>
 				{links}
 			</div>
