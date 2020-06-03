@@ -32,7 +32,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 	return (
 		<div className="col s12" style={{ textAlign: "right" }}>
 			<h4>
-				<span className="purple-text">About the CSV</span>
+				<span className="purple-text">Project Details</span>
 			</h4>
 			<div className="row">
 				<div className="col s0 m5"></div>
@@ -40,20 +40,21 @@ const CSVCard = ({ pid, auth, project, history }) => {
 					<p>
 						The various parameters used in{" "}
 						{shorten(project.csvName)} include
-						{printVarNames(project.variables)}.
+						{printVarNames(project.variables)}. Feeling rough around
+						the edges? Use the links below to change your project.
 					</p>
 				</div>
 			</div>
 			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
 			{owner ? (
 				<span>
+					{edit(setRedirect)}
 					<DeleteProject
 						auth={auth}
 						pid={pid}
 						project={project}
 						history={history}
 					/>
-					{edit(setRedirect)}
 				</span>
 			) : (
 				<span></span>
