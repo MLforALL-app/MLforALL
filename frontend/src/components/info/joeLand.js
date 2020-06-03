@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import headerImg from "../../pictures/headerland.png";
-import whoImg from "../../pictures/whoweare.png";
-import signImg from "../../pictures/signup.png";
+import headerImg from "../../pictures/land-transp.png";
+import whoImg from "../../pictures/who-transp.png";
+import signImg from "../../pictures/sign-transp.png";
 import "./landing.css";
 import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";

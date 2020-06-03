@@ -10,6 +10,7 @@ import VerifyEmailProject from "./components/auth/verify";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import JoeLand from "./components/info/joeLand";
 import BuildProject from "./components/projects/newProject/buildproject";
+import ScrollToTop from "./components/layouts/scrollToTop";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
@@ -19,6 +20,7 @@ function App() {
 		<BrowserRouter>
 			<div className="App">
 				<Navbar />
+				<ScrollToTop />
 				<Switch>
 					<Route path="/me/:uid" component={MyProjects} />
 					<Route path="/dashboard" component={Dashboard} />

@@ -100,7 +100,7 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			// console.log("THIS IS PATH", path);
+			console.log("THIS IS PATH", path);
 			this.setState({ loading: true });
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
