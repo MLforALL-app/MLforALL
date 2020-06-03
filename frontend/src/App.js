@@ -11,6 +11,8 @@ import CreateProjectContainer from "./components/projects/newProject/newprojectp
 import JoeLand from "./components/info/joeLand";
 import BuildProject from "./components/projects/newProject/buildproject";
 import ScrollToTop from "./components/layouts/scrollToTop";
+import MainDoc from "./components/education/mainDoc";
+import Lost from "./components/info/lost";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
@@ -30,7 +32,9 @@ function App() {
 					<Route path="/signin" component={SignIn} />
 					<Route path="/forgot" component={Forgot} />
 					<Route path="/create" component={CreateProjectContainer} />
+					<Route path="/edu" component={MainDoc} />
 					<Route exact path="/" component={JoeLand} />
+					<Route component={Lost} />
 				</Switch>
 				{/*<Footer />*/}
 			</div>
