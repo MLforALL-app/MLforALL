@@ -140,27 +140,35 @@ const landSign = (auth) => {
 		);
 	} else {
 		return (
-			<div className="container land">
-				<h2>What are you waiting for?</h2>
-				<div className="anchor header-subrow">
-					<NavLink to="/create">
-						<div
-							id="learn-more-landing"
-							className="btn waves-effect waves-light anchor"
-						>
-							Create
-						</div>{" "}
-					</NavLink>
-				</div>
-				<div className="anchor header-subrow">
-					<NavLink to="/create">
-						<div
-							id="learn-more-landing"
-							className="btn btn-sec waves-effect waves-light anchor"
-						>
-							Explore
-						</div>{" "}
-					</NavLink>
+			<div
+				className="row img-row"
+				style={{ backgroundImage: `url(${signImg})` }}
+			>
+				<div className="col s12 m7">
+					<div className="container land land-sign">
+						<h2>Let's get it!</h2>
+						<div className="anchor header-subrow">
+							<NavLink to="/create">
+								<div
+									id="learn-more-landing"
+									className="btn waves-effect waves-light anchor"
+								>
+									Create
+								</div>{" "}
+							</NavLink>
+						</div>
+						<div className="anchor header-subrow">
+							<NavLink to="/create">
+								<div
+									id="learn-more-landing"
+									className="btn btn-sec waves-effect waves-light anchor"
+								>
+									Explore
+								</div>{" "}
+							</NavLink>
+						</div>
+					</div>
+					<div className="col s0 m5"></div>
 				</div>
 			</div>
 		);

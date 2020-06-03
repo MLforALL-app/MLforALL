@@ -15,7 +15,7 @@
 	flex-wrap: wrap;
 }
 .land-head {
-	height: calc(10rem + 20vw + 60px);
+	height: calc(12rem + 20vw + 65px);
 }
 .land-who {
 	height: calc(10rem + 12vw + 50px);
