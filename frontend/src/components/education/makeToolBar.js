@@ -59,26 +59,41 @@ const MakeDrawer = ({ sections }) => {
 				anchor="left"
 			>
 				<div className={classes.toolbar} />
-				<Divider />
-				<List>
-					{sections.map((obj) => (
-						<Link to={obj.to} smooth="true" duration="500">
-							<ListItem button key={obj.text}>
-								<ListItemText primary={obj.text} />
-							</ListItem>
-						</Link>
-					))}
-				</List>
-				<Divider />
+				{sections.map((subsection) => (
+					<React.Fragment>
+						{" "}
+						<Divider />
+						<List>
+							{subsection.map((obj) => (
+								<Link
+									to={obj.to}
+									smooth="true"
+									duration="500"
+									offset={-80}
+								>
+									<ListItem button key={obj.text}>
+										<ListItemText primary={obj.text} />
+									</ListItem>
+								</Link>
+							))}
+						</List>
+						<Divider />
+					</React.Fragment>
+				))}
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
-				{sections.map((obj) => {
-					return (
-						<Element name={obj.to} className="element">
-							<Typography paragraph>{obj.content}</Typography>
-						</Element>
-					);
+				{sections.map((subsection) => {
+					return subsection.map((obj) => {
+						return (
+							<Element name={obj.to} className="element">
+								<Typography variant="h2">
+									{obj.title}
+								</Typography>
+								<Typography paragraph>{obj.content}</Typography>
+							</Element>
+						);
+					});
 				})}
 			</main>
 		</div>
