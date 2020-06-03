@@ -1,6 +1,6 @@
 import React from "react";
 import ProjectSummary from "./projectsummary";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function mapDepends(projects, uid) {
 	if (projects && uid) {
@@ -16,9 +16,9 @@ function makeLink(proj) {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
 		<div className="col s12 m6" key={proj.id}>
-			<Link to={"/project/" + proj.id}>
+			<NavLink to={"/project/" + proj.id}>
 				<ProjectSummary project={proj} />{" "}
-			</Link>
+			</NavLink>
 		</div>
 	);
 }
