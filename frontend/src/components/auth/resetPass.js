@@ -38,8 +38,8 @@ class ResetPass extends Component {
 		if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
 			<div className="container">
-				<form onSubmit={this.handleSubmit} className="white z-depth-1">
-					<h4 className="purple-text">Forgot Your Password?</h4>
+				<h1 className="purple-text">Forgot Your Password?</h1>
+				<form onSubmit={this.handleSubmit}>
 					<div className="input-field">
 						<label htmlFor="email">Email</label>
 						<input
