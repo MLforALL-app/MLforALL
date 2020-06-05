@@ -14,6 +14,7 @@ import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
+import HelpBox from "../../layouts/helpbox";
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
@@ -226,8 +227,15 @@ class DisplayCSV extends Component {
 						<div className="row container">
 							<h5>
 								<b>
-									<span className="pink-text">1. </span>I want
-									to consider these input parameters...
+									1. I want to consider these input
+									parameters...{" "}
+									<span className="pink-text">
+										<HelpBox
+											header="Click to Toggle Parameters"
+											placement="right-end"
+											desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
+										/>
+									</span>
 								</b>
 							</h5>
 							<Table
@@ -252,8 +260,8 @@ class DisplayCSV extends Component {
 						>
 							<h5>
 								<b>
-									<span className="pink-text">2. </span>In
-									order to predict this output parameter:{" "}
+									2. In order to predict this output
+									parameter:{" "}
 									<FormControl>
 										<Select
 											value={this.state.output}
@@ -270,15 +278,29 @@ class DisplayCSV extends Component {
 											Output Parameter
 										</FormHelperText>
 									</FormControl>
+									{"  "}
+									<span className="pink-text">
+										<HelpBox
+											header="Output Dropdown"
+											placement="right"
+											desc="Use this dropdown menu to select what column you would like to designate as your output value. This is the parameter that your machine learning model will try to predict!"
+										/>
+									</span>
 								</b>
 							</h5>
 						</div>
 						<div className="row container">
 							<h5>
-								<b>
-									<span className="pink-text">3. </span>Choose
-									your algorithms / models
-								</b>
+								<b>3. Choose your algorithms / models</b>{" "}
+								<span className="pink-text">
+									<HelpBox
+										header="Click the models!"
+										placement="right-end"
+										desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
+										link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
+										linkdesc="Learn more here"
+									/>
+								</span>
 							</h5>
 							<div>
 								<ModelCheck
