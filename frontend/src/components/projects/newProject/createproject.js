@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import Guide from "./guidingInfo";
 import {
 	createProject,
 	uploadCSV
 } from "../../../store/actions/projectActions";
+import "./build.css";
 
 class CreateProject extends Component {
 	state = {
@@ -29,70 +31,38 @@ class CreateProject extends Component {
 	render() {
 		const { auth } = this.props;
 		return (
-			<div className="container">
+			<div className="create-project">
 				{auth.uid ? <span></span> : <Redirect to="/" />}
 				{auth.emailVerified ? <p></p> : <Redirect to="/v/create" />}
-				<div className="row">
-					<form
-						onSubmit={this.handleSubmit}
-						className="white z-depth-1"
-					>
-						<h4 className="purple-text">Create Project</h4>
-						<div className="input-field">
-							<label htmlFor="title">Title</label>
-							<input
-								autoComplete="off"
-								type="text"
-								id="title"
-								onChange={this.handleChange}
-							/>
-						</div>
-						<div className="input-field">
-							<button className="btn z-depth-0">
-								Begin The Process
-							</button>
-						</div>
-					</form>
+				<div className="row container">
+					<h1 className="purple-text">Create Project</h1>
 				</div>
-				<div className="row">
-					<div className="card z-depth-1">
-						<div className="card-content">
-							<span className="card-title">
-								Choosing a Dataset
-							</span>
-							To get your project started, type in a project name
-							and click initialize project. If this is your first
-							project, don't worry! There will be plenty of
-							explanation and recourses provided as you get
-							started.
-							<br />
-							<span className="card-title"> Finding CSV's</span>
-							<ul>
-								<li>
-									<a href="https://www.kaggle.com/datasets">
-										Check out Kaggle,
-									</a>
-								</li>
-								<li>
-									<a href="https://data.world/">
-										data.world (needs login),
-									</a>
-								</li>
-								<li>
-									<a href="https://registry.opendata.aws/">
-										Amazon's open registry,
-									</a>
-								</li>
-								<li>
-									<a href="https://datasetsearch.research.google.com/">
-										{" "}
-										or Google's dataset search engine!
-									</a>
-								</li>
-							</ul>
-						</div>
+				<div className="row slider-row">
+					<div className="container">
+						<form
+							style={{ backgroundColor: "#eeeeee" }}
+							onSubmit={this.handleSubmit}
+						>
+							<div className="input-field">
+								<label htmlFor="title">
+									Insert a title here!
+								</label>
+								<input
+									autoComplete="off"
+									type="text"
+									id="title"
+									onChange={this.handleChange}
+								/>
+							</div>
+							<div className="input-field">
+								<button className="btn z-depth-0">
+									Begin The Process
+								</button>
+							</div>
+						</form>
 					</div>
 				</div>
+				<Guide />
 			</div>
 		);
 	}
