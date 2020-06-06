@@ -22,7 +22,8 @@ export const createProject = (project) => {
 				targetParam: "",
 				content: "",
 				models: [],
-				variables: []
+				variables: [],
+				info: {}
 			})
 			.then((snapshot) => {
 				//console.log(snapshot);
@@ -58,7 +59,6 @@ export const updateCsvName = (csv, project, id) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
 		const projectRef = firestore.collection("projects").doc(id);
-
 		projectRef
 			.set(
 				{

@@ -4,6 +4,7 @@ from predict import predict
 from build import build_and_pickle
 from variables import send_vars
 import firebase as fb
+from describe import pre_describe
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -83,11 +84,24 @@ def visual():
     return None
 
 
-@app.route('/descriptive', methods=['GET'])
+@app.route('/describe', methods=['POST'])
 def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
-    return None
+    req_data = request.get_json()
+    # Brackets require these fields to be present
+    # Sort of a safety contract to ensure we always have valid path
+    uid = req_data['uid']  # user id
+    proj_id = req_data['projId']  # unique project hash
+    csv_name = req_data['csvName']
+    # Get firebase stuff
+    bucket = fb.bucket_init()
+    db = fb.firestore.client()
+    # Get the dataframe
+    df = fb.get_csv(bucket, fb.make_path(
+        str(uid), str(proj_id), str(csv_name)))
+    # Generate info
+    return jsonify(pre_describe(db, df, proj_id))
 
 
 if __name__ == '__main__':
