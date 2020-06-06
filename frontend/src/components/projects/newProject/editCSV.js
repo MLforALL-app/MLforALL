@@ -14,34 +14,62 @@ import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
+import HelpBox from "../../layouts/helpbox";
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
 };
+const nameMapper = (name) => {
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression";
+		case "gnb":
+			return "Gauss Naive Bayes";
+		case "knn":
+			return "K-Nearest Neighbors";
+		case "svm":
+			return "Support Vector Machine";
+		case "clf":
+			return "Decision Tree Classifier";
+		case "lda":
+			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
+};
 
 class DisplayCSV extends Component {
 	// card to show what user is picking
-	getStatus = (inputs, output, models) => {
+	getStatus = (inputs, output, models, nameMapper) => {
 		return (
-			<div className="card z-depth-1">
-				<div className="card-content">
-					<span className="card-title">
-						{this.state.error
-							? "Something went Wrong"
-							: "What Your Model Does"}{" "}
-					</span>
-					<span>
-						This model will take these parameters:{" "}
-						<span style={{ color: "blue" }}>
-							{addSpace(inputs)}
-						</span>{" "}
-						to attempt to predict{" "}
-						<span style={{ color: "red" }}>{output}</span> using
-						these algorithms:{" "}
-						<span style={{ color: "purple" }}>
-							{addSpace(models)}
+			<div className="container center">
+				<div className="card">
+					<div className="card-content">
+						<span className="purple-text">
+							<h5>
+								<b>
+									{this.state.error
+										? "Something went Wrong"
+										: "What Your Model Does"}{" "}
+								</b>
+							</h5>
 						</span>
-					</span>
+						<h6>
+							This model will take these parameters:{" "}
+							<span className="purple-text">
+								{addSpace(inputs)}
+							</span>
+							<br />
+							to attempt to predict{" "}
+							<span className="purple-text">{output}</span> <br />
+							using these algorithms:{" "}
+							<span className="purple-text">
+								{addSpace(models.map((s) => nameMapper(s)))}
+							</span>
+						</h6>
+					</div>
 				</div>
 			</div>
 		);
@@ -191,26 +219,49 @@ class DisplayCSV extends Component {
 					<span></span>
 				)}
 				{this.state.csvArray.length === 0 ? (
-					<CircularProgress />
+					<div className="container center">
+						<CircularProgress />
+					</div>
 				) : (
 					<div className="isactive">
-						<div className="row">
-							{this.getStatus(
-								this.filterObj(this.state.inputs),
-								this.state.output,
-								this.filterObj(this.state.models)
-							)}
+						<div className="row container">
+							<h5>
+								<b>
+									1. I want to consider these input
+									parameters...{" "}
+									<span className="pink-text">
+										<HelpBox
+											header="Click to Toggle Parameters"
+											placement="right-end"
+											desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
+										/>
+									</span>
+								</b>
+							</h5>
+							<Table
+								width={1000}
+								height={400}
+								headerHeight={30}
+								rowHeight={25}
+								onHeaderClick={this.handleHeaderClick}
+								rowCount={this.state.csvArray.length}
+								rowGetter={({ index }) =>
+									this.state.csvArray[index]
+								}
+							>
+								{this.getColumns(
+									Object.keys(this.state.csvArray[0])
+								)}
+							</Table>
 						</div>
-						<div className="row">
-							<div className="col s8">
-								<ModelCheck
-									filterObj={this.filterObj}
-									handleToggle={this.handleModelToggle}
-									models={this.state.models}
-								/>
-							</div>
-							<div className="col s4">
-								<div className="row">
+						<div
+							style={{ paddingTop: "1.5rem" }}
+							className="row container"
+						>
+							<h5>
+								<b>
+									2. In order to predict this output
+									parameter:{" "}
 									<FormControl>
 										<Select
 											value={this.state.output}
@@ -227,38 +278,59 @@ class DisplayCSV extends Component {
 											Output Parameter
 										</FormHelperText>
 									</FormControl>
-								</div>
-								<div className="row">
-									<button
-										onClick={this.handleSubmit}
-										className="btn z-depth-0"
-									>
-										Build the model!
-									</button>
-									{this.state.loading ? (
-										<CircularProgress />
-									) : (
-										<span></span>
-									)}
-								</div>
+									{"  "}
+									<span className="pink-text">
+										<HelpBox
+											header="Output Dropdown"
+											placement="right"
+											desc="Use this dropdown menu to select what column you would like to designate as your output value. This is the parameter that your machine learning model will try to predict!"
+										/>
+									</span>
+								</b>
+							</h5>
+						</div>
+						<div className="row container">
+							<h5>
+								<b>3. Choose your algorithms / models</b>{" "}
+								<span className="pink-text">
+									<HelpBox
+										header="Click the models!"
+										placement="right-end"
+										desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
+										link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
+										linkdesc="Learn more here"
+									/>
+								</span>
+							</h5>
+							<div>
+								<ModelCheck
+									filterObj={this.filterObj}
+									handleToggle={this.handleModelToggle}
+									models={this.state.models}
+									nameMapper={nameMapper}
+								/>
 							</div>
 						</div>
-						<div className="row">
-							<Table
-								width={900}
-								height={400}
-								headerHeight={30}
-								rowHeight={25}
-								onHeaderClick={this.handleHeaderClick}
-								rowCount={this.state.csvArray.length}
-								rowGetter={({ index }) =>
-									this.state.csvArray[index]
-								}
+						<div className="row" style={{ padding: "2rem" }}>
+							{this.getStatus(
+								this.filterObj(this.state.inputs),
+								this.state.output,
+								this.filterObj(this.state.models),
+								nameMapper
+							)}
+						</div>
+						<div className="row container center">
+							<button
+								onClick={this.handleSubmit}
+								className="btn-large z-depth-0"
 							>
-								{this.getColumns(
-									Object.keys(this.state.csvArray[0])
-								)}
-							</Table>
+								Build the model!
+							</button>
+							{this.state.loading ? (
+								<CircularProgress />
+							) : (
+								<span></span>
+							)}
 						</div>
 					</div>
 				)}

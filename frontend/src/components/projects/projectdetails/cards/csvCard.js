@@ -40,8 +40,10 @@ const CSVCard = ({ pid, auth, project, history }) => {
 					<p>
 						The various parameters used in{" "}
 						{shorten(project.csvName)} include
-						{printVarNames(project.variables)}. Feeling rough around
-						the edges? Use the links below to change your project.
+						{printVarNames(project.variables)} in order to show a
+						relationship / predict {project.targetParam}. Feeling
+						rough around the edges? Use the links below to change
+						your project.
 					</p>
 				</div>
 			</div>

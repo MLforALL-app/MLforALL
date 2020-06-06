@@ -14,21 +14,23 @@ const Navbar = (props) => {
 		<Signedoutlinks />
 	);
 	return (
-		<nav className="nav-wrapper">
-			<div className="container">
-				<Link to="/" className="brand-logo">
-					<img
-						src={logo}
-						alt="Machine Learning for all Logo"
-						style={{ height: "2rem" }}
-					/>
-					<span className="purple-text">
-						<b> forALL</b>
-					</span>
-				</Link>
-				{links}
-			</div>
-		</nav>
+		<div class="navbar-fixed">
+			<nav className="nav-wrapper">
+				<div className="container">
+					<Link to="/" className="brand-logo">
+						<img
+							src={logo}
+							alt="Machine Learning for all Logo"
+							style={{ height: "2rem" }}
+						/>
+						<span className="purple-text">
+							<b> forALL</b>
+						</span>
+					</Link>
+					{links}
+				</div>
+			</nav>
+		</div>
 	);
 };
 

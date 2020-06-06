@@ -6,35 +6,23 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Checkbox from "@material-ui/core/Checkbox";
 
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
-};
-
 const useStyles = makeStyles((theme) => ({
 	root: {
-		width: "90%",
+		width: "100%",
 		backgroundColor: theme.palette.background.paper
 	}
 }));
 
-const ModelCheck = ({ filterObj, handleToggle, models }) => {
+const desc = {
+	log_reg: "logistic regraysson",
+	gnb: "gauss navigation bar",
+	knn: "keep your nearrest neigbhors",
+	svm: "small vegetable mind",
+	clf: "trees are good for the wrold decsion classifier",
+	lda: "line discrimnant analyisisisis"
+};
+
+const ModelCheck = ({ filterObj, handleToggle, models, nameMapper }) => {
 	const classes = useStyles();
 	const makeListItem = (value, description) => {
 		return (
@@ -58,12 +46,9 @@ const ModelCheck = ({ filterObj, handleToggle, models }) => {
 	return (
 		<div>
 			<List className={classes.root}>
-				{makeListItem("log_reg", "description")}
-				{makeListItem("knn", "description")}
-				{makeListItem("gnb", "description")}
-				{makeListItem("lda", "description")}
-				{makeListItem("svm", "description")}
-				{makeListItem("clf", "description")}
+				{Object.entries(desc).map(([key, val]) =>
+					makeListItem(key, val)
+				)}
 			</List>
 		</div>
 	);

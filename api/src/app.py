@@ -29,7 +29,7 @@ def predict_from_model():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    pid = req_data['projId'] # project id 
+    pid = req_data['projId']  # project id
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
     # Get firebase stuff
@@ -48,7 +48,6 @@ def store():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    title = req_data['title']  # project title, ie spotify
     proj_id = req_data['projectID']  # unique project hash
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output

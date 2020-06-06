@@ -18,13 +18,14 @@ const HtmlTooltip = withStyles((theme) => ({
 
 class HelpBox extends Component {
 	render() {
-		const { header, desc, placement } = this.props;
+		const { header, desc, placement, link, linkdesc } = this.props;
 		return (
 			<HtmlTooltip
 				title={
 					<React.Fragment>
 						<h5>{header}</h5>
 						<p>{desc}</p>
+						<a href={link}>{linkdesc}</a>
 					</React.Fragment>
 				}
 				placement={placement}

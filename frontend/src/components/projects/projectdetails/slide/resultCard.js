@@ -13,12 +13,12 @@ const inputToString = (inputs) => {
 			</div>
 		);
 	});
-	console.log("PRETTY", pretty);
+	// console.log("PRETTY", pretty);
 	return pretty;
 };
 
 // Text to display the results of a guess
-const showResults = (output, inputs, model, targetParam, nameMapper) => {
+const showResults = (output, inputs) => {
 	if (output === "") {
 		return <p className="pres"> ~~choose your inputs~~ </p>;
 	} else if (output === "Server Error") {
@@ -52,6 +52,7 @@ const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 				<CircularProgress />
 			) : (
 				<span>
+					<p> {target} is... </p>
 					<h4>
 						<span className="purple-text">
 							{output ? output.data : ""}
@@ -67,7 +68,7 @@ const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 						</b>
 					</p>
 					<div className="header-subrow">
-						{showResults(output, inputs, model, target, nameMapper)}
+						{showResults(output, inputs)}
 					</div>
 				</span>
 			)}
