@@ -29,6 +29,7 @@ export default function PredictSlider(
 ) {
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
+	const continuous = varObj.continuous;
 	const hi = varObj.hi;
 	const lo = varObj.lo;
 	const q1 = varObj.q1;
@@ -48,8 +49,11 @@ export default function PredictSlider(
 		{ value: q3, label: q3.toString() }
 	];
 	// (Clever?) way to scale step size so its not 1 for big and small ranges
-	const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
-	const stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
+	var stepSize = 1;
+	if (continuous) {
+		const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
+		stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
+	}
 
 	return (
 		<div key={"container_" + param}>
