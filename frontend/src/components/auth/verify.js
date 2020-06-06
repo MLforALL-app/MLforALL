@@ -3,6 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { sendVerify } from "../../store/actions/authActions";
+import authImg from "../../pictures/auth.svg";
 
 class VerifyEmailProject extends Component {
 	// pid = unique projID, auth = firebase auth object
@@ -28,21 +29,26 @@ class VerifyEmailProject extends Component {
 			}
 		};
 		return (
-			<div className="container center">
-				<h3>
-					<span className="purple-text">
-						Please verify your email before viewing / creating
-						projects
-					</span>
-				</h3>
-				<h5> Can't find your verification link?</h5>
-				<button
-					className="btn z-depth-0 anchor"
-					onClick={this.handleClick}
-				>
-					Send Another Link
-				</button>
-				<div className="header-subrow">{message(sentMsg)}</div>
+			<div className="verify">
+				<div className="container center">
+					<h1 className="purple-text">Please verify your email</h1>
+					<h5>
+						You're almost there! We sent an email to{" "}
+						<b>{auth.email}</b>
+					</h5>
+					<p className="grey-text">
+						It may take a few minutes for the email to send.{" "}
+					</p>
+					<p className="grey-text">Still don't see the email? </p>
+					<button
+						className="btn z-depth-0 anchor"
+						onClick={this.handleClick}
+					>
+						Resend Email
+					</button>
+					<div className="header-subrow">{message(sentMsg)}</div>
+				</div>
+				<img className="authImg" alt="" src={authImg}></img>
 			</div>
 		);
 	}
