@@ -182,7 +182,7 @@ class DisplayCSV extends Component {
 		this.setState({ loading: true, error: false });
 		const path = {
 			uid: this.props.auth.uid,
-			projectID: this.props.id,
+			projId: this.props.id,
 			title: this.props.project.title,
 			modelList: this.filterObj(this.state.models),
 			targetParameter: this.state.output,

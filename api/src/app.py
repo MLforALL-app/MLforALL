@@ -49,7 +49,7 @@ def store():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    proj_id = req_data['projectID']  # unique project hash
+    proj_id = req_data['projId']  # unique project hash
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
