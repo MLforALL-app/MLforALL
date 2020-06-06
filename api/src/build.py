@@ -39,7 +39,7 @@ def build_SVC(X, y):
     return SVC().fit(X, y)
 
 
-def build_and_pickle(df, target_parameter, df_variables, pickle_name, debug=False):
+def build_and_pickle(df, target_parameter, df_variables, pickle_name, nan_method="drop", debug=False):
     """
     Function that will take a dataframe, input variables, output parameter, and 
     kind of model to train a sklearn ml model to 
@@ -49,6 +49,19 @@ def build_and_pickle(df, target_parameter, df_variables, pickle_name, debug=Fals
               pickle_name the name of the model user wants to train
     ENSURES: Byte representation of a trained model based off of given parameters
     """
+    
+    # take care of nan values
+    if nan_method == "drop":
+        df.dropna(inplace=True)
+    elif nan_method == "zeros":
+        df.fillna(0, inplace=True)
+    elif nan_method == "mean":
+        df.fillna(df.mean(), inplace=True)
+    elif nan_method == "median":
+        df.fillna(df.median(), inplace=True)
+    else:
+        raise ValueError("Invalid fill nan method")
+
 
     target = df[target_parameter]
     col_name_list = list(df.columns)
