@@ -5,9 +5,14 @@ import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
 import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
+import Forgot from "./components/auth/resetPass";
+import VerifyEmailProject from "./components/auth/verify";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import JoeLand from "./components/info/joeLand";
-import BuildProject from "./components/projects/newProject/buildproject"
+import BuildProject from "./components/projects/newProject/buildproject";
+import ScrollToTop from "./components/layouts/scrollToTop";
+import MainDoc from "./components/education/mainDoc";
+import Lost from "./components/info/lost";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
@@ -17,14 +22,19 @@ function App() {
 		<BrowserRouter>
 			<div className="App">
 				<Navbar />
+				<ScrollToTop />
 				<Switch>
 					<Route path="/me/:uid" component={MyProjects} />
 					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/project/:id" component={ProjectDetails} />
-					<Route path="/edit/:id" component={BuildProject} />
+					<Route path="/project/:pid" component={ProjectDetails} />
+					<Route path="/edit/:pid" component={BuildProject} />
+					<Route path="/v/:pid" component={VerifyEmailProject} />
 					<Route path="/signin" component={SignIn} />
+					<Route path="/forgot" component={Forgot} />
 					<Route path="/create" component={CreateProjectContainer} />
+					<Route path="/edu" component={MainDoc} />
 					<Route exact path="/" component={JoeLand} />
+					<Route component={Lost} />
 				</Switch>
 				{/*<Footer />*/}
 			</div>

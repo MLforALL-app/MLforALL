@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
+import HelpBox from "../../../layouts/helpbox";
 import axios from "axios";
 
 // Helper function so model names get printed nicer
@@ -21,6 +22,28 @@ const nameMapper = (name) => {
 			return "Decision Tree Classifier";
 		case "lda":
 			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
+};
+
+// Helper function for brief descriptions about each model
+const getDesc = (name) => {
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression is a model where blank1";
+		case "gnb":
+			return "Gauss Naive Bayes is a model where blank2";
+		case "knn":
+			return "K-Nearest Neighbors is a model where blank3";
+		case "svm":
+			return "Support Vector Machine is a model where blank4";
+		case "clf":
+			return "Decision Tree Classifier is a model where blank5";
+		case "lda":
+			return "Linear Discriminant Analysis is a model where blank6";
 		default:
 			return "Error: Not valid model name";
 	}
@@ -100,7 +123,7 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			// console.log("THIS IS PATH", path);
+			console.log("THIS IS PATH", path);
 			this.setState({ loading: true });
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
@@ -150,7 +173,11 @@ class GenerateSliders extends Component {
 										this.state.model,
 										this.handleDropChange,
 										nameMapper
-									)}
+									)}{" "}
+									<HelpBox
+										placement="right"
+										desc={getDesc(this.state.model)}
+									/>
 								</h5>
 							</div>
 							<div className="slider-contain">
@@ -166,6 +193,10 @@ class GenerateSliders extends Component {
 										textAlign: "right"
 									}}
 								>
+									<HelpBox
+										placement="left"
+										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
+									/>{" "}
 									<button
 										className="btn waves-effect waves-light anchor"
 										onClick={this.handleSubmit}

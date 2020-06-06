@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
+import HelpBox from "../layouts/helpbox";
 //import fetchMine from "./fetchmine";
 
 class MyProjects extends Component {
@@ -19,9 +20,17 @@ class MyProjects extends Component {
 		return (
 			<div>
 				<div className="dashboard container">
-					<span className="purple-text">
-						<h1> My projects. </h1>
-					</span>
+					<h1>
+						<span className="purple-text">
+							My models.{" "}
+							<HelpBox
+								header="My models"
+								placement="right-start"
+								desc="Click on the cards to view your classification models!"
+							/>
+						</span>
+					</h1>
+
 					<ProjectList projects={projects} uid={auth.uid} />
 				</div>
 			</div>

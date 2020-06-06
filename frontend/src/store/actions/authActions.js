@@ -27,10 +27,9 @@ export const signOut = () => {
 
 export const signUp = (newUser) => {
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
-		const firebase = getFirebase();
+		const authRef = getFirebase().auth();
 		const firestore = getFirestore();
-		firebase
-			.auth()
+		authRef
 			.createUserWithEmailAndPassword(newUser.email, newUser.password)
 			.then((response) => {
 				return firestore
@@ -44,9 +43,54 @@ export const signUp = (newUser) => {
 			})
 			.then(() => {
 				dispatch({ type: "SIGNUP_SUCCESS" });
+				// Send verification link
+				authRef.currentUser
+					.sendEmailVerification()
+					.then(() => {
+						console.log("Verification email sent");
+						dispatch({ type: "SEND_VERIFY" });
+					})
+					.catch((error) => {
+						console.log("Verification email error");
+						dispatch({ type: "SEND_VERIFY_ERROR" });
+					});
 			})
 			.catch((err) => {
 				dispatch({ type: "SIGNUP_ERROR", err });
+			});
+	};
+};
+
+export const sendVerify = () => {
+	return (dispatch, getState, { getFirebase }) => {
+		const firebase = getFirebase();
+		firebase
+			.auth()
+			.currentUser.sendEmailVerification()
+			.then(() => {
+				console.log("Verification email sent");
+				dispatch({ type: "SEND_VERIFY" });
+			})
+			.catch((error) => {
+				console.log("Verification email error", error);
+				dispatch({ type: "SEND_VERIFY_ERROR" });
+			});
+	};
+};
+
+export const resetPass = (email) => {
+	return (dispatch, getState, { getFirebase }) => {
+		const firebase = getFirebase();
+		firebase
+			.auth()
+			.sendPasswordResetEmail(email)
+			.then(() => {
+				console.log("Reset email sent");
+				dispatch({ type: "SEND_RESET" });
+			})
+			.catch((error) => {
+				console.log("Reset email error", error);
+				dispatch({ type: "SEND_RESET_ERROR" });
 			});
 	};
 };

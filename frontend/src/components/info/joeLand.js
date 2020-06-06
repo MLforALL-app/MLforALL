@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import headerImg from "../../pictures/headerland.png";
-import whoImg from "../../pictures/whoweare.png";
-import signImg from "../../pictures/signup.png";
+import headerImg from "../../pictures/land-transp.png";
+import whoImg from "../../pictures/who-transp.png";
+import signImg from "../../pictures/sign-transp.png";
 import "./landing.css";
 import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
@@ -28,7 +28,7 @@ const header = (auth) => {
 						</h1>
 					</div>
 					<div className="header-subrow">
-						<Link to="goal" smooth={true} duration={500}>
+						<Link to="goal" smooth="true" duration={500}>
 							<div
 								id="learn-more-landing"
 								className="btn btn-sec waves-effect waves-light anchor"
@@ -38,7 +38,7 @@ const header = (auth) => {
 						</Link>
 					</div>
 					<div className="header-subrow">
-						<Link to="signup" smooth={true} duration={500}>
+						<Link to="signup" smooth="true" duration={500}>
 							<div className="btn waves-effect waves-light anchor">
 								{auth.uid ? "Get Started" : "Sign Up"}
 							</div>
@@ -140,27 +140,35 @@ const landSign = (auth) => {
 		);
 	} else {
 		return (
-			<div className="container land">
-				<h2>What are you waiting for?</h2>
-				<div className="anchor header-subrow">
-					<NavLink to="/create">
-						<div
-							id="learn-more-landing"
-							className="btn waves-effect waves-light anchor"
-						>
-							Create
-						</div>{" "}
-					</NavLink>
-				</div>
-				<div className="anchor header-subrow">
-					<NavLink to="/create">
-						<div
-							id="learn-more-landing"
-							className="btn btn-sec waves-effect waves-light anchor"
-						>
-							Explore
-						</div>{" "}
-					</NavLink>
+			<div
+				className="row img-row"
+				style={{ backgroundImage: `url(${signImg})` }}
+			>
+				<div className="col s12 m7">
+					<div className="container land land-sign">
+						<h2>Let's get it!</h2>
+						<div className="anchor header-subrow">
+							<NavLink to="/create">
+								<div
+									id="learn-more-landing"
+									className="btn waves-effect waves-light anchor"
+								>
+									Create
+								</div>{" "}
+							</NavLink>
+						</div>
+						<div className="anchor header-subrow">
+							<NavLink to="/create">
+								<div
+									id="learn-more-landing"
+									className="btn btn-sec waves-effect waves-light anchor"
+								>
+									Explore
+								</div>{" "}
+							</NavLink>
+						</div>
+					</div>
+					<div className="col s0 m5"></div>
 				</div>
 			</div>
 		);
