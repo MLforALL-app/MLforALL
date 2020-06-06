@@ -49,7 +49,6 @@ def build_and_pickle(df, target_parameter, df_variables, pickle_name, nan_method
               pickle_name the name of the model user wants to train
     ENSURES: Byte representation of a trained model based off of given parameters
     """
-    
     # take care of nan values
     if nan_method == "drop":
         df.dropna(inplace=True)
@@ -61,7 +60,6 @@ def build_and_pickle(df, target_parameter, df_variables, pickle_name, nan_method
         df.fillna(df.median(), inplace=True)
     else:
         raise ValueError("Invalid fill nan method")
-
 
     target = df[target_parameter]
     col_name_list = list(df.columns)
@@ -92,4 +90,4 @@ def build_and_pickle(df, target_parameter, df_variables, pickle_name, nan_method
     elif (pickle_name == "svm"):
         return pickle.dumps(build_SVC(X_train, y_train))
     else:
-        raise TypeError
+        raise ValueError("Invalid model name")

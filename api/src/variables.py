@@ -17,7 +17,7 @@ def get_information(df, input_variable):
         "q1": ref[4],
         "q2": ref[5],
         "q3": ref[6],
-        "continuous": likely_continuous,
+        "continuous": True if likely_continuous else False,
     }
     return info
 
