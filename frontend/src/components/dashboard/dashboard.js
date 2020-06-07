@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Notifications from "./notifcations";
+// import Notifications from "./notifcations";
 import ProjectList from "../projects/projectlist";
 import HelpBox from "../layouts/helpbox";
 import { connect } from "react-redux";
@@ -9,7 +9,9 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	render() {
-		const { projects, auth, notifications } = this.props;
+		// notifications is in props too
+		// TODO: Add Sort By functionality
+		const { projects, auth } = this.props;
 		//console.log("This is auth", auth);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
@@ -26,9 +28,9 @@ class Dashboard extends Component {
 						/>
 					</h1>
 				</div>
-				<div className="row">
+				{/*<div className="row">
 					<Notifications notifications={notifications} />
-				</div>
+				</div>*/}
 				<ProjectList projects={projects} />
 			</div>
 		);

@@ -7,7 +7,7 @@ const inputToString = (inputs) => {
 	const entries = Object.entries(inputs);
 	const pretty = entries.map(([key, value]) => {
 		return (
-			<div>
+			<div key={key}>
 				{key} ={" "}
 				<span className="purple-text pres">{String(value)}</span>{" "}
 			</div>
