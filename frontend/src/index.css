@@ -27,11 +27,6 @@ form {
 	/*margin-top: calc(25px + 5vh + 1vw);*/
 }
 
-form button,
-form h5 {
-	margin: calc(5px + 0.5vh + 0.1vw) 0;
-}
-
 input[type="text"]:not(.browser-default):focus:not([readonly]),
 input[type="email"]:not(.browser-default):focus:not([readonly]),
 input[type="password"]:not(.browser-default):focus:not([readonly]),

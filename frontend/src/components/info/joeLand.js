@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import headerImg from "../../pictures/land-transp.png";
 import whoImg from "../../pictures/who-transp.png";
 import signImg from "../../pictures/sign-transp.png";
-import davisImg from "../../pictures/headshots/davis.jpg";
+import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
@@ -96,7 +96,13 @@ const whoweare = () => {
 						of studies, places of the world, and walks of life. But
 						what brings them together is their shared interest in
 						educating people about topics they're passionate about.
-						#MyHeartIsInTheWork
+						<a
+							target="_blank"
+							rel="noreferrer noopener"
+							href="https://www.youtube.com/watch?v=nyHnU123Iew"
+						>
+							#MyHeartIsInTheWork
+						</a>
 					</div>
 				</div>
 			</div>
@@ -108,24 +114,48 @@ const headshot = () => {
 		<div className="land land-headshot">
 			<div className="row">
 				<div className="col s6 m3 center container">
-					<img className="headshot-img" src={davisImg} alt="Davis" />
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.linkedin.com/in/davis-wojnovich-560740165/"
+					>
+						<img className="headshot-img" src={davImg} alt="Dav" />
+					</a>
 					<h5>Davis Wojnovich</h5>
-					<h6>Data Science</h6>
+					<h6>Lead Data Science</h6>
 				</div>
 				<div className="col s6 m3 center container">
-					<img className="headshot-img" src={joeImg} alt="Joseph" />
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.linkedin.com/in/josephkimdesign/"
+					>
+						<img className="headshot-img" src={joeImg} alt="Joe" />
+					</a>
 					<h5>Joseph Kim</h5>
-					<h6>User Experience</h6>
+					<h6>UI/UX Design</h6>
 				</div>
 				<div className="col s6 m3 center container">
-					<img className="headshot-img" src={lenImg} alt="Len" />
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.linkedin.com/in/len-huang-622403178"
+					>
+						<img className="headshot-img" src={lenImg} alt="Len" />
+					</a>
 					<h5>Len Huang</h5>
 					<h6>Product / Tech Lead</h6>
 				</div>
 				<div className="col s6 m3 center container">
-					<img className="headshot-img" src={maxImg} alt="Max" />
+					<a
+						target="_blank"
+						rel="noreferrer noopener"
+						href="https://www.linkedin.com/in/max-hirsch/"
+					>
+						<img className="headshot-img" src={maxImg} alt="Max" />
+					</a>
 					<h5>Max Hirsch</h5>
-					<h6>Machine Learning</h6>
+					<h6>Head of ML Content</h6>
 				</div>
 			</div>
 		</div>
@@ -150,28 +180,18 @@ const video = () => {
 const landSign = (auth) => {
 	if (!auth.uid) {
 		return (
-			<div>
-				<div className="row" style={{ textAlign: "center" }}>
-					<h2>Sign up now.</h2>
-					<p>Be a part of the community and start learning</p>
-				</div>
-				<div
-					className="row img-row"
-					style={{ backgroundImage: `url(${signImg})` }}
-				>
-					<div className="col s12 m7">
-						<div className="container land land-sign">
-							<SignUp />
-							<div className="container land">
-								<NavLink to="/signin">
-									{" "}
-									Already a user? Sign in here.
-								</NavLink>
-							</div>
-						</div>
+			<div
+				className="row img-row"
+				style={{ backgroundImage: `url(${signImg})` }}
+			>
+				<div className="col s12 m7">
+					<div className="container land land-sign">
+						<h2>Sign up now.</h2>
+						<h6>Be a part of the community and start learning</h6>
+						<SignUp />
 					</div>
-					<div className="col s0 m5"></div>
 				</div>
+				<div className="col s0 m5"></div>
 			</div>
 		);
 	} else {

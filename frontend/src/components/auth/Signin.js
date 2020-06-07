@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
-import { Redirect, NavLink } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import authImg from "../../pictures/auth.svg";
 
 class SignIn extends Component {
@@ -52,9 +52,8 @@ class SignIn extends Component {
 								onChange={this.handleChange}
 							/>
 							<div className="purple-text">
-								<NavLink to="/forgot">
-									Forgot your password?
-								</NavLink>
+								<br />
+								<Link to="/forgot">Forgot your password?</Link>
 							</div>
 						</div>
 						<div style={{ float: "right" }} className="input-field">

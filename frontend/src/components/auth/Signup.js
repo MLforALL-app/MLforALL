@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 
@@ -31,7 +31,7 @@ class SignUp extends Component {
 		// route protection, shouldn't be able to sign in again
 		if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
-			<div className="container">
+			<div className="container" style={{ paddingTop: "2rem" }}>
 				<form onSubmit={this.handleSubmit} className="white z-depth-1">
 					<div className="input-field">
 						<label htmlFor="firstName">First Name</label>
@@ -69,6 +69,13 @@ class SignUp extends Component {
 						<button className="btn z-depth-0 center anchor">
 							Sign Up
 						</button>
+						<div className="container land">
+							<br />
+							<Link to="/signin">
+								{" "}
+								Already a user? Sign in here.
+							</Link>
+						</div>
 						<div className="red-text center">
 							{authError ? <p>{authError}</p> : null}
 						</div>
