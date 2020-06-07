@@ -196,7 +196,7 @@ class DisplayCSV extends Component {
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
 				this.setState({ redirect: true });
-				console.log("Successfully created project models?");
+				//console.log("Successfully created project models?");
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
