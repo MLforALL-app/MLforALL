@@ -34,6 +34,10 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "UPDATE_CSV_NAME_ERROR":
 			return state;
+		case "UPDATE_CONTENT":
+			return state;
+		case "UPDATE_CONTENT_ERROR":
+			return state;
 		default:
 			return state;
 	}

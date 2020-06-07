@@ -37,6 +37,24 @@ export const createProject = (project) => {
 	};
 };
 
+export const updateContent = (content, pid) => {
+	return (dispatch, getState, { getFirestore }) => {
+		// make async call to database
+		const firestore = getFirestore();
+		firestore
+			.collection("projects")
+			.doc(pid)
+			.set({ content: content }, { merge: true })
+			.then((snapshot) => {
+				//console.log(snapshot);
+				dispatch({ type: "UPDATE_CONTENT" });
+			})
+			.catch((err) => {
+				dispatch({ type: "UPDATE_CONTENT_ERROR" });
+			});
+	};
+};
+
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
