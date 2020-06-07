@@ -37,8 +37,7 @@ export const createProject = (project) => {
 	};
 };
 
-
-export const uploadCSVtoStorage = (csv, project, id) => {
+export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
@@ -73,7 +72,6 @@ export const uploadCSVtoStorage = (csv, project, id) => {
 			});
 	};
 };
-
 
 export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
