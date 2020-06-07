@@ -54,23 +54,21 @@ export const uploadCSV = (csv, project, pid) => {
 					projId: pid,
 					csvName: csv.name
 				};
-				console.log("THIS IS PATH FOR METADATA", path);
+				// After we upload the csv, update firestore with preliminary insights
 				axios
 					.post(
 						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
 						path
 					)
 					.then((res) => {
-						console.log("THIS IS RESULT", res);
-						console.log("Uploaded csv metadata");
+						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})
 					.catch((err) => {
-						console.log("CSV METADATA THIS IS AN ERROR", err);
+						dispatch({ type: "UPLOAD_CSV_METADATA_ERROR" });
 					});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
-				//console.log("csv upload error");
 			});
 	};
 };
@@ -116,13 +114,13 @@ export const deleteMLProject = (pid, uid, project) => {
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
 			storageRef
-				.ref(uid + "/" + pid + "/" + filename)
+				.ref(`${uid}/${pid}/${filename}`)
 				.delete()
 				.then(() => {
-					console.log("Delete correctly from storage");
+					dispatch({ type: "DELETE_PROJECT_STORE" });
 				})
 				.catch((err) => {
-					console.log("uh oh spagetthio", err);
+					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
 	};
