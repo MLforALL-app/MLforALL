@@ -78,8 +78,8 @@ export default function PredictSlider(
 						margin="dense"
 						onChange={handleInputChange}
 						inputProps={{
-							min: { lo },
-							max: { hi },
+							min: lo,
+							max: hi,
 							type: "number",
 							"aria-labelledby": "input-slider"
 						}}
