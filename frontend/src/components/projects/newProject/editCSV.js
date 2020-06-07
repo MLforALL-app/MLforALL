@@ -16,6 +16,7 @@ import axios from "axios";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../layouts/helpbox";
 import styles from "./table.css";
+import HandleNANs from "./handleNANs";
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
@@ -266,6 +267,7 @@ class DisplayCSV extends Component {
 								)}
 							</Table>
 						</div>
+						<HandleNANs uid ={this.props.auth.uid} csvName = {this.props.project.csvName} projId = {this.props.id} />
 						<div
 							style={{ paddingTop: "1.5rem" }}
 							className="row container"
