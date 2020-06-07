@@ -1,3 +1,7 @@
-.ReactVirtualized__Table__headerRow {
-	background-color: #f8bbd0;
+
+.evenRow{
+    background-color: #dcdcdc;
+}
+.oddRow {
+  background-color: #fafafa;
 }
