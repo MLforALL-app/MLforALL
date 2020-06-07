@@ -13,15 +13,14 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
 import firebase from "../../../config/fbConfig";
 import axios from "axios";
+import { updateContent } from "../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../layouts/helpbox";
-
 import styles from "./table.css";
 import Insights from "./insights";
 
-
 const addSpace = (list) => {
-	return list.map((s) => s + " ");
+	return list.map((s) => " " + s);
 };
 const nameMapper = (name) => {
 	switch (name) {
@@ -44,8 +43,6 @@ const nameMapper = (name) => {
 	}
 };
 
-
-
 class DisplayCSV extends Component {
 	// card to show what user is picking
 	getStatus = (inputs, output, models, nameMapper) => {
@@ -63,14 +60,13 @@ class DisplayCSV extends Component {
 							</h5>
 						</span>
 						<h6>
-							This model will take these parameters:{" "}
+							This model will take these parameters:
 							<span className="purple-text">
 								{addSpace(inputs)}
 							</span>
-							<br />
-							to attempt to predict{" "}
-							<span className="purple-text">{output}</span> <br />
-							using these algorithms:{" "}
+							<br /> to attempt to predict{" "}
+							<span className="purple-text">{output}</span> <br />{" "}
+							using these algorithms:
 							<span className="purple-text">
 								{addSpace(models.map((s) => nameMapper(s)))}
 							</span>
@@ -190,6 +186,28 @@ class DisplayCSV extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({ loading: true, error: false });
+		const getContent = (content) => {
+			if (content === "") {
+				return (
+					"These models attempt to predict " +
+					this.state.output +
+					" and how it relates to " +
+					addSpace(this.filterObj(this.state.inputs)) +
+					" using the following models: " +
+					addSpace(
+						this.filterObj(this.state.models).map((s) =>
+							nameMapper(s)
+						)
+					)
+				);
+			} else {
+				return content;
+			}
+		};
+		this.props.updateContent(
+			getContent(this.props.project.content),
+			this.props.id
+		);
 		const path = {
 			uid: this.props.auth.uid,
 			projId: this.props.id,
@@ -255,15 +273,15 @@ class DisplayCSV extends Component {
 								rowGetter={({ index }) =>
 									this.state.csvArray[index]
 								}
-								rowClassName = {({ index }) =>
-								{if (index < 0) {
-									return styles.headerRow;
-								  } else {
-									return index % 2 === 0 ? "evenRow" : "oddRow";
-								  }}
-							}
-								
-		
+								rowClassName={({ index }) => {
+									if (index < 0) {
+										return styles.headerRow;
+									} else {
+										return index % 2 === 0
+											? "evenRow"
+											: "oddRow";
+									}
+								}}
 							>
 								{this.getColumns(
 									Object.keys(this.state.csvArray[0])
@@ -391,17 +409,20 @@ class DisplayCSV extends Component {
 					</div>
 				)}
 			</div>
-
-
 		);
 	}
 }
 
-const mapStatetoProps = (state) => {
-	// console.log("LOOK AT ME", state);
+const mapStatetoProps = (state, ownProps) => {
 	return {
 		auth: state.firebase.auth
 	};
 };
+// Redux to associate action call to a dispatch
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateContent: (content, pid) => dispatch(updateContent(content, pid))
+	};
+};
 
-export default connect(mapStatetoProps)(DisplayCSV);
+export default connect(mapStatetoProps, mapDispatchToProps)(DisplayCSV);

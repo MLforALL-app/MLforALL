@@ -63,7 +63,6 @@ const DescCard = ({ project, pid, updateContent }) => {
 				)}
 				{editButton()}
 			</div>
-
 			<div style={{ color: "#808080", textAlign: "right" }}>
 				Posted with <span className="hearts">&hearts;</span> by{" "}
 				<span style={{ fontWeight: "bold" }}>
