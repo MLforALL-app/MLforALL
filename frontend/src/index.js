@@ -3,11 +3,11 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "./store/reducers/rootReducer";
 import { Provider, useSelector } from "react-redux";
 import thunk from "redux-thunk";
-
 import {
 	reduxFirestore,
 	getFirestore,
@@ -49,13 +49,9 @@ function AuthIsLoaded({ children }) {
 	const auth = useSelector((state) => state.firebase.auth);
 	if (!isLoaded(auth))
 		return (
-			<div style={{ textAlign: "center" }}>
-				<h6>Loading MLforAll...</h6>
-				{/*<img src={cute}></img>
-				<p>
-					{" "}
-					We appreciate your patience! Zesty Machine Learning Models
-					are on their way. </p> */}
+			<div className="container center">
+				<CircularProgress />
+				Loading MLforAll
 			</div>
 		);
 	return children;

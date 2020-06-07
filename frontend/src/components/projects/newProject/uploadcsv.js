@@ -3,7 +3,7 @@ import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
 	uploadCSVtoStorage,
-	updateCsvNameOnProject
+	updateCsvData
 } from "../../../store/actions/projectActions";
 import {Alert, AlertTitle} from "@material-ui/lab";
 
@@ -61,7 +61,8 @@ class UploadCSV extends Component {
 			this.props.project,
 			this.props.projectID
 		);
-		this.props.updateCsvNameOnProject(
+
+		this.props.updateCsvData(
 			this.state.csv,
 			this.props.project,
 			this.props.projectID
@@ -139,8 +140,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		uploadCSVtoStorage: (csv, project, id) => dispatch(uploadCSVtoStorage(csv, project, id)),
-		updateCsvNameOnProject: (csv, project, id) =>
-			dispatch(updateCsvNameOnProject(csv, project, id))
+		updateCsvData: (csv, project, id) =>
+			dispatch(updateCsvData(csv, project, id))
 	};
 };
 

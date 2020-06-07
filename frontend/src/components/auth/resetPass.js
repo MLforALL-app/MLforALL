@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { resetPass } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
+import authImg from "../../pictures/auth.svg";
 
 class ResetPass extends Component {
 	// State to keep track of what user types
@@ -37,22 +38,27 @@ class ResetPass extends Component {
 		// route protection, shouldn't be able to sign in again
 		if (auth.uid) return <Redirect to="/dashboard" />;
 		return (
-			<div className="container">
-				<h1 className="purple-text">Forgot Your Password?</h1>
-				<form onSubmit={this.handleSubmit}>
-					<div className="input-field">
-						<label htmlFor="email">Email</label>
-						<input
-							type="email"
-							id="email"
-							onChange={this.handleChange}
-						/>
-					</div>
-					<div className="input-field">
-						<button className="btn z-depth-0 anchor">Reset</button>
-					</div>
-					{message(msg)}
-				</form>
+			<div className="forgot">
+				<div className="container">
+					<h1 className="purple-text">Forgot Your Password?</h1>
+					<form onSubmit={this.handleSubmit}>
+						<div className="input-field">
+							<label htmlFor="email">Email</label>
+							<input
+								type="email"
+								id="email"
+								onChange={this.handleChange}
+							/>
+						</div>
+						<div className="input-field">
+							<button className="btn z-depth-0 anchor">
+								Reset
+							</button>
+						</div>
+						{message(msg)}
+					</form>
+				</div>
+				<img src={authImg} alt=""></img>
 			</div>
 		);
 	}

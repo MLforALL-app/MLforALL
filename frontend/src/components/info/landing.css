@@ -7,6 +7,10 @@
 	padding-bottom: 0px;
 }
 
+.authImg {
+	width: 100%;
+}
+
 .land {
 	display: flex;
 	flex-direction: column;

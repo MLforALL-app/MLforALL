@@ -9,13 +9,15 @@ def get_information(df, input_variable):
     ENSURES: a dictionary representation of descriptive stats
     """
     ref = df.describe()[input_variable]
+    likely_continuous = 1.*df[input_variable].nunique()/df[input_variable].count() > 0.05
     info = {
         "name": input_variable,
         "lo": ref[3],
         "hi": ref[7],
         "q1": ref[4],
         "q2": ref[5],
-        "q3": ref[6]
+        "q3": ref[6],
+        "continuous": True if likely_continuous else False,
     }
     return info
 

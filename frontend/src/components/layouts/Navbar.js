@@ -14,7 +14,7 @@ const Navbar = (props) => {
 		<Signedoutlinks />
 	);
 	return (
-		<div class="navbar-fixed">
+		<div className="navbar-fixed">
 			<nav className="nav-wrapper">
 				<div className="container">
 					<Link to="/" className="brand-logo">

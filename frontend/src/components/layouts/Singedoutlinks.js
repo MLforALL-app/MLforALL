@@ -6,28 +6,23 @@ function Signedoutlinks() {
 	return (
 		<ul className="right">
 			<li>
-				<NavLink to="/" smooth="true" duration={500}>
-					<span className="purple-text">Home</span>
-				</NavLink>{" "}
-			</li>
-			<li>
 				<div className="anchor-link">
 					<Link to="goal" smooth="true" duration={500}>
-						<span className="purple-text">Goal</span>
+						<span className="purple-text">Our Goal</span>
 					</Link>{" "}
 				</div>
 			</li>
 			<li>
 				<div className="anchor-link">
 					<Link to="who" smooth="true" duration={500}>
-						<span className="purple-text">Who</span>
+						<span className="purple-text">Who We Are</span>
 					</Link>{" "}
 				</div>
 			</li>
 			<li>
 				<div className="anchor-link">
 					<Link to="how" smooth="true" duration={500}>
-						<span className="purple-text">How</span>
+						<span className="purple-text">How It Works</span>
 					</Link>{" "}
 				</div>
 			</li>
