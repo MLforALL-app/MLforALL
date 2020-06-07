@@ -5,11 +5,7 @@ import {
 	uploadCSVtoStorage,
 	updateCsvNameOnProject
 } from "../../../store/actions/projectActions";
-
 import {Alert, AlertTitle} from "@material-ui/lab";
-
-
-
 
 class UploadCSV extends Component {
 	state = {
@@ -33,23 +29,21 @@ class UploadCSV extends Component {
 				fileUploadMessage: "File Too Large"
 			})
 		}
-		else if (this.getFileExtension(file.name) === "csv"){
+		else if (this.getFileExtension(file.name) !== "csv"){
+			this.setState({
+				fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
+				errorText: "Invalid File Type",
+				showError: true
+			});
+		}else{
 			console.log("storing file locally");
 			this.setState({
 				csv: file,
 				showError: false,
 				fileUploadMessage : "Upload",
 			});
-		}else{
-			this.setState({
-				fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
-				errorText: "Invalid File Type",
-				showError: true
-			});
 		}
-
 	};
-
 
 	getFileExtension = (filename) => {
 		return filename.split('.').pop();
@@ -73,6 +67,7 @@ class UploadCSV extends Component {
 			this.props.projectID
 		);
 	};
+
 	render() {
 		return (
 			<div className="upload-csv">
@@ -148,4 +143,5 @@ const mapDispatchToProps = (dispatch) => {
 			dispatch(updateCsvNameOnProject(csv, project, id))
 	};
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(UploadCSV);
