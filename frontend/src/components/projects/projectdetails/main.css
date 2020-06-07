@@ -48,7 +48,9 @@ h6 {
 .pink-text {
 	color: #f8bbd0 !important;
 }
-
+.yellow-warning-text {
+	color: 	#ffcc00 !important;
+}
 .btn-floating {
 	background-color: #283593;
 }

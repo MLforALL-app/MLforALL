@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Guide from "./guidingInfo";
-import {
-	createProject,
-	uploadCSV
-} from "../../../store/actions/projectActions";
+import { createProject } from "../../../store/actions/projectActions";
 import "./build.css";
 
 class CreateProject extends Component {
@@ -77,7 +74,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createProject: (project) => dispatch(createProject(project)),
-		uploadCSV: (csv, projTitle) => dispatch(uploadCSV(csv, projTitle))
 	};
 };
 
