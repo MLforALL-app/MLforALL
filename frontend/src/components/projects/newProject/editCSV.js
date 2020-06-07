@@ -15,6 +15,7 @@ import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../layouts/helpbox";
+import styles from "./table.css";
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
@@ -39,6 +40,8 @@ const nameMapper = (name) => {
 			return "Error: Not valid model name";
 	}
 };
+
+
 
 class DisplayCSV extends Component {
 	// card to show what user is picking
@@ -248,6 +251,15 @@ class DisplayCSV extends Component {
 								rowGetter={({ index }) =>
 									this.state.csvArray[index]
 								}
+								rowClassName = {({ index }) =>
+								{if (index < 0) {
+									return styles.headerRow;
+								  } else {
+									return index % 2 === 0 ? "evenRow" : "oddRow";
+								  }}
+							}
+								
+		
 							>
 								{this.getColumns(
 									Object.keys(this.state.csvArray[0])
@@ -335,6 +347,8 @@ class DisplayCSV extends Component {
 					</div>
 				)}
 			</div>
+
+
 		);
 	}
 }
