@@ -2,15 +2,16 @@ import React from "react";
 
 const Insights = ({ project }) => {
 	return (
-		<div className="card">
-			<div className="card-content">
-				<span className="card-title"> Dataset Insights </span>
+		<div>
+			<h6 className="purple-text">
+				{" "}
+				Uh oh!{" "}
 				{!project.info
 					? "Error no insights"
 					: "This project has " +
 					  project.info.NaN +
-					  " NaN datapoints."}
-			</div>
+					  " NaN datapoints."}{" "}
+			</h6>
 		</div>
 	);
 };

@@ -54,6 +54,7 @@ def store():
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
     csv_name = req_data['csvName']  # name of uploaded csv
+    nan_method = req_data['nanMethod']  # method for dealing with NaN's
 
     # Get firebase stuff
     bucket = fb.bucket_init()
@@ -66,7 +67,8 @@ def store():
             df = fb.get_csv(bucket, fb.make_path(
                 str(uid), str(proj_id), str(csv_name)))
             # get the saved model in byte form
-            pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
+            pickle_bytes = build_and_pickle(
+                df, target_param, df_vars, model, nan_method=str(nan_method))
             # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(str(uid), str(proj_id), str(model)))

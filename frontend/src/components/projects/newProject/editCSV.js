@@ -94,6 +94,7 @@ class DisplayCSV extends Component {
 		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
 		inputs: {},
 		output: "",
+		nanMethod: "drop",
 		redirect: false,
 		loading: false,
 		error: false
@@ -106,8 +107,11 @@ class DisplayCSV extends Component {
 			return { ...prevState, inputs: newInputs };
 		});
 	};
-	handleDropdown = (event) => {
+	handleDropdownOutput = (event) => {
 		this.setState({ output: event.target.value });
+	};
+	handleDropdownNan = (event) => {
+		this.setState({ nanMethod: event.target.value });
 	};
 	handleModelToggle = (value) => () => {
 		//console.log("VALUE IN HANDLE TOGGLE", value);
@@ -188,7 +192,8 @@ class DisplayCSV extends Component {
 			modelList: this.filterObj(this.state.models),
 			targetParameter: this.state.output,
 			dfVariables: this.filterObj(this.state.inputs),
-			csvName: this.props.project.csvName
+			csvName: this.props.project.csvName,
+			nanMethod: this.state.nanMethod
 		};
 		console.log(path);
 		axios
@@ -206,10 +211,6 @@ class DisplayCSV extends Component {
 	};
 	componentDidMount = () => {
 		this.initCSV();
-		/*console.log(
-			"INITILA OBJ",
-			this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
-		);*/
 	};
 	render() {
 		return (
@@ -225,9 +226,6 @@ class DisplayCSV extends Component {
 					</div>
 				) : (
 					<div className="isactive">
-						<div className="row container">
-							<Insights project={this.props.project} />
-						</div>
 						<div className="row container">
 							<h5>
 								<b>
@@ -258,10 +256,48 @@ class DisplayCSV extends Component {
 								)}
 							</Table>
 						</div>
-						<div
-							style={{ paddingTop: "1.5rem" }}
-							className="row container"
-						>
+						{this.props.project.info.NaN === 0 ? (
+							<span></span>
+						) : (
+							<span>
+								<div className="row container">
+									<Insights project={this.props.project} />
+									<h6>
+										<b>
+											How do you want to deal with NaN's?{" "}
+											<FormControl>
+												<Select
+													value={this.state.nanMethod}
+													onChange={
+														this.handleDropdownNan
+													}
+													displayEmpty
+												>
+													{this.getMenuItems([
+														"drop",
+														"zero",
+														"median",
+														"mean"
+													])}
+												</Select>
+												<FormHelperText>
+													Method
+												</FormHelperText>
+											</FormControl>
+											{"  "}
+											<span className="pink-text">
+												<HelpBox
+													header="Data Cleaning Dropdown"
+													placement="right"
+													desc="Use this dropdown menu to select how you would like to clean your NaN's. Drop will ignore all the rows that contain NaN's in a particular column. Zero will set all NaN's to zero. Median/mean will replace all NaN's with the median/mean of the existing inputs."
+												/>
+											</span>
+										</b>
+									</h6>
+								</div>
+							</span>
+						)}
+						<div className="row container">
 							<h5>
 								<b>
 									2. In order to predict this output
@@ -269,7 +305,7 @@ class DisplayCSV extends Component {
 									<FormControl>
 										<Select
 											value={this.state.output}
-											onChange={this.handleDropdown}
+											onChange={this.handleDropdownOutput}
 											displayEmpty
 										>
 											{this.getMenuItems(
@@ -331,7 +367,9 @@ class DisplayCSV extends Component {
 								Build the model!
 							</button>
 							{this.state.loading ? (
-								<CircularProgress />
+								<div className="row">
+									<CircularProgress />
+								</div>
 							) : (
 								<span></span>
 							)}
