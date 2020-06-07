@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -35,39 +37,51 @@ export const createProject = (project) => {
 	};
 };
 
+
 export const uploadCSVtoStorage = (csv, project, id) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
-		const csvPath =
-			getState().firebase.auth.uid + "/" + id + "/" + csv.name;
+		const uid = getState().firebase.auth.uid;
+		const csvPath = uid + "/" + pid + "/" + csv.name;
 		var csvRef = firebase.storage().ref(csvPath);
 		csvRef
 			.put(csv)
 			.then((snapshot) => {
 				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
+				const path = {
+					uid: uid,
+					projId: pid,
+					csvName: csv.name
+				};
+				// After we upload the csv, update firestore with preliminary insights
+				axios
+					.post(
+						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
+						path
+					)
+					.then((res) => {
+						dispatch({ type: "UPLOAD_CSV_METADATA" });
+					})
+					.catch((err) => {
+						dispatch({ type: "UPLOAD_CSV_METADATA_ERROR" });
+					});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
-				//console.log("csv upload error");
 			});
 	};
 };
 
-export const updateCsvNameOnProject = (csv, project, id) => {
+
+export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
-		const projectRef = firestore.collection("projects").doc(id);
+		const projectRef = firestore.collection("projects").doc(pid);
 		projectRef
-			.set(
-				{
-					csvName: csv.name
-				},
-				{ merge: true }
-			)
+			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
-				//console.log(snapshot);
 				dispatch({ type: "UPDATE_CSV_NAME" });
 			})
 			.catch((err) => {
@@ -102,13 +116,13 @@ export const deleteMLProject = (pid, uid, project) => {
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
 			storageRef
-				.ref(uid + "/" + pid + "/" + filename)
+				.ref(`${uid}/${pid}/${filename}`)
 				.delete()
 				.then(() => {
-					//console.log("Delete correctly from storage");
+					dispatch({ type: "DELETE_PROJECT_STORE" });
 				})
 				.catch((err) => {
-					//console.log("uh oh spagetthio", err);
+					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
 	};

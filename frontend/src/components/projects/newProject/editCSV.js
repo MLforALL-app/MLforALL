@@ -15,8 +15,10 @@ import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../layouts/helpbox";
+
 import styles from "./table.css";
-import HandleNANs from "./handleNANs";
+import Insights from "./insights";
+
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
@@ -186,7 +188,7 @@ class DisplayCSV extends Component {
 		this.setState({ loading: true, error: false });
 		const path = {
 			uid: this.props.auth.uid,
-			projectID: this.props.id,
+			projId: this.props.id,
 			title: this.props.project.title,
 			modelList: this.filterObj(this.state.models),
 			targetParameter: this.state.output,
@@ -199,7 +201,7 @@ class DisplayCSV extends Component {
 			.then((res) => {
 				console.log("THIS IS RESULT", res);
 				this.setState({ redirect: true });
-				console.log("Successfully created project models?");
+				//console.log("Successfully created project models?");
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
@@ -228,6 +230,9 @@ class DisplayCSV extends Component {
 					</div>
 				) : (
 					<div className="isactive">
+						<div className="row container">
+							<Insights project={this.props.project} />
+						</div>
 						<div className="row container">
 							<h5>
 								<b>

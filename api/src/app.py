@@ -49,7 +49,7 @@ def store():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    proj_id = req_data['projectID']  # unique project hash
+    proj_id = req_data['projId']  # unique project hash
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
@@ -70,11 +70,11 @@ def store():
             # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(str(uid), str(proj_id), str(model)))
-       # update firestore with descriptive stats (IQR)
+        # update firestore with descriptive stats (IQR)
         send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
-    except TypeError:
-        return "it failed"
+    except ValueError as e:
+        return f"it failed: {e}"
 
 
 @app.route('/visual', methods=['GET'])
