@@ -27,6 +27,17 @@
 .land-sign {
 	height: calc(20rem + 25vw + 50px);
 }
+.land-headshot {
+	padding-top: calc(1rem + 3vw + 5px);
+}
+.headshot-img {
+	height: 200px;
+	width: 200px;
+	border-radius: 100px;
+}
+.headshot-img-wrapper {
+	padding: 5px;
+}
 
 .anchor {
 	width: 200px;

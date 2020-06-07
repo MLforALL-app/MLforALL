@@ -4,6 +4,10 @@ import { connect } from "react-redux";
 import headerImg from "../../pictures/land-transp.png";
 import whoImg from "../../pictures/who-transp.png";
 import signImg from "../../pictures/sign-transp.png";
+import davisImg from "../../pictures/headshots/davis.jpg";
+import joeImg from "../../pictures/headshots/joe.jpeg";
+import lenImg from "../../pictures/headshots/len.JPG";
+import maxImg from "../../pictures/headshots/max.jpg";
 import "./landing.css";
 import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
@@ -22,10 +26,14 @@ const header = (auth) => {
 		>
 			<div className="col s12 m7">
 				<div className="container land land-head">
-					<div className="header-subrow">
-						<h1>
-							<span className="purple-text">MLforALL</span>
-						</h1>
+					<h1 style={{ fontSize: "5rem" }}>
+						<span className="purple-text">MLforALL</span>
+					</h1>
+					<div className="row container center">
+						<h5 style={{ fontSize: "1.2rem" }}>
+							An educational community helping you take your first
+							step into machine learning: classification models
+						</h5>
 					</div>
 					<div className="header-subrow">
 						<Link to="goal" smooth="true" duration={500}>
@@ -58,8 +66,8 @@ const goal = () => {
 				<div className="col s0 m1"></div>
 				<div className="col s12 m6">
 					<h2>Our goal.</h2>
-					ML For All is a platform designed by three ambitious
-					students, Davis, Joseph, and Len seeking to spread the
+					ML For All is a platform designed by four ambitious
+					students, Davis, Joseph, Len, and Max seeking to spread the
 					excitment behind machine learning models to people from all
 					kinds of backgrounds. ML for All simplifies the math and the
 					small details and grants you freedom to make observations,
@@ -84,12 +92,40 @@ const whoweare = () => {
 				<div className="container land land-who">
 					<div className="subrow">
 						<h2>Who We Are</h2>
-						Davis, Joseph, and Len are all from different areas of
-						studies, places of the world, and walks of life. But
+						Davis, Joseph, Len, and Max are all from different areas
+						of studies, places of the world, and walks of life. But
 						what brings them together is their shared interest in
 						educating people about topics they're passionate about.
 						#MyHeartIsInTheWork
 					</div>
+				</div>
+			</div>
+		</div>
+	);
+};
+const headshot = () => {
+	return (
+		<div className="land land-headshot">
+			<div className="row">
+				<div className="col s6 m3 center container">
+					<img className="headshot-img" src={davisImg} alt="Davis" />
+					<h5>Davis Wojnovich</h5>
+					<h6>Data Science</h6>
+				</div>
+				<div className="col s6 m3 center container">
+					<img className="headshot-img" src={joeImg} alt="Joseph" />
+					<h5>Joseph Kim</h5>
+					<h6>User Experience</h6>
+				</div>
+				<div className="col s6 m3 center container">
+					<img className="headshot-img" src={lenImg} alt="Len" />
+					<h5>Len Huang</h5>
+					<h6>Product / Tech Lead</h6>
+				</div>
+				<div className="col s6 m3 center container">
+					<img className="headshot-img" src={maxImg} alt="Max" />
+					<h5>Max Hirsch</h5>
+					<h6>Machine Learning</h6>
 				</div>
 			</div>
 		</div>
@@ -149,20 +185,14 @@ const landSign = (auth) => {
 						<h2>Let's get it!</h2>
 						<div className="anchor header-subrow">
 							<NavLink to="/create">
-								<div
-									id="learn-more-landing"
-									className="btn waves-effect waves-light anchor"
-								>
+								<div className="btn waves-effect waves-light anchor">
 									Create
 								</div>{" "}
 							</NavLink>
 						</div>
 						<div className="anchor header-subrow">
 							<NavLink to="/create">
-								<div
-									id="learn-more-landing"
-									className="btn btn-sec waves-effect waves-light anchor"
-								>
+								<div className="btn btn-sec waves-effect waves-light anchor">
 									Explore
 								</div>{" "}
 							</NavLink>
@@ -187,6 +217,7 @@ class JoeLand extends Component {
 				</Element>
 				<Element name="who" className="element">
 					{whoweare()}
+					{headshot()}
 				</Element>
 				<Element name="how" className="element">
 					{video()}
