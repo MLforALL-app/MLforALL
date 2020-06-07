@@ -15,6 +15,7 @@ import firebase from "../../../config/fbConfig";
 import axios from "axios";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../layouts/helpbox";
+import Insights from "./insights";
 
 const addSpace = (list) => {
 	return list.map((s) => s + " ");
@@ -224,6 +225,9 @@ class DisplayCSV extends Component {
 					</div>
 				) : (
 					<div className="isactive">
+						<div className="row container">
+							<Insights project={this.props.project} />
+						</div>
 						<div className="row container">
 							<h5>
 								<b>

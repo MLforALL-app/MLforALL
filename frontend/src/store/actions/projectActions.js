@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
@@ -35,18 +37,36 @@ export const createProject = (project) => {
 	};
 };
 
-export const uploadCSV = (csv, project, id) => {
+export const uploadCSV = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
-		const csvPath =
-			getState().firebase.auth.uid + "/" + id + "/" + csv.name;
+		const uid = getState().firebase.auth.uid;
+		const csvPath = uid + "/" + pid + "/" + csv.name;
 		var csvRef = firebase.storage().ref(csvPath);
 		csvRef
 			.put(csv)
 			.then((snapshot) => {
 				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
+				const path = {
+					uid: uid,
+					projId: pid,
+					csvName: csv.name
+				};
+				console.log("THIS IS PATH FOR METADATA", path);
+				axios
+					.post(
+						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
+						path
+					)
+					.then((res) => {
+						console.log("THIS IS RESULT", res);
+						console.log("Uploaded csv metadata");
+					})
+					.catch((err) => {
+						console.log("CSV METADATA THIS IS AN ERROR", err);
+					});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
@@ -55,19 +75,13 @@ export const uploadCSV = (csv, project, id) => {
 	};
 };
 
-export const updateCsvName = (csv, project, id) => {
+export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
-		const projectRef = firestore.collection("projects").doc(id);
+		const projectRef = firestore.collection("projects").doc(pid);
 		projectRef
-			.set(
-				{
-					csvName: csv.name
-				},
-				{ merge: true }
-			)
+			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
-				//console.log(snapshot);
 				dispatch({ type: "UPDATE_CSV_NAME" });
 			})
 			.catch((err) => {
@@ -105,10 +119,10 @@ export const deleteMLProject = (pid, uid, project) => {
 				.ref(uid + "/" + pid + "/" + filename)
 				.delete()
 				.then(() => {
-					//console.log("Delete correctly from storage");
+					console.log("Delete correctly from storage");
 				})
 				.catch((err) => {
-					//console.log("uh oh spagetthio", err);
+					console.log("uh oh spagetthio", err);
 				});
 		});
 	};

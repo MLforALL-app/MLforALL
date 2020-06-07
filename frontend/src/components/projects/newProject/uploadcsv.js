@@ -3,7 +3,7 @@ import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
 	uploadCSV,
-	updateCsvName
+	updateCsvData
 } from "../../../store/actions/projectActions";
 class UploadCSV extends Component {
 	state = {
@@ -22,7 +22,7 @@ class UploadCSV extends Component {
 			this.props.project,
 			this.props.projectID
 		);
-		this.props.updateCsvName(
+		this.props.updateCsvData(
 			this.state.csv,
 			this.props.project,
 			this.props.projectID
@@ -81,8 +81,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		uploadCSV: (csv, project, id) => dispatch(uploadCSV(csv, project, id)),
-		updateCsvName: (csv, project, id) =>
-			dispatch(updateCsvName(csv, project, id))
+		updateCsvData: (csv, project, id) =>
+			dispatch(updateCsvData(csv, project, id))
 	};
 };
 export default connect(mapStateToProps, mapDispatchToProps)(UploadCSV);
