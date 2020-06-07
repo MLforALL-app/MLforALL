@@ -4,9 +4,12 @@ const Insights = ({ project }) => {
 	return (
 		<div className="card">
 			<div className="card-content">
-				here are some insights: Your dataset has {console.log(project)}
-				{project.info ? project.info.NaN : "Error no info"} amount of
-				NaN's, or missing values
+				<span className="card-title"> Dataset Insights </span>
+				{!project.info
+					? "Error no insights"
+					: "This project has " +
+					  project.info.NaN +
+					  " NaN datapoints."}
 			</div>
 		</div>
 	);
