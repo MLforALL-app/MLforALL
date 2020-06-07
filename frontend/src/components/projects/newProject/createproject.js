@@ -4,7 +4,7 @@ import { Redirect } from "react-router-dom";
 import Guide from "./guidingInfo";
 import {
 	createProject,
-	uploadCSV
+	uploadCSVtoStorage
 } from "../../../store/actions/projectActions";
 import "./build.css";
 
@@ -77,7 +77,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		createProject: (project) => dispatch(createProject(project)),
-		uploadCSV: (csv, projTitle) => dispatch(uploadCSV(csv, projTitle))
+		uploadCSVtoStorage: (csv, projTitle) => dispatch(uploadCSVtoStorage(csv, projTitle))
 	};
 };
 

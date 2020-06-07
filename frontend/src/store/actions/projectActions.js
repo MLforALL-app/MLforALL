@@ -35,7 +35,7 @@ export const createProject = (project) => {
 	};
 };
 
-export const uploadCSV = (csv, project, id) => {
+export const uploadCSVtoStorage = (csv, project, id) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
@@ -55,7 +55,7 @@ export const uploadCSV = (csv, project, id) => {
 	};
 };
 
-export const updateCsvName = (csv, project, id) => {
+export const updateCsvNameOnProject = (csv, project, id) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
 		const projectRef = firestore.collection("projects").doc(id);
