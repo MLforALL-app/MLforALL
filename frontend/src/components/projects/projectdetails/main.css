@@ -38,6 +38,10 @@ h6 {
 	background-color: white;
 	color: black;
 }
+.card-content {
+	border-top-left-radius: 30px !important;
+	border-top-right-radius: 30px !important;
+}
 .content-sum {
 	height: 150px;
 }
@@ -49,7 +53,7 @@ h6 {
 	color: #f8bbd0 !important;
 }
 .yellow-warning-text {
-	color: 	#ffcc00 !important;
+	color: #ffcc00 !important;
 }
 .btn-floating {
 	background-color: #283593;

@@ -1,3 +1,20 @@
+.evenRow {
+	background-color: #dcdcdc;
+}
+.oddRow {
+	background-color: #fafafa;
+}
+.card-model {
+	height: 12.5rem;
+}
+.card-model-clicked {
+	height: 12.5rem;
+	background-color: #dcdcdc;
+}
+.card-action-clicked {
+	color: #dcdcdc !important;
+	background-color: #1d276e !important;
+}
 .ReactVirtualized__Table__headerRow {
 	background-color: #f8bbd0;
 }

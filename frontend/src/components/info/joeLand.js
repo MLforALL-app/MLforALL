@@ -95,7 +95,7 @@ const whoweare = () => {
 						Davis, Joseph, Len, and Max are all from different areas
 						of studies, places of the world, and walks of life. But
 						what brings them together is their shared interest in
-						educating people about topics they're passionate about.
+						educating people about topics they're passionate about.{" "}
 						<a
 							target="_blank"
 							rel="noreferrer noopener"

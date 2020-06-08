@@ -16,7 +16,7 @@ import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
-import styles from "./table.css";
+import styles from "./build.css";
 import Insights from "./insights";
 
 const addSpace = (list) => {
@@ -376,10 +376,9 @@ class DisplayCSV extends Component {
 							</h5>
 							<div>
 								<ModelCheck
-									filterObj={this.filterObj}
 									handleToggle={this.handleModelToggle}
-									models={this.state.models}
 									nameMapper={nameMapper}
+									models={this.state.models}
 								/>
 							</div>
 						</div>
