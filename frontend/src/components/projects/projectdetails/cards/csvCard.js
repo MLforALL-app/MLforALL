@@ -63,6 +63,19 @@ const CSVCard = ({ pid, auth, project, history }) => {
 				</div>
 			</div>
 			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
+			{owner ? (
+				<span>
+					<DeleteProject
+						auth={auth}
+						pid={pid}
+						project={project}
+						history={history}
+					/>
+					{edit(setRedirect)}
+				</span>
+			) : (
+				<span></span>
+			)}{" "}
 			{csvUrl === "" ? (
 				<span></span>
 			) : (
@@ -75,19 +88,6 @@ const CSVCard = ({ pid, auth, project, history }) => {
 					</button>
 				</a>
 			)}
-			{owner ? (
-				<span>
-					{edit(setRedirect)}
-					<DeleteProject
-						auth={auth}
-						pid={pid}
-						project={project}
-						history={history}
-					/>
-				</span>
-			) : (
-				<span></span>
-			)}{" "}
 		</div>
 	);
 };

@@ -24,15 +24,27 @@ function App() {
 				<Navbar />
 				<ScrollToTop />
 				<Switch>
-					<Route path="/me/:uid" component={MyProjects} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/project/:pid" component={ProjectDetails} />
-					<Route path="/edit/:pid" component={BuildProject} />
-					<Route path="/v/:pid" component={VerifyEmailProject} />
-					<Route path="/signin" component={SignIn} />
-					<Route path="/forgot" component={Forgot} />
-					<Route path="/create" component={CreateProjectContainer} />
-					<Route path="/edu" component={MainDoc} />
+					<Route exact path="/me/:uid" component={MyProjects} />
+					<Route exact path="/dashboard" component={Dashboard} />
+					<Route
+						exact
+						path="/project/:pid"
+						component={ProjectDetails}
+					/>
+					<Route exact path="/edit/:pid" component={BuildProject} />
+					<Route
+						exact
+						path="/v/:pid"
+						component={VerifyEmailProject}
+					/>
+					<Route exact path="/signin" component={SignIn} />
+					<Route exact path="/forgot" component={Forgot} />
+					<Route
+						exact
+						path="/create"
+						component={CreateProjectContainer}
+					/>
+					<Route exact path="/edu" component={MainDoc} />
 					<Route exact path="/" component={JoeLand} />
 					<Route component={Lost} />
 				</Switch>

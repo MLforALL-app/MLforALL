@@ -5,7 +5,7 @@ import CSVCard from "./cards/csvCard";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./main.css";
 
 /* MAIN COMPONENT
@@ -38,7 +38,10 @@ const ProjectDetails = (props) => {
 	} else {
 		return (
 			<div className="container center">
-				Error Loading Project
+				<Link to="/dashboard">
+					There was an error loading this project... click here to go
+					back
+				</Link>
 				{/*<Redirect to="/dashboard" />*/}
 			</div>
 		);

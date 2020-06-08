@@ -229,7 +229,7 @@ class JoeLand extends Component {
 	render() {
 		const { auth } = this.props;
 		return (
-			<div>
+			<div className="white-background-landing">
 				{" "}
 				{header(auth)}
 				<Element name="goal" className="element">

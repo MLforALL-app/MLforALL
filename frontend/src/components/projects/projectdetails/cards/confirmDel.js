@@ -40,7 +40,7 @@ class DeleteProject extends Component {
 					style={{ display: "inline" }}
 					onClick={this.handleClickOpen}
 				>
-					<span className="purple-text">Delete This Project</span>
+					<span className="pink-text">Delete This Project</span>
 				</button>
 				<Dialog
 					open={this.state.open}
