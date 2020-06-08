@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import DeleteProject from "./confirmDel";
+import "firebase/storage";
+import firebase from "../../../../config/fbConfig";
 
 const printVarNames = (variables) => {
 	return variables.map((v) => " " + v.name);
@@ -27,8 +29,21 @@ const edit = (setRedirect) => {
 // COMPONENT To Show the CSV Card information. This is where the
 // delete project functionality is housed
 const CSVCard = ({ pid, auth, project, history }) => {
+	const [csvUrl, setcsvUrl] = useState("");
 	const [redirect, setRedirect] = useState(false);
 	const owner = auth.uid === project.authorID;
+	const csvPath = project.authorID + "/" + pid + "/" + project.csvName;
+	var csvRef = firebase.storage().ref(csvPath);
+	csvRef
+		.getDownloadURL()
+		.then((url) => {
+			console.log("This the url", url);
+			setcsvUrl(url);
+		})
+		.catch((err) => {
+			console.log("SOMETHING wrong uhOh", err);
+		});
+
 	return (
 		<div className="col s12" style={{ textAlign: "right" }}>
 			<h4>
@@ -48,6 +63,18 @@ const CSVCard = ({ pid, auth, project, history }) => {
 				</div>
 			</div>
 			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
+			{csvUrl === "" ? (
+				<span></span>
+			) : (
+				<a href={csvUrl}>
+					<button
+						className="btn-flat waves-effect waves-light"
+						style={{ display: "inline" }}
+					>
+						Download the CSV Here
+					</button>
+				</a>
+			)}
 			{owner ? (
 				<span>
 					{edit(setRedirect)}
