@@ -3,7 +3,7 @@ import { compose } from "redux";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { sendVerify } from "../../store/actions/authActions";
-import authImg from "../../pictures/auth.svg";
+import authImg from "../../pictures/backgrounds/auth.svg";
 
 class VerifyEmailProject extends Component {
 	// pid = unique projID, auth = firebase auth object

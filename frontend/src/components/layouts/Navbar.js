@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Signedinlinks from "./Singedinlinks";
 import Signedoutlinks from "./Singedoutlinks";
 import { connect } from "react-redux";
-import logo from "../../pictures/logo.png";
+import logo from "../../pictures/backgrounds/logo.png";
 
 // use parent div className = "navbar-fixed" if you want sticky
 const Navbar = (props) => {

@@ -11,11 +11,11 @@ import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
-import firebase from "../../../config/fbConfig";
+import firebase from "../../../../config/fbConfig";
 import axios from "axios";
-import { updateContent } from "../../../store/actions/projectActions";
+import { updateContent } from "../../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
-import HelpBox from "../../layouts/helpbox";
+import HelpBox from "../../../layouts/helpbox";
 import styles from "./table.css";
 import Insights from "./insights";
 

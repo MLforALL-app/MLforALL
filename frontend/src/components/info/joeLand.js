@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 // import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import headerImg from "../../pictures/land-transp.png";
-import whoImg from "../../pictures/who-transp.png";
-import signImg from "../../pictures/sign-transp.png";
+import headerImg from "../../pictures/backgrounds/land-transp.png";
+import whoImg from "../../pictures/backgrounds/who-transp.png";
+import signImg from "../../pictures/backgrounds/sign-transp.png";
 import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";

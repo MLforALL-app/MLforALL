@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Guide from "./guidingInfo";
 import { createProject } from "../../../store/actions/projectActions";
-import "./build.css";
+import "./editpage/build.css";
 
 class CreateProject extends Component {
 	state = {
@@ -73,7 +73,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		createProject: (project) => dispatch(createProject(project)),
+		createProject: (project) => dispatch(createProject(project))
 	};
 };
 

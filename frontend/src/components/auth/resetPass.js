@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { resetPass } from "../../store/actions/authActions";
 import { Redirect } from "react-router-dom";
-import authImg from "../../pictures/auth.svg";
+import authImg from "../../pictures/backgrounds/auth.svg";
 
 class ResetPass extends Component {
 	// State to keep track of what user types
