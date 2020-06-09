@@ -25,8 +25,8 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
 		}
 	};
 	const editButton = () => {
-		console.log(auth);
-		console.log(project);
+		//console.log(auth);
+		//console.log(project);
 		if (auth.uid === project.authorID)
 			return (
 				<div onClick={handleSubmit}>

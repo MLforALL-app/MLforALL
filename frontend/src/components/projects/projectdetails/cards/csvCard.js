@@ -29,11 +29,11 @@ const CSVCard = ({ pid, auth, project, history }) => {
 	csvRef
 		.getDownloadURL()
 		.then((url) => {
-			console.log("This the url", url);
+			//console.log("This the url", url);
 			setcsvUrl(url);
 		})
 		.catch((err) => {
-			console.log("SOMETHING wrong uhOh", err);
+			//console.log("SOMETHING wrong uhOh", err);
 		});
 
 	return (
