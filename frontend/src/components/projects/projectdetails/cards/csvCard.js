@@ -4,14 +4,6 @@ import DeleteProject from "./confirmDel";
 import "firebase/storage";
 import firebase from "../../../../config/fbConfig";
 
-const printVarNames = (variables) => {
-	return variables.map((v) => " " + v.name);
-};
-
-const shorten = (s) => {
-	return s.length < 30 ? s : s.substr(0, 27) + "...";
-};
-
 const edit = (setRedirect) => {
 	return (
 		<button
@@ -53,12 +45,9 @@ const CSVCard = ({ pid, auth, project, history }) => {
 				<div className="col s0 m5"></div>
 				<div className="col s12 m7">
 					<p>
-						The various parameters used in{" "}
-						{shorten(project.csvName)} include
-						{printVarNames(project.variables)} in order to show a
-						relationship / predict {project.targetParam}. Feeling
-						rough around the edges? Use the links below to change
-						your project.
+						Curious to learn more? Use the link below to download
+						the CSV. Feeling rough around the edges? Edit or delete
+						your project!
 					</p>
 				</div>
 			</div>

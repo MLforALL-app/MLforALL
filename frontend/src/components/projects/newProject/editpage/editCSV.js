@@ -289,7 +289,7 @@ class DisplayCSV extends Component {
 							</Table>
 						</div>
 						{this.props.project.info.NaN === 0 ? (
-							<span></span>
+							<div className="row container"></div>
 						) : (
 							<span>
 								<div className="row container">

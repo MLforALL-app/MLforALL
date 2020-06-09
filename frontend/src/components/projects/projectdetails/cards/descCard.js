@@ -45,17 +45,17 @@ const DescCard = ({ project, pid, updateContent }) => {
 				{edit ? (
 					<div className="col s12 m6">
 						<div className="input-field">
-							<label htmlFor="content">
+							<label htmlFor="textarea1">
 								Write a description!
 							</label>
 							<textarea
 								className="materialize-textarea"
-								cols="30"
-								rows="10"
-								id="content"
+								id="textarea1"
 								onChange={handleChange}
 								value={content}
-							></textarea>
+							>
+								{content}
+							</textarea>
 						</div>
 					</div>
 				) : (
