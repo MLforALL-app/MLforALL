@@ -17,7 +17,7 @@ const ProjectDetails = (props) => {
 	const { pid, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
-	if (!auth.emailVerified) return <Redirect to={`/v/${pid}`} />;
+	// if (!auth.emailVerified) return <Redirect to={`/v/${pid}`} />;
 	if (project) {
 		return (
 			<div className="project-details">
