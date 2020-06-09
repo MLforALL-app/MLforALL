@@ -4,7 +4,7 @@ import moment from "moment";
 const ProjectSummary = ({ project }) => {
 	return (
 		<div className="project-summary">
-			<div className="card">
+			<div className="card z-depth-1">
 				<div className="card-content content-sum">
 					<span className="card-title"> {project.title} </span>
 					<p>

@@ -1,5 +1,4 @@
-
-
+import axios from "axios";
 
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
@@ -25,7 +24,8 @@ export const createProject = (project) => {
 				targetParam: "",
 				content: "",
 				models: [],
-				variables: []
+				variables: [],
+				info: {}
 			})
 			.then((snapshot) => {
 				//console.log(snapshot);
@@ -37,47 +37,76 @@ export const createProject = (project) => {
 	};
 };
 
-export const uploadCSV = (csv, project, id) => {
+export const updateContent = (content, pid) => {
+	return (dispatch, getState, { getFirestore }) => {
+		// make async call to database
+		const firestore = getFirestore();
+		firestore
+			.collection("projects")
+			.doc(pid)
+			.set({ content: content }, { merge: true })
+			.then((snapshot) => {
+				//console.log(snapshot);
+				dispatch({ type: "UPDATE_CONTENT" });
+			})
+			.catch((err) => {
+				dispatch({ type: "UPDATE_CONTENT_ERROR" });
+			});
+	};
+};
+
+export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
 		const firebase = getFirebase();
-		const csvPath =
-			getState().firebase.auth.uid + "/" + id + "/" + csv.name;
+		const uid = getState().firebase.auth.uid;
+		const csvPath = uid + "/" + pid + "/" + csv.name;
 		var csvRef = firebase.storage().ref(csvPath);
 		csvRef
 			.put(csv)
 			.then((snapshot) => {
 				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
+				const path = {
+					uid: uid,
+					projId: pid,
+					csvName: csv.name
+				};
+				// After we upload the csv, update firestore with preliminary insights
+				axios
+					.post(
+						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
+						path
+					)
+					.then((res) => {
+						dispatch({ type: "UPLOAD_CSV_METADATA" });
+					})
+					.catch((err) => {
+						dispatch({ type: "UPLOAD_CSV_METADATA_ERROR" });
+					});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
-				//console.log("csv upload error");
 			});
 	};
 };
 
-export const updateCsvName = (csv, project, id) => {
+export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
-		const projectRef = firestore.collection('projects').doc(id);
+		const projectRef = firestore.collection("projects").doc(pid);
+		projectRef
+			.set({ csvName: csv.name }, { merge: true })
+			.then((snapshot) => {
+				dispatch({ type: "UPDATE_CSV_NAME" });
+			})
+			.catch((err) => {
+				dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
+			});
+	};
+};
 
-		projectRef.set({
-			csvName : csv.name
-
-		}, { merge : true})
-		.then((snapshot) => {
-			//console.log(snapshot);
-			dispatch({ type: "UPDATE_CSV_NAME"});
-		})
-		.catch((err) => {
-			dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
-		});
-
-	}
-}
-
-export const deleteMLProject = (id, auth, project) => {
+export const deleteMLProject = (pid, uid, project) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
@@ -92,7 +121,7 @@ export const deleteMLProject = (id, auth, project) => {
 		//console.log("STORAGE PATH", auth.uid + "/" + project.title);
 		firestore
 			.collection("projects")
-			.doc(id)
+			.doc(pid)
 			.delete()
 			.then((snapshot) => {
 				dispatch({ type: "DELETE_PROJECT_DOC" });
@@ -103,13 +132,13 @@ export const deleteMLProject = (id, auth, project) => {
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
 			storageRef
-				.ref(auth.uid + "/" + project.title + "/" + filename)
+				.ref(`${uid}/${pid}/${filename}`)
 				.delete()
 				.then(() => {
-					//console.log("Delete correctly from storage");
+					dispatch({ type: "DELETE_PROJECT_STORE" });
 				})
 				.catch((err) => {
-					//console.log("uh oh spagetthio", err);
+					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
 	};

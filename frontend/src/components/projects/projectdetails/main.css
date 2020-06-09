@@ -3,11 +3,11 @@ h2,
 h4,
 h6 {
 	/* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
-	font-family: "Roboto", sans-serif;
+	/* font-family: "Roboto", sans-serif; */
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-weight: 600;
-	letter-spacing: 0.12rem;
+	/* letter-spacing: 0.12rem; */
 }
-
 .pres {
 	font-size: 1.2rem;
 }
@@ -31,11 +31,16 @@ h6 {
 	border-bottom-right-radius: 30px !important;
 	background-color: #283593 !important;
 	color: white;
+	height: 55px;
 }
 .card {
 	border-radius: 30px;
 	background-color: white;
 	color: black;
+}
+.card-content {
+	border-top-left-radius: 30px !important;
+	border-top-right-radius: 30px !important;
 }
 .content-sum {
 	height: 150px;
@@ -44,7 +49,12 @@ h6 {
 .purple-text {
 	color: #283593 !important;
 }
-
+.pink-text {
+	color: #f8bbd0 !important;
+}
+.yellow-warning-text {
+	color: #ffcc00 !important;
+}
 .btn-floating {
 	background-color: #283593;
 }
@@ -81,7 +91,7 @@ h6 {
 	padding-bottom: 10px;
 }
 .nav-wrapper {
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	border-width: 0px;
 	box-shadow: 0 0 0 0;
 }
@@ -95,10 +105,10 @@ h6 {
 a {
 	color: #283593;
 }
-form {
-	border-radius: 30px;
-}
 .MuiCircularProgress-colorPrimary {
+	color: #f8bbd0 !important;
+}
+.MuiSvgIcon-root {
 	color: #f8bbd0 !important;
 }
 .MuiSlider-root {
@@ -117,7 +127,7 @@ form {
 	padding-top: 2rem;
 }
 .slider-row {
-	background-color: #eeeeee;
+	background-color: #e9e9e9;
 }
 .slider-contain {
 	padding-top: 1.2rem;

@@ -5,7 +5,7 @@ import CSVCard from "./cards/csvCard";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import "./main.css";
 
 /* MAIN COMPONENT
@@ -14,25 +14,34 @@ import "./main.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
-	const { id, auth, project } = props;
+	const { pid, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
+	// if (!auth.emailVerified) return <Redirect to={`/v/${pid}`} />;
 	if (project) {
 		return (
 			<div className="project-details">
 				<div className="row container">
-					<DescCard project={project} />
+					<DescCard project={project} pid={pid} />
 				</div>
-				<GenerateSliders project={project} uid={auth.uid} pid={id}/>
+				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
 				<div className="row container">
-					<CSVCard id={id} auth={auth} project={project} />
+					<CSVCard
+						pid={pid}
+						auth={auth}
+						project={project}
+						history={history}
+					/>
 				</div>
 			</div>
 		);
 	} else {
 		return (
 			<div className="container center">
-				Error Loading Project
+				<Link to="/dashboard">
+					There was an error loading this project... click here to go
+					back
+				</Link>
 				{/*<Redirect to="/dashboard" />*/}
 			</div>
 		);
@@ -43,11 +52,11 @@ const ProjectDetails = (props) => {
  * auth object, and project object. We get the entire projects
  * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state, ownProps) => {
-	const id = ownProps.match.params.id;
+	const pid = ownProps.match.params.pid;
 	const projects = state.firestore.data.projects;
-	const project = projects ? projects[id] : null;
+	const project = projects ? projects[pid] : null;
 	return {
-		id,
+		pid,
 		project,
 		auth: state.firebase.auth
 	};

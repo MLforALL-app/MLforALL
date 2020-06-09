@@ -4,6 +4,7 @@ from predict import predict
 from build import build_and_pickle
 from variables import send_vars
 import firebase as fb
+from describe import pre_describe
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
@@ -29,7 +30,7 @@ def predict_from_model():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    pid = req_data['projId'] # project id 
+    pid = req_data['projId']  # project id
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
     # Get firebase stuff
@@ -48,12 +49,12 @@ def store():
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
-    title = req_data['title']  # project title, ie spotify
-    proj_id = req_data['projectID']  # unique project hash
+    proj_id = req_data['projId']  # unique project hash
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
     csv_name = req_data['csvName']  # name of uploaded csv
+    nan_method = req_data['nanMethod']  # method for dealing with NaN's
 
     # Get firebase stuff
     bucket = fb.bucket_init()
@@ -66,15 +67,16 @@ def store():
             df = fb.get_csv(bucket, fb.make_path(
                 str(uid), str(proj_id), str(csv_name)))
             # get the saved model in byte form
-            pickle_bytes = build_and_pickle(df, target_param, df_vars, model)
+            pickle_bytes = build_and_pickle(
+                df, target_param, df_vars, model, nan_method=str(nan_method))
             # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
                            fb.make_path(str(uid), str(proj_id), str(model)))
-       # update firestore with descriptive stats (IQR)
+        # update firestore with descriptive stats (IQR)
         send_vars(df, db, proj_id, df_vars, model_list, target_param)
         return "it worked"
-    except TypeError:
-        return "it failed"
+    except ValueError as e:
+        return f"it failed: {e}"
 
 
 @app.route('/visual', methods=['GET'])
@@ -84,11 +86,24 @@ def visual():
     return None
 
 
-@app.route('/descriptive', methods=['GET'])
+@app.route('/describe', methods=['POST'])
 def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
-    return None
+    req_data = request.get_json()
+    # Brackets require these fields to be present
+    # Sort of a safety contract to ensure we always have valid path
+    uid = req_data['uid']  # user id
+    proj_id = req_data['projId']  # unique project hash
+    csv_name = req_data['csvName']
+    # Get firebase stuff
+    bucket = fb.bucket_init()
+    db = fb.firestore.client()
+    # Get the dataframe
+    df = fb.get_csv(bucket, fb.make_path(
+        str(uid), str(proj_id), str(csv_name)))
+    # Generate info
+    return jsonify(pre_describe(db, df, proj_id))
 
 
 if __name__ == '__main__':

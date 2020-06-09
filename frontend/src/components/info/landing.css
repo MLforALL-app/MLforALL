@@ -7,6 +7,13 @@
 	padding-bottom: 0px;
 }
 
+.white-background-landing {
+	background-color: #fefefe;
+}
+.authImg {
+	width: 100%;
+}
+
 .land {
 	display: flex;
 	flex-direction: column;
@@ -15,13 +22,24 @@
 	flex-wrap: wrap;
 }
 .land-head {
-	height: calc(10rem + 20vw + 60px);
+	height: calc(12rem + 20vw + 65px);
 }
 .land-who {
 	height: calc(10rem + 12vw + 50px);
 }
 .land-sign {
 	height: calc(20rem + 25vw + 50px);
+}
+.land-headshot {
+	padding-top: calc(1rem + 3vw + 5px);
+}
+.headshot-img {
+	height: 200px;
+	width: 200px;
+	border-radius: 100px;
+}
+.headshot-img-wrapper {
+	padding: 5px;
 }
 
 .anchor {
@@ -37,7 +55,7 @@
 	padding-bottom: calc(18vh + 10vw + 12rem);
 }
 .video {
-	padding-top: calc(8vh + 5vw + 1.5rem);
+	padding-top: calc(5vh + 2.5vw + 1.5rem);
 	padding-bottom: calc(8vh + 5vw + 2rem);
 }
 

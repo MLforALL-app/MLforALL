@@ -1,0 +1,17 @@
+.evenRow {
+	background-color: #ffffff;
+}
+.oddRow {
+	background-color: #faf8f8;
+}
+.card-model {
+	height: 12.5rem;
+}
+.card-model-clicked {
+	height: 12.5rem;
+	background-color: #dcdcdc;
+}
+.card-action-clicked {
+	color: #dcdcdc !important;
+	background-color: #1d276e !important;
+}

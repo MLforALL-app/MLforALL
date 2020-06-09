@@ -1,56 +1,134 @@
 import React, { Component } from "react";
+import Guide from "./guidingInfo";
 import { connect } from "react-redux";
-import { uploadCSV, updateCsvName } from "../../../store/actions/projectActions";
-class UploadCSV extends Component {
-    state = {
-        csv: "" 
-    }
-    handleChange = (e) => {
-        this.setState({
-            csv : e.target.files[0]
-        });
-    };
+import {
+	uploadCSVtoStorage,
+	updateCsvData
+} from "../../../store/actions/projectActions";
+import {Alert, AlertTitle} from "@material-ui/lab";
 
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.uploadCSV(this.state.csv, this.props.project, this.props.projectID);
-        this.props.updateCsvName(this.state.csv, this.props.project, this.props.projectID);
-    };
-    render () {
-        return (
-            <div className = "row">
-                <form className="card z-depth-1"
-                      onSubmit={this.handleSubmit}>
-                <span className="card-title purple-text">Upload Data <span role = "img" aria-label="smile">😄</span></span>
-                    <div className="file-field input-field">
-                    
-                        <div className="btn z-depth-0" style={{ borderRadius: "50px" }}>
-                            <span>Browse</span>
-                            <input
-                                type="file"
-                                id="csvName"
-                                
-                                onChange={this.handleChange}
-                            />
-                        </div>
-                        <div className="file-path-wrapper">
-                            <input
-                                className="file-path validate"
-                                type="text"
-                                placeholder="Upload .csv file"
-                                accept=".csv"
-                            />
-                        </div>
-                    </div>
-                    <div className="input-field">
-						<button className="btn  z-depth-0" style={{ borderRadius: "50px" }}>
-							Upload
-						</button>
+class UploadCSV extends Component {
+	state = {
+		csv: "",
+		fileUploadMessage : "Waiting For File...",
+		showError : false,
+		errorText : ""
+	};
+	
+	handleChange = (e) => {
+		//console.log(e.target.files[0]);
+		//console.log(this.getFileExtension(e.target.files[0].name));
+		if (!e.target.files[0]){
+			return;
+		}
+		let file = e.target.files[0]
+		if (file.size > 50 * 1000000){
+			this.setState({
+				showError: true, 
+				errorText: "Files above 50 Megabytes are not supported",
+				fileUploadMessage: "File Too Large"
+			})
+		}
+		else if (this.getFileExtension(file.name) !== "csv"){
+			this.setState({
+				fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
+				errorText: "Invalid File Type",
+				showError: true
+			});
+		}else{
+			console.log("storing file locally");
+			this.setState({
+				csv: file,
+				showError: false,
+				fileUploadMessage : "Upload",
+			});
+		}
+	};
+
+	getFileExtension = (filename) => {
+		return filename.split('.').pop();
+	}
+
+	handleSubmit = (e) => {
+		e.preventDefault();
+		if(this.state.showError || this.state.csv === ""){
+			console.log("invalid submit.");
+			return;
+		}
+		
+		this.props.uploadCSVtoStorage(
+			this.state.csv,
+			this.props.project,
+			this.props.projectID
+		);
+
+		this.props.updateCsvData(
+			this.state.csv,
+			this.props.project,
+			this.props.projectID
+		);
+	};
+
+	render() {
+		return (
+			<div className="upload-csv">
+				<div className="row" style={{ backgroundColor: "#eeeeee" }}>
+					<div className="container">
+						{ this.state.showError ? 
+							<Alert severity="error">
+							<AlertTitle>Error</AlertTitle>
+								<strong>{this.state.errorText}</strong> 
+						 	 </Alert>
+							:
+							<span></span>
+						}
+						{  (!this.state.showError && this.state.csv !== "") ?
+							<Alert severity="success">
+							<AlertTitle>Success</AlertTitle>
+								<strong>Successful CSV Upload</strong> 
+						 	 </Alert>
+							:
+							<span></span>
+						}
+
+						<form onSubmit={this.handleSubmit}>
+							<div className="file-field input-field">
+								<div
+									className="btn z-depth-0"
+									style={{ borderRadius: "50px" }}
+								>
+									<span>Browse</span>
+									<input
+										type="file"
+										id="csvName"
+										onChange={this.handleChange}
+									/>
+								</div>
+								<div className="file-path-wrapper">
+									<input
+										className="file-path validate"
+										type="text"
+										placeholder="Upload .csv file"
+										accept=".csv"
+									/>
+								</div>
+							</div>
+							<div className="input-field">
+								<button
+									className="btn  z-depth-0"
+									style={{ borderRadius: "50px" }}
+								>
+									{this.state.fileUploadMessage}
+								</button>
+							</div>
+						</form>
 					</div>
-                </form>
-            </div>
-        );
-    }
+				</div>
+				<Guide />
+			
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = (state) => {
@@ -60,9 +138,11 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => {
-    return {
-        uploadCSV : (csv, project, id) => dispatch(uploadCSV(csv, project, id)), 
-        updateCsvName : (csv, project, id) => dispatch(updateCsvName(csv, project, id))
-    };
+	return {
+		uploadCSVtoStorage: (csv, project, id) => dispatch(uploadCSVtoStorage(csv, project, id)),
+		updateCsvData: (csv, project, id) =>
+			dispatch(updateCsvData(csv, project, id))
+	};
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(UploadCSV);
