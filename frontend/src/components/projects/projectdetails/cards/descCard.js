@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { updateContent } from "../../../../store/actions/projectActions";
 
 // DESCRIPTION CARD
-const DescCard = ({ project, pid, updateContent }) => {
+const DescCard = ({ project, pid, updateContent, auth }) => {
 	const [content, setContent] = useState(project.content);
 	const [edit, setEdit] = useState(false);
 	const handleChange = (e) => {
@@ -25,11 +25,14 @@ const DescCard = ({ project, pid, updateContent }) => {
 		}
 	};
 	const editButton = () => {
-		return (
-			<div onClick={handleSubmit}>
-				{edit ? <SaveIcon /> : <EditIcon />}
-			</div>
-		);
+		console.log(auth);
+		console.log(project);
+		if (auth.uid === project.authorID)
+			return (
+				<div onClick={handleSubmit}>
+					{edit ? <SaveIcon /> : <EditIcon />}
+				</div>
+			);
 	};
 	return (
 		<div className="col s12">
@@ -79,7 +82,8 @@ const mapStateToProps = (state, ownProps) => {
 	const project = ownProps.project;
 	return {
 		pid,
-		project
+		project,
+		auth: state.firebase.auth
 	};
 };
 
