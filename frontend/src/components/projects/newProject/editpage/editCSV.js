@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Papa from "papaparse";
-import { Column, Table } from "react-virtualized";
+import { Column, Table, CellMeasurer, CellMeasurerCache } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
 // import { makeStyles } from "@material-ui/core/styles";
@@ -15,10 +15,15 @@ import firebase from "../../../../config/fbConfig";
 import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
+<<<<<<< HEAD:frontend/src/components/projects/newProject/editpage/editCSV.js
 import HelpBox from "../../../layouts/helpbox";
+=======
+import HelpBox from "../../layouts/helpbox";
+>>>>>>> header_button_n_errorprotection:frontend/src/components/projects/newProject/editCSV.js
 import styles from "./build.css";
 import Insights from "./insights";
-
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
@@ -42,6 +47,7 @@ const nameMapper = (name) => {
 			return "Error: Not valid model name";
 	}
 };
+
 
 class DisplayCSV extends Component {
 	// card to show what user is picking
@@ -134,11 +140,47 @@ class DisplayCSV extends Component {
 		});
 		return menuitems;
 	};
+	checkBoxChange = colName => (e) => {
+		console.log(e.target.checked);
+		console.log(colName);
+		this.setState((prevState) => {
+			var newInputs = prevState.inputs;
+			newInputs[colName] = !newInputs[colName];
+			return { ...prevState, inputs: newInputs };
+		});
+		console.log(this.state);
+	}
+	checkBoxHeader =  colName => key => {
+		return (
+			<div>
+				<FormControlLabel
+		  className = "purple-text"
+          value="bottom"
+          control={<Checkbox color="primary" />}
+          label= ""
+		  labelPlacement="bottom"
+		  onChange = {this.checkBoxChange(colName)}
+        />	
+			
+					 <span className="ReactVirtualized__Table__headerTruncatedText purple-text" 
+					 	   style={{"text-align": "left"}} 
+					       >{colName}</span>
+			</div> 		      
+			
+		);
+	};
+
 	getColumns = (keyList) => {
 		var columns = [];
 		keyList.forEach((key) => {
+			console.log(key);
+			let colName = key; 
 			columns.push(
-				<Column label={key} dataKey={key} key={key} width={900} />
+				<Column label={key}
+						dataKey={key}
+						key={key}
+						headerRenderer={this.checkBoxHeader(colName)}
+						width={5000} />
 			);
 		});
 		return columns;
@@ -157,7 +199,7 @@ class DisplayCSV extends Component {
 				this.setState({
 					inputs: inputState
 				});
-				//console.log("All done!", results);
+				console.log("All done!", results);
 			}
 		});
 	};
@@ -235,6 +277,7 @@ class DisplayCSV extends Component {
 	componentDidMount = () => {
 		this.initCSV();
 	};
+
 	render() {
 		return (
 			<div className="displaycsv">
@@ -263,12 +306,12 @@ class DisplayCSV extends Component {
 									</span>
 								</b>
 							</h5>
+
 							<Table
 								width={1000}
 								height={400}
-								headerHeight={30}
+								headerHeight={60}
 								rowHeight={25}
-								onHeaderClick={this.handleHeaderClick}
 								rowCount={this.state.csvArray.length}
 								rowGetter={({ index }) =>
 									this.state.csvArray[index]
