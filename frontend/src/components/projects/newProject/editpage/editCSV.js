@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Papa from "papaparse";
-import { Column, Table, CellMeasurer, CellMeasurerCache } from "react-virtualized";
+import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
 // import { makeStyles } from "@material-ui/core/styles";
@@ -15,11 +15,7 @@ import firebase from "../../../../config/fbConfig";
 import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
-<<<<<<< HEAD:frontend/src/components/projects/newProject/editpage/editCSV.js
 import HelpBox from "../../../layouts/helpbox";
-=======
-import HelpBox from "../../layouts/helpbox";
->>>>>>> header_button_n_errorprotection:frontend/src/components/projects/newProject/editCSV.js
 import styles from "./build.css";
 import Insights from "./insights";
 import Checkbox from '@material-ui/core/Checkbox';

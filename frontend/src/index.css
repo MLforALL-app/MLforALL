@@ -24,7 +24,7 @@ form {
 	padding-left: calc(15px + 3vh + 0.7vw);
 	padding-right: calc(15px + 3vh + 0.7vw);
 	border-radius: 30px;
-	background-color: transparent;
+	background-color: transparent !important;
 }
 
 input[type="text"]:not(.browser-default):focus:not([readonly]),
