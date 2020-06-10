@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import headerImg from "../../pictures/backgrounds/land-transp.png";
 import whoImg from "../../pictures/backgrounds/who-transp.png";
@@ -9,9 +8,9 @@ import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
 import "./landing.css";
+import { Redirect } from "react-router-dom";
 import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
-import { NavLink } from "react-router-dom";
 
 const emptyDiv = () => {
 	return <div style={{ height: "200px" }}></div>;
@@ -177,77 +176,52 @@ const video = () => {
 		</div>
 	);
 };
-const landSign = (auth) => {
-	if (!auth.uid) {
-		return (
-			<div
-				className="row img-row"
-				style={{ backgroundImage: `url(${signImg})` }}
-			>
-				<div className="col s12 m7">
-					<div className="container land land-sign">
-						<h2>Sign up now.</h2>
-						<h6>Be a part of the community and start learning</h6>
-						<SignUp />
-					</div>
-				</div>
-				<div className="col s0 m5"></div>
-			</div>
-		);
-	} else {
-		return (
-			<div
-				className="row img-row"
-				style={{ backgroundImage: `url(${signImg})` }}
-			>
-				<div className="col s12 m7">
-					<div className="container land land-sign">
-						<h2>Let's get it!</h2>
-						<div className="anchor header-subrow">
-							<NavLink to="/create">
-								<div className="btn waves-effect waves-light anchor">
-									Create
-								</div>{" "}
-							</NavLink>
-						</div>
-						<div className="anchor header-subrow">
-							<NavLink to="/create">
-								<div className="btn btn-sec waves-effect waves-light anchor">
-									Explore
-								</div>{" "}
-							</NavLink>
-						</div>
-					</div>
-					<div className="col s0 m5"></div>
+const landSign = () => {
+	return (
+		<div
+			className="row img-row"
+			style={{ backgroundImage: `url(${signImg})` }}
+		>
+			<div className="col s12 m7">
+				<div className="container land land-sign">
+					<h2>Sign up now.</h2>
+					<h6>Be a part of the community and start learning</h6>
+					<SignUp />
 				</div>
 			</div>
-		);
-	}
+			<div className="col s0 m5"></div>
+		</div>
+	);
 };
 
 class JoeLand extends Component {
 	render() {
 		const { auth } = this.props;
-		return (
-			<div className="white-background-landing">
-				{" "}
-				{header(auth)}
-				<Element name="goal" className="element">
-					{goal()}
-				</Element>
-				<Element name="who" className="element">
-					{whoweare()}
-					{headshot()}
-				</Element>
-				<Element name="how" className="element">
-					{video()}
-				</Element>
-				<Element name="signup" className="element">
-					{landSign(auth)}
-				</Element>
-				{emptyDiv()}
-			</div>
-		);
+		if (!auth.uid) {
+			return (
+				<div className="white-background-landing">
+					{" "}
+					{header(auth)}
+					<Element name="goal" className="element">
+						{goal()}
+					</Element>
+					<Element name="who" className="element">
+						{whoweare()}
+						{headshot()}
+					</Element>
+					<Element name="how" className="element">
+						{video()}
+					</Element>
+					<Element name="signup" className="element">
+						{landSign(auth)}
+					</Element>
+					{emptyDiv()}
+				</div>
+			);
+		} else {
+			// Don't let people see landing page
+			return <Redirect to={`/me/${auth.uid}`} />;
+		}
 	}
 }
 

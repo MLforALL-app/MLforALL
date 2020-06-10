@@ -64,6 +64,7 @@ class BuildProject extends Component {
 	render() {
 		const { project, auth, projectID } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
+		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 		if (!project)
 			return (
 				<div className="container center">

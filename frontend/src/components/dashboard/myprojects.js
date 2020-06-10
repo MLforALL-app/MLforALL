@@ -13,6 +13,7 @@ class MyProjects extends Component {
 		//const projects = fetchMine(auth.uid);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
+		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 		// maybe instead of redirecting, we can have another sign up page here
 		// otws good to go
 		// TODO: change const projects so its only this user's projects

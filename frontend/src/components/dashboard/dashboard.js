@@ -15,6 +15,7 @@ class Dashboard extends Component {
 		//console.log("This is auth", auth);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
+		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 		// otws good to go
 		return (
 			<div className="dashboard container">

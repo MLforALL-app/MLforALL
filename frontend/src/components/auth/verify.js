@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { sendVerify } from "../../store/actions/authActions";
 import authImg from "../../pictures/backgrounds/auth.svg";
 
@@ -10,15 +10,43 @@ class VerifyEmailProject extends Component {
 	handleClick = () => {
 		this.props.sendVerify();
 	};
-	render() {
-		const { pid, auth, sentMsg } = this.props;
-		if (!auth.uid) return <Redirect to="/" />;
-		if (auth.emailVerified)
-			return pid === "create" ? (
-				<Redirect to={`/create`} />
-			) : (
-				<Redirect to={`/project/${pid}`} />
+	button = () => {
+		if (this.props.auth.emailVerified) {
+			return (
+				<Link to={`me/${this.props.auth.uid}`}>
+					<button className="btn btn-sec z-depth-0 anchor">
+						Enter MLforALL
+					</button>
+				</Link>
 			);
+		} else {
+			return (
+				<React.Fragment>
+					<p className="grey-text">
+						It may take a few minutes for the email to send.{" "}
+					</p>
+					<p className="grey-text">Still don't see the email? </p>
+					<button
+						className="btn z-depth-0 anchor"
+						onClick={this.handleClick}
+					>
+						Resend Email
+					</button>
+				</React.Fragment>
+			);
+		}
+	};
+	componentDidMount() {
+		console.log("Mount");
+		console.log(this.props.auth);
+	}
+	componentDidUpdate() {
+		console.log("Update");
+		console.log(this.props.auth);
+	}
+	render() {
+		const { auth, sentMsg } = this.props;
+		if (!auth.uid) return <Redirect to="/" />;
 		const message = (msg) => {
 			if (msg === "noo") {
 				return <p className="red-text">Email could not be sent</p>;
@@ -36,16 +64,8 @@ class VerifyEmailProject extends Component {
 						You're almost there! We sent an email to{" "}
 						<b>{auth.email}</b>
 					</h5>
-					<p className="grey-text">
-						It may take a few minutes for the email to send.{" "}
-					</p>
-					<p className="grey-text">Still don't see the email? </p>
-					<button
-						className="btn z-depth-0 anchor"
-						onClick={this.handleClick}
-					>
-						Resend Email
-					</button>
+					<div className="header-subrow"> {this.button()}</div>
+					<p> After you verify, please refresh this page.</p>
 					<div className="header-subrow">{message(sentMsg)}</div>
 				</div>
 				<img className="authImg" alt="" src={authImg}></img>
@@ -54,12 +74,8 @@ class VerifyEmailProject extends Component {
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	console.log("STATE", state);
-	console.log("ownprops", ownProps);
-	const pid = ownProps.match.params.pid;
+const mapStateToProps = (state) => {
 	return {
-		pid,
 		auth: state.firebase.auth,
 		sentMsg: state.auth.sent.verify
 	};

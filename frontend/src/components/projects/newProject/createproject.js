@@ -27,10 +27,10 @@ class CreateProject extends Component {
 
 	render() {
 		const { auth } = this.props;
+		if (!auth.uid) return <Redirect to="/" />;
+		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 		return (
 			<div className="create-project">
-				{auth.uid ? <span></span> : <Redirect to="/" />}
-				{auth.emailVerified ? <p></p> : <Redirect to="/v/create" />}
 				<div className="row container">
 					<h1 className="purple-text">Create Project</h1>
 				</div>

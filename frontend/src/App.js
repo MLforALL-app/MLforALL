@@ -41,7 +41,7 @@ function App() {
 						/>
 						<Route
 							exact
-							path="/v/:pid"
+							path="/verify"
 							component={VerifyEmailProject}
 						/>
 						<Route exact path="/signin" component={SignIn} />
