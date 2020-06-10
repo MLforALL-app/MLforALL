@@ -3,7 +3,7 @@ import ProjectList from "../projects/projectlist";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import HelpBox from "../layouts/helpbox";
 //import fetchMine from "./fetchmine";
 
@@ -31,8 +31,14 @@ class MyProjects extends Component {
 							/>
 						</span>
 					</h1>
-
 					<ProjectList projects={projects} uid={auth.uid} />
+					<div className="video center">
+						<Link to="/create">
+							<button className="btn btn-sec z-depth-0">
+								Click Here to Create More!
+							</button>
+						</Link>
+					</div>
 				</div>
 			</div>
 		);
