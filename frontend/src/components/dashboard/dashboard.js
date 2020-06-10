@@ -22,7 +22,7 @@ class Dashboard extends Component {
 					<h1>
 						<span className="purple-text">Explore </span>
 						<HelpBox
-							header="The Explore Page"
+							header="Explore here!"
 							placement="right-start"
 							desc="This is the main page of MLforALL. Here you can see projects that other people have been working on! Click on any one of the cards below to enter an interactive experience of testing their classification models."
 						/>
