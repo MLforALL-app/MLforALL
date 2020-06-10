@@ -68,7 +68,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 			{csvUrl === "" ? (
 				<span></span>
 			) : (
-				<a href={csvUrl}>
+				<a target="_blank" rel="noreferrer noopener" href={csvUrl}>
 					<button
 						className="btn-flat waves-effect waves-light"
 						style={{ display: "inline" }}

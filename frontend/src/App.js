@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { isBrowser } from "react-device-detect";
 import Navbar from "./components/layouts/Navbar";
 import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
@@ -13,45 +14,54 @@ import BuildProject from "./components/projects/newProject/buildproject";
 import ScrollToTop from "./components/layouts/scrollToTop";
 import MainDoc from "./components/education/mainDoc";
 import Lost from "./components/info/lost";
+import Mobile from "./components/info/mobile";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
 
 function App() {
-	return (
-		<BrowserRouter>
-			<div className="App">
-				<Navbar />
-				<ScrollToTop />
-				<Switch>
-					<Route exact path="/me/:uid" component={MyProjects} />
-					<Route exact path="/dashboard" component={Dashboard} />
-					<Route
-						exact
-						path="/project/:pid"
-						component={ProjectDetails}
-					/>
-					<Route exact path="/edit/:pid" component={BuildProject} />
-					<Route
-						exact
-						path="/v/:pid"
-						component={VerifyEmailProject}
-					/>
-					<Route exact path="/signin" component={SignIn} />
-					<Route exact path="/forgot" component={Forgot} />
-					<Route
-						exact
-						path="/create"
-						component={CreateProjectContainer}
-					/>
-					<Route exact path="/edu" component={MainDoc} />
-					<Route exact path="/" component={JoeLand} />
-					<Route component={Lost} />
-				</Switch>
-				{/*<Footer />*/}
-			</div>
-		</BrowserRouter>
-	);
+	if (isBrowser) {
+		return (
+			<BrowserRouter>
+				<div className="App">
+					<Navbar />
+					<ScrollToTop />
+					<Switch>
+						<Route exact path="/me/:uid" component={MyProjects} />
+						<Route exact path="/dashboard" component={Dashboard} />
+						<Route
+							exact
+							path="/project/:pid"
+							component={ProjectDetails}
+						/>
+						<Route
+							exact
+							path="/edit/:pid"
+							component={BuildProject}
+						/>
+						<Route
+							exact
+							path="/v/:pid"
+							component={VerifyEmailProject}
+						/>
+						<Route exact path="/signin" component={SignIn} />
+						<Route exact path="/forgot" component={Forgot} />
+						<Route
+							exact
+							path="/create"
+							component={CreateProjectContainer}
+						/>
+						<Route exact path="/edu" component={MainDoc} />
+						<Route exact path="/" component={JoeLand} />
+						<Route component={Lost} />
+					</Switch>
+					{/*<Footer />*/}
+				</div>
+			</BrowserRouter>
+		);
+	} else {
+		return <Mobile />;
+	}
 }
 
 export default App;
