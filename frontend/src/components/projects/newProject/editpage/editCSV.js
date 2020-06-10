@@ -159,7 +159,7 @@ class DisplayCSV extends Component {
 
 				<span
 					className="ReactVirtualized__Table__headerTruncatedText purple-text"
-					style={{ "text-align": "left" }}
+					style={{ textAlign: "left" }}
 				>
 					{colName}
 				</span>

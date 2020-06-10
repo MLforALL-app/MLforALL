@@ -25,8 +25,11 @@ class HelpBox extends Component {
 				title={
 					<React.Fragment>
 						<h5>{header}</h5>
-						<p>{desc}</p>
-						<a href={link}>{linkdesc}</a>
+						<p>
+							{desc}
+							<br />
+							<a href={link}>{linkdesc}</a>
+						</p>
 					</React.Fragment>
 				}
 				placement={placement}
