@@ -4,6 +4,7 @@ import HelpBox from "../../../layouts/helpbox";
 import EditIcon from "@material-ui/icons/Edit";
 import SaveIcon from "@material-ui/icons/Save";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import { updateContent } from "../../../../store/actions/projectActions";
 
 // DESCRIPTION CARD
@@ -68,8 +69,13 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
 			</div>
 			<div style={{ color: "#808080", textAlign: "right" }}>
 				Posted with <span className="hearts">&hearts;</span> by{" "}
-				<span style={{ fontWeight: "bold" }}>
-					{project.authorFirstName} {project.authorLastName}
+				<span className="purple-text" style={{ fontWeight: "bold" }}>
+					<u>
+						{" "}
+						<Link to={`/user/${project.authorID}`}>
+							{project.authorFirstName} {project.authorLastName}
+						</Link>
+					</u>
 				</span>{" "}
 				on {moment(project.createdAt.toDate()).format("LLL")}
 			</div>

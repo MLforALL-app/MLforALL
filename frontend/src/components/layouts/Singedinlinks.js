@@ -12,7 +12,7 @@ const Signedinlinks = (props) => {
 				</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to={"/me/" + props.auth.uid} key={props.auth.uid}>
+				<NavLink to={"/user/" + props.auth.uid} key={props.auth.uid}>
 					<span className="purple-text">My Models</span>
 				</NavLink>
 			</li>
@@ -28,7 +28,7 @@ const Signedinlinks = (props) => {
 			</li>
 			<li>
 				<NavLink
-					to={"/me/" + props.auth.uid}
+					to={"/user/" + props.auth.uid}
 					key={props.auth.uid}
 					className="btn btn-floating"
 				>

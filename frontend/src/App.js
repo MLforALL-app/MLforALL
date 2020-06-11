@@ -4,6 +4,7 @@ import { isBrowser } from "react-device-detect";
 import Navbar from "./components/layouts/Navbar";
 import Dashboard from "./components/dashboard/dashboard";
 import MyProjects from "./components/dashboard/myprojects";
+import UserProfile from "./components/dashboard/userProfile";
 import ProjectDetails from "./components/projects/projectdetails/projectdetails";
 import SignIn from "./components/auth/Signin";
 import Forgot from "./components/auth/resetPass";
@@ -27,6 +28,11 @@ function App() {
 					<Navbar />
 					<ScrollToTop />
 					<Switch>
+						<Route
+							exact
+							path="/user/:uid"
+							component={UserProfile}
+						/>
 						<Route exact path="/me/:uid" component={MyProjects} />
 						<Route exact path="/dashboard" component={Dashboard} />
 						<Route
