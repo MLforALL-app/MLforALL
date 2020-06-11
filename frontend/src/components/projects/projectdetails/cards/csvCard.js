@@ -10,7 +10,7 @@ const edit = () => {
 			className="btn-flat waves-effect waves-light"
 			style={{ display: "inline" }}
 		>
-			<span className="purple-text">Edit</span>
+			<span className="purple-text">Edit This Project</span>
 		</button>
 	);
 };

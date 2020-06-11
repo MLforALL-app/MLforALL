@@ -62,28 +62,31 @@ h6 {
 	background-color: #283593;
 	border-radius: 30px;
 }
-.btn:focus,
+.btn:focus {
+	background-color: #283593;
+}
 .btn:hover {
 	background-color: #6e689be0;
 }
 .btn-sec {
 	background-color: #f8bbd0;
 	color: black;
-	border-radius: 30px;
 }
-.btn-sec:focus,
+.btn-sec:focus {
+	background-color: #f8bbd0;
+}
 .btn-sec:hover {
 	background-color: #ffdce8ed;
 }
 .btn-large {
-	border-radius: 30px;
 	background-color: #283593;
 }
-.btn-large:focus,
+.btn-large:focus {
+	background-color: #283593;
+}
 .btn-large:hover {
 	background-color: #6e689be0;
 }
-
 .project-summary {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;

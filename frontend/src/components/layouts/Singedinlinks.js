@@ -22,15 +22,9 @@ const Signedinlinks = (props) => {
 				</NavLink>{" "}
 			</li>
 			<li>
-				<button
-					style={{
-						border: "None",
-						backgroundColor: "transparent"
-					}}
-					onClick={props.signOut}
-				>
+				<NavLink to="/" onClick={props.signOut}>
 					<span className="purple-text">Logout</span>
-				</button>
+				</NavLink>{" "}
 			</li>
 			<li>
 				<NavLink
