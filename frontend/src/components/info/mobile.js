@@ -21,8 +21,8 @@ const Mobile = () => {
 					<u>
 						<a href="https://www.youtube.com/embed/CswRqTuqzHQ">
 							this video
-						</a>{" "}
-					</u>
+						</a>
+					</u>{" "}
 					to learn more.
 				</p>
 				<br />

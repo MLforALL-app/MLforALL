@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import headerImg from "../../pictures/backgrounds/land-transp.png";
-import whoImg from "../../pictures/backgrounds/who-transp.png";
-import signImg from "../../pictures/backgrounds/sign-transp.png";
+import headerImg from "../../pictures/backgrounds/land.svg";
+import whoImg from "../../pictures/backgrounds/who.svg";
+import signImg from "../../pictures/backgrounds/sign.svg";
 import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
