@@ -79,6 +79,7 @@ h6 {
 	background-color: #ffdce8ed;
 }
 .btn-large {
+	border-radius: 30px;
 	background-color: #283593;
 }
 .btn-large:focus {

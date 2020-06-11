@@ -433,19 +433,18 @@ class DisplayCSV extends Component {
 							)}
 						</div>
 						<div className="row container center">
+							{this.state.loading ? (
+								<CircularProgress />
+							) : (
+								<span></span>
+							)}
 							<button
+								style={{ float: "right" }}
 								onClick={this.handleSubmit}
 								className="btn-large z-depth-0"
 							>
 								Build the model!
 							</button>
-							{this.state.loading ? (
-								<div className="row">
-									<CircularProgress />
-								</div>
-							) : (
-								<span></span>
-							)}
 						</div>
 					</div>
 				)}
