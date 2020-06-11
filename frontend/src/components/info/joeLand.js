@@ -220,7 +220,7 @@ class JoeLand extends Component {
 			);
 		} else {
 			// Don't let people see landing page
-			return <Redirect to={`/me/${auth.uid}`} />;
+			return <Redirect to="/me" />;
 		}
 	}
 }

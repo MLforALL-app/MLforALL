@@ -18,9 +18,11 @@ const Mobile = () => {
 				<p>
 					This site is best viewed on <b>desktop/laptop</b> and is not
 					supported on mobile. Check out{" "}
-					<a href="https://www.youtube.com/embed/CswRqTuqzHQ">
-						this video
-					</a>{" "}
+					<u>
+						<a href="https://www.youtube.com/embed/CswRqTuqzHQ">
+							this video
+						</a>{" "}
+					</u>
 					to learn more.
 				</p>
 				<br />

@@ -16,7 +16,7 @@ class UserProfile extends Component {
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 		if (this.props.auth.uid === this.props.pageuid)
-			return <Redirect to={`/me/${auth.uid}`} />;
+			return <Redirect to="/me" />;
 		// maybe instead of redirecting, we can have another sign up page here
 		// otws good to go
 		// TODO: change const projects so its only this user's projects
