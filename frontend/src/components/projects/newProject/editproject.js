@@ -6,7 +6,8 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
-class BuildProject extends Component {
+import { setWorkingProject } from "../../../store/actions/projectActions";
+class EditProject extends Component {
 	state = {
 		projectState: "init",
 		waitForCSVUpload: false
@@ -38,6 +39,7 @@ class BuildProject extends Component {
 		console.log(this.props.project);
 		console.log(this.props.csvLoaded);
 		console.log(this.state);
+		console.log(this.props.currentWorkingProject);
 		let project_process = this.determineProjectState();
 		console.log(project_process);
 		if (this.state.projectState !== project_process) {
@@ -47,6 +49,12 @@ class BuildProject extends Component {
 					this.setState({
 						waitForCSVUpload: true
 					});
+				}
+				if (project_process >= 2){
+					console.log("RUNNING CODE");
+					console.log(this.props.project);
+					this.props.setWorkingProject(this.props.project, this.props.projectID);
+					console.log(this.props.currentWorkingProject);
 				}
 			}
 			this.setState({
@@ -107,14 +115,21 @@ const mapStateToProps = (state, props) => {
 		project:
 			state.firestore.data.projects && state.firestore.data.projects[pid],
 		auth: state.firebase.auth,
-		csvLoaded: state.project.csvLoaded
+		csvLoaded: state.project.csvLoaded,
+		currentWorkingProject: state.project.currentWorkingProject
 	};
 };
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id))
+	};
+};
 export default compose(
-	connect(mapStateToProps),
+	connect(mapStateToProps, mapDispatchToProps),
 	firestoreConnect((props) => {
 		if (!props.auth) return [];
 		return [{ collection: "projects", doc: props.match.params.id }];
 	})
-)(BuildProject);
+)(EditProject);
+ 

@@ -9,7 +9,7 @@ import Forgot from "./components/auth/resetPass";
 import VerifyEmailProject from "./components/auth/verify";
 import CreateProjectContainer from "./components/projects/newProject/newprojectpage.js";
 import JoeLand from "./components/info/joeLand";
-import BuildProject from "./components/projects/newProject/buildproject";
+import EditProject from "./components/projects/newProject/editproject";
 import ScrollToTop from "./components/layouts/scrollToTop";
 import MainDoc from "./components/education/mainDoc";
 import Lost from "./components/info/lost";
@@ -31,7 +31,7 @@ function App() {
 						path="/project/:pid"
 						component={ProjectDetails}
 					/>
-					<Route exact path="/edit/:pid" component={BuildProject} />
+					<Route exact path="/edit/:pid" component={EditProject} />
 					<Route
 						exact
 						path="/v/:pid"

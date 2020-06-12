@@ -38,7 +38,7 @@ export const createProject = (project) => {
 };
 
 export const updateContent = (content, pid) => {
-	return (dispatch, getState, { getFirestore }) => {
+	return (dispatch, { getFirestore }) => {
 		// make async call to database
 		const firestore = getFirestore();
 		firestore
@@ -54,6 +54,20 @@ export const updateContent = (content, pid) => {
 			});
 	};
 };
+
+/* setWorkingProject will create a place in the redux state to hold the fields
+ * for our build and pickle query. The intent is to move a lot of the code out
+ * of editCSV and build the query by adding to this store.
+ */
+export const setWorkingProject = (project, pid) => {
+	return (dispatch, getState) => {
+		const uid = getState().firebase.auth.uid;
+		console.log("IN ACTION", project); 
+		console.log(uid);
+		console.log(pid);
+		dispatch({type : "UPDATE_CURRENT_WORKING_PROJECT", project, pid, uid});
+	};
+}
 
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
@@ -94,11 +108,13 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
+		const uid = getState().firebase.auth.uid;
 		const projectRef = firestore.collection("projects").doc(pid);
 		projectRef
 			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CSV_NAME" });
+				dispatch({type : "UPDATE_CURRENT_WORKING_PROJECT", project, pid, uid});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
