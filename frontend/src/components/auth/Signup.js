@@ -63,11 +63,11 @@ class SignUp extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-					<div className="input-field center">
-						<button className="btn z-depth-0 center anchor">
-							Sign Up
-						</button>
-						<div className="container land">
+					<div className="center land">
+						<div className="btn waves-effect waves-light anchor-160 z-depth-0">
+							SIGN UP
+						</div>
+						<div className="container">
 							<br />
 							<Link to="/signin">
 								{" "}

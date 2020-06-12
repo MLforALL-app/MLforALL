@@ -34,20 +34,22 @@ const header = (auth) => {
 						</h5>
 					</div>
 					<div className="header-subrow">
-						<Link to="goal" smooth="true" duration={500}>
-							<div
-								id="learn-more-landing"
-								className="btn btn-sec waves-effect waves-light anchor">
-								Learn More
-							</div>
-						</Link>
-					</div>
-					<div className="header-subrow">
-						<Link to="signup" smooth="true" duration={500}>
-							<div className="btn waves-effect waves-light anchor">
-								{auth.uid ? "Get Started" : "Sign Up"}
-							</div>
-						</Link>
+						<span className="header-subrow">
+							<Link to="goal" smooth="true" duration={500}>
+								<div
+									id="learn-more-landing"
+									className="btn btn-outline waves-effect waves-light anchor-160 z-depth-0">
+									LEARN MORE
+								</div>
+							</Link>
+						</span>
+						<span className="header-subrow">
+							<Link to="signup" smooth="true" duration={500}>
+								<div className="btn waves-effect waves-light anchor-160 z-depth-0">
+									{auth.uid ? "Get Started" : "SIGN UP"}
+								</div>
+							</Link>
+						</span>
 					</div>
 				</div>
 			</div>

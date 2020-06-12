@@ -6,14 +6,12 @@
 	background-color: #eeeeee;
 	padding-bottom: 0px;
 }
-
 .white-background-landing {
 	background-color: #fefefe;
 }
 .authImg {
 	width: 100%;
 }
-
 .land {
 	display: flex;
 	flex-direction: column;
@@ -41,15 +39,15 @@
 .headshot-img-wrapper {
 	padding: 5px;
 }
-
 .anchor {
 	width: 200px;
 }
-
+.anchor-160 {
+	width: 160px;
+}
 .header-subrow {
 	padding: 10px;
 }
-
 .goals {
 	padding-top: calc(10vh + 5vw + 1rem);
 	padding-bottom: calc(18vh + 10vw + 12rem);
@@ -58,7 +56,6 @@
 	padding-top: calc(5vh + 2.5vw + 1.5rem);
 	padding-bottom: calc(8vh + 5vw + 2rem);
 }
-
 @media only screen and (max-width: 565px) {
 	.row {
 		background-image: none !important;

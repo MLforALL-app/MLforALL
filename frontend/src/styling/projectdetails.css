@@ -45,7 +45,6 @@ h6 {
 .content-sum {
 	height: 150px;
 }
-
 .purple-text {
 	color: #283593 !important;
 }
@@ -57,16 +56,36 @@ h6 {
 }
 .btn-floating {
 	background-color: #283593;
+	display: inline-block !important;
 }
 .btn {
+	font-weight: bold;
 	background-color: #283593;
+	border-color: #283593;
 	border-radius: 30px;
+	border-width: 2px;
+	border-style: solid;
+	display: table-cell;
+	vertical-align: middle;
 }
 .btn:focus {
 	background-color: #283593;
 }
 .btn:hover {
 	background-color: #6e689be0;
+}
+.btn-outline {
+	color: #283593;
+	border-color: #283593;
+	border-width: 2px;
+	border-style: solid;
+	background-color: transparent;
+}
+.btn-outline:focus {
+	background-color: transparent;
+}
+.btn-outline:hover {
+	background-color: #9e98d12a;
 }
 .btn-sec {
 	background-color: #f8bbd0;
