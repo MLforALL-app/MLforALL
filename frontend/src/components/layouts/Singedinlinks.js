@@ -30,8 +30,7 @@ const Signedinlinks = (props) => {
 				<NavLink
 					to={"/user/" + props.auth.uid}
 					key={props.auth.uid}
-					className="btn btn-floating"
-				>
+					className="btn waves-effect waves-light btn-floating">
 					{props.profile.initials}
 				</NavLink>
 			</li>

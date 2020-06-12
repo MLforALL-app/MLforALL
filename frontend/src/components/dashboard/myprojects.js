@@ -34,9 +34,9 @@ class MyProjects extends Component {
 					<ProjectList projects={projects} uid={auth.uid} />
 					<div className="video center">
 						<Link to="/create">
-							<button className="btn btn-sec z-depth-0">
+							<div className="btn btn-sec waves-effect waves-light z-depth-0">
 								Click Here to Create More!
-							</button>
+							</div>
 						</Link>
 					</div>
 				</div>

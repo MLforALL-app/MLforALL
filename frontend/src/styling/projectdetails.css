@@ -73,6 +73,7 @@ h6 {
 }
 .btn:hover {
 	background-color: #6e689be0;
+	border-color: #6e689be0;
 }
 .btn-outline {
 	color: #283593;
@@ -89,6 +90,7 @@ h6 {
 }
 .btn-sec {
 	background-color: #f8bbd0;
+	border-color: #f8bbd0;
 	color: black;
 }
 .btn-sec:focus {

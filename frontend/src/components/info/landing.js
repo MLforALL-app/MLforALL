@@ -43,8 +43,7 @@ const video = () => {
 				src="https://www.youtube.com/embed/CswRqTuqzHQ"
 				frameborder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-				allowfullscreen
-			></iframe>
+				allowfullscreen></iframe>
 		</div>
 	);
 };
@@ -62,7 +61,9 @@ class LandingPage extends Component {
 				) : (
 					<div>
 						<h3> What are you waiting for? </h3>
-						<NavLink to="/signup" className="btn z-depth-0 ">
+						<NavLink
+							to="/signup"
+							className="btn waves-effect waves-light z-depth-0 ">
 							Sign Up
 						</NavLink>
 					</div>

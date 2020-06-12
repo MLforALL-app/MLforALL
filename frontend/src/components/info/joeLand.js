@@ -29,8 +29,8 @@ const header = (auth) => {
 					</h1>
 					<div className="row container center">
 						<h5 style={{ fontSize: "1.2rem" }}>
-							An educational community helping you take your first
-							step into machine learning: classification models
+							Create, Play With, and Learn About Machine Learning
+							Models.
 						</h5>
 					</div>
 					<div className="header-subrow">

@@ -50,7 +50,7 @@ class CreateProject extends Component {
 								/>
 							</div>
 							<div className="input-field">
-								<button className="btn z-depth-0">
+								<button className="btn waves-effect waves-light z-depth-0">
 									Begin The Process
 								</button>
 							</div>

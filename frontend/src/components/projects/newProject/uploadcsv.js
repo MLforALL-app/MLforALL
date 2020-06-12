@@ -5,57 +5,56 @@ import {
 	uploadCSVtoStorage,
 	updateCsvData
 } from "../../../store/actions/projectActions";
-import {Alert, AlertTitle} from "@material-ui/lab";
+import { Alert, AlertTitle } from "@material-ui/lab";
 
 class UploadCSV extends Component {
 	state = {
 		csv: "",
-		fileUploadMessage : "Waiting For File...",
-		showError : false,
-		errorText : ""
+		fileUploadMessage: "Waiting For File...",
+		showError: false,
+		errorText: ""
 	};
-	
+
 	handleChange = (e) => {
 		//console.log(e.target.files[0]);
 		//console.log(this.getFileExtension(e.target.files[0].name));
-		if (!e.target.files[0]){
+		if (!e.target.files[0]) {
 			return;
 		}
-		let file = e.target.files[0]
-		if (file.size > 50 * 1000000){
+		let file = e.target.files[0];
+		if (file.size > 50 * 1000000) {
 			this.setState({
-				showError: true, 
+				showError: true,
 				errorText: "Files above 50 Megabytes are not supported",
 				fileUploadMessage: "File Too Large"
-			})
-		}
-		else if (this.getFileExtension(file.name) !== "csv"){
+			});
+		} else if (this.getFileExtension(file.name) !== "csv") {
 			this.setState({
 				fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
 				errorText: "Invalid File Type",
 				showError: true
 			});
-		}else{
+		} else {
 			console.log("storing file locally");
 			this.setState({
 				csv: file,
 				showError: false,
-				fileUploadMessage : "Upload",
+				fileUploadMessage: "Upload"
 			});
 		}
 	};
 
 	getFileExtension = (filename) => {
-		return filename.split('.').pop();
-	}
+		return filename.split(".").pop();
+	};
 
 	handleSubmit = (e) => {
 		e.preventDefault();
-		if(this.state.showError || this.state.csv === ""){
+		if (this.state.showError || this.state.csv === "") {
 			console.log("invalid submit.");
 			return;
 		}
-		
+
 		this.props.uploadCSVtoStorage(
 			this.state.csv,
 			this.props.project,
@@ -74,29 +73,28 @@ class UploadCSV extends Component {
 			<div className="upload-csv">
 				<div className="row" style={{ backgroundColor: "#eeeeee" }}>
 					<div className="container">
-						{ this.state.showError ? 
+						{this.state.showError ? (
 							<Alert severity="error">
-							<AlertTitle>Error</AlertTitle>
-								<strong>{this.state.errorText}</strong> 
-						 	 </Alert>
-							:
+								<AlertTitle>Error</AlertTitle>
+								<strong>{this.state.errorText}</strong>
+							</Alert>
+						) : (
 							<span></span>
-						}
-						{  (!this.state.showError && this.state.csv !== "") ?
+						)}
+						{!this.state.showError && this.state.csv !== "" ? (
 							<Alert severity="success">
-							<AlertTitle>Success</AlertTitle>
-								<strong>Successful CSV Upload</strong> 
-						 	 </Alert>
-							:
+								<AlertTitle>Success</AlertTitle>
+								<strong>Successful CSV Upload</strong>
+							</Alert>
+						) : (
 							<span></span>
-						}
+						)}
 
 						<form onSubmit={this.handleSubmit}>
 							<div className="file-field input-field">
 								<div
-									className="btn z-depth-0"
-									style={{ borderRadius: "50px" }}
-								>
+									className="btn waves-effect waves-light z-depth-0"
+									style={{ borderRadius: "50px" }}>
 									<span>Browse</span>
 									<input
 										type="file"
@@ -115,9 +113,8 @@ class UploadCSV extends Component {
 							</div>
 							<div className="input-field">
 								<button
-									className="btn  z-depth-0"
-									style={{ borderRadius: "50px" }}
-								>
+									className="btn waves-effect waves-light z-depth-0"
+									style={{ borderRadius: "50px" }}>
 									{this.state.fileUploadMessage}
 								</button>
 							</div>
@@ -125,7 +122,6 @@ class UploadCSV extends Component {
 					</div>
 				</div>
 				<Guide />
-			
 			</div>
 		);
 	}
@@ -139,7 +135,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		uploadCSVtoStorage: (csv, project, id) => dispatch(uploadCSVtoStorage(csv, project, id)),
+		uploadCSVtoStorage: (csv, project, id) =>
+			dispatch(uploadCSVtoStorage(csv, project, id)),
 		updateCsvData: (csv, project, id) =>
 			dispatch(updateCsvData(csv, project, id))
 	};

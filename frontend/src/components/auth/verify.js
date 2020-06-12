@@ -14,9 +14,9 @@ class VerifyEmailProject extends Component {
 		if (this.props.auth.emailVerified) {
 			return (
 				<Link to={`me/${this.props.auth.uid}`}>
-					<button className="btn btn-sec z-depth-0 anchor">
+					<div className="btn btn-sec waves-effect waves-light z-depth-0 anchor">
 						Enter MLforALL
-					</button>
+					</div>
 				</Link>
 			);
 		} else {
@@ -28,8 +28,7 @@ class VerifyEmailProject extends Component {
 					<p className="grey-text">Still don't see the email? </p>
 					<button
 						className="btn z-depth-0 anchor"
-						onClick={this.handleClick}
-					>
+						onClick={this.handleClick}>
 						Resend Email
 					</button>
 				</React.Fragment>

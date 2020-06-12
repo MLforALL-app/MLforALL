@@ -437,7 +437,7 @@ class DisplayCSV extends Component {
 							<button
 								style={{ float: "right" }}
 								onClick={this.handleSubmit}
-								className="btn-large z-depth-0">
+								className="btn-large waves-effect waves-light z-depth-0">
 								Build the model!
 							</button>
 						</div>
