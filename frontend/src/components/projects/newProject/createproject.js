@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import Guide from "./guidingInfo";
 import { createProject } from "../../../store/actions/projectActions";
-import "./editpage/build.css";
 
 class CreateProject extends Component {
 	state = {
@@ -38,8 +37,7 @@ class CreateProject extends Component {
 					<div className="container">
 						<form
 							style={{ backgroundColor: "#eeeeee" }}
-							onSubmit={this.handleSubmit}
-						>
+							onSubmit={this.handleSubmit}>
 							<div className="input-field">
 								<label htmlFor="title">
 									Insert a title here!

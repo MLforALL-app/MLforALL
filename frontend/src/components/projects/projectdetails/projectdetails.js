@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
-import "./main.css";
+import "../../../styling/projectdetails.css";
 
 /* MAIN COMPONENT
  * Uses the helper components DescCard, Generate Sliders, and CSV Card

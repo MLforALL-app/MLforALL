@@ -4,7 +4,6 @@ import Papa from "papaparse";
 import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
-// import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
@@ -16,10 +15,11 @@ import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
-import styles from "./build.css";
+import styles from "../../../../styling/build.css";
 import Insights from "./insights";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+
 const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
@@ -159,8 +159,7 @@ class DisplayCSV extends Component {
 
 				<span
 					className="ReactVirtualized__Table__headerTruncatedText purple-text"
-					style={{ textAlign: "left" }}
-				>
+					style={{ textAlign: "left" }}>
 					{colName}
 				</span>
 			</div>
@@ -323,8 +322,7 @@ class DisplayCSV extends Component {
 											? "evenRow"
 											: "oddRow";
 									}
-								}}
-							>
+								}}>
 								{this.getColumns(
 									Object.keys(this.state.csvArray[0])
 								)}
@@ -345,8 +343,7 @@ class DisplayCSV extends Component {
 													onChange={
 														this.handleDropdownNan
 													}
-													displayEmpty
-												>
+													displayEmpty>
 													{this.getMenuItems([
 														"drop",
 														"zero",
@@ -380,8 +377,7 @@ class DisplayCSV extends Component {
 										<Select
 											value={this.state.output}
 											onChange={this.handleDropdownOutput}
-											displayEmpty
-										>
+											displayEmpty>
 											{this.getMenuItems(
 												Object.keys(
 													this.state.csvArray[0]
@@ -441,8 +437,7 @@ class DisplayCSV extends Component {
 							<button
 								style={{ float: "right" }}
 								onClick={this.handleSubmit}
-								className="btn-large z-depth-0"
-							>
+								className="btn-large z-depth-0">
 								Build the model!
 							</button>
 						</div>

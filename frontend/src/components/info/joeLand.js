@@ -7,7 +7,7 @@ import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
-import "./landing.css";
+import "../../styling/landing.css";
 import { Redirect } from "react-router-dom";
 import { Link, Element } from "react-scroll";
 import SignUp from "../auth/Signup";
@@ -21,8 +21,7 @@ const header = (auth) => {
 			className="row img-row"
 			style={{
 				backgroundImage: `url(${headerImg})`
-			}}
-		>
+			}}>
 			<div className="col s12 m7">
 				<div className="container land land-head">
 					<h1 style={{ fontSize: "5rem" }}>
@@ -38,8 +37,7 @@ const header = (auth) => {
 						<Link to="goal" smooth="true" duration={500}>
 							<div
 								id="learn-more-landing"
-								className="btn btn-sec waves-effect waves-light anchor"
-							>
+								className="btn btn-sec waves-effect waves-light anchor">
 								Learn More
 							</div>
 						</Link>
@@ -84,8 +82,7 @@ const whoweare = () => {
 			className="row img-row"
 			style={{
 				backgroundImage: `url(${whoImg})`
-			}}
-		>
+			}}>
 			<div className="col s0 m5"></div>
 			<div className="col s12 m7">
 				<div className="container land land-who">
@@ -98,8 +95,7 @@ const whoweare = () => {
 						<a
 							target="_blank"
 							rel="noreferrer noopener"
-							href="https://www.youtube.com/watch?v=nyHnU123Iew"
-						>
+							href="https://www.youtube.com/watch?v=nyHnU123Iew">
 							#MyHeartIsInTheWork
 						</a>
 					</div>
@@ -116,8 +112,7 @@ const headshot = () => {
 					<a
 						target="_blank"
 						rel="noreferrer noopener"
-						href="https://www.linkedin.com/in/davis-wojnovich-560740165/"
-					>
+						href="https://www.linkedin.com/in/davis-wojnovich-560740165/">
 						<img className="headshot-img" src={davImg} alt="Dav" />
 					</a>
 					<h5>Davis Wojnovich</h5>
@@ -127,8 +122,7 @@ const headshot = () => {
 					<a
 						target="_blank"
 						rel="noreferrer noopener"
-						href="https://www.linkedin.com/in/josephkimdesign/"
-					>
+						href="https://www.linkedin.com/in/josephkimdesign/">
 						<img className="headshot-img" src={joeImg} alt="Joe" />
 					</a>
 					<h5>Joseph Kim</h5>
@@ -138,8 +132,7 @@ const headshot = () => {
 					<a
 						target="_blank"
 						rel="noreferrer noopener"
-						href="https://www.linkedin.com/in/len-huang-622403178"
-					>
+						href="https://www.linkedin.com/in/len-huang-622403178">
 						<img className="headshot-img" src={lenImg} alt="Len" />
 					</a>
 					<h5>Len Huang</h5>
@@ -149,8 +142,7 @@ const headshot = () => {
 					<a
 						target="_blank"
 						rel="noreferrer noopener"
-						href="https://www.linkedin.com/in/max-hirsch/"
-					>
+						href="https://www.linkedin.com/in/max-hirsch/">
 						<img className="headshot-img" src={maxImg} alt="Max" />
 					</a>
 					<h5>Max Hirsch</h5>
@@ -171,8 +163,7 @@ const video = () => {
 				src="https://www.youtube.com/embed/CswRqTuqzHQ"
 				frameBorder="0"
 				allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-				allowFullScreen
-			></iframe>
+				allowFullScreen></iframe>
 		</div>
 	);
 };
@@ -180,8 +171,7 @@ const landSign = () => {
 	return (
 		<div
 			className="row img-row"
-			style={{ backgroundImage: `url(${signImg})` }}
-		>
+			style={{ backgroundImage: `url(${signImg})` }}>
 			<div className="col s12 m7">
 				<div className="container land land-sign">
 					<h2>Sign up now.</h2>
