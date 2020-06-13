@@ -191,16 +191,14 @@ class GenerateSliders extends Component {
 									style={{
 										paddingTop: "2rem",
 										textAlign: "right"
-									}}
-								>
+									}}>
 									<HelpBox
 										placement="left"
 										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
 									/>{" "}
 									<button
 										className="btn waves-effect waves-light anchor"
-										onClick={this.handleSubmit}
-									>
+										onClick={this.handleSubmit}>
 										<b>Generate</b>
 									</button>
 								</div>
