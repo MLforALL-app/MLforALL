@@ -2,16 +2,37 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import styles from "./build.css";
 import Insights from "./insights";
+import Select from "@material-ui/core/Select";
+import FormHelperText from "@material-ui/core/FormHelperText";
+import FormControl from "@material-ui/core/FormControl";
+import HelpBox from "../../../layouts/helpbox";
+import MenuItem from "@material-ui/core/MenuItem";
+import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 
 class NaanHandler extends Component {
+    state = {
+        nanMethod: "drop",
+    }
+    handleDropdownNan = (event) => {
+        this.setState({
+            nanMethod : event.target.value
+        });
+        this.props.updateCurrentWorkingProject("nanMethod", event.target.value);        
+    };
+    
+    getMenuItems = (headers) => {
+		var menuitems = [];
+		headers.forEach((h) => {
+			menuitems.push(
+				<MenuItem key={h} value={h}>
+					{h}
+				</MenuItem>
+			);
+		});
+		return menuitems;
+	};
 
     render () {
-        this.state = {
-            nanMethod: "drop",
-        }
-        handleDropdownNan = (event) => {
-            this.setState({ nanMethod: event.target.value });
-        };
         return (
             <span>
                 <div className="row container">
@@ -54,5 +75,11 @@ class NaanHandler extends Component {
     };
 }
 
+const mapDispatchToProps = (dispatch) => {
+	return {
+		updateCurrentWorkingProject: (paramName, nanMethod) => dispatch(updateCurrentWorkingProject(paramName, nanMethod))
+	};
+};
 
-export default NaanHandler;
+
+export default connect(null, mapDispatchToProps)(NaanHandler);

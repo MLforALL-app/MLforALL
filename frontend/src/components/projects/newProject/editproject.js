@@ -7,6 +7,7 @@ import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
 import { setWorkingProject } from "../../../store/actions/projectActions";
+import NanHandler from "./editpage/nanhandler"
 class EditProject extends Component {
 	state = {
 		projectState: "init",
@@ -36,10 +37,6 @@ class EditProject extends Component {
 		}
 	};
 	componentDidUpdate = () => {
-		console.log(this.props.project);
-		console.log(this.props.csvLoaded);
-		console.log(this.state);
-		console.log(this.props.currentWorkingProject);
 		let project_process = this.determineProjectState();
 		console.log(project_process);
 		if (this.state.projectState !== project_process) {
@@ -51,10 +48,7 @@ class EditProject extends Component {
 					});
 				}
 				if (project_process >= 2){
-					console.log("RUNNING CODE");
-					console.log(this.props.project);
 					this.props.setWorkingProject(this.props.project, this.props.projectID);
-					console.log(this.props.currentWorkingProject);
 				}
 			}
 			this.setState({
@@ -94,7 +88,15 @@ class EditProject extends Component {
 				)}
 				{this.state.projectState >= 2 ? (
 					!this.state.waitForCSVUpload ? (
-						<DisplayCSV project={project} id={projectID} />
+						<div>
+							{this.props.project.info.NaN === 0 ? (
+							<div className="row container"></div>
+							) : (
+							<NanHandler project = {this.props.project}/>
+							)}
+							<DisplayCSV project={project} id={projectID} />
+						</div>
+						
 					) : (
 						<span></span>
 					)

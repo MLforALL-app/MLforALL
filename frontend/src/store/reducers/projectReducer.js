@@ -37,7 +37,7 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "UPDATE_CONTENT_ERROR":
 			return state;
-		case "UPDATE_CURRENT_WORKING_PROJECT":
+		case "SET_CURRENT_WORKING_PROJECT":
 			console.log("IN REDUCER");
 			console.log(action.pid);
 			console.log(action.project);
@@ -53,6 +53,15 @@ const projectReducer = (state = initState, action) => {
 					dfVariables : "initialized",
 					targetParameter : "initialized",
 					modelList : "initialized",
+				}
+			}
+		case "UPDATE_NAN":
+			console.log(action.data); 
+			return {
+				...state,
+				currentWorkingProject : {
+					...state.currentWorkingProject,
+					nanMethod : action.data 
 				}
 			}
 		default:

@@ -65,9 +65,21 @@ export const setWorkingProject = (project, pid) => {
 		console.log("IN ACTION", project); 
 		console.log(uid);
 		console.log(pid);
-		dispatch({type : "UPDATE_CURRENT_WORKING_PROJECT", project, pid, uid});
+		dispatch({type : "SET_CURRENT_WORKING_PROJECT", project, pid, uid});
 	};
 }
+
+export const updateCurrentWorkingProject = (param, data) => {
+	return (dispatch) => {
+		console.log(param);
+		switch (param){
+			case "nanMethod" :
+				dispatch({type : "UPDATE_NAN", param, data});
+				break;
+		}
+		
+	};
+};
 
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
