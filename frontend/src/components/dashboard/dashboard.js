@@ -3,20 +3,18 @@ import React, { Component } from "react";
 import ProjectList from "../projects/projectlist";
 import HelpBox from "../layouts/helpbox";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
+	state = {
+		orderBy: "createdAt",
+		limit: 2,
+		direction: "desc"
+	};
 	render() {
-		// notifications is in props too
-		// TODO: Add Sort By functionality
-		const { projects, auth } = this.props;
-		//console.log("This is auth", auth);
-		// Route Protection
+		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		// otws good to go
 		return (
 			<div className="dashboard container">
 				<div className="row">
@@ -32,7 +30,12 @@ class Dashboard extends Component {
 				{/*<div className="row">
 					<Notifications notifications={notifications} />
 				</div>*/}
-				<ProjectList projects={projects} />
+				{console.log("DASH STATE", this.state)}
+				<ProjectList
+					orderBy={this.state.orderBy}
+					limit={this.state.limit}
+					direction={this.state.direction}
+				/>
 			</div>
 		);
 	}
@@ -41,20 +44,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
 	//console.log(state);
 	return {
-		projects: state.firestore.ordered.projects,
-		auth: state.firebase.auth,
-		notifications: state.firestore.ordered.notifications
+		auth: state.firebase.auth
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([
-		{
-			collection: "projects",
-			orderBy: ["createdAt", "desc"],
-			limit: 14
-		},
-		{ collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
-	])
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

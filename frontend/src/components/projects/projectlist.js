@@ -1,6 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import ProjectSummary from "./projectsummary";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 function mapDepends(projects, uid) {
 	if (projects && uid) {
@@ -13,7 +16,7 @@ function mapDepends(projects, uid) {
 }
 
 function makeLink(proj) {
-	//console.log("THIS IS PROJ FOR MAKELINK", proj);
+	console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
 		<div className="col s12 m6" key={proj.id}>
 			<Link to={`/project/${proj.id}`}>
@@ -38,6 +41,7 @@ function grouped(projects) {
 }
 
 function mapPairs(pair) {
+	console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
 			<div className="row" key={pair[0].id}>
@@ -54,12 +58,58 @@ function mapPairs(pair) {
 	}
 }
 
-const ProjectList = ({ projects, uid }) => {
-	return (
-		<div className="project-list section">
-			{projects && grouped(mapDepends(projects, uid)).map(mapPairs)}
-		</div>
-	);
+class ProjectList extends Component {
+	state = {
+		pLoad: false,
+		check: true
+	};
+	componentDidUpdate() {
+		console.log("UPDATE", this.props.projects);
+		if (this.state.check) {
+			this.setState({
+				pLoad: this.props.projects && this.props.projects.length !== 0,
+				check: false
+			});
+		}
+	}
+	render() {
+		const { projects, auth } = this.props;
+		console.log("RENDER", projects);
+		console.log("STATE", this.state);
+		return (
+			<div className="project-list section">
+				{this.state.pLoad
+					? grouped(mapDepends(projects, auth.uid)).map(mapPairs)
+					: []}
+				{console.log(
+					this.state.pLoad
+						? grouped(mapDepends(projects, auth.uid)).map(mapPairs)
+						: "davis is troll"
+				)}
+			</div>
+		);
+	}
+}
+
+const mapStateToProps = (state, ownProps) => {
+	console.log(ownProps);
+	console.log("map state to", state.firestore.ordered.projects);
+	return {
+		projects: state.firestore.ordered.projects,
+		auth: state.firebase.auth
+	};
 };
 
-export default ProjectList;
+export default compose(
+	connect(mapStateToProps),
+	firestoreConnect((props) => {
+		console.log("CONNECT PROPS", props);
+		return [
+			{
+				collection: "projects",
+				orderBy: ["createdAt", "desc"],
+				limit: 2
+			}
+		];
+	})
+)(ProjectList);
