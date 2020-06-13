@@ -14,7 +14,6 @@ import "firebase/storage";
 import firebase from "../../../../config/fbConfig";
 import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
-import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "./build.css";
 import Insights from "./insights";
@@ -23,7 +22,7 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
-const nameMapper = (name) => {
+export const nameMapper = (name) => {
 	switch (name) {
 		case "":
 			return "Nothing Selected Yet";
@@ -114,14 +113,7 @@ class DisplayCSV extends Component {
 	handleDropdownNan = (event) => {
 		this.setState({ nanMethod: event.target.value });
 	};
-	handleModelToggle = (value) => () => {
-		//console.log("VALUE IN HANDLE TOGGLE", value);
-		this.setState((prevState) => {
-			var newModels = prevState.models;
-			newModels[value] = !newModels[value];
-			return { ...prevState, models: newModels };
-		});
-	};
+
 	// get functions to populate things on page
 	getMenuItems = (headers) => {
 		var menuitems = [];
@@ -362,27 +354,7 @@ class DisplayCSV extends Component {
 								</b>
 							</h5>
 						</div>
-						<div className="row container">
-							<h5>
-								<b>3. Choose your algorithms / models</b>{" "}
-								<span className="pink-text">
-									<HelpBox
-										header="Click the models!"
-										placement="right-end"
-										desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
-										link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
-										linkdesc="Learn more here"
-									/>
-								</span>
-							</h5>
-							<div>
-								<ModelCheck
-									handleToggle={this.handleModelToggle}
-									nameMapper={nameMapper}
-									models={this.state.models}
-								/>
-							</div>
-						</div>
+
 						<div className="row" style={{ padding: "2rem" }}>
 							{this.getStatus(
 								this.filterObj(this.state.inputs),

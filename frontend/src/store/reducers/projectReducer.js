@@ -49,10 +49,16 @@ const projectReducer = (state = initState, action) => {
 					projId : action.pid,
 					title : action.project.title,
 					csvName : action.project.csvName,
-					nanMethod : "initialized",
+					nanMethod : "drop",
 					dfVariables : "initialized",
 					targetParameter : "initialized",
-					modelList : "initialized",
+					modelList : {
+						log_reg : false,
+						knn: false, 
+						clf: false, 
+						gnb: false, 
+						svm: false,
+					},
 				}
 			}
 		case "UPDATE_NAN":
@@ -62,6 +68,14 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject : {
 					...state.currentWorkingProject,
 					nanMethod : action.data 
+				}
+			}
+		case "UPDATE_ML":
+			return {
+				...state,
+				currentWorkingProject : {
+					...state.currentWorkingProject,
+					modelList : action.data 
 				}
 			}
 		default:

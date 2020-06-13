@@ -7,7 +7,8 @@ import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
 import { setWorkingProject } from "../../../store/actions/projectActions";
-import NanHandler from "./editpage/nanhandler"
+import NanHandler from "./editpage/nanhandler";
+import ModelSelect from "./editpage/modelselect";
 class EditProject extends Component {
 	state = {
 		projectState: "init",
@@ -95,6 +96,7 @@ class EditProject extends Component {
 							<NanHandler project = {this.props.project}/>
 							)}
 							<DisplayCSV project={project} id={projectID} />
+							<ModelSelect project={project} id = {projectID} cp = {this.props.currentWorkingProject}/>
 						</div>
 						
 					) : (

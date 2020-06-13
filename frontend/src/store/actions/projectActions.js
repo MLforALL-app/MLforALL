@@ -76,6 +76,9 @@ export const updateCurrentWorkingProject = (param, data) => {
 			case "nanMethod" :
 				dispatch({type : "UPDATE_NAN", param, data});
 				break;
+			case "modelList" :
+				dispatch({type : "UPDATE_ML", param, data});
+				break;
 		}
 		
 	};
