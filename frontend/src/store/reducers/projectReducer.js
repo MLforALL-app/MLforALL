@@ -1,7 +1,8 @@
 const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
-	currentWorkingProject: "initialized"
+	currentWorkingProject: "initialized",
+	csvUrl: ""
 };
 
 const projectReducer = (state = initState, action) => {
@@ -38,10 +39,6 @@ const projectReducer = (state = initState, action) => {
 		case "UPDATE_CONTENT_ERROR":
 			return state;
 		case "SET_CURRENT_WORKING_PROJECT":
-			console.log("IN REDUCER");
-			console.log(action.pid);
-			console.log(action.project);
-			console.log(action.uid);
 			return {
 				...state,
 				currentWorkingProject : {
@@ -78,6 +75,13 @@ const projectReducer = (state = initState, action) => {
 					modelList : action.data 
 				}
 			}
+		case "CSV_DATA_IN_STORE":
+			return {
+				...state, 
+				csvData: action.data
+			}
+		case "CSV_FETCH_ERROR":
+			return state;
 		default:
 			return state;
 	}

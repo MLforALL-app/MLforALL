@@ -6,13 +6,19 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
-import { setWorkingProject } from "../../../store/actions/projectActions";
+import { setWorkingProject, initCSV  } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
+
+
+
+
+
 class EditProject extends Component {
 	state = {
 		projectState: "init",
-		waitForCSVUpload: false
+		waitForCSVUpload: false,
+		pLoad: false
 	};
 	determineProjectState = () => {
 		if (!this.props.project) {
@@ -50,6 +56,8 @@ class EditProject extends Component {
 				}
 				if (project_process >= 2){
 					this.props.setWorkingProject(this.props.project, this.props.projectID);
+					console.log("CALLING INIT CSV", this.props.project, this.props.projectID);
+					this.props.initCSV(this.props.project, this.props.projectID);
 				}
 			}
 			this.setState({
@@ -120,13 +128,15 @@ const mapStateToProps = (state, props) => {
 			state.firestore.data.projects && state.firestore.data.projects[pid],
 		auth: state.firebase.auth,
 		csvLoaded: state.project.csvLoaded,
-		currentWorkingProject: state.project.currentWorkingProject
+		currentWorkingProject: state.project.currentWorkingProject,
+		csvUrl : state.project.csvUrl 
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id))
+		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id)),
+		initCSV: (project, id) => dispatch(initCSV(project, id))
 	};
 };
 export default compose(

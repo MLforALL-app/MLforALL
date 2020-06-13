@@ -96,7 +96,7 @@ class DisplayCSV extends Component {
 		inputs: {},
 		output: "",
 		redirect: false,
-		loading: false,
+		loading: true,
 		error: false
 	};
 	// Handlers for things on the page
@@ -109,9 +109,6 @@ class DisplayCSV extends Component {
 	};
 	handleDropdownOutput = (event) => {
 		this.setState({ output: event.target.value });
-	};
-	handleDropdownNan = (event) => {
-		this.setState({ nanMethod: event.target.value });
 	};
 
 	// get functions to populate things on page
@@ -176,46 +173,7 @@ class DisplayCSV extends Component {
 		});
 		return columns;
 	};
-	// BIG PAPA
-	bigPapa = (url) => {
-		Papa.parse(url, {
-			download: true,
-			worker: true,
-			header: true,
-			complete: (results) => {
-				this.setState({
-					csvArray: results.data
-				});
-				const inputState = this.initObj(Object.keys(results.data[0]));
-				this.setState({
-					inputs: inputState
-				});
-				console.log("All done!", results);
-			}
-		});
-	};
-	// initialize the CSV in firebase storage and then big papa it
-	initCSV = () => {
-		const csvPath =
-			this.props.project.authorID +
-			"/" +
-			this.props.id +
-			"/" +
-			this.props.project.csvName;
-		var csvRef = firebase.storage().ref(csvPath);
-		csvRef
-			.getDownloadURL()
-			.then((url) => {
-				console.log("This the url", url);
-				this.bigPapa(url); // populates the csvArray state
-				this.setState({ error: false });
-			})
-			.catch((err) => {
-				console.log("SOMETHING wrong uhOh", err);
-				this.setState({ error: true });
-			});
-	};
-	// handle submitting the project
+
 	handleSubmit = (e) => {
 		e.preventDefault();
 		this.setState({ loading: true, error: false });
@@ -266,8 +224,17 @@ class DisplayCSV extends Component {
 			});
 	};
 	componentDidMount = () => {
-		this.initCSV();
+		//this.initCSV();
 	};
+	componentDidUpdate = () => {
+		if(this.state.loading === true && this.props.csvData !== ""){
+			this.setState({
+				csvArray : this.props.csvData,
+				loading : false
+			})
+			console.log(this.state.csvArray);
+		}
+	}
 
 	render() {
 		return (
@@ -387,7 +354,8 @@ class DisplayCSV extends Component {
 
 const mapStatetoProps = (state, ownProps) => {
 	return {
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		csvData: state.project.csvData
 	};
 };
 // Redux to associate action call to a dispatch

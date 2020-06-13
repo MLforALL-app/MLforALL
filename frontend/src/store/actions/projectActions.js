@@ -1,4 +1,5 @@
 import axios from "axios";
+import Papa from "papaparse";
 
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
@@ -83,6 +84,41 @@ export const updateCurrentWorkingProject = (param, data) => {
 		
 	};
 };
+
+export const bigPapa = (url, dispatch) => {
+	Papa.parse(url, {
+		download: true,
+		worker: true,
+		header: true,
+		complete: (results) => {
+			console.log(results);
+			const data = results.data;
+			dispatch({type : "CSV_DATA_IN_STORE", data});
+			console.log("All done!", results);
+		}
+	});
+};
+
+/* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
+export const initCSV = (project, projID) => {
+	return (dispatch, getState, {getFirebase}) => {
+		const uid = getState().firebase.auth.uid;
+		const csvPath = uid + "/" + projID + "/" + project.csvName;
+		const firebase = getFirebase();
+		var csvRef = firebase.storage().ref(csvPath);
+		csvRef
+			.getDownloadURL()
+			.then((url) => {
+				console.log("This the url", url);
+				bigPapa(url, dispatch);
+
+			})
+			.catch((err) => {
+				console.log("SOMETHING wrong uhOh", err);
+				dispatch({type: "CSV_FETCH_ERROR"});
+			});
+	}
+}
 
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
