@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectlist";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
 import HelpBox from "../layouts/helpbox";
 //import fetchMine from "./fetchmine";
 
 class MyProjects extends Component {
+	state = {
+		orderBy: "createdAt",
+		limit: 5,
+		startAt: 0,
+		direction: "asc"
+	};
 	render() {
-		const { projects, auth } = this.props;
+		const { auth } = this.props;
 		//const projects = fetchMine(auth.uid);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
@@ -31,7 +35,13 @@ class MyProjects extends Component {
 							/>
 						</span>
 					</h1>
-					<ProjectList projects={projects} uid={auth.uid} />
+					<ProjectList
+						orderBy={this.state.orderBy}
+						limit={this.state.limit}
+						direction={this.state.direction}
+						startAt={this.state.startAt}
+						uid={auth.uid}
+					/>
 					<div className="video center">
 						<Link to="/create">
 							<div className="btn btn-sec waves-effect waves-light z-depth-0">
@@ -46,16 +56,9 @@ class MyProjects extends Component {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state);
 	return {
-		projects: state.firestore.ordered.projects,
 		auth: state.firebase.auth
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([
-		{ collection: "projects", orderBy: ["createdAt", "desc"] }
-	])
-)(MyProjects);
+export default connect(mapStateToProps)(MyProjects);

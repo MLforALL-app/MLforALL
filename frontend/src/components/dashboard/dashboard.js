@@ -7,7 +7,7 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	state = {
-		orderBy: "authorFirstName",
+		orderBy: "createdAt",
 		limit: 5,
 		startAt: 0,
 		direction: "asc"

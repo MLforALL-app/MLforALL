@@ -6,7 +6,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
 const makeLink = (proj) => {
-	console.log("THIS IS PROJ FOR MAKELINK", proj);
+	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
 		<div className="col s12 m6" key={proj.id}>
 			<Link to={`/project/${proj.id}`}>
@@ -31,7 +31,7 @@ const grouped = (projects) => {
 };
 
 const mapPairs = (pair) => {
-	console.log("PAIR", pair);
+	//console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
 			<div className="row" key={pair[0].id}>
@@ -55,11 +55,7 @@ class ProjectList extends Component {
 		pList: []
 	};
 	componentDidUpdate() {
-		console.log("UPDATE", this.props.projects);
-		console.log(
-			"update pLoad",
-			this.props.projects && this.props.projects.length !== 0
-		);
+		//console.log("UPDATE", this.props.projects);
 		if (this.state.check) {
 			this.setState({
 				pLoad: this.props.projects && this.props.projects.length !== 0,
@@ -68,9 +64,9 @@ class ProjectList extends Component {
 		}
 	}
 	render() {
-		const { projects, auth } = this.props;
-		console.log("RENDER PROJECT", projects);
-		console.log("pLOAD", this.state.pLoad);
+		const { projects } = this.props;
+		//console.log("RENDER PROJECT", projects);
+		//console.log("pLOAD", this.state.pLoad);
 		return (
 			<div className="project-list section">
 				{this.state.pLoad
@@ -92,13 +88,25 @@ const mapStateToProps = (state) => {
 export default compose(
 	connect(mapStateToProps),
 	firestoreConnect((ownProps) => {
-		return [
-			{
-				collection: "projects",
-				orderBy: [ownProps.orderBy, ownProps.direction],
-				limit: ownProps.limit,
-				startAt: ownProps.startAt
-			}
-		];
+		if (!ownProps.uid) {
+			return [
+				{
+					collection: "projects",
+					orderBy: [ownProps.orderBy, ownProps.direction],
+					limit: ownProps.limit,
+					startAt: 0
+				}
+			];
+		} else {
+			return [
+				{
+					collection: "projects",
+					where: [["authorID", "==", ownProps.uid]],
+					orderBy: [ownProps.orderBy, ownProps.direction],
+					limit: ownProps.limit,
+					startAt: 0
+				}
+			];
+		}
 	})
 )(ProjectList);
