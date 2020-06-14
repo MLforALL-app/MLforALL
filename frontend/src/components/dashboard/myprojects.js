@@ -1,20 +1,27 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectlist";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import HelpBox from "../layouts/helpbox";
-//import fetchMine from "./fetchmine";
+
+const greetings = () => {
+	const hi = ["Howdy", "Hello", "Hi there", "What's up"];
+	const index = Math.floor(Math.random() * hi.length);
+	return hi[index];
+};
 
 class MyProjects extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 5,
 		startAt: 0,
-		direction: "asc"
+		direction: "desc"
 	};
 	render() {
-		const { auth } = this.props;
-		//const projects = fetchMine(auth.uid);
+		const { auth, profile } = this.props;
+		console.log("THIS IS prof", profile);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
@@ -25,16 +32,39 @@ class MyProjects extends Component {
 		return (
 			<div>
 				<div className="dashboard container">
-					<h1>
-						<span className="purple-text">
-							My models.{" "}
-							<HelpBox
-								header="My models"
-								placement="right-start"
-								desc="Click on the cards to view your classification models!"
-							/>
-						</span>
-					</h1>
+					<div className="row">
+						<h1>
+							<span className="purple-text">
+								My models.{" "}
+								<HelpBox
+									header="My models"
+									placement="right-start"
+									desc="Click on the cards to view your classification models!"
+								/>
+							</span>
+						</h1>
+						<h4 style={{ float: "left" }}>
+							{profile.isLoaded
+								? greetings() + " " + profile.firstName + "!"
+								: ""}
+						</h4>
+						<FormControl style={{ float: "right" }}>
+							<span>
+								Sort By:{" "}
+								<Select
+									value={this.state.orderBy}
+									onChange={(e) =>
+										this.setState({
+											orderBy: e.target.value
+										})
+									}
+									displayEmpty>
+									<MenuItem value="createdAt">Date</MenuItem>
+									<MenuItem value="title">Title</MenuItem>
+								</Select>
+							</span>
+						</FormControl>
+					</div>
 					<ProjectList
 						orderBy={this.state.orderBy}
 						limit={this.state.limit}
@@ -56,8 +86,10 @@ class MyProjects extends Component {
 }
 
 const mapStateToProps = (state) => {
+	console.log(state);
 	return {
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
 	};
 };
 

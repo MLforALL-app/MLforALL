@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 // import Notifications from "./notifcations";
 import ProjectList from "../projects/projectlist";
-import HelpBox from "../layouts/helpbox";
+import MenuItem from "@material-ui/core/MenuItem";
+import FormControl from "@material-ui/core/FormControl";
+import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 5,
+		limit: 14,
 		startAt: 0,
-		direction: "asc"
+		direction: "desc"
 	};
 	render() {
 		const { auth } = this.props;
@@ -21,12 +23,30 @@ class Dashboard extends Component {
 				<div className="row">
 					<h1>
 						<span className="purple-text">Explore </span>
-						<HelpBox
-							header="Explore here!"
-							placement="right-start"
-							desc="This is the main page of MLforALL. Here you can see projects that other people have been working on! Click on any one of the cards below to enter an interactive experience of testing their classification models."
-						/>
 					</h1>
+					<h4 style={{ float: "left" }}>
+						See what others are up to.
+					</h4>
+					<FormControl style={{ float: "right" }}>
+						<span>
+							Sort By:{" "}
+							<Select
+								value={this.state.orderBy}
+								onChange={(e) =>
+									this.setState({ orderBy: e.target.value })
+								}
+								displayEmpty>
+								<MenuItem value="createdAt">Date</MenuItem>
+								<MenuItem value="title">Title</MenuItem>
+								<MenuItem value="authorFirstName">
+									First Name
+								</MenuItem>
+								<MenuItem value="authorLastName">
+									Last Name
+								</MenuItem>
+							</Select>
+						</span>
+					</FormControl>
 				</div>
 				{/*<div className="row">
 					<Notifications notifications={notifications} />

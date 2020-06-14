@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProjectSummary from "./projectsummary";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -69,10 +70,13 @@ class ProjectList extends Component {
 		//console.log("pLOAD", this.state.pLoad);
 		return (
 			<div className="project-list section">
-				{this.state.pLoad
-					? console.log("grouping", grouped(projects))
-					: console.log("grouping not loaded")}
-				{this.state.pLoad ? grouped(projects).map(mapPairs) : []}
+				{this.state.pLoad ? (
+					grouped(projects).map(mapPairs)
+				) : (
+					<div className="container center">
+						<CircularProgress />
+					</div>
+				)}
 			</div>
 		);
 	}
@@ -88,12 +92,12 @@ const mapStateToProps = (state) => {
 export default compose(
 	connect(mapStateToProps),
 	firestoreConnect((ownProps) => {
-		if (!ownProps.uid) {
+		if (ownProps.uid && !ownProps.limit) {
 			return [
 				{
 					collection: "projects",
+					where: [["authorID", "==", ownProps.uid]],
 					orderBy: [ownProps.orderBy, ownProps.direction],
-					limit: ownProps.limit,
 					startAt: 0
 				}
 			];
@@ -101,7 +105,6 @@ export default compose(
 			return [
 				{
 					collection: "projects",
-					where: [["authorID", "==", ownProps.uid]],
 					orderBy: [ownProps.orderBy, ownProps.direction],
 					limit: ownProps.limit,
 					startAt: 0
