@@ -13,12 +13,24 @@ const greetings = () => {
 	return hi[index];
 };
 
+const greeting = greetings();
+
 class MyProjects extends Component {
 	state = {
 		orderBy: "createdAt",
 		startAt: 0,
-		direction: "desc"
+		direction: "desc",
+		greet: ""
 	};
+	componentDidUpdate() {
+		if (this.state.greet === "") {
+			this.setState({
+				greet: this.props.profile.isLoaded
+					? greeting + " " + this.props.profile.firstName + "!"
+					: ""
+			});
+		}
+	}
 	render() {
 		const { auth, profile } = this.props;
 		console.log("THIS IS prof", profile);
@@ -43,11 +55,7 @@ class MyProjects extends Component {
 								/>
 							</span>
 						</h1>
-						<h4 style={{ float: "left" }}>
-							{profile.isLoaded
-								? greetings() + " " + profile.firstName + "!"
-								: ""}
-						</h4>
+						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
 						<FormControl style={{ float: "right" }}>
 							<span>
 								Sort By:{" "}
