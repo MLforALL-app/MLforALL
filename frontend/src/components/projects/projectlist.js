@@ -5,17 +5,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 
-function mapDepends(projects, uid) {
-	if (projects && uid) {
-		// console.log("MAP DEPENDS if", projects);
-		return projects.filter((p) => p.authorID === uid);
-	} else {
-		// console.log("MAP DEPENDS else", projects);
-		return projects;
-	}
-}
-
-function makeLink(proj) {
+const makeLink = (proj) => {
 	console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
 		<div className="col s12 m6" key={proj.id}>
@@ -24,9 +14,9 @@ function makeLink(proj) {
 			</Link>
 		</div>
 	);
-}
+};
 
-function grouped(projects) {
+const grouped = (projects) => {
 	const group = [];
 	for (var i = 0; i < projects.length; i++) {
 		if (i < projects.length - 1) {
@@ -38,9 +28,9 @@ function grouped(projects) {
 	}
 	//console.log("THIS IS GROUPED", group);
 	return group;
-}
+};
 
-function mapPairs(pair) {
+const mapPairs = (pair) => {
 	console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
@@ -56,15 +46,20 @@ function mapPairs(pair) {
 			</div>
 		);
 	}
-}
+};
 
 class ProjectList extends Component {
 	state = {
 		pLoad: false,
-		check: true
+		check: true,
+		pList: []
 	};
 	componentDidUpdate() {
 		console.log("UPDATE", this.props.projects);
+		console.log(
+			"update pLoad",
+			this.props.projects && this.props.projects.length !== 0
+		);
 		if (this.state.check) {
 			this.setState({
 				pLoad: this.props.projects && this.props.projects.length !== 0,
@@ -74,26 +69,20 @@ class ProjectList extends Component {
 	}
 	render() {
 		const { projects, auth } = this.props;
-		console.log("RENDER", projects);
-		console.log("STATE", this.state);
+		console.log("RENDER PROJECT", projects);
+		console.log("pLOAD", this.state.pLoad);
 		return (
 			<div className="project-list section">
 				{this.state.pLoad
-					? grouped(mapDepends(projects, auth.uid)).map(mapPairs)
-					: []}
-				{console.log(
-					this.state.pLoad
-						? grouped(mapDepends(projects, auth.uid)).map(mapPairs)
-						: "davis is troll"
-				)}
+					? console.log("grouping", grouped(projects))
+					: console.log("grouping not loaded")}
+				{this.state.pLoad ? grouped(projects).map(mapPairs) : []}
 			</div>
 		);
 	}
 }
 
-const mapStateToProps = (state, ownProps) => {
-	console.log(ownProps);
-	console.log("map state to", state.firestore.ordered.projects);
+const mapStateToProps = (state) => {
 	return {
 		projects: state.firestore.ordered.projects,
 		auth: state.firebase.auth
@@ -102,13 +91,13 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect((props) => {
-		console.log("CONNECT PROPS", props);
+	firestoreConnect((ownProps) => {
 		return [
 			{
 				collection: "projects",
-				orderBy: ["createdAt", "desc"],
-				limit: 2
+				orderBy: [ownProps.orderBy, ownProps.direction],
+				limit: ownProps.limit,
+				startAt: ownProps.startAt
 			}
 		];
 	})

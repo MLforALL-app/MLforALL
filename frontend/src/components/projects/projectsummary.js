@@ -2,7 +2,6 @@ import React from "react";
 import moment from "moment";
 
 const ProjectSummary = ({ project }) => {
-	console.log("PROJECT RECIEIVED: ", project);
 	const shorten = (s) => {
 		return s.length < 15 ? s : s.substr(0, 13) + "..";
 	};

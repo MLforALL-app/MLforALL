@@ -7,9 +7,10 @@ import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
 	state = {
-		orderBy: "createdAt",
-		limit: 2,
-		direction: "desc"
+		orderBy: "authorFirstName",
+		limit: 5,
+		startAt: 0,
+		direction: "asc"
 	};
 	render() {
 		const { auth } = this.props;
@@ -30,11 +31,11 @@ class Dashboard extends Component {
 				{/*<div className="row">
 					<Notifications notifications={notifications} />
 				</div>*/}
-				{console.log("DASH STATE", this.state)}
 				<ProjectList
 					orderBy={this.state.orderBy}
 					limit={this.state.limit}
 					direction={this.state.direction}
+					startAt={this.state.startAt}
 				/>
 			</div>
 		);
