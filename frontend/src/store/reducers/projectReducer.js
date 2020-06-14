@@ -57,7 +57,7 @@ const projectReducer = (state = initState, action) => {
 						svm: false,
 					},
 				}
-			}
+			};
 		case "UPDATE_NAN":
 			console.log(action.data); 
 			return {
@@ -66,7 +66,7 @@ const projectReducer = (state = initState, action) => {
 					...state.currentWorkingProject,
 					nanMethod : action.data 
 				}
-			}
+			};
 		case "UPDATE_ML":
 			return {
 				...state,
@@ -74,14 +74,22 @@ const projectReducer = (state = initState, action) => {
 					...state.currentWorkingProject,
 					modelList : action.data 
 				}
-			}
+			};
 		case "CSV_DATA_IN_STORE":
 			return {
 				...state, 
 				csvData: action.data
-			}
+			};
 		case "CSV_FETCH_ERROR":
 			return state;
+		case "UPDATE_TP":
+			return {
+				...state, 
+				currentWorkingProject : {
+					...state.currentWorkingProject,
+					targetParameter : action.data 
+				}
+			};
 		default:
 			return state;
 	}

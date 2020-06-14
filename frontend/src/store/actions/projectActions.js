@@ -68,7 +68,7 @@ export const setWorkingProject = (project, pid) => {
 		console.log(pid);
 		dispatch({type : "SET_CURRENT_WORKING_PROJECT", project, pid, uid});
 	};
-}
+};
 
 export const updateCurrentWorkingProject = (param, data) => {
 	return (dispatch) => {
@@ -80,6 +80,8 @@ export const updateCurrentWorkingProject = (param, data) => {
 			case "modelList" :
 				dispatch({type : "UPDATE_ML", param, data});
 				break;
+			case "targetParameter" :
+				dispatch({type : "UPDATE_TP", param, data})
 		}
 		
 	};
@@ -118,7 +120,7 @@ export const initCSV = (project, projID) => {
 				dispatch({type: "CSV_FETCH_ERROR"});
 			});
 	}
-}
+};
 
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {

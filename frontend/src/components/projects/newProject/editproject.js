@@ -9,10 +9,7 @@ import UploadCSV from "./uploadcsv";
 import { setWorkingProject, initCSV  } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
-
-
-
-
+import ModelOutput from "./editpage/modeloutput";
 
 class EditProject extends Component {
 	state = {
@@ -70,6 +67,9 @@ class EditProject extends Component {
 				waitForCSVUpload: false
 			});
 		}
+		if (project_process >= 2){
+			console.log(this.props.currentWorkingProject);
+		}
 	};
 
 	render() {
@@ -103,8 +103,13 @@ class EditProject extends Component {
 							) : (
 							<NanHandler project = {this.props.project}/>
 							)}
-							<DisplayCSV project={project} id={projectID} />
-							<ModelSelect project={project} id = {projectID} cp = {this.props.currentWorkingProject}/>
+							{this.props.csvData ? (
+								<DisplayCSV project={project} id={projectID} />
+							):(
+								<p>Waiting for csvData</p>
+							)}
+							<ModelOutput project={project} id={projectID}/>
+							<ModelSelect project={project} id={projectID}/>
 						</div>
 						
 					) : (
@@ -129,7 +134,7 @@ const mapStateToProps = (state, props) => {
 		auth: state.firebase.auth,
 		csvLoaded: state.project.csvLoaded,
 		currentWorkingProject: state.project.currentWorkingProject,
-		csvUrl : state.project.csvUrl 
+		csvData : state.project.csvData 
 	};
 };
 

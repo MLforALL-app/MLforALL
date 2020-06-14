@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Papa from "papaparse";
 import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
@@ -96,7 +95,7 @@ class DisplayCSV extends Component {
 		inputs: {},
 		output: "",
 		redirect: false,
-		loading: true,
+		loading: false,
 		error: false
 	};
 	// Handlers for things on the page
@@ -223,16 +222,14 @@ class DisplayCSV extends Component {
 				this.setState({ error: true });
 			});
 	};
-	componentDidMount = () => {
-		//this.initCSV();
-	};
+
 	componentDidUpdate = () => {
 		if(this.state.loading === true && this.props.csvData !== ""){
 			this.setState({
 				csvArray : this.props.csvData,
 				loading : false
 			})
-			console.log(this.state.csvArray);
+			console.log(this.props.csvData,);
 		}
 	}
 
@@ -244,7 +241,7 @@ class DisplayCSV extends Component {
 				) : (
 					<span></span>
 				)}
-				{this.state.csvArray.length === 0 ? (
+				{(this.props.csvData && this.props.csvData.length) === 0 ? (
 					<div className="container center">
 						<CircularProgress />
 					</div>
@@ -270,9 +267,9 @@ class DisplayCSV extends Component {
 								height={400}
 								headerHeight={60}
 								rowHeight={25}
-								rowCount={this.state.csvArray.length}
+								rowCount={this.props.csvData.length}
 								rowGetter={({ index }) =>
-									this.state.csvArray[index]
+									this.props.csvData[index]
 								}
 								rowClassName={({ index }) => {
 									if (index < 0) {
@@ -285,42 +282,11 @@ class DisplayCSV extends Component {
 								}}
 							>
 								{this.getColumns(
-									Object.keys(this.state.csvArray[0])
+									Object.keys(this.props.csvData[0])
 								)}
 							</Table>
 						</div>
-						<div className="row container">
-							<h5>
-								<b>
-									2. In order to predict this output
-									parameter:{" "}
-									<FormControl>
-										<Select
-											value={this.state.output}
-											onChange={this.handleDropdownOutput}
-											displayEmpty
-										>
-											{this.getMenuItems(
-												Object.keys(
-													this.state.csvArray[0]
-												)
-											)}
-										</Select>
-										<FormHelperText>
-											Output Parameter
-										</FormHelperText>
-									</FormControl>
-									{"  "}
-									<span className="pink-text">
-										<HelpBox
-											header="Output Dropdown"
-											placement="right"
-											desc="Use this dropdown menu to select what column you would like to designate as your output value. This is the parameter that your machine learning model will try to predict!"
-										/>
-									</span>
-								</b>
-							</h5>
-						</div>
+						
 
 						<div className="row" style={{ padding: "2rem" }}>
 							{this.getStatus(
@@ -352,7 +318,7 @@ class DisplayCSV extends Component {
 	}
 }
 
-const mapStatetoProps = (state, ownProps) => {
+const mapStatetoProps = (state) => {
 	return {
 		auth: state.firebase.auth,
 		csvData: state.project.csvData
