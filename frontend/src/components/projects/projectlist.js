@@ -1,16 +1,18 @@
 import React, { Component } from "react";
 import ProjectSummary from "./projectsummary";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+import { db } from "../../config/fbConfig";
+import "../../styling/dashboard.css";
 
 const makeLink = (proj) => {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
-		<div className="col s12 m6" key={proj.id}>
-			<Link to={`/project/${proj.id}`}>
+		<div className="col s12 m6" key={proj.pid}>
+			<Link to={`/project/${proj.pid}`}>
 				<ProjectSummary project={proj} />{" "}
 			</Link>
 		</div>
@@ -27,21 +29,26 @@ const grouped = (projects) => {
 			group.push([projects[i]]);
 		}
 	}
-	//console.log("THIS IS GROUPED", group);
 	return group;
 };
 
 const mapPairs = (pair) => {
-	//console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
-			<div className="row" key={pair[0].id}>
+			<div className="row" key={pair[0].authorID + pair[0].title}>
 				{makeLink(pair[0])}
 			</div>
 		);
 	} else {
 		return (
-			<div className="row" key={pair[0].id}>
+			<div
+				className="row"
+				key={
+					pair[0].authorID +
+					pair[1].authorID +
+					pair[0].title +
+					pair[1].title
+				}>
 				{makeLink(pair[0])}
 				{makeLink(pair[1])}
 			</div>
@@ -52,31 +59,86 @@ const mapPairs = (pair) => {
 class ProjectList extends Component {
 	state = {
 		pLoad: false,
-		check: true,
-		pList: []
+		projects: [],
+		lastVisible: null,
+		count: 0,
+		index: 0
 	};
-	componentDidUpdate() {
-		//console.log("UPDATE", this.props.projects);
-		if (this.state.check) {
-			this.setState({
-				pLoad: this.props.projects && this.props.projects.length !== 0,
-				check: false
+	// doc map helper
+	docMap(doc) {
+		var proj = doc.data();
+		proj["pid"] = doc.id;
+		return proj;
+	}
+	initProjects() {
+		// Get first round of projects
+		this.setState({ pLoad: false });
+		const { orderBy, direction, limit } = this.props;
+		console.log("init state", this.state);
+		// temporarily make limit large
+		db.collection("projects")
+			.orderBy(orderBy, direction)
+			.limit(20)
+			.get()
+			.then((documentSnapshots) => {
+				var docList = documentSnapshots.docs;
+				this.setState({
+					projects: docList.map(this.docMap),
+					pLoad: true
+				});
 			});
-		}
+	}
+	handleClick(dir) {
+		const { count, projects, lastVisible } = this.state;
+		const { limit } = this.props;
+		const direction = dir === "next" ? 1 : -1;
+		return () => {
+			//check if maybe loading not necessary
+			if (count * limit < projects.length) {
+				this.setState((prev) => {
+					return {
+						index: prev.index + limit * direction,
+						count: prev.count + direction
+					};
+				});
+			}
+			//if not, readjust index
+			//else, make query
+		};
+	}
+	componentDidMount() {
+		this.initProjects();
 	}
 	render() {
-		const { projects } = this.props;
-		//console.log("RENDER PROJECT", projects);
-		//console.log("pLOAD", this.state.pLoad);
+		const { projects, pLoad, count, index } = this.state;
+		const { limit } = this.props;
+		console.log("Render", this.state);
+		console.log(count);
+
 		return (
 			<div className="project-list section">
-				{this.state.pLoad ? (
-					grouped(projects).map(mapPairs)
+				{pLoad
+					? console.log("slice", projects.slice(index, index + limit))
+					: "'"}
+				{pLoad ? (
+					grouped(projects.slice(index, index + limit)).map(mapPairs)
 				) : (
 					<div className="container center">
 						<CircularProgress />
 					</div>
 				)}
+				<div className="row pagination-select">
+					<h4 className="purple-text center">
+						{" "}
+						<span onClick={this.handleClick("before")}>
+							<NavigateBeforeIcon className="pagination-icon" />
+						</span>{" "}
+						{count + 1}{" "}
+						<span onClick={this.handleClick("next")}>
+							<NavigateNextIcon className="pagination-icon" />
+						</span>
+					</h4>
+				</div>
 			</div>
 		);
 	}
@@ -84,32 +146,8 @@ class ProjectList extends Component {
 
 const mapStateToProps = (state) => {
 	return {
-		projects: state.firestore.ordered.projects,
 		auth: state.firebase.auth
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect((ownProps) => {
-		if (ownProps.uid && !ownProps.limit) {
-			return [
-				{
-					collection: "projects",
-					where: [["authorID", "==", ownProps.uid]],
-					orderBy: [ownProps.orderBy, ownProps.direction],
-					startAt: 0
-				}
-			];
-		} else {
-			return [
-				{
-					collection: "projects",
-					orderBy: [ownProps.orderBy, ownProps.direction],
-					limit: ownProps.limit,
-					startAt: 0
-				}
-			];
-		}
-	})
-)(ProjectList);
+export default connect(mapStateToProps)(ProjectList);

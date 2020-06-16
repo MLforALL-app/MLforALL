@@ -1,0 +1,11 @@
+.pagination-icon {
+	transform: scale(3);
+	transition: transform 100ms;
+}
+.pagination-icon:hover {
+	transform: scale(3.5);
+	color: #f8bbd0;
+}
+.pagination-select {
+	height: 2rem;
+}

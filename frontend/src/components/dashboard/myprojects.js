@@ -75,7 +75,7 @@ class MyProjects extends Component {
 					</div>
 					<ProjectList
 						orderBy={this.state.orderBy}
-						limit={this.state.limit}
+						limit={0}
 						direction={this.state.direction}
 						startAt={this.state.startAt}
 						uid={auth.uid}
