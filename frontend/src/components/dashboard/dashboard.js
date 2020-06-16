@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import Notifications from "./notifcations";
-import ProjectList from "../projects/projectlist";
+import ProjectList from "../projects/projectList/projectlist";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 4,
+		limit: 2,
 		startAt: 0,
 		direction: "desc"
 	};
@@ -18,6 +18,7 @@ class Dashboard extends Component {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
+		//if (refresh) return <Redirect to="/dashboard" />;
 		return (
 			<div className="dashboard container">
 				<div className="row">
@@ -33,7 +34,10 @@ class Dashboard extends Component {
 							<Select
 								value={this.state.orderBy}
 								onChange={(e) =>
-									this.setState({ orderBy: e.target.value })
+									this.setState({
+										orderBy: e.target.value,
+										refresh: true
+									})
 								}
 								displayEmpty>
 								<MenuItem value="createdAt">Date</MenuItem>

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ProjectList from "../projects/projectlist";
+import ProjectList from "../projects/projectList/projectlist";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
