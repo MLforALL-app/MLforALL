@@ -10,8 +10,7 @@ import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 2,
-		startAt: 0,
+		limit: 4,
 		direction: "desc"
 	};
 	render() {
@@ -59,7 +58,6 @@ class Dashboard extends Component {
 					orderBy={this.state.orderBy}
 					limit={this.state.limit}
 					direction={this.state.direction}
-					startAt={this.state.startAt}
 				/>
 			</div>
 		);

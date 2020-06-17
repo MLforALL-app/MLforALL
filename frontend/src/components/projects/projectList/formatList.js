@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 const makeLink = (proj) => {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
-		<div className="col s12 m6" key={proj.id}>
-			<Link to={`/project/${proj.id}`}>
+		<div className="col s12 m6" key={proj.pid}>
+			<Link to={`/project/${proj.pid}`}>
 				<ProjectSummary project={proj} />{" "}
 			</Link>
 		</div>
@@ -32,7 +32,7 @@ const mapPairs = (pair) => {
 	//console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
-			<div className="row" key={pair[0].id}>
+			<div className="row" key={pair[0].pid}>
 				{makeLink(pair[0])}
 			</div>
 		);
@@ -46,9 +46,9 @@ const mapPairs = (pair) => {
 	}
 };
 
-const FormatList = ({ projects, loaded }) => {
-	if (loaded) {
-		return grouped(projects.flat()).map(mapPairs);
+const FormatList = ({ projects }) => {
+	if (projects) {
+		return grouped(projects).map(mapPairs);
 	} else {
 		return (
 			<div className="container center">
