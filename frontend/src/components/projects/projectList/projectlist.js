@@ -11,8 +11,8 @@ class ProjectList extends Component {
 		page: 0,
 		maxPage: 0,
 		projects: [],
-		nextPage: [],
-		lastVisible: []
+		lastVisible: [],
+		nextPage: null
 	};
 	tail(list) {
 		return list[list.length - 1];
@@ -122,14 +122,18 @@ class ProjectList extends Component {
 	}
 	render() {
 		const { projects, page } = this.state;
+		const { limit } = this.props;
 		console.log("page number", page);
 		console.log("RENDER PROJECT", projects[page]);
 		console.log("pLOAD", this.state.pLoad);
+		const showNext = projects[page]
+			? projects[page].length === limit
+			: true; // not sure
 		return (
 			<div className="project-list section">
 				<FormatList projects={projects[page]} />
 				<div className="row pagination-select">
-					{this.pageArrows(true, true)}
+					{this.pageArrows(page > 0, showNext)}
 				</div>
 			</div>
 		);
