@@ -1,0 +1,39 @@
+.card-action {
+	border-bottom-left-radius: 30px !important;
+	border-bottom-right-radius: 30px !important;
+	background-color: #283593 !important;
+	color: white;
+	height: 55px;
+}
+.card {
+	border-radius: 30px;
+	background-color: white;
+	color: black;
+	animation-name: card;
+	animation-duration: 500ms;
+	animation-iteration-count: 1;
+}
+@keyframes card {
+	0% {
+		transform: scale(0.95);
+	}
+	5% {
+		transform: scale(0.96);
+	}
+	10% {
+		transform: scale(0.97);
+	}
+	15% {
+		transform: scale(0.98);
+	}
+	20% {
+		transform: scale(0.99);
+	}
+	100% {
+		transform: scale(1);
+	}
+}
+.card-content {
+	border-top-left-radius: 30px !important;
+	border-top-right-radius: 30px !important;
+}

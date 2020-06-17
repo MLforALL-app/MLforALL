@@ -44,6 +44,8 @@
 }
 .anchor-160 {
 	width: 160px;
+	border-width: 2px;
+	border-style: solid;
 }
 .header-subrow {
 	padding: 10px;

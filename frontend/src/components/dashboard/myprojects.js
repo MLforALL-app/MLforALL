@@ -1,16 +1,39 @@
 import React, { Component } from "react";
-import ProjectList from "../projects/projectlist";
+import ProjectList from "../projects/projectList/projectlist";
+import SortForm from "./sortform";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
-import HelpBox from "../layouts/helpbox";
-//import fetchMine from "./fetchmine";
+
+/*
+const greetings = () => {
+	const hi = ["Howdy", "Hello", "Hi there", "What's up"];
+	const index = Math.floor(Math.random() * hi.length);
+	return hi[index];
+};
+const greeting = greetings();
+*/
 
 class MyProjects extends Component {
+	state = {
+		orderBy: "createdAt",
+		direction: false, // false = desc, true = asc
+		limit: 8,
+		greet: "Welcome to your central hub."
+	};
+	componentDidUpdate() {
+		/*
+		if (this.state.greet === "Hello") {
+			this.setState({
+				greet: this.props.profile.isLoaded
+					? greeting + " " + this.props.profile.firstName + "!"
+					: ""
+			});
+		}
+		*/
+	}
 	render() {
-		const { projects, auth } = this.props;
-		//const projects = fetchMine(auth.uid);
+		const { auth } = this.props;
+		//console.log("THIS IS prof", profile);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
@@ -21,17 +44,34 @@ class MyProjects extends Component {
 		return (
 			<div>
 				<div className="dashboard container">
-					<h1>
-						<span className="purple-text">
-							My models.{" "}
-							<HelpBox
-								header="My models"
-								placement="right-start"
-								desc="Click on the cards to view your classification models!"
-							/>
-						</span>
-					</h1>
-					<ProjectList projects={projects} uid={auth.uid} />
+					<div className="row">
+						<h1>
+							<span className="purple-text">My models. </span>
+						</h1>
+						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
+						<SortForm
+							handleDropChange={(e) =>
+								this.setState({
+									orderBy: e.target.value
+								})
+							}
+							handleSwitchChange={() =>
+								this.setState((prev) => {
+									return { direction: !prev.direction };
+								})
+							}
+							orderBy={this.state.orderBy}
+							direction={this.state.direction}
+							me={true}
+						/>
+					</div>
+					{/* For now myprojects page has no pages */}
+					<ProjectList
+						orderBy={this.state.orderBy}
+						limit={this.state.limit}
+						direction={this.state.direction}
+						uid={auth.uid}
+					/>
 					<div className="video center">
 						<Link to="/create">
 							<div className="btn btn-sec waves-effect waves-light z-depth-0">
@@ -46,16 +86,29 @@ class MyProjects extends Component {
 }
 
 const mapStateToProps = (state) => {
-	//console.log(state);
 	return {
-		projects: state.firestore.ordered.projects,
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		profile: state.firebase.profile
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([
-		{ collection: "projects", orderBy: ["createdAt", "desc"] }
-	])
-)(MyProjects);
+export default connect(mapStateToProps)(MyProjects);
+
+/*
+	<FormControl style={{ float: "right" }}>
+							<span>
+								Sort By:{" "}
+								<Select
+									value={this.state.orderBy}
+									onChange={(e) =>
+										this.setState({
+											orderBy: e.target.value
+										})
+									}
+									displayEmpty>
+									<MenuItem value="createdAt">Date</MenuItem>
+									<MenuItem value="title">Title</MenuItem>
+								</Select>
+							</span>
+						</FormControl>
+*/

@@ -55,6 +55,7 @@ const mapStateToProps = (state, ownProps) => {
 	const pid = ownProps.match.params.pid;
 	const projects = state.firestore.data.projects;
 	const project = projects ? projects[pid] : null;
+	// lets change this to somehow query in firestoreConnect
 	return {
 		pid,
 		project,

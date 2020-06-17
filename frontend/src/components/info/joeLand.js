@@ -218,8 +218,8 @@ class JoeLand extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	console.log(ownProps);
-	console.log("TODO, CHANGE LINK TO DEPENDING ON PAGE");
+	//console.log(ownProps);
+	//console.log("TODO, CHANGE LINK TO DEPENDING ON PAGE");
 	return {
 		auth: state.firebase.auth
 	};

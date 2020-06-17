@@ -1,0 +1,29 @@
+getProjects() {
+		// general function for getting projects
+		this.setState({ pLoad: false });
+		const { orderBy, direction, limit } = this.props;
+		const { startAt, count } = this.state;
+		console.log("getPorjects count", count);
+		console.log("getPorjects startAt", startAt);
+		console.log("getPorjects startAt length", startAt.length);
+		// check invariants
+		// start at whatever count you're at for pages
+		db.collection("projects")
+			.orderBy(orderBy, direction)
+			.limit(limit)
+			.startAfter(startAt[count])
+			.get()
+			.then((documentSnapshots) => {
+				var docList = documentSnapshots.docs;
+				const lastVisible = docList[docList.length - 1];
+				this.setState((prev) => {
+					prev.startAt.push(lastVisible);
+					console.log("map", docList.map(this.docMap));
+					return {
+						projects: docList.map(this.docMap),
+						startAt: prev.startAt,
+						pLoad: true
+					};
+				});
+			});
+	}
