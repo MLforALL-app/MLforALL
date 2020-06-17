@@ -47,14 +47,7 @@ class MyProjects extends Component {
 				<div className="dashboard container">
 					<div className="row">
 						<h1>
-							<span className="purple-text">
-								My models.{" "}
-								<HelpBox
-									header="My models"
-									placement="right-start"
-									desc="Click on the cards to view your classification models!"
-								/>
-							</span>
+							<span className="purple-text">My models. </span>
 						</h1>
 						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
 						<SortForm
