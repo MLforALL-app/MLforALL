@@ -18,8 +18,8 @@ const greeting = greetings();
 class MyProjects extends Component {
 	state = {
 		orderBy: "createdAt",
-		startAt: 0,
 		direction: "desc",
+		limit: 5,
 		greet: ""
 	};
 	componentDidUpdate() {
@@ -75,9 +75,8 @@ class MyProjects extends Component {
 					</div>
 					<ProjectList
 						orderBy={this.state.orderBy}
-						limit={0}
+						limit={this.state.limit}
 						direction={this.state.direction}
-						startAt={this.state.startAt}
 						uid={auth.uid}
 					/>
 					<div className="video center">

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const makeLink = (proj) => {
 	//console.log("THIS IS PROJ FOR MAKELINK", proj);
 	return (
-		<div className="col s12 m6" key={proj.pid}>
+		<div className="col s12 m6" key={`link_${proj.pid}`}>
 			<Link to={`/project/${proj.pid}`}>
 				<ProjectSummary project={proj} />{" "}
 			</Link>
@@ -32,13 +32,13 @@ const mapPairs = (pair) => {
 	//console.log("PAIR", pair);
 	if (pair.length < 2) {
 		return (
-			<div className="row" key={pair[0].pid}>
+			<div className="row" key={`row_${pair[0].pid}`}>
 				{makeLink(pair[0])}
 			</div>
 		);
 	} else {
 		return (
-			<div className="row" key={pair[0].id}>
+			<div className="row" key={`row_${pair[0].pid}`}>
 				{makeLink(pair[0])}
 				{makeLink(pair[1])}
 			</div>

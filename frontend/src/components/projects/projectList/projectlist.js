@@ -24,25 +24,42 @@ class ProjectList extends Component {
 	}
 	pageArrows(showPrev, showNext) {
 		var arrows = { left: null, right: null };
-		if (showPrev) {
-			arrows.left = (
-				<span onClick={this.handleClick("before")}>
-					<NavigateBeforeIcon className="pagination-icon" />{" "}
-				</span>
+		if (showPrev || showNext || this.state.page > 0) {
+			if (showPrev) {
+				arrows.left = (
+					<span onClick={this.handleClick("before")}>
+						<NavigateBeforeIcon className="pagination-icon" />{" "}
+					</span>
+				);
+			}
+			if (showNext) {
+				arrows.right = (
+					<span onClick={this.handleClick("next")}>
+						<NavigateNextIcon className="pagination-icon" />
+					</span>
+				);
+			}
+			return (
+				<h4 className="purple-text center">
+					{arrows.left} {this.state.page + 1} {arrows.right}
+				</h4>
 			);
+		} else {
+			return <span></span>;
 		}
-		if (showNext) {
-			arrows.right = (
-				<span onClick={this.handleClick("next")}>
-					<NavigateNextIcon className="pagination-icon" />
-				</span>
-			);
-		}
-		return (
-			<h4 className="purple-text center">
-				{arrows.left} {this.state.page + 1} {arrows.right}
-			</h4>
-		);
+	}
+	initUserProjects() {
+		// don't have pagination for an indivdual user's projects
+		const { orderBy, direction, uid } = this.props;
+		const ref = db.collection("projects");
+		const query = ref
+			.orderBy(orderBy, direction)
+			.where("authorID", "==", uid)
+			.get();
+		query.then((documentSnapshot) => {
+			const myProjects = documentSnapshot.docs.map(this.docMap);
+			this.setState({ projects: [myProjects] });
+		});
 	}
 	initProjects() {
 		// put the first page in "next" to be called by getProject
@@ -109,26 +126,31 @@ class ProjectList extends Component {
 				return { page: prev.page + direction };
 			});
 			if (page >= maxPage) {
-				console.log("click! YES if getting projects...");
+				console.log("click! YES getting projects...");
 				this.getProjects();
 			} else {
-				console.log("click! Yes else getting.");
-				this.getProjects();
+				console.log("click! NO else getting.");
 			}
 		};
 	}
 	componentDidMount() {
-		this.initProjects();
+		if (this.props.uid) {
+			this.initUserProjects();
+		} else {
+			this.initProjects();
+		}
 	}
 	render() {
 		const { projects, page } = this.state;
-		const { limit } = this.props;
-		console.log("page number", page);
-		console.log("RENDER PROJECT", projects[page]);
-		console.log("pLOAD", this.state.pLoad);
-		const showNext = projects[page]
+		const { limit, uid } = this.props;
+		console.log("render page", projects[page]);
+		console.log("STATE OF PROJECTS");
+		console.log("projects:", projects);
+		console.log("end state of porjects");
+		const shownextpre = projects[page]
 			? projects[page].length === limit
 			: true; // not sure
+		const showNext = uid ? false : shownextpre;
 		return (
 			<div className="project-list section">
 				<FormatList projects={projects[page]} />
