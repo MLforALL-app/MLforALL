@@ -1,3 +1,4 @@
+/*
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
 
@@ -50,3 +51,4 @@ exports.userJoined = functions.auth.user().onCreate((user) => {
 			return createNotification(notification);
 		});
 });
+*/
