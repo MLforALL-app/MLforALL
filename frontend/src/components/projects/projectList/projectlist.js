@@ -122,15 +122,16 @@ class ProjectList extends Component {
 		const direction = dir === "next" ? 1 : -1;
 		const { page, maxPage } = this.state;
 		return () => {
-			this.setState((prev) => {
-				return { page: prev.page + direction };
-			});
-			if (page >= maxPage) {
+			// figure out the off by one errors here
+			if (page >= maxPage - 1) {
 				console.log("click! YES getting projects...");
 				this.getProjects();
 			} else {
 				console.log("click! NO else getting.");
 			}
+			this.setState((prev) => {
+				return { page: prev.page + direction };
+			});
 		};
 	}
 	componentDidMount() {
