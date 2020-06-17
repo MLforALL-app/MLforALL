@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectList/projectlist";
-import MenuItem from "@material-ui/core/MenuItem";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import FormControl from "@material-ui/core/FormControl";
+// import Select from "@material-ui/core/Select";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import HelpBox from "../layouts/helpbox";
@@ -56,22 +56,7 @@ class MyProjects extends Component {
 							</span>
 						</h1>
 						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
-						<FormControl style={{ float: "right" }}>
-							<span>
-								Sort By:{" "}
-								<Select
-									value={this.state.orderBy}
-									onChange={(e) =>
-										this.setState({
-											orderBy: e.target.value
-										})
-									}
-									displayEmpty>
-									<MenuItem value="createdAt">Date</MenuItem>
-									<MenuItem value="title">Title</MenuItem>
-								</Select>
-							</span>
-						</FormControl>
+						{/* insert form here */}
 					</div>
 					<ProjectList
 						orderBy={this.state.orderBy}
@@ -101,3 +86,22 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(MyProjects);
+
+/*
+	<FormControl style={{ float: "right" }}>
+							<span>
+								Sort By:{" "}
+								<Select
+									value={this.state.orderBy}
+									onChange={(e) =>
+										this.setState({
+											orderBy: e.target.value
+										})
+									}
+									displayEmpty>
+									<MenuItem value="createdAt">Date</MenuItem>
+									<MenuItem value="title">Title</MenuItem>
+								</Select>
+							</span>
+						</FormControl>
+*/

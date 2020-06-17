@@ -10,7 +10,7 @@ import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 4,
+		limit: 8,
 		direction: "desc"
 	};
 	render() {
@@ -27,7 +27,7 @@ class Dashboard extends Component {
 					<h4 style={{ float: "left" }}>
 						See what others are up to.
 					</h4>
-					insert form here
+					{/* insert form here */}
 				</div>
 				{/*<div className="row">
 					<Notifications notifications={notifications} />
