@@ -8,7 +8,6 @@ class CreateProject extends Component {
 	state = {
 		title: ""
 	};
-
 	handleChange = (e) => {
 		this.setState({
 			[e.target.id]: e.target.value
@@ -16,14 +15,8 @@ class CreateProject extends Component {
 	};
 	handleSubmit = (e) => {
 		e.preventDefault();
-		//this.props.uploadCSV(this.state.csvName, this.state.title);
 		this.props.createProject(this.state);
-		// can we do something like
-		// this.props.history.push("/me") to get to UID?
-		//this.props.initProject();
-		//this.props.history.push("/dashboard");
 	};
-
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;

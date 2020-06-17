@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import CreateProject from "./createproject";
+import CreateLanding from "./createlanding";
 
 class CreateProjectContainer extends Component {
 	goToProjectEdit = () => {
@@ -18,7 +18,7 @@ class CreateProjectContainer extends Component {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		return <CreateProject />;
+		return <CreateLanding />;
 	}
 }
 

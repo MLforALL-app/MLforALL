@@ -15,3 +15,8 @@
 	color: #dcdcdc !important;
 	background-color: #1d276e !important;
 }
+.create-animation {
+	animation-name: card;
+	animation-duration: 350ms;
+	animation-iteration-count: 1;
+}
