@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-export const nameMapper = (name) => {
+const nameMapper = (name) => {
 	switch (name) {
 		case "":
 			return "Nothing Selected Yet";

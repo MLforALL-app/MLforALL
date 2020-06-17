@@ -6,18 +6,54 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
-import { setWorkingProject, initCSV  } from "../../../store/actions/projectActions";
+import { setWorkingProject, initCSV, buildModels, updateContent  } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
 
+const 	addSpace = (list) => {
+	return list.map((s) => " " + s);
+};
+
+const nameMapper = (name) => {
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression";
+		case "gnb":
+			return "Gauss Naive Bayes";
+		case "knn":
+			return "K-Nearest Neighbors";
+		case "svm":
+			return "Support Vector Machine";
+		case "clf":
+			return "Decision Tree Classifier";
+		case "lda":
+			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
+};
+
+const filterObj = (objState) => {
+	return Object.entries(objState)
+		.filter(([key, val]) => val)
+		.map(([key, val]) => key);
+};
+
+
+
 class EditProject extends Component {
 	state = {
 		projectState: "init",
 		waitForCSVUpload: false,
-		pLoad: false
+		pLoad: false,
+		submitLoad: false,
 	};
+	
+
 	determineProjectState = () => {
 		if (!this.props.project) {
 			return 0;
@@ -52,7 +88,7 @@ class EditProject extends Component {
 						waitForCSVUpload: true
 					});
 				}
-				if (project_process >= 2){
+				if (project_process >= 3){
 					this.props.setWorkingProject(this.props.project, this.props.projectID);
 					console.log("CALLING INIT CSV", this.props.project, this.props.projectID);
 					this.props.initCSV(this.props.project, this.props.projectID);
@@ -68,9 +104,37 @@ class EditProject extends Component {
 				waitForCSVUpload: false
 			});
 		}
-		if (project_process >= 2){
+		if (project_process >= 3){
 			console.log(this.props.currentWorkingProject);
 		}
+
+	};
+
+	getContent = (content) => {
+		if (content === "") {
+			return (
+				"These models attempt to predict " +
+				this.props.currentWorkingProject.targetParameter +
+				" and how it relates to " +
+				addSpace(filterObj(this.props.currentWorkingProject.inputs)) +
+				" using the following models: " +
+				addSpace(
+					filterObj(this.props.currentWorkingProject.modelList).map((s) =>
+						nameMapper(s)
+					)
+				)
+			);
+		} else {
+			return content;
+		}
+	};
+
+	handleSubmit = (e) => {
+		this.setState({
+			submitLoad : true
+		})
+		this.props.updateContent(this.getContent(this.props.project.content), this.props.projectID);
+		this.props.buildModels();
 	};
 
 	render() {
@@ -84,6 +148,9 @@ class EditProject extends Component {
 			);
 		if (auth.uid !== project.authorID)
 			return <Redirect to={`/project/${projectID}`} />;
+		if(this.props.built === true){
+			return <Redirect to={`/project/${projectID}`} />;
+			}
 		return (
 			<div className="build-project">
 				<div className="row container">
@@ -115,7 +182,21 @@ class EditProject extends Component {
 
 							
 
-							
+							<div className="row container center">
+							<button
+								onClick={this.handleSubmit}
+								className="btn-large z-depth-0"
+							>
+								Build the model!
+							</button>
+							{this.state.submitLoad ? (
+								<div className="row">
+									<CircularProgress />
+								</div>
+							) : (
+								<span></span>
+							)}
+						</div>
 						</div>
 						
 					) : (
@@ -147,7 +228,9 @@ const mapStateToProps = (state, props) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id)),
-		initCSV: (project, id) => dispatch(initCSV(project, id))
+		initCSV: (project, id) => dispatch(initCSV(project, id)),
+		buildModels : () => dispatch(buildModels()),
+		updateContent: (content, pid) => dispatch(updateContent(content, pid))
 	};
 };
 export default compose(

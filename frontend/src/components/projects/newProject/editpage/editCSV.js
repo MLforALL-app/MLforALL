@@ -148,55 +148,7 @@ class DisplayCSV extends Component {
 		return columns;
 	};
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.setState({ loading: true, error: false });
-		const getContent = (content) => {
-			if (content === "") {
-				return (
-					"These models attempt to predict " +
-					this.state.output +
-					" and how it relates to " +
-					addSpace(this.filterObj(this.state.inputs)) +
-					" using the following models: " +
-					addSpace(
-						this.filterObj(this.state.models).map((s) =>
-							nameMapper(s)
-						)
-					)
-				);
-			} else {
-				return content;
-			}
-		};
-		this.props.updateContent(
-			getContent(this.props.project.content),
-			this.props.id
-		);
-		const path = {
-			uid: this.props.auth.uid,
-			projId: this.props.id,
-			title: this.props.project.title,
-			modelList: this.filterObj(this.state.models),
-			targetParameter: this.state.output,
-			dfVariables: this.filterObj(this.state.inputs),
-			csvName: this.props.project.csvName,
-			nanMethod: this.state.nanMethod
-		};
-		console.log(path);
-		axios
-			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
-			.then((res) => {
-				console.log("THIS IS RESULT", res);
-				this.setState({ redirect: true });
-				//console.log("Successfully created project models?");
-			})
-			.catch((err) => {
-				console.log("THIS IS AN ERROR", err);
-				this.setState({ loading: false });
-				this.setState({ error: true });
-			});
-	};
+	
 
 	componentDidUpdate = () => {
 		if(this.state.loading === true && this.props.inputs){
@@ -266,21 +218,7 @@ class DisplayCSV extends Component {
 						
 
 						
-						<div className="row container center">
-							<button
-								onClick={this.handleSubmit}
-								className="btn-large z-depth-0"
-							>
-								Build the model!
-							</button>
-							{this.state.loading ? (
-								<div className="row">
-									<CircularProgress />
-								</div>
-							) : (
-								<span></span>
-							)}
-						</div>
+						
 					</div>
 				)}
 			</div>

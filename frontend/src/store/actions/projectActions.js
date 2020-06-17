@@ -219,3 +219,46 @@ export const deleteMLProject = (pid, uid, project) => {
 		});
 	};
 };
+//extras for handle csv
+
+
+
+
+const filterObj = (objState) => {
+	return Object.entries(objState)
+		.filter(([key, val]) => val)
+		.map(([key, val]) => key);
+};
+
+export const buildModels = () => {
+	return (dispatch, getState, { getFirestore, getFirebase }) => {
+		
+		const submissionData = getState().project.currentWorkingProject;
+		
+
+		const path = {
+			uid: submissionData.uid,
+			projId: submissionData.projId,
+			title: submissionData.title,
+			modelList: filterObj(submissionData.modelList),
+			targetParameter: submissionData.targetParameter,
+			dfVariables: filterObj(submissionData.inputs),
+			csvName: submissionData.csvName,
+			nanMethod: submissionData.nanMethod
+		};
+		console.log(path);
+		axios
+			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
+			.then((res) => {
+				console.log("THIS IS RESULT", res);
+				dispatch({type : "CREATE_MODEL_SUCC"});
+
+				//console.log("Successfully created project models?");
+			})
+			.catch((err) => {
+				console.log("THIS IS AN ERROR", err);
+				dispatch({type : "CREATE_MODEL_FAIL"});
+			});
+	}
+	
+};

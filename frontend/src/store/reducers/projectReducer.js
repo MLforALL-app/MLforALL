@@ -63,7 +63,8 @@ const projectReducer = (state = initState, action) => {
 						gnb: false, 
 						svm: false,
 					},
-					inputs: {}
+					inputs: {},
+					content : ""
 				}
 			};
 		case "UPDATE_NAN":
