@@ -212,7 +212,7 @@ class JoeLand extends Component {
 			);
 		} else {
 			// Don't let people see landing page
-			return <Redirect to="/me" />;
+			return <Redirect to="/dashboard" />;
 		}
 	}
 }

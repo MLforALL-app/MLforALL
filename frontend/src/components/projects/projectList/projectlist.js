@@ -15,6 +15,9 @@ class ProjectList extends Component {
 		lastVisible: [],
 		nextPage: null
 	};
+	getDir(orderBy) {
+		return orderBy === "createdAt" ? "desc" : "asc";
+	}
 	initState() {
 		return {
 			pLoad: false,
@@ -61,8 +64,8 @@ class ProjectList extends Component {
 	}
 	initUserProjects() {
 		// don't have pagination for an indivdual user's projects
-		const { orderBy, direction, uid } = this.props;
-		const dir = direction ? "asc" : "desc";
+		const { orderBy, uid } = this.props;
+		const dir = this.getDir(orderBy);
 		const ref = db.collection("projects");
 		const query = ref
 			.orderBy(orderBy, dir)
@@ -75,8 +78,8 @@ class ProjectList extends Component {
 	}
 	initProjects() {
 		// put the first page in "next" to be called by getProject
-		const { orderBy, direction, limit } = this.props;
-		const dir = direction ? "asc" : "desc";
+		const { orderBy, limit } = this.props;
+		const dir = this.getDir(orderBy);
 		const ref = db.collection("projects");
 		const query = ref.orderBy(orderBy, dir).limit(limit).get();
 		query.then((documentSnapshot) => {
@@ -98,7 +101,7 @@ class ProjectList extends Component {
 	getProjects() {
 		// load the current page (snapshot) from next and convert to list
 		this.setState({ pLoad: false }); //begin load
-		const { orderBy, direction, limit } = this.props;
+		const { orderBy, limit } = this.props;
 		const { nextPage, lastVisible } = this.state;
 		this.setState((prev) => {
 			// Load current snapshot from next
@@ -109,7 +112,7 @@ class ProjectList extends Component {
 		});
 		// update "next page" with new page
 		const ref = db.collection("projects");
-		const dir = direction ? "asc" : "desc";
+		const dir = this.getDir(orderBy);
 		ref.orderBy(orderBy, dir)
 			.limit(limit)
 			.startAt(this.tail(lastVisible))

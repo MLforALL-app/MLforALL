@@ -3,13 +3,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
 
-const SortForm = ({
-	handleDropChange,
-	orderBy,
-	handleSwitchChange,
-	direction,
-	me
-}) => {
+const SortForm = ({ handleDropChange, orderBy, handleSwitchChange, me }) => {
 	const items = [
 		<MenuItem key="cat" value="createdAt">
 			Date
@@ -30,17 +24,6 @@ const SortForm = ({
 		<span>
 			<FormControl style={{ float: "right" }}>
 				<span>
-					<div style={{ paddingBottom: "0.5rem" }} className="switch">
-						{direction ? "Lowest First" : "Highest First"}
-						<label>
-							<input
-								value={direction}
-								type="checkbox"
-								onChange={handleSwitchChange}
-							/>
-							<span className="lever"></span>
-						</label>
-					</div>
 					Sort by:{" "}
 					<Select
 						value={orderBy}

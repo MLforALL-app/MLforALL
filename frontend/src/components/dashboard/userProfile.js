@@ -1,22 +1,26 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectList/projectlist";
+import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
-import HelpBox from "../layouts/helpbox";
 
 class UserProfile extends Component {
+	state = {
+		orderBy: "createdAt",
+		limit: 8
+	};
 	render() {
-		const { projects, auth, user, pageuid } = this.props;
+		const { auth, user, pageuid } = this.props;
+		const { orderBy, limit } = this.state;
 		const poss = user
 			? user.firstName + " " + user.lastName + "'s models"
 			: "";
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		if (this.props.auth.uid === this.props.pageuid)
-			return <Redirect to="/me" />;
+		if (auth.uid === pageuid) return <Redirect to="/me" />;
 		// maybe instead of redirecting, we can have another sign up page here
 		// otws good to go
 		// TODO: change const projects so its only this user's projects
@@ -24,18 +28,28 @@ class UserProfile extends Component {
 		return (
 			<div>
 				<div className="dashboard container">
-					<h1>
-						<span className="purple-text">
-							{poss}
-							<HelpBox
-								header="My models"
-								placement="right-start"
-								desc="Click on the cards to view your classification models!"
-							/>
-						</span>
-					</h1>
-					<ProjectList projects={projects} uid={pageuid} />
-					<div className="video center">
+					<div className="row">
+						<h1>
+							<span className="purple-text">{poss}</span>
+						</h1>
+						<SortForm
+							handleDropChange={(e) =>
+								this.setState({
+									orderBy: e.target.value
+								})
+							}
+							orderBy={this.state.orderBy}
+						/>
+						<h4 style={{ float: "left" }}>
+							View other people's projects
+						</h4>
+					</div>
+					<ProjectList
+						orderBy={orderBy}
+						limit={limit}
+						uid={auth.uid}
+					/>
+					<div className="center">
 						<Link to="/create">
 							<button className="btn btn-sec z-depth-0">
 								Inspired? Click here to create your own!

@@ -33,7 +33,7 @@ class HelpBox extends Component {
 					</React.Fragment>
 				}
 				placement={placement}>
-				<HelpIcon />
+				<HelpIcon className="pink-text" />
 			</HtmlTooltip>
 		);
 	}

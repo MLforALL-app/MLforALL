@@ -56,8 +56,7 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
 								className="materialize-textarea"
 								id="textarea1"
 								onChange={handleChange}
-								value={content}
-							>
+								value={content}>
 								{content}
 							</textarea>
 						</div>

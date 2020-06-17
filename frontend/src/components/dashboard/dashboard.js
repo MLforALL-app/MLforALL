@@ -8,8 +8,7 @@ import { Redirect } from "react-router-dom";
 class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
-		limit: 8,
-		direction: false // false = desc, true = asc
+		limit: 8
 	};
 	render() {
 		const { auth } = this.props;
@@ -31,13 +30,7 @@ class Dashboard extends Component {
 								orderBy: e.target.value
 							})
 						}
-						handleSwitchChange={() =>
-							this.setState((prev) => {
-								return { direction: !prev.direction };
-							})
-						}
 						orderBy={this.state.orderBy}
-						direction={this.state.direction}
 					/>
 				</div>
 				{/*<div className="row">
@@ -46,7 +39,6 @@ class Dashboard extends Component {
 				<ProjectList
 					orderBy={this.state.orderBy}
 					limit={this.state.limit}
-					direction={this.state.direction}
 				/>
 			</div>
 		);
