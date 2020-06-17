@@ -139,12 +139,12 @@ class ProjectList extends Component {
 		const increment = dir === "next" ? 1 : -1;
 		const { page, maxPage } = this.state;
 		return () => {
-			// figure out the off by one errors here
-			if (page >= maxPage - 1) {
+			console.log("page", page);
+			console.log("maxPage", maxPage);
+			// maintain ordering as well as only get projects while moving fwd
+			if (page >= maxPage - 1 && increment === 1) {
 				//console.log("click! YES getting projects...");
 				this.getProjects();
-			} else {
-				//console.log("click! NO else getting.");
 			}
 			this.setState((prev) => {
 				return { page: prev.page + increment };
@@ -176,7 +176,7 @@ class ProjectList extends Component {
 		const { limit, uid } = this.props;
 		//console.log("render page", projects[page]);
 		//console.log("STATE OF PROJECTS");
-		//console.log("projects:", projects);
+		console.log("projects:", projects);
 		//console.log("end state of porjects");
 		const shownextpre = projects[page]
 			? projects[page].length === limit
