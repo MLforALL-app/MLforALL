@@ -176,8 +176,8 @@ class ProjectList extends Component {
 		const { limit, uid } = this.props;
 		//console.log("render page", projects[page]);
 		//console.log("STATE OF PROJECTS");
-		console.log("projects:", projects);
-		//console.log("end state of porjects");
+		//console.log("projects:", projects);
+		//console.log("end state of projects");
 		const shownextpre = projects[page]
 			? projects[page].length === limit
 			: true; // not sure
