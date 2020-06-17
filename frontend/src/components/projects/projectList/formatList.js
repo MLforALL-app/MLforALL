@@ -48,7 +48,7 @@ const mapPairs = (pair) => {
 
 const FormatList = ({ projects, loaded }) => {
 	if (loaded) {
-		return grouped(projects).map(mapPairs);
+		return grouped(projects.flat()).map(mapPairs);
 	} else {
 		return (
 			<div className="container center">
