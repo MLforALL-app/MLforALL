@@ -81,7 +81,14 @@ export const updateCurrentWorkingProject = (param, data) => {
 				dispatch({type : "UPDATE_ML", param, data});
 				break;
 			case "targetParameter" :
-				dispatch({type : "UPDATE_TP", param, data})
+				dispatch({type : "UPDATE_TP", param, data});
+				break;
+			case "inputs" :
+				console.log("updating inputs");
+				dispatch({type : "UPDATE_INPUTS", param, data});
+				break;
+			default :
+				dispatch({type : "MALFORMED_CWP_REQ"});
 		}
 		
 	};

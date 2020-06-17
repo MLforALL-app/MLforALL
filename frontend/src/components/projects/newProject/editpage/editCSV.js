@@ -18,9 +18,12 @@ import styles from "./build.css";
 import Insights from "./insights";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
+
 const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
+
 export const nameMapper = (name) => {
 	switch (name) {
 		case "":
@@ -43,38 +46,7 @@ export const nameMapper = (name) => {
 };
 
 class DisplayCSV extends Component {
-	// card to show what user is picking
-	getStatus = (inputs, output, models, nameMapper) => {
-		return (
-			<div className="container center">
-				<div className="card">
-					<div className="card-content">
-						<span className="purple-text">
-							<h5>
-								<b>
-									{this.state.error
-										? "Something went Wrong"
-										: "What Your Model Does"}{" "}
-								</b>
-							</h5>
-						</span>
-						<h6>
-							This model will take these parameters:
-							<span className="purple-text">
-								{addSpace(inputs)}
-							</span>
-							<br /> to attempt to predict{" "}
-							<span className="purple-text">{output}</span> <br />{" "}
-							using these algorithms:
-							<span className="purple-text">
-								{addSpace(models.map((s) => nameMapper(s)))}
-							</span>
-						</h6>
-					</div>
-				</div>
-			</div>
-		);
-	};
+
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
 		return Object.entries(objState)
@@ -91,20 +63,21 @@ class DisplayCSV extends Component {
 	// State
 	state = {
 		csvArray: [],
-		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
-		inputs: {},
-		output: "",
 		redirect: false,
 		loading: false,
-		error: false
+		error: false,
+		inputs: {}
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
+		console.log("SETTING INPUTS");
 		this.setState((prevState) => {
 			var newInputs = prevState.inputs;
 			newInputs[dataKey] = !newInputs[dataKey];
 			return { ...prevState, inputs: newInputs };
 		});
+		
+		
 	};
 	handleDropdownOutput = (event) => {
 		this.setState({ output: event.target.value });
@@ -130,7 +103,9 @@ class DisplayCSV extends Component {
 			newInputs[colName] = !newInputs[colName];
 			return { ...prevState, inputs: newInputs };
 		});
-		console.log(this.state);
+		console.log(this.props.inputs);
+		console.log("SETTING INPUTS");
+		this.props.setInputParameters(this.state.inputs);
 	};
 	checkBoxHeader = (colName) => (key) => {
 		return (
@@ -224,13 +199,15 @@ class DisplayCSV extends Component {
 	};
 
 	componentDidUpdate = () => {
-		if(this.state.loading === true && this.props.csvData !== ""){
+		if(this.state.loading === true && this.props.inputs){
 			this.setState({
 				csvArray : this.props.csvData,
+				inputs : this.props.inputs,
 				loading : false
-			})
-			console.log(this.props.csvData,);
+			});
+			console.log(this.state.inputs);
 		}
+
 	}
 
 	render() {
@@ -288,14 +265,7 @@ class DisplayCSV extends Component {
 						</div>
 						
 
-						<div className="row" style={{ padding: "2rem" }}>
-							{this.getStatus(
-								this.filterObj(this.state.inputs),
-								this.state.output,
-								this.filterObj(this.state.models),
-								nameMapper
-							)}
-						</div>
+						
 						<div className="row container center">
 							<button
 								onClick={this.handleSubmit}
@@ -321,13 +291,15 @@ class DisplayCSV extends Component {
 const mapStatetoProps = (state) => {
 	return {
 		auth: state.firebase.auth,
-		csvData: state.project.csvData
+		csvData: state.project.csvData,
+		inputs : state.project.currentWorkingProject && state.project.currentWorkingProject.inputs
 	};
 };
 // Redux to associate action call to a dispatch
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateContent: (content, pid) => dispatch(updateContent(content, pid))
+		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
+		setInputParameters : (inputs) => dispatch(updateCurrentWorkingProject("inputs", inputs))
 	};
 };
 

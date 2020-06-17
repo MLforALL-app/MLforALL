@@ -10,6 +10,7 @@ import { setWorkingProject, initCSV  } from "../../../store/actions/projectActio
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
+import ProjectStatus from "./editpage/projectstatus";
 
 class EditProject extends Component {
 	state = {
@@ -110,6 +111,11 @@ class EditProject extends Component {
 							)}
 							<ModelOutput project={project} id={projectID}/>
 							<ModelSelect project={project} id={projectID}/>
+							<ProjectStatus/>
+
+							
+
+							
 						</div>
 						
 					) : (

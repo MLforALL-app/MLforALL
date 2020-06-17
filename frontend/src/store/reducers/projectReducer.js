@@ -5,6 +5,14 @@ const initState = {
 	csvUrl: ""
 };
 
+const initObj = (objList) => {
+	var objState = {};
+	objList.forEach((item) => {
+		objState[item] = false;
+	});
+	return objState;
+};
+
 const projectReducer = (state = initState, action) => {
 	switch (action.type) {
 		case "CREATE_PROJECT":
@@ -47,8 +55,7 @@ const projectReducer = (state = initState, action) => {
 					title : action.project.title,
 					csvName : action.project.csvName,
 					nanMethod : "drop",
-					dfVariables : "initialized",
-					targetParameter : "initialized",
+					targetParameter : "",
 					modelList : {
 						log_reg : false,
 						knn: false, 
@@ -56,6 +63,7 @@ const projectReducer = (state = initState, action) => {
 						gnb: false, 
 						svm: false,
 					},
+					inputs: {}
 				}
 			};
 		case "UPDATE_NAN":
@@ -78,7 +86,11 @@ const projectReducer = (state = initState, action) => {
 		case "CSV_DATA_IN_STORE":
 			return {
 				...state, 
-				csvData: action.data
+				csvData: action.data,
+				currentWorkingProject : {
+					...state.currentWorkingProject,
+					inputs : initObj(Object.keys(action.data[0]))
+				}
 			};
 		case "CSV_FETCH_ERROR":
 			return state;
@@ -90,6 +102,16 @@ const projectReducer = (state = initState, action) => {
 					targetParameter : action.data 
 				}
 			};
+		case "UPDATE_INPUTS":
+			console.log(action.data);
+			return {
+				...state,
+				currentWorkingProject : {
+					...state.currentWorkingProject,
+					inputs : action.data
+				}
+			};
+
 		default:
 			return state;
 	}
