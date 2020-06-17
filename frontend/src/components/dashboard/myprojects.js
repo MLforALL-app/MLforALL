@@ -1,35 +1,36 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectList/projectlist";
-// import MenuItem from "@material-ui/core/MenuItem";
-// import FormControl from "@material-ui/core/FormControl";
-// import Select from "@material-ui/core/Select";
+import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 import HelpBox from "../layouts/helpbox";
 
+/*
 const greetings = () => {
 	const hi = ["Howdy", "Hello", "Hi there", "What's up"];
 	const index = Math.floor(Math.random() * hi.length);
 	return hi[index];
 };
-
 const greeting = greetings();
+*/
 
 class MyProjects extends Component {
 	state = {
 		orderBy: "createdAt",
 		direction: "desc",
-		limit: 5,
-		greet: ""
+		limit: 8,
+		greet: "Welcome to your central hub."
 	};
 	componentDidUpdate() {
-		if (this.state.greet === "") {
+		/*
+		if (this.state.greet === "Hello") {
 			this.setState({
 				greet: this.props.profile.isLoaded
 					? greeting + " " + this.props.profile.firstName + "!"
 					: ""
 			});
 		}
+		*/
 	}
 	render() {
 		const { auth, profile } = this.props;
@@ -56,8 +57,17 @@ class MyProjects extends Component {
 							</span>
 						</h1>
 						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
-						{/* insert form here */}
+						<SortForm
+							handleChange={(e) =>
+								this.setState({
+									orderBy: e.target.value
+								})
+							}
+							orderBy={this.state.orderBy}
+							me={true}
+						/>
 					</div>
+					{/* For now myprojects page has no pages */}
 					<ProjectList
 						orderBy={this.state.orderBy}
 						limit={this.state.limit}

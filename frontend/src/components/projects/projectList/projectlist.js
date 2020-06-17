@@ -14,6 +14,16 @@ class ProjectList extends Component {
 		lastVisible: [],
 		nextPage: null
 	};
+	initState() {
+		return {
+			pLoad: false,
+			page: 0,
+			maxPage: 0,
+			projects: [],
+			lastVisible: [],
+			nextPage: null
+		};
+	}
 	tail(list) {
 		return list[list.length - 1];
 	}
@@ -69,8 +79,8 @@ class ProjectList extends Component {
 		query.then((documentSnapshot) => {
 			const initNext = documentSnapshot.docs.map(this.docMap);
 			const lastVis = this.tail(documentSnapshot.docs);
-			console.log("Init_next", initNext);
-			console.log("Init_lastVis", lastVis.data().title);
+			//console.log("Init_next", initNext);
+			//console.log("Init_lastVis", lastVis.data().title);
 			// load the next page
 			this.setState((prev) => {
 				prev.lastVisible.push(lastVis);
@@ -86,12 +96,13 @@ class ProjectList extends Component {
 		// load the current page (snapshot) from next and convert to list
 		this.setState({ pLoad: false }); //begin load
 		const { orderBy, direction, limit } = this.props;
+		console.log("new orderBy", orderBy);
 		const { nextPage, lastVisible } = this.state;
 		this.setState((prev) => {
 			// Load current snapshot from next
-			console.log("pushing on nextpage");
+			//console.log("pushing on nextpage");
 			prev.projects.push(nextPage);
-			console.log("Updated projects", prev.projects);
+			//console.log("Updated projects", prev.projects);
 			return { projects: prev.projects };
 		});
 		// update "next page" with new page
@@ -103,12 +114,12 @@ class ProjectList extends Component {
 			.then((documentSnapshot) => {
 				const getNext = documentSnapshot.docs.map(this.docMap);
 				const lastVis = this.tail(documentSnapshot.docs);
-				console.log("get_next", getNext);
-				console.log("get_lastVis", lastVis.data().title);
+				//console.log("get_next", getNext);
+				//console.log("get_lastVis", lastVis.data().title);
 				// update next here, update lastVisible accordingly
 				this.setState((prev) => {
 					prev.lastVisible.push(lastVis);
-					console.log("update last visible", prev.lastVisible);
+					//console.log("update last visible", prev.lastVisible);
 					return {
 						nextPage: getNext,
 						lastVisible: prev.lastVisible,
@@ -124,27 +135,40 @@ class ProjectList extends Component {
 		return () => {
 			// figure out the off by one errors here
 			if (page >= maxPage - 1) {
-				console.log("click! YES getting projects...");
+				//console.log("click! YES getting projects...");
 				this.getProjects();
 			} else {
-				console.log("click! NO else getting.");
+				//console.log("click! NO else getting.");
 			}
 			this.setState((prev) => {
 				return { page: prev.page + direction };
 			});
 		};
 	}
-	componentDidMount() {
+	resetProjects() {
+		console.log("reseting projects...");
+		this.setState(this.initState());
+		console.log("reset:", this.state);
 		if (this.props.uid) {
 			this.initUserProjects();
 		} else {
 			this.initProjects();
 		}
 	}
+	componentDidMount() {
+		this.resetProjects();
+	}
+	componentDidUpdate(prevProps) {
+		if (prevProps !== this.props) {
+			//console.log("resetinng..");
+			this.resetProjects();
+			//console.log("end reset");
+		}
+	}
 	render() {
 		const { projects, page } = this.state;
 		const { limit, uid } = this.props;
-		console.log("render page", projects[page]);
+		//console.log("render page", projects[page]);
 		console.log("STATE OF PROJECTS");
 		console.log("projects:", projects);
 		console.log("end state of porjects");
@@ -156,7 +180,11 @@ class ProjectList extends Component {
 			<div className="project-list section">
 				<FormatList projects={projects[page]} />
 				<div className="row pagination-select">
-					{this.pageArrows(page > 0, showNext)}
+					{projects[page] ? (
+						this.pageArrows(page > 0, showNext)
+					) : (
+						<span></span>
+					)}
 				</div>
 			</div>
 		);

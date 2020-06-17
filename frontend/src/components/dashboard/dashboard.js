@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 // import Notifications from "./notifcations";
 import ProjectList from "../projects/projectList/projectlist";
-//import MenuItem from "@material-ui/core/MenuItem";
-//import FormControl from "@material-ui/core/FormControl";
-//import Select from "@material-ui/core/Select";
+import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 
@@ -27,7 +25,14 @@ class Dashboard extends Component {
 					<h4 style={{ float: "left" }}>
 						See what others are up to.
 					</h4>
-					{/* insert form here */}
+					<SortForm
+						handleChange={(e) =>
+							this.setState({
+								orderBy: e.target.value
+							})
+						}
+						orderBy={this.state.orderBy}
+					/>
 				</div>
 				{/*<div className="row">
 					<Notifications notifications={notifications} />
