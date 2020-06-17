@@ -9,7 +9,7 @@ class Dashboard extends Component {
 	state = {
 		orderBy: "createdAt",
 		limit: 8,
-		direction: "desc"
+		direction: false // false = desc, true = asc
 	};
 	render() {
 		const { auth } = this.props;
@@ -26,12 +26,18 @@ class Dashboard extends Component {
 						See what others are up to.
 					</h4>
 					<SortForm
-						handleChange={(e) =>
+						handleDropChange={(e) =>
 							this.setState({
 								orderBy: e.target.value
 							})
 						}
+						handleSwitchChange={() =>
+							this.setState((prev) => {
+								return { direction: !prev.direction };
+							})
+						}
 						orderBy={this.state.orderBy}
+						direction={this.state.direction}
 					/>
 				</div>
 				{/*<div className="row">

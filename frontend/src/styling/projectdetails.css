@@ -25,23 +25,6 @@ h6 {
 		display: none !important;
 	}
 }
-
-.card-action {
-	border-bottom-left-radius: 30px !important;
-	border-bottom-right-radius: 30px !important;
-	background-color: #283593 !important;
-	color: white;
-	height: 55px;
-}
-.card {
-	border-radius: 30px;
-	background-color: white;
-	color: black;
-}
-.card-content {
-	border-top-left-radius: 30px !important;
-	border-top-right-radius: 30px !important;
-}
 .content-sum {
 	height: 150px;
 }

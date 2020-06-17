@@ -4,6 +4,7 @@ import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { db } from "../../../config/fbConfig";
 import "../../../styling/dashboard.css";
+import "../../../styling/cards.css";
 
 class ProjectList extends Component {
 	state = {
@@ -61,9 +62,10 @@ class ProjectList extends Component {
 	initUserProjects() {
 		// don't have pagination for an indivdual user's projects
 		const { orderBy, direction, uid } = this.props;
+		const dir = direction ? "asc" : "desc";
 		const ref = db.collection("projects");
 		const query = ref
-			.orderBy(orderBy, direction)
+			.orderBy(orderBy, dir)
 			.where("authorID", "==", uid)
 			.get();
 		query.then((documentSnapshot) => {
@@ -74,8 +76,9 @@ class ProjectList extends Component {
 	initProjects() {
 		// put the first page in "next" to be called by getProject
 		const { orderBy, direction, limit } = this.props;
+		const dir = direction ? "asc" : "desc";
 		const ref = db.collection("projects");
-		const query = ref.orderBy(orderBy, direction).limit(limit).get();
+		const query = ref.orderBy(orderBy, dir).limit(limit).get();
 		query.then((documentSnapshot) => {
 			const initNext = documentSnapshot.docs.map(this.docMap);
 			const lastVis = this.tail(documentSnapshot.docs);
@@ -96,7 +99,6 @@ class ProjectList extends Component {
 		// load the current page (snapshot) from next and convert to list
 		this.setState({ pLoad: false }); //begin load
 		const { orderBy, direction, limit } = this.props;
-		console.log("new orderBy", orderBy);
 		const { nextPage, lastVisible } = this.state;
 		this.setState((prev) => {
 			// Load current snapshot from next
@@ -107,7 +109,8 @@ class ProjectList extends Component {
 		});
 		// update "next page" with new page
 		const ref = db.collection("projects");
-		ref.orderBy(orderBy, direction)
+		const dir = direction ? "asc" : "desc";
+		ref.orderBy(orderBy, dir)
 			.limit(limit)
 			.startAt(this.tail(lastVisible))
 			.get()
@@ -130,7 +133,7 @@ class ProjectList extends Component {
 			});
 	}
 	handleClick(dir) {
-		const direction = dir === "next" ? 1 : -1;
+		const increment = dir === "next" ? 1 : -1;
 		const { page, maxPage } = this.state;
 		return () => {
 			// figure out the off by one errors here
@@ -141,14 +144,14 @@ class ProjectList extends Component {
 				//console.log("click! NO else getting.");
 			}
 			this.setState((prev) => {
-				return { page: prev.page + direction };
+				return { page: prev.page + increment };
 			});
 		};
 	}
 	resetProjects() {
-		console.log("reseting projects...");
+		//console.log("reseting projects...");
 		this.setState(this.initState());
-		console.log("reset:", this.state);
+		//console.log("reset:", this.state);
 		if (this.props.uid) {
 			this.initUserProjects();
 		} else {
@@ -169,9 +172,9 @@ class ProjectList extends Component {
 		const { projects, page } = this.state;
 		const { limit, uid } = this.props;
 		//console.log("render page", projects[page]);
-		console.log("STATE OF PROJECTS");
-		console.log("projects:", projects);
-		console.log("end state of porjects");
+		//console.log("STATE OF PROJECTS");
+		//console.log("projects:", projects);
+		//console.log("end state of porjects");
 		const shownextpre = projects[page]
 			? projects[page].length === limit
 			: true; // not sure

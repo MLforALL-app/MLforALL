@@ -3,7 +3,6 @@ import ProjectList from "../projects/projectList/projectlist";
 import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
-import HelpBox from "../layouts/helpbox";
 
 /*
 const greetings = () => {
@@ -17,7 +16,7 @@ const greeting = greetings();
 class MyProjects extends Component {
 	state = {
 		orderBy: "createdAt",
-		direction: "desc",
+		direction: false, // false = desc, true = asc
 		limit: 8,
 		greet: "Welcome to your central hub."
 	};
@@ -33,8 +32,8 @@ class MyProjects extends Component {
 		*/
 	}
 	render() {
-		const { auth, profile } = this.props;
-		console.log("THIS IS prof", profile);
+		const { auth } = this.props;
+		//console.log("THIS IS prof", profile);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
@@ -51,12 +50,18 @@ class MyProjects extends Component {
 						</h1>
 						<h4 style={{ float: "left" }}>{this.state.greet}</h4>
 						<SortForm
-							handleChange={(e) =>
+							handleDropChange={(e) =>
 								this.setState({
 									orderBy: e.target.value
 								})
 							}
+							handleSwitchChange={() =>
+								this.setState((prev) => {
+									return { direction: !prev.direction };
+								})
+							}
 							orderBy={this.state.orderBy}
+							direction={this.state.direction}
 							me={true}
 						/>
 					</div>
@@ -81,7 +86,6 @@ class MyProjects extends Component {
 }
 
 const mapStateToProps = (state) => {
-	console.log(state);
 	return {
 		auth: state.firebase.auth,
 		profile: state.firebase.profile
