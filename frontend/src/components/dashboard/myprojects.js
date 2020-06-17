@@ -65,6 +65,13 @@ class MyProjects extends Component {
 							me={true}
 						/>
 					</div>
+					<div className="center">
+						<Link to="/create">
+							<div className="btn btn-sec waves-effect waves-light z-depth-0">
+								Click Here to Create More!
+							</div>
+						</Link>
+					</div>
 					{/* For now myprojects page has no pages */}
 					<ProjectList
 						orderBy={this.state.orderBy}
@@ -72,13 +79,6 @@ class MyProjects extends Component {
 						direction={this.state.direction}
 						uid={auth.uid}
 					/>
-					<div className="video center">
-						<Link to="/create">
-							<div className="btn btn-sec waves-effect waves-light z-depth-0">
-								Click Here to Create More!
-							</div>
-						</Link>
-					</div>
 				</div>
 			</div>
 		);

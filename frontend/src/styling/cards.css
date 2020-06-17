@@ -9,8 +9,9 @@
 	border-radius: 30px;
 	background-color: white;
 	color: black;
+	transition: transform 100ms, box-shadow 100ms;
 	animation-name: card;
-	animation-duration: 500ms;
+	animation-duration: 300ms;
 	animation-iteration-count: 1;
 }
 @keyframes card {
@@ -32,6 +33,10 @@
 	100% {
 		transform: scale(1);
 	}
+}
+.card:hover {
+	transform: scale(1.01);
+	box-shadow: 0 0 5px grey !important;
 }
 .card-content {
 	border-top-left-radius: 30px !important;
