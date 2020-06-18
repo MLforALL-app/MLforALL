@@ -109,7 +109,10 @@ a {
 	color: #f8bbd0 !important;
 }
 .MuiSvgIcon-root {
-	color: #f8bbd0 !important;
+	color: #f8bbd0;
+}
+.disabled {
+	color : #aaaaaa !important;
 }
 .MuiSlider-root {
 	color: #283593 !important;
