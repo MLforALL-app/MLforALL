@@ -14,9 +14,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 
-const addSpace = (list) => {
-	return list.map((s) => " " + s);
-};
 
 export const nameMapper = (name) => {
 	switch (name) {
@@ -111,7 +108,7 @@ class DisplayCSV extends Component {
 				<FormControlLabel
 					className="purple-text"
 					value="bottom"
-					control={<Checkbox  disabled color="secondary" />}
+					control={<Checkbox  disabled className="disabled" />}
 					label=""
 					labelPlacement="bottom"
 					onChange={this.checkBoxChange(colName)}

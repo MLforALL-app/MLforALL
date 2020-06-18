@@ -6,7 +6,7 @@ import FormControl from "@material-ui/core/FormControl";
 import HelpBox from "../../../layouts/helpbox";
 import MenuItem from "@material-ui/core/MenuItem";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
-import { CircularProgress } from "@material-ui/core";
+
 
 
 class ModelOutput extends Component{
