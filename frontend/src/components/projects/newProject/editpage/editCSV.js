@@ -101,11 +101,24 @@ class DisplayCSV extends Component {
 		console.log("SETTING INPUTS");
 		this.props.setInputParameters(this.state.inputs);
 	};
-	checkBoxHeader = (colName) => (key) => {
+	checkBoxHeader = (colName, is_numeric) => (key) => {
 		return (
 			<div>
 				<div>
+				{!is_numeric ? 
+				(
+				
 				<FormControlLabel
+					className="purple-text"
+					value="bottom"
+					control={<Checkbox  disabled color="secondary" />}
+					label=""
+					labelPlacement="bottom"
+					onChange={this.checkBoxChange(colName)}
+				/>
+				)
+				:
+				(<FormControlLabel
 					className="purple-text"
 					value="bottom"
 					control={<Checkbox color="primary" />}
@@ -113,6 +126,9 @@ class DisplayCSV extends Component {
 					labelPlacement="bottom"
 					onChange={this.checkBoxChange(colName)}
 				/>
+
+				)}
+
 				</div>
 				<span
 					className="ReactVirtualized__Table__headerTruncatedText purple-text"
@@ -124,17 +140,23 @@ class DisplayCSV extends Component {
 		);
 	};
 
-	getColumns = (keyList) => {
+	isNumeric = (n) => {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	}
+
+	getColumns = (keyList, firstRow) => {
 		var columns = [];
 		keyList.forEach((key) => {
 			console.log(key);
+			console.log("FIRSTROW", firstRow[key]);
+			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
 			columns.push(
 				<Column
 					label={key}
 					dataKey={key}
 					key={key}
-					headerRenderer={this.checkBoxHeader(colName)}
+					headerRenderer={this.checkBoxHeader(colName, numeric_col)}
 					width={5000}
 				/>
 			);
@@ -205,7 +227,8 @@ class DisplayCSV extends Component {
 								}}
 							>
 								{this.getColumns(
-									Object.keys(this.props.csvData[0])
+									Object.keys(this.props.csvData[0]),
+									this.props.csvData[0]
 								)}
 							</Table>
 						</div>
