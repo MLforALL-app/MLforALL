@@ -12,7 +12,7 @@ class VerifyEmailProject extends Component {
 	};
 	button = () => {
 		if (this.props.auth.emailVerified) {
-			return <Redirect to="/me" />;
+			return <Redirect to="myprofile" />;
 		} else {
 			return (
 				<React.Fragment>
