@@ -1,15 +1,1 @@
-<svg width="133" height="126" viewBox="0 0 133 126" fill="none" xmlns="http://www.w3.org/2000/svg">
-<circle r="4.5" transform="matrix(-1 0 0 1 55.5 4.5)" fill="#F8BBD0"/>
-<ellipse rx="4.5" ry="4" transform="matrix(-1 0 0 1 45.5 79)" fill="#CECECE"/>
-<circle r="4.5" transform="matrix(-1 0 0 1 86.5 41.5)" fill="#283593"/>
-<rect x="21" y="37" width="10" height="10" fill="#CECECE"/>
-<rect x="62" y="75" width="10" height="10" fill="#F8BBD0"/>
-<rect x="82" y="113" width="10" height="10" fill="#283593"/>
-<path d="M26 34V22.5217H56M86 34V22.5217H56M56 22.5217V12" stroke="black" stroke-width="2"/>
-<path d="M6 72V61.0435H26M46 72V61.0435H26M26 61.0435V51" stroke="black" stroke-width="2"/>
-<path d="M67 72V61.0435H87M107 72V61.0435H87M87 61.0435V51" stroke="black" stroke-width="2"/>
-<path d="M87 111V99.5217H107M127 111V99.5217H107M107 99.5217V89" stroke="black" stroke-width="2"/>
-<path d="M6 75L11.1962 84H0.803848L6 75Z" fill="#F8BBD0"/>
-<path d="M107 75L112.196 84H101.804L107 75Z" fill="#CECECE"/>
-<path d="M127 113L132.196 122.75H121.804L127 113Z" fill="#283593"/>
-</svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="133" height="126" fill="none" viewBox="0 0 133 126"><circle r="4.5" fill="#F8BBD0" transform="matrix(-1 0 0 1 55.5 4.5)"/><ellipse fill="#CECECE" rx="4.5" ry="4" transform="matrix(-1 0 0 1 45.5 79)"/><circle r="4.5" fill="#283593" transform="matrix(-1 0 0 1 86.5 41.5)"/><rect width="10" height="10" x="21" y="37" fill="#CECECE"/><rect width="10" height="10" x="62" y="75" fill="#F8BBD0"/><rect width="10" height="10" x="82" y="113" fill="#283593"/><path stroke="#000" stroke-width="2" d="M26 34V22.5217H56M86 34V22.5217H56M56 22.5217V12"/><path stroke="#000" stroke-width="2" d="M6 72V61.0435H26M46 72V61.0435H26M26 61.0435V51"/><path stroke="#000" stroke-width="2" d="M67 72V61.0435H87M107 72V61.0435H87M87 61.0435V51"/><path stroke="#000" stroke-width="2" d="M87 111V99.5217H107M127 111V99.5217H107M107 99.5217V89"/><path fill="#F8BBD0" d="M6 75L11.1962 84H0.803848L6 75Z"/><path fill="#CECECE" d="M107 75L112.196 84H101.804L107 75Z"/><path fill="#283593" d="M127 113L132.196 122.75H121.804L127 113Z"/></svg>
