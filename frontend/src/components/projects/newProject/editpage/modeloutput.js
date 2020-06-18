@@ -33,21 +33,10 @@ class ModelOutput extends Component{
 		return menuitems;
     };
     
-    componentDidUpdate = () => {
-        if(this.state.loading){
-            if(this.props.cols !== "") {
-                this.setState({
-                    loading:false
-                })
-            }
-        }
-    }
+   
 
     render() {
-        if (this.state.loading === true){
 
-            return <div className="model-output"><CircularProgress/></div>;
-        }
         return (
 
             <div className="row container">

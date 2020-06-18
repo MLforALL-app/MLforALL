@@ -39,7 +39,7 @@ export const createProject = (project) => {
 };
 
 export const updateContent = (content, pid) => {
-	return (dispatch, { getFirestore }) => {
+	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
 		const firestore = getFirestore();
 		firestore
@@ -262,3 +262,15 @@ export const buildModels = () => {
 	}
 	
 };
+
+export const resetBuild = () => {
+	return (dispatch, getState, { getFirestore }) => {
+		dispatch({type : "RESET_BUILD"});
+	}
+}
+
+export const clearStore = () => {
+	return (dispatch, getState, { getFirestore }) => {
+		dispatch({type : "CLEAR_STORE"});
+	}
+}

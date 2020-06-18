@@ -6,7 +6,7 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
-import { setWorkingProject, initCSV, buildModels, updateContent  } from "../../../store/actions/projectActions";
+import { setWorkingProject, initCSV, buildModels, updateContent, resetBuild, clearStore } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
@@ -88,11 +88,11 @@ class EditProject extends Component {
 						waitForCSVUpload: true
 					});
 				}
-				if (project_process >= 3){
-					this.props.setWorkingProject(this.props.project, this.props.projectID);
-					console.log("CALLING INIT CSV", this.props.project, this.props.projectID);
-					this.props.initCSV(this.props.project, this.props.projectID);
-				}
+			}
+			if (project_process >= 2){
+				console.log("SETTING UP PROJECT!!!", this.props.project, this.props.projectID);
+				this.props.setWorkingProject(this.props.project, this.props.projectID);
+				this.props.initCSV(this.props.project, this.props.projectID);
 			}
 			this.setState({
 				projectState: project_process
@@ -109,7 +109,10 @@ class EditProject extends Component {
 		}
 
 	};
-
+	componentWillUnmount = () => {
+		this.props.resetBuild();
+		console.log(this.props.currentWorkingProject);
+	}
 	getContent = (content) => {
 		if (content === "") {
 			return (
@@ -136,6 +139,8 @@ class EditProject extends Component {
 		this.props.updateContent(this.getContent(this.props.project.content), this.props.projectID);
 		this.props.buildModels();
 	};
+
+	
 
 	render() {
 		const { project, auth, projectID } = this.props;
@@ -171,14 +176,19 @@ class EditProject extends Component {
 							) : (
 							<NanHandler project = {this.props.project}/>
 							)}
-							{this.props.csvData ? (
-								<DisplayCSV project={project} id={projectID} />
+							{(this.props.csvData && this.props.currentWorkingProject !== "initialized") ? (
+								<div>
+									<DisplayCSV project={project} id={projectID} />
+									<ModelOutput project={project} id={projectID}/>
+									<ModelSelect project={project} id={projectID}/>
+									<ProjectStatus/>
+								</div>
+								
 							):(
 								<p>Waiting for csvData</p>
 							)}
-							<ModelOutput project={project} id={projectID}/>
-							<ModelSelect project={project} id={projectID}/>
-							<ProjectStatus/>
+							
+							
 
 							
 
@@ -221,7 +231,8 @@ const mapStateToProps = (state, props) => {
 		auth: state.firebase.auth,
 		csvLoaded: state.project.csvLoaded,
 		currentWorkingProject: state.project.currentWorkingProject,
-		csvData : state.project.csvData 
+		csvData : state.project.csvData,
+		built : state.project.built
 	};
 };
 
@@ -230,7 +241,9 @@ const mapDispatchToProps = (dispatch) => {
 		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
 		buildModels : () => dispatch(buildModels()),
-		updateContent: (content, pid) => dispatch(updateContent(content, pid))
+		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
+		resetBuild: () => dispatch(resetBuild()),
+		clearStore: () => dispatch(clearStore())
 	};
 };
 export default compose(

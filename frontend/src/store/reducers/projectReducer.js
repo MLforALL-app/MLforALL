@@ -2,7 +2,8 @@ const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
 	currentWorkingProject: "initialized",
-	csvUrl: ""
+	csvUrl: "",
+	built : false
 };
 
 const initObj = (objList) => {
@@ -49,6 +50,7 @@ const projectReducer = (state = initState, action) => {
 		case "SET_CURRENT_WORKING_PROJECT":
 			return {
 				...state,
+				built : false,
 				currentWorkingProject : {
 					uid : action.uid,
 					projId : action.pid,
@@ -112,7 +114,21 @@ const projectReducer = (state = initState, action) => {
 					inputs : action.data
 				}
 			};
-
+		case "CREATE_MODEL_SUCC":
+			return{
+				...state,
+				built : true
+			}
+		case "CREATE_MODEL_FAIL":
+			return state;
+		case "RESET_BUILD":
+			return{
+				...state,
+				built: false,
+				currentWorkingProject : "initialized",
+			};
+		case "CLEAR_STORE":
+			return initState;
 		default:
 			return state;
 	}

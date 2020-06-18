@@ -5,17 +5,11 @@ import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
 // import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
-import firebase from "../../../../config/fbConfig";
-import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "./build.css";
-import Insights from "./insights";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
