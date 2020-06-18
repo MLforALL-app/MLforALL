@@ -3,7 +3,7 @@ import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
 	uploadCSVtoStorage,
-	updateCsvData
+	updateCsvData,
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 

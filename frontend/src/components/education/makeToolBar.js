@@ -3,10 +3,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
+//import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+//import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link, Element } from "react-scroll";
@@ -44,11 +44,6 @@ const MakeDrawer = ({ sections }) => {
 		<div className={classes.root}>
 			<CssBaseline />
 			<AppBar position="fixed" className={classes.appBar}>
-				<Toolbar>
-					<Typography variant="h6" noWrap>
-						ML for All Notes
-					</Typography>
-				</Toolbar>
 			</AppBar>
 			<Drawer
 				className={classes.drawer}
@@ -62,7 +57,9 @@ const MakeDrawer = ({ sections }) => {
 				{sections.map((subsection) => (
 					<React.Fragment>
 						{" "}
-						<Divider />
+						{
+						//<Divider />
+						}
 						<List>
 							{subsection.map((obj) => (
 								<Link
@@ -77,7 +74,9 @@ const MakeDrawer = ({ sections }) => {
 								</Link>
 							))}
 						</List>
-						<Divider />
+						{
+						//<Divider />
+						}
 					</React.Fragment>
 				))}
 			</Drawer>

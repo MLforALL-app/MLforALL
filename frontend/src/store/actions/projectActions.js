@@ -1,4 +1,5 @@
 import axios from "axios";
+import Papa from "papaparse";
 
 export const createProject = (project) => {
 	return (dispatch, getState, { getFirestore }) => {
@@ -54,6 +55,79 @@ export const updateContent = (content, pid) => {
 	};
 };
 
+/* setWorkingProject will create a place in the redux state to hold the fields
+ * for our build and pickle query. The intent is to move a lot of the code out
+ * of editCSV and build the query by adding to this store.
+ */
+export const setWorkingProject = (project, pid) => {
+	return (dispatch, getState) => {
+		const uid = getState().firebase.auth.uid;
+		console.log("IN ACTION", project); 
+		console.log(uid);
+		console.log(pid);
+		dispatch({type : "SET_CURRENT_WORKING_PROJECT", project, pid, uid});
+	};
+};
+
+export const updateCurrentWorkingProject = (param, data) => {
+	return (dispatch) => {
+		console.log(param);
+		switch (param){
+			case "nanMethod" :
+				dispatch({type : "UPDATE_NAN", param, data});
+				break;
+			case "modelList" :
+				dispatch({type : "UPDATE_ML", param, data});
+				break;
+			case "targetParameter" :
+				dispatch({type : "UPDATE_TP", param, data});
+				break;
+			case "inputs" :
+				console.log("updating inputs");
+				dispatch({type : "UPDATE_INPUTS", param, data});
+				break;
+			default :
+				dispatch({type : "MALFORMED_CWP_REQ"});
+		}
+		
+	};
+};
+
+export const bigPapa = (url, dispatch) => {
+	Papa.parse(url, {
+		download: true,
+		worker: true,
+		header: true,
+		complete: (results) => {
+			console.log(results);
+			const data = results.data;
+			dispatch({type : "CSV_DATA_IN_STORE", data});
+			console.log("All done!", results);
+		}
+	});
+};
+
+/* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
+export const initCSV = (project, projID) => {
+	return (dispatch, getState, {getFirebase}) => {
+		const uid = getState().firebase.auth.uid;
+		const csvPath = uid + "/" + projID + "/" + project.csvName;
+		const firebase = getFirebase();
+		var csvRef = firebase.storage().ref(csvPath);
+		csvRef
+			.getDownloadURL()
+			.then((url) => {
+				console.log("This the url", url);
+				bigPapa(url, dispatch);
+
+			})
+			.catch((err) => {
+				console.log("SOMETHING wrong uhOh", err);
+				dispatch({type: "CSV_FETCH_ERROR"});
+			});
+	}
+};
+
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
 		//console.log(csvName);
@@ -93,11 +167,13 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
+		const uid = getState().firebase.auth.uid;
 		const projectRef = firestore.collection("projects").doc(pid);
 		projectRef
 			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CSV_NAME" });
+				dispatch({type : "UPDATE_CURRENT_WORKING_PROJECT", project, pid, uid});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
@@ -142,3 +218,58 @@ export const deleteMLProject = (pid, uid, project) => {
 		});
 	};
 };
+//extras for handle csv
+
+
+
+
+const filterObj = (objState) => {
+	return Object.entries(objState)
+		.filter(([key, val]) => val)
+		.map(([key, val]) => key);
+};
+
+export const buildModels = () => {
+	return (dispatch, getState, { getFirestore, getFirebase }) => {
+		
+		const submissionData = getState().project.currentWorkingProject;
+		
+
+		const path = {
+			uid: submissionData.uid,
+			projId: submissionData.projId,
+			title: submissionData.title,
+			modelList: filterObj(submissionData.modelList),
+			targetParameter: submissionData.targetParameter,
+			dfVariables: filterObj(submissionData.inputs),
+			csvName: submissionData.csvName,
+			nanMethod: submissionData.nanMethod
+		};
+		console.log(path);
+		axios
+			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
+			.then((res) => {
+				console.log("THIS IS RESULT", res);
+				dispatch({type : "CREATE_MODEL_SUCC"});
+
+				//console.log("Successfully created project models?");
+			})
+			.catch((err) => {
+				console.log("THIS IS AN ERROR", err);
+				dispatch({type : "CREATE_MODEL_FAIL"});
+			});
+	}
+	
+};
+
+export const resetBuild = () => {
+	return (dispatch, getState, { getFirestore }) => {
+		dispatch({type : "RESET_BUILD"});
+	}
+}
+
+export const clearStore = () => {
+	return (dispatch, getState, { getFirestore }) => {
+		dispatch({type : "CLEAR_STORE"});
+	}
+}

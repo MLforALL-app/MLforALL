@@ -117,6 +117,9 @@ a {
 .MuiSvgIcon-root {
 	color: none;
 }
+.disabled {
+	color: #aaaaaa !important;
+}
 .MuiSlider-root {
 	color: #283593 !important;
 }
