@@ -1,0 +1,33 @@
+.pagination-icon {
+	transform: scale(3);
+	transition: transform 100ms;
+}
+.pagination-icon:hover {
+	transform: scale(3.5);
+	color: #f8bbd0;
+}
+.pagination-select {
+	height: 2rem;
+}
+/* bar color */
+.switch label input[type="checkbox"]:checked + .lever {
+	background-color: #f8bbd0 !important;
+}
+/* background pop color */
+.switch label input[type="checkbox"]:checked + .lever:before {
+	background-color: #a18ef6a6 !important;
+}
+/* lever or dot color */
+.switch label input[type="checkbox"]:checked + .lever:after {
+	background-color: #283593 !important;
+}
+/* same but not checked*/
+.switch label input[type="checkbox"] + .lever {
+	background-color: #f8bbd0 !important;
+}
+.switch label input[type="checkbox"] + .lever:before {
+	background-color: #a18ef6a6 !important;
+}
+.switch label input[type="checkbox"] + .lever:after {
+	background-color: #283593 !important;
+}

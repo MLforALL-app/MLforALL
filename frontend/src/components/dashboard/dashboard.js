@@ -1,37 +1,45 @@
 import React, { Component } from "react";
 // import Notifications from "./notifcations";
-import ProjectList from "../projects/projectlist";
-import HelpBox from "../layouts/helpbox";
+import ProjectList from "../projects/projectList/projectlist";
+import SortForm from "./sortform";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 
 class Dashboard extends Component {
+	state = {
+		orderBy: "createdAt",
+		limit: 8
+	};
 	render() {
-		// notifications is in props too
-		// TODO: Add Sort By functionality
-		const { projects, auth } = this.props;
-		//console.log("This is auth", auth);
-		// Route Protection
+		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
-		// otws good to go
+		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
+		//if (refresh) return <Redirect to="/dashboard" />;
 		return (
 			<div className="dashboard container">
 				<div className="row">
 					<h1>
 						<span className="purple-text">Explore </span>
-						<HelpBox
-							header="The Explore Page"
-							placement="right-start"
-							desc="This is the main page of MLforALL. Here you can see projects that other people have been working on! Click on any one of the cards below to enter an interactive experience of testing their classification models."
-						/>
 					</h1>
+					<h4 style={{ float: "left" }}>
+						See what others are up to.
+					</h4>
+					<SortForm
+						handleDropChange={(e) =>
+							this.setState({
+								orderBy: e.target.value
+							})
+						}
+						orderBy={this.state.orderBy}
+					/>
 				</div>
 				{/*<div className="row">
 					<Notifications notifications={notifications} />
 				</div>*/}
-				<ProjectList projects={projects} />
+				<ProjectList
+					orderBy={this.state.orderBy}
+					limit={this.state.limit}
+				/>
 			</div>
 		);
 	}
@@ -40,20 +48,8 @@ class Dashboard extends Component {
 const mapStateToProps = (state) => {
 	//console.log(state);
 	return {
-		projects: state.firestore.ordered.projects,
-		auth: state.firebase.auth,
-		notifications: state.firestore.ordered.notifications
+		auth: state.firebase.auth
 	};
 };
 
-export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([
-		{
-			collection: "projects",
-			orderBy: ["createdAt", "desc"],
-			limit: 14
-		},
-		{ collection: "notifications", limit: 3, orderBy: ["time", "desc"] }
-	])
-)(Dashboard);
+export default connect(mapStateToProps)(Dashboard);

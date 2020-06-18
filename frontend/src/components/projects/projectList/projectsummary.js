@@ -2,6 +2,9 @@ import React from "react";
 import moment from "moment";
 
 const ProjectSummary = ({ project }) => {
+	const shorten = (s) => {
+		return s.length < 15 ? s : s.substr(0, 13) + "..";
+	};
 	return (
 		<div className="project-summary">
 			<div className="card z-depth-1">
@@ -18,7 +21,11 @@ const ProjectSummary = ({ project }) => {
 						{moment(project.createdAt.toDate()).calendar()}
 					</div>
 					<div style={{ float: "right" }}>
-						{project.authorFirstName} {project.authorLastName}{" "}
+						{shorten(
+							project.authorFirstName +
+								" " +
+								project.authorLastName
+						)}{" "}
 						<span className="hearts">&hearts;</span>
 					</div>
 					<div style={{ clear: "both" }}></div>

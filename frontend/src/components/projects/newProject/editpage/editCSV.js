@@ -1,29 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Papa from "papaparse";
 import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
-// import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import FormControl from "@material-ui/core/FormControl";
-import Select from "@material-ui/core/Select";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
-import firebase from "../../../../config/fbConfig";
-import axios from "axios";
 import { updateContent } from "../../../../store/actions/projectActions";
-import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
-import styles from "./build.css";
-import Insights from "./insights";
+import styles from "../../../../styling/build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
-const addSpace = (list) => {
-	return list.map((s) => " " + s);
-};
-const nameMapper = (name) => {
+import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
+
+export const nameMapper = (name) => {
 	switch (name) {
 		case "":
 			return "Nothing Selected Yet";
@@ -45,38 +35,6 @@ const nameMapper = (name) => {
 };
 
 class DisplayCSV extends Component {
-	// card to show what user is picking
-	getStatus = (inputs, output, models, nameMapper) => {
-		return (
-			<div className="container center">
-				<div className="card">
-					<div className="card-content">
-						<span className="purple-text">
-							<h5>
-								<b>
-									{this.state.error
-										? "Something went Wrong"
-										: "What Your Model Does"}{" "}
-								</b>
-							</h5>
-						</span>
-						<h6>
-							This model will take these parameters:
-							<span className="purple-text">
-								{addSpace(inputs)}
-							</span>
-							<br /> to attempt to predict{" "}
-							<span className="purple-text">{output}</span> <br />{" "}
-							using these algorithms:
-							<span className="purple-text">
-								{addSpace(models.map((s) => nameMapper(s)))}
-							</span>
-						</h6>
-					</div>
-				</div>
-			</div>
-		);
-	};
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
 		return Object.entries(objState)
@@ -93,16 +51,14 @@ class DisplayCSV extends Component {
 	// State
 	state = {
 		csvArray: [],
-		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]),
-		inputs: {},
-		output: "",
-		nanMethod: "drop",
 		redirect: false,
 		loading: false,
-		error: false
+		error: false,
+		inputs: {}
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
+		console.log("SETTING INPUTS");
 		this.setState((prevState) => {
 			var newInputs = prevState.inputs;
 			newInputs[dataKey] = !newInputs[dataKey];
@@ -112,17 +68,7 @@ class DisplayCSV extends Component {
 	handleDropdownOutput = (event) => {
 		this.setState({ output: event.target.value });
 	};
-	handleDropdownNan = (event) => {
-		this.setState({ nanMethod: event.target.value });
-	};
-	handleModelToggle = (value) => () => {
-		//console.log("VALUE IN HANDLE TOGGLE", value);
-		this.setState((prevState) => {
-			var newModels = prevState.models;
-			newModels[value] = !newModels[value];
-			return { ...prevState, models: newModels };
-		});
-	};
+
 	// get functions to populate things on page
 	getMenuItems = (headers) => {
 		var menuitems = [];
@@ -143,138 +89,74 @@ class DisplayCSV extends Component {
 			newInputs[colName] = !newInputs[colName];
 			return { ...prevState, inputs: newInputs };
 		});
-		console.log(this.state);
+		console.log(this.props.inputs);
+		console.log("SETTING INPUTS");
+		this.props.setInputParameters(this.state.inputs);
 	};
-	checkBoxHeader = (colName) => (key) => {
+	checkBoxHeader = (colName, is_numeric) => (key) => {
 		return (
 			<div>
-				<FormControlLabel
-					className="purple-text"
-					value="bottom"
-					control={<Checkbox color="primary" />}
-					label=""
-					labelPlacement="bottom"
-					onChange={this.checkBoxChange(colName)}
-				/>
-
-				<span
-					className="ReactVirtualized__Table__headerTruncatedText purple-text"
-					style={{ "text-align": "left" }}
-				>
+				<div>
+					{!is_numeric ? (
+						<FormControlLabel
+							className="purple-text"
+							value="bottom"
+							control={<Checkbox disabled className="disabled" />}
+							label=""
+							labelPlacement="bottom"
+							onChange={this.checkBoxChange(colName)}
+						/>
+					) : (
+						<FormControlLabel
+							className="purple-text"
+							value="bottom"
+							control={<Checkbox color="primary" />}
+							label=""
+							labelPlacement="bottom"
+							onChange={this.checkBoxChange(colName)}
+						/>
+					)}
+				</div>
+				<span className="ReactVirtualized__Table__headerTruncatedText purple-text">
 					{colName}
 				</span>
 			</div>
 		);
 	};
 
-	getColumns = (keyList) => {
+	isNumeric = (n) => {
+		return !isNaN(parseFloat(n)) && isFinite(n);
+	};
+
+	getColumns = (keyList, firstRow) => {
 		var columns = [];
 		keyList.forEach((key) => {
 			console.log(key);
+			console.log("FIRSTROW", firstRow[key]);
+			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
 			columns.push(
 				<Column
 					label={key}
 					dataKey={key}
 					key={key}
-					headerRenderer={this.checkBoxHeader(colName)}
+					headerRenderer={this.checkBoxHeader(colName, numeric_col)}
 					width={5000}
 				/>
 			);
 		});
 		return columns;
 	};
-	// BIG PAPA
-	bigPapa = (url) => {
-		Papa.parse(url, {
-			download: true,
-			worker: true,
-			header: true,
-			complete: (results) => {
-				this.setState({
-					csvArray: results.data
-				});
-				const inputState = this.initObj(Object.keys(results.data[0]));
-				this.setState({
-					inputs: inputState
-				});
-				console.log("All done!", results);
-			}
-		});
-	};
-	// initialize the CSV in firebase storage and then big papa it
-	initCSV = () => {
-		const csvPath =
-			this.props.project.authorID +
-			"/" +
-			this.props.id +
-			"/" +
-			this.props.project.csvName;
-		var csvRef = firebase.storage().ref(csvPath);
-		csvRef
-			.getDownloadURL()
-			.then((url) => {
-				console.log("This the url", url);
-				this.bigPapa(url); // populates the csvArray state
-				this.setState({ error: false });
-			})
-			.catch((err) => {
-				console.log("SOMETHING wrong uhOh", err);
-				this.setState({ error: true });
+
+	componentDidUpdate = () => {
+		if (this.state.loading === true && this.props.inputs) {
+			this.setState({
+				csvArray: this.props.csvData,
+				inputs: this.props.inputs,
+				loading: false
 			});
-	};
-	// handle submitting the project
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.setState({ loading: true, error: false });
-		const getContent = (content) => {
-			if (content === "") {
-				return (
-					"These models attempt to predict " +
-					this.state.output +
-					" and how it relates to " +
-					addSpace(this.filterObj(this.state.inputs)) +
-					" using the following models: " +
-					addSpace(
-						this.filterObj(this.state.models).map((s) =>
-							nameMapper(s)
-						)
-					)
-				);
-			} else {
-				return content;
-			}
-		};
-		this.props.updateContent(
-			getContent(this.props.project.content),
-			this.props.id
-		);
-		const path = {
-			uid: this.props.auth.uid,
-			projId: this.props.id,
-			title: this.props.project.title,
-			modelList: this.filterObj(this.state.models),
-			targetParameter: this.state.output,
-			dfVariables: this.filterObj(this.state.inputs),
-			csvName: this.props.project.csvName,
-			nanMethod: this.state.nanMethod
-		};
-		console.log(path);
-		axios
-			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
-			.then((res) => {
-				console.log("THIS IS RESULT", res);
-				this.setState({ redirect: true });
-				//console.log("Successfully created project models?");
-			})
-			.catch((err) => {
-				console.log("THIS IS AN ERROR", err);
-				this.setState({ loading: false });
-				this.setState({ error: true });
-			});
-	};
-	componentDidMount = () => {
-		this.initCSV();
+			console.log(this.state.inputs);
+		}
 	};
 
 	render() {
@@ -285,7 +167,7 @@ class DisplayCSV extends Component {
 				) : (
 					<span></span>
 				)}
-				{this.state.csvArray.length === 0 ? (
+				{(this.props.csvData && this.props.csvData.length) === 0 ? (
 					<div className="container center">
 						<CircularProgress />
 					</div>
@@ -311,9 +193,9 @@ class DisplayCSV extends Component {
 								height={400}
 								headerHeight={60}
 								rowHeight={25}
-								rowCount={this.state.csvArray.length}
+								rowCount={this.props.csvData.length}
 								rowGetter={({ index }) =>
-									this.state.csvArray[index]
+									this.props.csvData[index]
 								}
 								rowClassName={({ index }) => {
 									if (index < 0) {
@@ -323,129 +205,12 @@ class DisplayCSV extends Component {
 											? "evenRow"
 											: "oddRow";
 									}
-								}}
-							>
+								}}>
 								{this.getColumns(
-									Object.keys(this.state.csvArray[0])
+									Object.keys(this.props.csvData[0]),
+									this.props.csvData[0]
 								)}
 							</Table>
-						</div>
-						{this.props.project.info.NaN === 0 ? (
-							<div className="row container"></div>
-						) : (
-							<span>
-								<div className="row container">
-									<Insights project={this.props.project} />
-									<h6>
-										<b>
-											How do you want to deal with NaN's?{" "}
-											<FormControl>
-												<Select
-													value={this.state.nanMethod}
-													onChange={
-														this.handleDropdownNan
-													}
-													displayEmpty
-												>
-													{this.getMenuItems([
-														"drop",
-														"zero",
-														"median",
-														"mean"
-													])}
-												</Select>
-												<FormHelperText>
-													Method
-												</FormHelperText>
-											</FormControl>
-											{"  "}
-											<span className="pink-text">
-												<HelpBox
-													header="Data Cleaning Dropdown"
-													placement="right"
-													desc="Use this dropdown menu to select how you would like to clean your NaN's. Drop will ignore all the rows that contain NaN's in a particular column. Zero will set all NaN's to zero. Median/mean will replace all NaN's with the median/mean of the existing inputs."
-												/>
-											</span>
-										</b>
-									</h6>
-								</div>
-							</span>
-						)}
-						<div className="row container">
-							<h5>
-								<b>
-									2. In order to predict this output
-									parameter:{" "}
-									<FormControl>
-										<Select
-											value={this.state.output}
-											onChange={this.handleDropdownOutput}
-											displayEmpty
-										>
-											{this.getMenuItems(
-												Object.keys(
-													this.state.csvArray[0]
-												)
-											)}
-										</Select>
-										<FormHelperText>
-											Output Parameter
-										</FormHelperText>
-									</FormControl>
-									{"  "}
-									<span className="pink-text">
-										<HelpBox
-											header="Output Dropdown"
-											placement="right"
-											desc="Use this dropdown menu to select what column you would like to designate as your output value. This is the parameter that your machine learning model will try to predict!"
-										/>
-									</span>
-								</b>
-							</h5>
-						</div>
-						<div className="row container">
-							<h5>
-								<b>3. Choose your algorithms / models</b>{" "}
-								<span className="pink-text">
-									<HelpBox
-										header="Click the models!"
-										placement="right-end"
-										desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
-										link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
-										linkdesc="Learn more here"
-									/>
-								</span>
-							</h5>
-							<div>
-								<ModelCheck
-									handleToggle={this.handleModelToggle}
-									nameMapper={nameMapper}
-									models={this.state.models}
-								/>
-							</div>
-						</div>
-						<div className="row" style={{ padding: "2rem" }}>
-							{this.getStatus(
-								this.filterObj(this.state.inputs),
-								this.state.output,
-								this.filterObj(this.state.models),
-								nameMapper
-							)}
-						</div>
-						<div className="row container center">
-							<button
-								onClick={this.handleSubmit}
-								className="btn-large z-depth-0"
-							>
-								Build the model!
-							</button>
-							{this.state.loading ? (
-								<div className="row">
-									<CircularProgress />
-								</div>
-							) : (
-								<span></span>
-							)}
 						</div>
 					</div>
 				)}
@@ -454,15 +219,21 @@ class DisplayCSV extends Component {
 	}
 }
 
-const mapStatetoProps = (state, ownProps) => {
+const mapStatetoProps = (state) => {
 	return {
-		auth: state.firebase.auth
+		auth: state.firebase.auth,
+		csvData: state.project.csvData,
+		inputs:
+			state.project.currentWorkingProject &&
+			state.project.currentWorkingProject.inputs
 	};
 };
 // Redux to associate action call to a dispatch
 const mapDispatchToProps = (dispatch) => {
 	return {
-		updateContent: (content, pid) => dispatch(updateContent(content, pid))
+		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
+		setInputParameters: (inputs) =>
+			dispatch(updateCurrentWorkingProject("inputs", inputs))
 	};
 };
 

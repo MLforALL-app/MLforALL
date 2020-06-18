@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
-import "./main.css";
+import "../../../styling/projectdetails.css";
 
 /* MAIN COMPONENT
  * Uses the helper components DescCard, Generate Sliders, and CSV Card
@@ -17,7 +17,7 @@ const ProjectDetails = (props) => {
 	const { pid, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
-	// if (!auth.emailVerified) return <Redirect to={`/v/${pid}`} />;
+	if (!auth.emailVerified) return <Redirect to={`/verify`} />;
 	if (project) {
 		return (
 			<div className="project-details">
@@ -55,6 +55,7 @@ const mapStateToProps = (state, ownProps) => {
 	const pid = ownProps.match.params.pid;
 	const projects = state.firestore.data.projects;
 	const project = projects ? projects[pid] : null;
+	// lets change this to somehow query in firestoreConnect
 	return {
 		pid,
 		project,

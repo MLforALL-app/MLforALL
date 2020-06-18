@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { signUp } from "../../store/actions/authActions";
 
@@ -27,9 +27,7 @@ class SignUp extends Component {
 
 	render() {
 		// from props, retrieve authError and auth objects
-		const { authError, auth } = this.props;
-		// route protection, shouldn't be able to sign in again
-		if (auth.uid) return <Redirect to="/dashboard" />;
+		const { authError } = this.props;
 		return (
 			<div className="container" style={{ paddingTop: "2rem" }}>
 				<form onSubmit={this.handleSubmit} className="white z-depth-1">
@@ -65,11 +63,11 @@ class SignUp extends Component {
 							onChange={this.handleChange}
 						/>
 					</div>
-					<div className="input-field center">
-						<button className="btn z-depth-0 center anchor">
-							Sign Up
+					<div className="center land">
+						<button className="btn waves-effect waves-light anchor z-depth-0">
+							<span>SIGN UP</span>
 						</button>
-						<div className="container land">
+						<div className="container">
 							<br />
 							<Link to="/signin">
 								{" "}

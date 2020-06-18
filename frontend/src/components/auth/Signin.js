@@ -28,7 +28,7 @@ class SignIn extends Component {
 		// from props, retrieve authError and auth objects
 		const { authError, auth } = this.props;
 		// route protection, shouldn't be able to sign in again
-		if (auth.uid) return <Redirect to="/dashboard" />;
+		if (auth.uid) return <Redirect to="/myprofile" />;
 		return (
 			<div className="signin">
 				<div className="container">
@@ -74,7 +74,9 @@ class SignIn extends Component {
 }
 
 // Redux to associate state of this component with the props its passed in
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
+	//console.log(ownProps);
+	//console.log("TODO, CHANGE LINK TO DEPENDING ON PAGE");
 	return { authError: state.auth.authError, auth: state.firebase.auth };
 };
 
