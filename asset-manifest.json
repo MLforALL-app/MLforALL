@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/MLforAll/static/css/main.ee8a5052.chunk.css",
+    "main.js": "/MLforAll/static/js/main.3fa2468a.chunk.js",
+    "main.js.map": "/MLforAll/static/js/main.3fa2468a.chunk.js.map",
+    "runtime-main.js": "/MLforAll/static/js/runtime-main.6a193048.js",
+    "runtime-main.js.map": "/MLforAll/static/js/runtime-main.6a193048.js.map",
+    "static/css/2.71916e70.chunk.css": "/MLforAll/static/css/2.71916e70.chunk.css",
+    "static/js/2.f0524b28.chunk.js": "/MLforAll/static/js/2.f0524b28.chunk.js",
+    "static/js/2.f0524b28.chunk.js.map": "/MLforAll/static/js/2.f0524b28.chunk.js.map",
+    "index.html": "/MLforAll/index.html",
+    "precache-manifest.7e9db755f89e74e7c7c9c20e504ee4f3.js": "/MLforAll/precache-manifest.7e9db755f89e74e7c7c9c20e504ee4f3.js",
+    "service-worker.js": "/MLforAll/service-worker.js",
+    "static/css/2.71916e70.chunk.css.map": "/MLforAll/static/css/2.71916e70.chunk.css.map",
+    "static/css/main.ee8a5052.chunk.css.map": "/MLforAll/static/css/main.ee8a5052.chunk.css.map",
+    "static/js/2.f0524b28.chunk.js.LICENSE.txt": "/MLforAll/static/js/2.f0524b28.chunk.js.LICENSE.txt",
+    "static/media/auth.svg": "/MLforAll/static/media/auth.a8c1f454.svg",
+    "static/media/clf.svg": "/MLforAll/static/media/clf.45cb2c57.svg",
+    "static/media/create.svg": "/MLforAll/static/media/create.5c8b7d9f.svg",
+    "static/media/davis.jpg": "/MLforAll/static/media/davis.ec206f2d.jpg",
+    "static/media/error.svg": "/MLforAll/static/media/error.52600eaf.svg",
+    "static/media/gnb.svg": "/MLforAll/static/media/gnb.d808b586.svg",
+    "static/media/joe.jpeg": "/MLforAll/static/media/joe.9b2d8617.jpeg",
+    "static/media/knn.svg": "/MLforAll/static/media/knn.600a4eb3.svg",
+    "static/media/land.svg": "/MLforAll/static/media/land.019866b9.svg",
+    "static/media/lda.svg": "/MLforAll/static/media/lda.ab4e5355.svg",
+    "static/media/len.JPG": "/MLforAll/static/media/len.39815d99.JPG",
+    "static/media/log_reg.svg": "/MLforAll/static/media/log_reg.acd5f513.svg",
+    "static/media/logo.png": "/MLforAll/static/media/logo.18a91dfc.png",
+    "static/media/max.jpg": "/MLforAll/static/media/max.a087d2c7.jpg",
+    "static/media/oops.svg": "/MLforAll/static/media/oops.a0679141.svg",
+    "static/media/sign.svg": "/MLforAll/static/media/sign.e724f27a.svg",
+    "static/media/svm.svg": "/MLforAll/static/media/svm.ad2a666a.svg",
+    "static/media/who.svg": "/MLforAll/static/media/who.7976b38e.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6a193048.js",
+    "static/css/2.71916e70.chunk.css",
+    "static/js/2.f0524b28.chunk.js",
+    "static/css/main.ee8a5052.chunk.css",
+    "static/js/main.3fa2468a.chunk.js"
+  ]
+}
