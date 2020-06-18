@@ -8,7 +8,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
 import { updateContent } from "../../../../store/actions/projectActions";
 import HelpBox from "../../../layouts/helpbox";
-import styles from "./build.css";
+import styles from "../../../../styling/build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
