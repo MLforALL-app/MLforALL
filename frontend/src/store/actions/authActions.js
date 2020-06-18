@@ -21,18 +21,21 @@ export const signOut = () => {
 			.signOut()
 			.then(() => {
 				dispatch({ type: "SIGN_OUT_SUCCESS" });
+				console.log("bye bye!");
 			});
 	};
 };
 
 export const signUp = (newUser) => {
+	console.log("newUser info", newUser);
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const authRef = getFirebase().auth();
 		const firestore = getFirestore();
 		authRef
 			.createUserWithEmailAndPassword(newUser.email, newUser.password)
 			.then((response) => {
-				return firestore
+				console.log("response", response);
+				firestore
 					.collection("users")
 					.doc(response.user.uid)
 					.set({

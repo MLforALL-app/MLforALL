@@ -47,7 +47,7 @@ class UserProfile extends Component {
 					<ProjectList
 						orderBy={orderBy}
 						limit={limit}
-						uid={auth.uid}
+						uid={pageuid}
 					/>
 					<div className="center">
 						<Link to="/create">

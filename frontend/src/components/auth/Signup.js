@@ -64,9 +64,9 @@ class SignUp extends Component {
 						/>
 					</div>
 					<div className="center land">
-						<div className="btn waves-effect waves-light anchor z-depth-0">
+						<button className="btn waves-effect waves-light anchor z-depth-0">
 							<span>SIGN UP</span>
-						</div>
+						</button>
 						<div className="container">
 							<br />
 							<Link to="/signin">

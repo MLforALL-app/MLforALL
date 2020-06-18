@@ -71,10 +71,12 @@ class ProjectList extends Component {
 			.orderBy(orderBy, dir)
 			.where("authorID", "==", uid)
 			.get();
-		query.then((documentSnapshot) => {
-			const myProjects = documentSnapshot.docs.map(this.docMap);
-			this.setState({ projects: [myProjects] });
-		});
+		query
+			.then((documentSnapshot) => {
+				const myProjects = documentSnapshot.docs.map(this.docMap);
+				this.setState({ projects: [myProjects] });
+			})
+			.catch((err) => console.log(err));
 	}
 	initProjects() {
 		// put the first page in "next" to be called by getProject
@@ -82,21 +84,23 @@ class ProjectList extends Component {
 		const dir = this.getDir(orderBy);
 		const ref = db.collection("projects");
 		const query = ref.orderBy(orderBy, dir).limit(limit).get();
-		query.then((documentSnapshot) => {
-			const initNext = documentSnapshot.docs.map(this.docMap);
-			const lastVis = this.tail(documentSnapshot.docs);
-			//console.log("Init_next", initNext);
-			//console.log("Init_lastVis", lastVis.data().title);
-			// load the next page
-			this.setState((prev) => {
-				prev.lastVisible.push(lastVis);
-				return {
-					nextPage: initNext,
-					lastVisible: prev.lastVisible
-				};
-			});
-			this.getProjects();
-		});
+		query
+			.then((documentSnapshot) => {
+				const initNext = documentSnapshot.docs.map(this.docMap);
+				const lastVis = this.tail(documentSnapshot.docs);
+				//console.log("Init_next", initNext);
+				//console.log("Init_lastVis", lastVis.data().title);
+				// load the next page
+				this.setState((prev) => {
+					prev.lastVisible.push(lastVis);
+					return {
+						nextPage: initNext,
+						lastVisible: prev.lastVisible
+					};
+				});
+				this.getProjects();
+			})
+			.catch((err) => console.log(err));
 	}
 	getProjects() {
 		// load the current page (snapshot) from next and convert to list
@@ -133,7 +137,8 @@ class ProjectList extends Component {
 						pLoad: true
 					};
 				});
-			});
+			})
+			.catch((err) => console.log(err));
 	}
 	handleClick(dir) {
 		const increment = dir === "next" ? 1 : -1;
@@ -165,7 +170,9 @@ class ProjectList extends Component {
 		this.resetProjects();
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps !== this.props) {
+		if (prevProps === undefined) {
+			console.log("no props");
+		} else if (prevProps !== this.props) {
 			//console.log("resetinng..");
 			this.resetProjects();
 			//console.log("end reset");
@@ -196,5 +203,4 @@ class ProjectList extends Component {
 		);
 	}
 }
-
 export default ProjectList;
