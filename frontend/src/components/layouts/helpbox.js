@@ -21,16 +21,19 @@ class HelpBox extends Component {
 		const { header, desc, placement, link, linkdesc } = this.props;
 		return (
 			<HtmlTooltip
+				leaveDelay={link ? 750 : 100}
 				title={
 					<React.Fragment>
 						<h5>{header}</h5>
-						<p>{desc}</p>
-						<a href={link}>{linkdesc}</a>
+						<p>
+							{desc}
+							<br />
+							<a href={link}>{linkdesc}</a>
+						</p>
 					</React.Fragment>
 				}
-				placement={placement}
-			>
-				<HelpIcon />
+				placement={placement}>
+				<HelpIcon className="pink-text" />
 			</HtmlTooltip>
 		);
 	}

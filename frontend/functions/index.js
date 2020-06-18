@@ -20,7 +20,6 @@ const createNotification = (notification) => {
 			//console.log(doc);
 		});
 };
-
 exports.projectCreated = functions.firestore
 	.document("projects/{projectID}")
 	.onCreate((doc) => {

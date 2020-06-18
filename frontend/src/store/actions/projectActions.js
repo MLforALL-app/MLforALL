@@ -8,7 +8,6 @@ export const createProject = (project) => {
 		const fname = getState().firebase.profile.firstName;
 		const lname = getState().firebase.profile.lastName;
 		const uid = getState().firebase.auth.uid;
-		const date = new Date();
 		// We get the csv name from the csv project (called csvName for conveinence)
 		//const csvName = project.csvName.name;
 		//Store the file to upload for later
@@ -20,7 +19,7 @@ export const createProject = (project) => {
 				authorFirstName: fname,
 				authorLastName: lname,
 				authorID: uid,
-				createdAt: date,
+				createdAt: firestore.FieldValue.serverTimestamp(),
 				csvName: "",
 				targetParam: "",
 				content: "",

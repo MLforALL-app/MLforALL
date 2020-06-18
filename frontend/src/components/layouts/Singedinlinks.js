@@ -12,7 +12,7 @@ const Signedinlinks = (props) => {
 				</NavLink>{" "}
 			</li>
 			<li>
-				<NavLink to={"/me/" + props.auth.uid} key={props.auth.uid}>
+				<NavLink to={"/user/" + props.auth.uid} key={props.auth.uid}>
 					<span className="purple-text">My Models</span>
 				</NavLink>
 			</li>
@@ -22,22 +22,15 @@ const Signedinlinks = (props) => {
 				</NavLink>{" "}
 			</li>
 			<li>
-				<button
-					style={{
-						border: "None",
-						backgroundColor: "transparent"
-					}}
-					onClick={props.signOut}
-				>
+				<NavLink to="/" onClick={props.signOut}>
 					<span className="purple-text">Logout</span>
-				</button>
+				</NavLink>{" "}
 			</li>
 			<li>
 				<NavLink
-					to={"/me/" + props.auth.uid}
+					to={"/user/" + props.auth.uid}
 					key={props.auth.uid}
-					className="btn btn-floating"
-				>
+					className="btn waves-effect waves-light btn-floating">
 					{props.profile.initials}
 				</NavLink>
 			</li>

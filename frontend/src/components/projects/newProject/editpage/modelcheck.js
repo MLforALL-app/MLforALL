@@ -12,40 +12,9 @@ import log_reg from "../../../../pictures/models/log_reg.svg";
 import gnb from "../../../../pictures/models/gnb.svg";
 import lda from "../../../../pictures/models/lda.svg";
 import clf from "../../../../pictures/models/clf.svg";
-// import Checkbox from "@material-ui/core/Checkbox";
 import HelpBox from "../../../layouts/helpbox";
 
-/*
-const useStyles = makeStyles((theme) => ({
-	root: {
-		width: "100%",
-		backgroundColor: theme.palette.background.paper
-	}
-}));
-*/
-
 const ModelCheck = ({ handleToggle, nameMapper, models }) => {
-	// const classes = useStyles();
-	/*
-	const makeListItem = (value, description) => {
-		return (
-			<ListItem key={value} dense button onClick={handleToggle(value)}>
-				<ListItemIcon>
-					<Checkbox
-						edge="start"
-						checked={models[value]}
-						disableRipple
-					/>
-				</ListItemIcon>
-				<ListItemText
-					id={value}
-					primary={nameMapper(value)}
-					secondary={description}
-				/>
-			</ListItem>
-		);
-	};
-	*/
 	const desc = {
 		log_reg: "logistic regraysson",
 		gnb: "gauss navigation bar",
@@ -64,7 +33,7 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
 	];
 	const makeCard = (value, img) => {
 		return (
-			<div className="col s6 m4">
+			<div key={value} className="col s6 m4">
 				<div className="card center">
 					<div onClick={handleToggle(value)}>
 						{models[value] ? (
@@ -103,17 +72,7 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
 		);
 	};
 	const modelCards = modelImgs.map(([value, img]) => makeCard(value, img));
-	/*
-	return (
-		<div>
-			<List className={classes.root}>
-				{Object.entries(desc).map(([key, val]) =>
-					makeListItem(key, val)
-				)}
-			</List>
-		</div>
-	);
-	*/
+
 	return (
 		<div style={{ paddingTop: "2.5rem" }}>
 			<div className="row">{modelCards.slice(0, 3)}</div>

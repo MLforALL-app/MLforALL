@@ -25,27 +25,9 @@ h6 {
 		display: none !important;
 	}
 }
-
-.card-action {
-	border-bottom-left-radius: 30px !important;
-	border-bottom-right-radius: 30px !important;
-	background-color: #283593 !important;
-	color: white;
-	height: 55px;
-}
-.card {
-	border-radius: 30px;
-	background-color: white;
-	color: black;
-}
-.card-content {
-	border-top-left-radius: 30px !important;
-	border-top-right-radius: 30px !important;
-}
 .content-sum {
 	height: 150px;
 }
-
 .purple-text {
 	color: #283593 !important;
 }
@@ -57,21 +39,44 @@ h6 {
 }
 .btn-floating {
 	background-color: #283593;
+	display: inline-block !important;
 }
 .btn {
+	font-weight: bold;
 	background-color: #283593;
+	border-color: #283593;
 	border-radius: 30px;
+	display: table-cell;
+	vertical-align: middle;
 }
-.btn:focus,
+.btn:focus {
+	background-color: #283593;
+}
 .btn:hover {
 	background-color: #6e689be0;
+	border-color: #6e689be0;
+}
+.btn-outline {
+	color: #283593;
+	border-color: #283593;
+	border-width: 2px;
+	border-style: solid;
+	background-color: transparent;
+}
+.btn-outline:focus {
+	background-color: transparent;
+}
+.btn-outline:hover {
+	background-color: #9e98d12a;
 }
 .btn-sec {
 	background-color: #f8bbd0;
+	border-color: #f8bbd0;
 	color: black;
-	border-radius: 30px;
 }
-.btn-sec:focus,
+.btn-sec:focus {
+	background-color: #f8bbd0;
+}
 .btn-sec:hover {
 	background-color: #ffdce8ed;
 }
@@ -79,11 +84,12 @@ h6 {
 	border-radius: 30px;
 	background-color: #283593;
 }
-.btn-large:focus,
+.btn-large:focus {
+	background-color: #283593;
+}
 .btn-large:hover {
 	background-color: #6e689be0;
 }
-
 .project-summary {
 	padding-right: 1.5rem;
 	padding-left: 1.5rem;
@@ -109,10 +115,10 @@ a {
 	color: #f8bbd0 !important;
 }
 .MuiSvgIcon-root {
-	color: #f8bbd0;
+	color: none;
 }
 .disabled {
-	color : #aaaaaa !important;
+	color: #aaaaaa !important;
 }
 .MuiSlider-root {
 	color: #283593 !important;

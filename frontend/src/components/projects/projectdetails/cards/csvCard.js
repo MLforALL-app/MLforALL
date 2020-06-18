@@ -1,19 +1,16 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DeleteProject from "./confirmDel";
 import "firebase/storage";
 import firebase from "../../../../config/fbConfig";
 
-const edit = (setRedirect) => {
+const edit = () => {
 	return (
 		<button
 			className="btn-flat waves-effect waves-light"
 			style={{ display: "inline" }}
-			onClick={() => {
-				setRedirect(true);
-			}}
 		>
-			<span className="purple-text">Edit</span>
+			<span className="purple-text">Edit This Project</span>
 		</button>
 	);
 };
@@ -22,7 +19,6 @@ const edit = (setRedirect) => {
 // delete project functionality is housed
 const CSVCard = ({ pid, auth, project, history }) => {
 	const [csvUrl, setcsvUrl] = useState("");
-	const [redirect, setRedirect] = useState(false);
 	const owner = auth.uid === project.authorID;
 	const csvPath = project.authorID + "/" + pid + "/" + project.csvName;
 	var csvRef = firebase.storage().ref(csvPath);
@@ -51,7 +47,6 @@ const CSVCard = ({ pid, auth, project, history }) => {
 					</p>
 				</div>
 			</div>
-			{redirect ? <Redirect to={`/edit/${pid}`} /> : <span></span>}
 			{owner ? (
 				<span>
 					<DeleteProject
@@ -60,7 +55,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 						project={project}
 						history={history}
 					/>
-					{edit(setRedirect)}
+					<Link to={`/edit/${pid}`}>{edit()}</Link>
 				</span>
 			) : (
 				<span></span>
@@ -68,7 +63,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 			{csvUrl === "" ? (
 				<span></span>
 			) : (
-				<a href={csvUrl}>
+				<a target="_blank" rel="noreferrer noopener" href={csvUrl}>
 					<button
 						className="btn-flat waves-effect waves-light"
 						style={{ display: "inline" }}

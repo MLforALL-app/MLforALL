@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Column, Table } from "react-virtualized";
 import { Redirect } from "react-router-dom";
 import "react-virtualized/styles.css"; // only needs to be imported once
-// import { makeStyles } from "@material-ui/core/styles";
 import MenuItem from "@material-ui/core/MenuItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
@@ -13,7 +12,6 @@ import styles from "./build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
-
 
 export const nameMapper = (name) => {
 	switch (name) {
@@ -37,7 +35,6 @@ export const nameMapper = (name) => {
 };
 
 class DisplayCSV extends Component {
-
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
 		return Object.entries(objState)
@@ -67,8 +64,6 @@ class DisplayCSV extends Component {
 			newInputs[dataKey] = !newInputs[dataKey];
 			return { ...prevState, inputs: newInputs };
 		});
-		
-		
 	};
 	handleDropdownOutput = (event) => {
 		this.setState({ output: event.target.value });
@@ -102,35 +97,27 @@ class DisplayCSV extends Component {
 		return (
 			<div>
 				<div>
-				{!is_numeric ? 
-				(
-				
-				<FormControlLabel
-					className="purple-text"
-					value="bottom"
-					control={<Checkbox  disabled className="disabled" />}
-					label=""
-					labelPlacement="bottom"
-					onChange={this.checkBoxChange(colName)}
-				/>
-				)
-				:
-				(<FormControlLabel
-					className="purple-text"
-					value="bottom"
-					control={<Checkbox color="primary" />}
-					label=""
-					labelPlacement="bottom"
-					onChange={this.checkBoxChange(colName)}
-				/>
-
-				)}
-
+					{!is_numeric ? (
+						<FormControlLabel
+							className="purple-text"
+							value="bottom"
+							control={<Checkbox disabled className="disabled" />}
+							label=""
+							labelPlacement="bottom"
+							onChange={this.checkBoxChange(colName)}
+						/>
+					) : (
+						<FormControlLabel
+							className="purple-text"
+							value="bottom"
+							control={<Checkbox color="primary" />}
+							label=""
+							labelPlacement="bottom"
+							onChange={this.checkBoxChange(colName)}
+						/>
+					)}
 				</div>
-				<span
-					className="ReactVirtualized__Table__headerTruncatedText purple-text"
-					
-				>
+				<span className="ReactVirtualized__Table__headerTruncatedText purple-text">
 					{colName}
 				</span>
 			</div>
@@ -139,7 +126,7 @@ class DisplayCSV extends Component {
 
 	isNumeric = (n) => {
 		return !isNaN(parseFloat(n)) && isFinite(n);
-	}
+	};
 
 	getColumns = (keyList, firstRow) => {
 		var columns = [];
@@ -161,19 +148,16 @@ class DisplayCSV extends Component {
 		return columns;
 	};
 
-	
-
 	componentDidUpdate = () => {
-		if(this.state.loading === true && this.props.inputs){
+		if (this.state.loading === true && this.props.inputs) {
 			this.setState({
-				csvArray : this.props.csvData,
-				inputs : this.props.inputs,
-				loading : false
+				csvArray: this.props.csvData,
+				inputs: this.props.inputs,
+				loading: false
 			});
 			console.log(this.state.inputs);
 		}
-
-	}
+	};
 
 	render() {
 		return (
@@ -221,18 +205,13 @@ class DisplayCSV extends Component {
 											? "evenRow"
 											: "oddRow";
 									}
-								}}
-							>
+								}}>
 								{this.getColumns(
 									Object.keys(this.props.csvData[0]),
 									this.props.csvData[0]
 								)}
 							</Table>
 						</div>
-						
-
-						
-						
 					</div>
 				)}
 			</div>
@@ -244,14 +223,17 @@ const mapStatetoProps = (state) => {
 	return {
 		auth: state.firebase.auth,
 		csvData: state.project.csvData,
-		inputs : state.project.currentWorkingProject && state.project.currentWorkingProject.inputs
+		inputs:
+			state.project.currentWorkingProject &&
+			state.project.currentWorkingProject.inputs
 	};
 };
 // Redux to associate action call to a dispatch
 const mapDispatchToProps = (dispatch) => {
 	return {
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
-		setInputParameters : (inputs) => dispatch(updateCurrentWorkingProject("inputs", inputs))
+		setInputParameters: (inputs) =>
+			dispatch(updateCurrentWorkingProject("inputs", inputs))
 	};
 };
 
