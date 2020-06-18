@@ -16,6 +16,7 @@ import ScrollToTop from "./components/layouts/scrollToTop";
 import MainDoc from "./components/education/mainDoc";
 import Lost from "./components/info/lost";
 import Mobile from "./components/info/mobile";
+import GHPages from "./components/info/ghpages";
 
 // import Footer from "./components/info/footer";
 import "./App.css";
@@ -59,6 +60,7 @@ function App() {
 						/>
 						<Route exact path="/edu" component={MainDoc} />
 						<Route exact path="/" component={JoeLand} />
+						<Route path="/MLforAll" component={GHPages} />
 						<Route component={Lost} />
 					</Switch>
 					{/*<Footer />*/}
