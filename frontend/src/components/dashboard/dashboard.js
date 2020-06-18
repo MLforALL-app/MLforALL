@@ -53,31 +53,3 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps)(Dashboard);
-
-/*
-
-	<FormControl style={{ float: "right" }}>
-						<span>
-							Sort By:{" "}
-							<Select
-								value={this.state.orderBy}
-								onChange={(e) =>
-									this.setState({
-										orderBy: e.target.value,
-										refresh: true
-									})
-								}
-								displayEmpty>
-								<MenuItem value="createdAt">Date</MenuItem>
-								<MenuItem value="title">Title</MenuItem>
-								<MenuItem value="authorFirstName">
-									First Name
-								</MenuItem>
-								<MenuItem value="authorLastName">
-									Last Name
-								</MenuItem>
-							</Select>
-						</span>
-					</FormControl>
-
-*/

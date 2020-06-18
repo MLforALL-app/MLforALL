@@ -27,7 +27,7 @@ class DeleteProject extends Component {
 		return () => {
 			this.setState({ open: false });
 			this.props.deleteMLProject(pid, auth.uid, project);
-			history.push(`/me/${auth.uid}`);
+			history.push(`/myprofile`);
 		};
 	};
 
@@ -38,16 +38,14 @@ class DeleteProject extends Component {
 				<button
 					className="btn-flat waves-effect waves-light"
 					style={{ display: "inline" }}
-					onClick={this.handleClickOpen}
-				>
+					onClick={this.handleClickOpen}>
 					<span className="pink-text">Delete This Project</span>
 				</button>
 				<Dialog
 					open={this.state.open}
 					onClose={this.handleClose}
 					aria-labelledby="alert-dialog-title"
-					aria-describedby="alert-dialog-description"
-				>
+					aria-describedby="alert-dialog-description">
 					<DialogTitle id="alert-dialog-title">
 						Delete this model once and ml for all?
 					</DialogTitle>
@@ -62,8 +60,7 @@ class DeleteProject extends Component {
 						<button
 							className="btn-flat waves-effect waves-light"
 							style={{ display: "inline", color: "green" }}
-							onClick={this.handleClose}
-						>
+							onClick={this.handleClose}>
 							Keep It!
 						</button>
 						<button
@@ -74,8 +71,7 @@ class DeleteProject extends Component {
 								auth,
 								project,
 								history
-							)}
-						>
+							)}>
 							Delete Forever {" :("}
 						</button>
 					</DialogActions>

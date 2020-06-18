@@ -20,7 +20,7 @@ class UserProfile extends Component {
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		if (auth.uid === pageuid) return <Redirect to="/me" />;
+		if (auth.uid === pageuid) return <Redirect to="/myprofile" />;
 		// maybe instead of redirecting, we can have another sign up page here
 		// otws good to go
 		// TODO: change const projects so its only this user's projects
@@ -47,7 +47,7 @@ class UserProfile extends Component {
 					<ProjectList
 						orderBy={orderBy}
 						limit={limit}
-						uid={auth.uid}
+						uid={pageuid}
 					/>
 					<div className="center">
 						<Link to="/create">

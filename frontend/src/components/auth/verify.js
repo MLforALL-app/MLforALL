@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import { sendVerify } from "../../store/actions/authActions";
 import authImg from "../../pictures/backgrounds/auth.svg";
 
@@ -12,13 +12,7 @@ class VerifyEmailProject extends Component {
 	};
 	button = () => {
 		if (this.props.auth.emailVerified) {
-			return (
-				<Link to={`me/${this.props.auth.uid}`}>
-					<div className="btn btn-sec waves-effect waves-light z-depth-0 anchor">
-						Enter MLforALL
-					</div>
-				</Link>
-			);
+			return <Redirect to="myprofile" />;
 		} else {
 			return (
 				<React.Fragment>

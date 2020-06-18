@@ -28,7 +28,7 @@ class SignIn extends Component {
 		// from props, retrieve authError and auth objects
 		const { authError, auth } = this.props;
 		// route protection, shouldn't be able to sign in again
-		if (auth.uid) return <Redirect to="/me" />;
+		if (auth.uid) return <Redirect to="/myprofile" />;
 		return (
 			<div className="signin">
 				<div className="container">
