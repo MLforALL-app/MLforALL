@@ -13,7 +13,7 @@ const nameMapper = (name) => {
 		case "log_reg":
 			return "Logistic Regression";
 		case "gnb":
-			return "Gauss Naive Bayes";
+			return "Gaussian Naive Bayes";
 		case "knn":
 			return "K-Nearest Neighbors";
 		case "svm":
@@ -33,17 +33,17 @@ const getDesc = (name) => {
 		case "":
 			return "Nothing Selected Yet";
 		case "log_reg":
-			return "Logistic Regression is a model where blank1";
+			return "Classifies based on class probabilities modeled by logistic function";
 		case "gnb":
-			return "Gauss Naive Bayes is a model where blank2";
+			return "Classifies under assumptions of Gaussian data and independence";
 		case "knn":
-			return "K-Nearest Neighbors is a model where blank3";
+			return "Classifies based on distance to closest k training examples";
 		case "svm":
-			return "Support Vector Machine is a model where blank4";
+			return "Classifies by creating maximum margin decision boundaries";
 		case "clf":
-			return "Decision Tree Classifier is a model where blank5";
+			return "Classifies using consecutive true/false decision rules";
 		case "lda":
-			return "Linear Discriminant Analysis is a model where blank6";
+			return "Classifies using Bayes' theorem assuming each class is normally distributed with equal covariance";
 		default:
 			return "Error: Not valid model name";
 	}
@@ -123,7 +123,7 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			// console.log("THIS IS PATH", path);
+			console.log("THIS IS PATH", path);
 			this.setState({ loading: true });
 			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
@@ -191,14 +191,16 @@ class GenerateSliders extends Component {
 									style={{
 										paddingTop: "2rem",
 										textAlign: "right"
-									}}>
+									}}
+								>
 									<HelpBox
 										placement="left"
 										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
 									/>{" "}
 									<button
 										className="btn waves-effect waves-light anchor"
-										onClick={this.handleSubmit}>
+										onClick={this.handleSubmit}
+									>
 										<b>Generate</b>
 									</button>
 								</div>
