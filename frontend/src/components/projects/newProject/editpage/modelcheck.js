@@ -16,12 +16,12 @@ import HelpBox from "../../../layouts/helpbox";
 
 const ModelCheck = ({ handleToggle, nameMapper, models }) => {
 	const desc = {
-		log_reg: "logistic regraysson",
-		gnb: "gauss navigation bar",
-		knn: "keep your nearrest neigbhors",
-		svm: "small vegetable mind",
-		clf: "trees are good for the wrold decsion classifier",
-		lda: "line discrimnant analyisisisis"
+		log_reg: "Logistic Regression classifies based on class probabilities modeled by logistic function",
+		gnb: "Gaussian Naive Bayes classifies under assumptions of Gaussian data and independence",
+		knn: "K Nearest Neighbors classifies based on distance to closest k training examples",
+		svm: "Support Vector Machines classify by creating maximum margin decision boundaries",
+		clf: "Decision Trees classify by using consecutive true/false decision rules",
+		lda: "Linear Discriminant Analysis classifies using Bayes' theorem assuming each class is normally distributed with equal covariance"
 	};
 	const modelImgs = [
 		["log_reg", log_reg],
