@@ -1,6 +1,9 @@
-# MLForEveryone
+# MLForEveryone 
+
+[![CodeFactor](https://www.codefactor.io/repository/github/lenghuang/mlforall/badge)](https://www.codefactor.io/repository/github/lenghuang/mlforall)
 
 Making visualizations, machine learning, and data analysis easier for you!
+
 
 ## Our Tech Stack
 #### Frontend: 
@@ -16,6 +19,6 @@ Making visualizations, machine learning, and data analysis easier for you!
 - Pandas
 
 ## Links
-[In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
-[Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
-[Custom Link](mlforall.xyz)
+- [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
+- [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
+- [Custom Link](mlforall.xyz)
