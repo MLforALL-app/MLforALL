@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/MLforAll/static/css/main.7e9b0247.chunk.css",
-    "main.js": "/MLforAll/static/js/main.63ea2f2f.chunk.js",
-    "main.js.map": "/MLforAll/static/js/main.63ea2f2f.chunk.js.map",
+    "main.js": "/MLforAll/static/js/main.a8fda88a.chunk.js",
+    "main.js.map": "/MLforAll/static/js/main.a8fda88a.chunk.js.map",
     "runtime-main.js": "/MLforAll/static/js/runtime-main.6a193048.js",
     "runtime-main.js.map": "/MLforAll/static/js/runtime-main.6a193048.js.map",
     "static/css/2.71916e70.chunk.css": "/MLforAll/static/css/2.71916e70.chunk.css",
     "static/js/2.d6b8fbab.chunk.js": "/MLforAll/static/js/2.d6b8fbab.chunk.js",
     "static/js/2.d6b8fbab.chunk.js.map": "/MLforAll/static/js/2.d6b8fbab.chunk.js.map",
     "index.html": "/MLforAll/index.html",
-    "precache-manifest.f2859af48b6850b632cbc3458da0d396.js": "/MLforAll/precache-manifest.f2859af48b6850b632cbc3458da0d396.js",
+    "precache-manifest.f4c03d038f425b1927dd815ff6e611a0.js": "/MLforAll/precache-manifest.f4c03d038f425b1927dd815ff6e611a0.js",
     "service-worker.js": "/MLforAll/service-worker.js",
     "static/css/2.71916e70.chunk.css.map": "/MLforAll/static/css/2.71916e70.chunk.css.map",
     "static/css/main.7e9b0247.chunk.css.map": "/MLforAll/static/css/main.7e9b0247.chunk.css.map",
@@ -38,6 +38,6 @@
     "static/css/2.71916e70.chunk.css",
     "static/js/2.d6b8fbab.chunk.js",
     "static/css/main.7e9b0247.chunk.css",
-    "static/js/main.63ea2f2f.chunk.js"
+    "static/js/main.a8fda88a.chunk.js"
   ]
 }

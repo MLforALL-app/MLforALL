@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "eed75a5a7d62aac0de39eca176072257",
+    "revision": "9e6910f677c0b4bb1a021a0ca187c589",
     "url": "/MLforAll/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MLforAll/static/css/2.71916e70.chunk.css"
   },
   {
-    "revision": "6a2c32f4aef4e9f9930f",
+    "revision": "00577fef2023d7806adb",
     "url": "/MLforAll/static/css/main.7e9b0247.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/MLforAll/static/js/2.d6b8fbab.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6a2c32f4aef4e9f9930f",
-    "url": "/MLforAll/static/js/main.63ea2f2f.chunk.js"
+    "revision": "00577fef2023d7806adb",
+    "url": "/MLforAll/static/js/main.a8fda88a.chunk.js"
   },
   {
     "revision": "4149c217d06a9d80ce97",
