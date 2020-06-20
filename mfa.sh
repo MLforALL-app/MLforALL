@@ -18,25 +18,30 @@ function print_help () {
 
 function ghpages_build() {
   cd frontend
+  printf "Building and deploying to Github Pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
   npm run deploy 
   cd ..
 }
 
 function ghpages_nobuild(){
   cd frontend 
+  printf "Running gh-pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
   gh-pages -d build
   cd ..
 }
 
 function firebase () {
   cd frontend 
+  printf "Deploying to Firebase (◕‿◕✿)\n\n"
   firebase deploy 
   cd ..
 }
 
 function api () {
   cd api
+  printf "Building Docker Image (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
   gcloud builds submit --tag gcr.io/mlforall-api/flask-api
+  printf "Loading to Google Cloud Platform (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
   gcloud run deploy "flask-api" --image gcr.io/mlforall-api/flask-api --platform=managed --region=us-east1
   cd ..
 }
