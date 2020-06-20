@@ -14,4 +14,4 @@ There are two different frameworks that are being used in this folder. **Firebas
 
 ### Create-React-App
 
-[Create React App](https://github.com/facebook/create-react-app) serves as the frontend for this project. We have many components and hopefully
+[Create React App](https://github.com/facebook/create-react-app) serves as the frontend for this project. A major thanks to [Net Ninja's Tutorials](https://www.youtube.com/playlist?list=PL4cUxeGkcC9iWstfXntcj8f-dFZ4UtlN3) for teaching us many important basics as well. We have many components and hopefully can provide more details as to how they're used here.
