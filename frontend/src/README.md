@@ -11,7 +11,7 @@ Here is a brief rundown on our various react components. Hopefully this can prov
 -   #### Dashboards/Profiles: `.../dashboard/...` Folder
     -   `dashboard.js` is the "Explore" page
     -   `myprojects.js` is the "My Models" page
-    -   `notifications.js` is the live notificatins component _(NOT IN USE)_
+    -   `notifications.js` is the live notifications component _(NOT IN USE)_
     -   `sortform.js` is a component used in sorting cards
     -   `userProfile.js` has the same effect as `myprojects.js` but allows viewing of other users
 -   #### Educational Content: `.../education/...`
