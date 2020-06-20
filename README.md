@@ -6,12 +6,15 @@ Making visualizations, machine learning, and data analysis easier for you!
 
 
 ## Our Tech Stack
-#### Frontend: 
+
+_Use the links to view more in-depth `README.md` files throughout the repo._
+
+### [Frontend:](https://github.com/lenghuang/MLforAll/tree/master/frontend/src)
 - Materialize-CSS
 - Material-UI
 - ReactJS 
 - Redux
-#### Backend: 
+### [Backend:](https://github.com/lenghuang/MLforAll/tree/master/api)
 - Firebase Authentication, Firestore
 - Flask RestAPI
 - Google Cloud Platform, Storage
