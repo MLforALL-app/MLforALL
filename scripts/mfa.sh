@@ -18,7 +18,7 @@ function print_help () {
 
 function check_git() {
   printf "Checking that this directory contains MLforALL repo... ಠ_ಠ\n"
-  url=`git config --get remote.origin.url`
+  url=$(git config --get remote.origin.url)
   if [ "$url" != "https://github.com/lenghuang/MLforAll.git" ]
   then
     printf "\nNoooo wrong repo, bring me back! (ಥ﹏ಥ) \n"
@@ -29,7 +29,7 @@ function check_git() {
 
 function check_dir() {
   printf "Checking you're in the right directory... ಠ╭╮ಠ\n"
-  dir=`pwd`
+  dir=$(pwd)
   if [ "${dir: -8}" != "MLforAll" ]
   then
     printf "\nWrong Directory!!! You're in ...${dir: -32}\n"
