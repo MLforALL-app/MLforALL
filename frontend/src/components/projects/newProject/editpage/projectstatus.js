@@ -26,19 +26,18 @@ const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
 
-class ProjectStatus extends Component{
-
+class ProjectStatus extends Component {
 	state = {
-		error : false
+		error: false
 	};
 
 	filterObj = (objState) => {
 		return Object.entries(objState)
 			.filter(([key, val]) => val)
 			.map(([key, val]) => key);
-    };
+	};
 
-    getStatus = (inputs, output, models, nameMapper) => {
+	getStatus = (inputs, output, models, nameMapper) => {
 		return (
 			<div className="container center">
 				<div className="card">
@@ -69,30 +68,30 @@ class ProjectStatus extends Component{
 			</div>
 		);
 	};
-    
-    render () {
-		if(this.props.CWP === undefined || this.props.CWP === {}){
-			return (<span>waiting</span>)
+
+	render() {
+		if (this.props.CWP === undefined || this.props.CWP === {}) {
+			return <span>waiting</span>;
 		}
 		console.log(this.props.CWP.inputs);
 		console.log(this.props.CWP.models);
-        return (
-            <div className="row" style={{ padding: "2rem" }}>
-                {this.getStatus(
-                    this.filterObj(this.props.CWP.inputs),
-                    this.props.CWP.targetParameter,
-                    this.filterObj(this.props.CWP.modelList),
-                    nameMapper
-                )}
-            </div>
-        );
-    };
+		return (
+			<div className="row" style={{ padding: "2rem" }}>
+				{this.getStatus(
+					this.filterObj(this.props.CWP.inputs),
+					this.props.CWP.targetParameter,
+					this.filterObj(this.props.CWP.modelList),
+					nameMapper
+				)}
+			</div>
+		);
+	}
 }
 
 const mapStateToProps = (state) => {
 	return {
-		CWP : state.project.currentWorkingProject
-	}
-}
+		CWP: state.project.currentWorkingProject
+	};
+};
 
-export default connect(mapStateToProps)(ProjectStatus); 
+export default connect(mapStateToProps)(ProjectStatus);

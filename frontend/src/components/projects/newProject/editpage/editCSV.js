@@ -150,12 +150,14 @@ class DisplayCSV extends Component {
 
 	componentDidUpdate = () => {
 		if (this.state.loading === true && this.props.inputs) {
-			this.setState({
-				csvArray: this.props.csvData,
-				inputs: this.props.inputs,
-				loading: false
+			this.setState((prevState, prevProps) => {
+				return {
+					csvArray: prevProps.csvData,
+					inputs: prevProps.inputs,
+					loading: false
+				};
 			});
-			console.log(this.state.inputs);
+			// console.log(this.state.inputs);
 		}
 	};
 

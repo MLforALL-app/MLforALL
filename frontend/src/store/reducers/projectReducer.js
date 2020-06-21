@@ -3,7 +3,7 @@ const initState = {
 	csvLoaded: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
-	built : false
+	built: false
 };
 
 const initObj = (objList) => {
@@ -50,82 +50,82 @@ const projectReducer = (state = initState, action) => {
 		case "SET_CURRENT_WORKING_PROJECT":
 			return {
 				...state,
-				built : false,
-				currentWorkingProject : {
-					uid : action.uid,
-					projId : action.pid,
-					title : action.project.title,
-					csvName : action.project.csvName,
-					nanMethod : "drop",
-					targetParameter : "",
-					modelList : {
-						log_reg : false,
-						knn: false, 
-						clf: false, 
-						gnb: false, 
-						svm: false,
+				built: false,
+				currentWorkingProject: {
+					uid: action.uid,
+					projId: action.pid,
+					title: action.project.title,
+					csvName: action.project.csvName,
+					nanMethod: "drop",
+					targetParameter: "",
+					modelList: {
+						log_reg: false,
+						knn: false,
+						clf: false,
+						gnb: false,
+						svm: false
 					},
 					inputs: {},
-					content : ""
+					content: ""
 				}
 			};
 		case "UPDATE_NAN":
-			console.log(action.data); 
+			console.log(action.data);
 			return {
 				...state,
-				currentWorkingProject : {
+				currentWorkingProject: {
 					...state.currentWorkingProject,
-					nanMethod : action.data 
+					nanMethod: action.data
 				}
 			};
 		case "UPDATE_ML":
 			return {
 				...state,
-				currentWorkingProject : {
+				currentWorkingProject: {
 					...state.currentWorkingProject,
-					modelList : action.data 
+					modelList: action.data
 				}
 			};
 		case "CSV_DATA_IN_STORE":
 			return {
-				...state, 
+				...state,
 				csvData: action.data,
-				currentWorkingProject : {
+				currentWorkingProject: {
 					...state.currentWorkingProject,
-					inputs : initObj(Object.keys(action.data[0]))
+					inputs: initObj(Object.keys(action.data[0]))
 				}
 			};
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
 			return {
-				...state, 
-				currentWorkingProject : {
+				...state,
+				currentWorkingProject: {
 					...state.currentWorkingProject,
-					targetParameter : action.data 
+					targetParameter: action.data
 				}
 			};
 		case "UPDATE_INPUTS":
 			console.log(action.data);
 			return {
 				...state,
-				currentWorkingProject : {
+				currentWorkingProject: {
 					...state.currentWorkingProject,
-					inputs : action.data
+					inputs: action.data
 				}
 			};
 		case "CREATE_MODEL_SUCC":
-			return{
+			return {
 				...state,
-				built : true
-			}
+				built: true
+			};
 		case "CREATE_MODEL_FAIL":
 			return state;
 		case "RESET_BUILD":
-			return{
+			return {
 				...state,
 				built: false,
-				currentWorkingProject : "initialized",
+				currentWorkingProject: "initialized"
 			};
 		case "CLEAR_STORE":
 			return initState;

@@ -39,6 +39,7 @@ class UserProfile extends Component {
 								})
 							}
 							orderBy={this.state.orderBy}
+							me={true}
 						/>
 						<h4 style={{ float: "left" }}>
 							View other people's projects

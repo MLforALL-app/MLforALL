@@ -8,7 +8,6 @@ import "../../../styling/cards.css";
 
 class ProjectList extends Component {
 	state = {
-		pLoad: false,
 		page: 0,
 		maxPage: 0,
 		projects: [],
@@ -20,7 +19,6 @@ class ProjectList extends Component {
 	}
 	initState() {
 		return {
-			pLoad: false,
 			page: 0,
 			maxPage: 0,
 			projects: [],
@@ -104,7 +102,6 @@ class ProjectList extends Component {
 	}
 	getProjects() {
 		// load the current page (snapshot) from next and convert to list
-		this.setState({ pLoad: false }); //begin load
 		const { orderBy, limit } = this.props;
 		const { nextPage, lastVisible } = this.state;
 		this.setState((prev) => {
@@ -133,8 +130,7 @@ class ProjectList extends Component {
 					return {
 						nextPage: getNext,
 						lastVisible: prev.lastVisible,
-						maxPage: prev.maxPage + 1,
-						pLoad: true
+						maxPage: prev.maxPage + 1
 					};
 				});
 			})

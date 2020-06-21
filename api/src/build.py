@@ -1,4 +1,3 @@
-import pandas as pd
 import pickle
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -75,7 +74,7 @@ def build_and_pickle(df, target_parameter, df_variables, pickle_name, nan_method
     X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
     scaler = MinMaxScaler()
     X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    # X_test = scaler.transform(X_test)
     # models
     if (pickle_name == "log_reg"):
         return pickle.dumps(build_logistic_regression(X_train, y_train))

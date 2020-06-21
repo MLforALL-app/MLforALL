@@ -111,9 +111,11 @@ class GenerateSliders extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault();
 		// Update the inputs/models ur showing
-		this.setState({
-			resInputs: this.state.inputs,
-			resModel: this.state.model
+		this.setState((prevState) => {
+			return {
+				resInputs: prevState.inputs,
+				resModel: prevState.model
+			};
 		});
 		if (this.state.model !== "") {
 			// create path for API Post Request
@@ -191,16 +193,14 @@ class GenerateSliders extends Component {
 									style={{
 										paddingTop: "2rem",
 										textAlign: "right"
-									}}
-								>
+									}}>
 									<HelpBox
 										placement="left"
 										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
 									/>{" "}
 									<button
 										className="btn waves-effect waves-light anchor"
-										onClick={this.handleSubmit}
-									>
+										onClick={this.handleSubmit}>
 										<b>Generate</b>
 									</button>
 								</div>
