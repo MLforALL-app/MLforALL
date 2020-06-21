@@ -9,8 +9,7 @@ import { updateCurrentWorkingProject } from "../../../../store/actions/projectAc
 
 class ModelOutput extends Component {
 	state = {
-		output: "Output",
-		loading: true
+		output: "Output"
 	};
 	handleDropdownOutput = (event) => {
 		console.log("setting output to ", event.target.value);
