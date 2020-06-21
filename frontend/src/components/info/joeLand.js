@@ -205,7 +205,7 @@ class JoeLand extends Component {
 						{video()}
 					</Element>
 					<Element name="signup" className="element">
-						{landSign(auth)}
+						{landSign}
 					</Element>
 					{emptyDiv()}
 				</div>
