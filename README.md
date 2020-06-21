@@ -1,4 +1,6 @@
-# <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL
+<img src="frontend/src/pictures/backgrounds/banner.jpeg" />
+
+# <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL 
 
 [![CodeFactor](https://www.codefactor.io/repository/github/lenghuang/mlforall/badge)](https://www.codefactor.io/repository/github/lenghuang/mlforall)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/lenghuang/MLforAll/context:javascript)
