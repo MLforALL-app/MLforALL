@@ -8,13 +8,12 @@
 
 function print_help () {
   printf "USAGE (づ｡◕‿‿◕｡)づ\n"
-  printf "(note that there will be instances where user input is required)\n"
   printf "mfa            ~~>    Show this help display\n"
-  printf "mfa all        ~~>    Deploy everything\n"
-  printf "mfa frontend   ~~>    Deploy GHPages and Host on Firebase\n"
-  printf "mfa api        ~~>    Deploy Python Flask API to Cloud Run\n"
-  printf "mfa ghpages    ~~>    Deploy only to Github Pages\n"
-  printf "mfa firebase   ~~>    Deploy and Host on Firebase\n\n"
+  printf "mfa all        ~~>    Deploys ALL services used in MLforALL\n"
+  printf "mfa api        ~~>    Deploys Python Flask API to Google Cloud Run\n"
+  printf "mfa frontend   ~~>    Deploys ALL Frontend related services (Fb/Gh)\n"
+  printf "mfa ghpages    ~~>    Deploys experimental build to Github Pages\n"
+  printf "mfa firebase   ~~>    Deploys production build to Firebase Hosting\n\n"
 }
 
 function check_git() {
@@ -89,7 +88,7 @@ function end() {
 }
 
 function error() {
-  printf "\nERROR: ┻━┻ ︵ヽ(\`Д´)ﾉ︵ ┻━┻ \n"
+  printf "\nEXIT WITH ERROR: ┻━┻ ︵ヽ(\`Д´)ﾉ︵ ┻━┻ \n"
 }
 
 # Parse options to the `./mfa` command
@@ -97,7 +96,6 @@ function error() {
 subcommand=$1; shift  # Remove 'mfa' from the argument list
 start
 case "$subcommand" in
-  # Parse options to the install sub command
   all ) 
     check
     firebase
