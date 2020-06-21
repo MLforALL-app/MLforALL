@@ -23,3 +23,16 @@ MLforALL makes use of **Firebase Hosting**, **Google Cloud Run**, and **Github P
 -   `mfa frontend` Deploys ALL Frontend related services (Firebase Hosting and Github Pages)
 -   `mfa ghpages` Deploys experimental build to Github Pages
 -   `mfa firebase` Deploys production build to Firebase Hosting
+
+
+### Usage on Terminal
+
+<img src="../frontend/src/pictures/scripts/works.png" width="500"/>
+
+### Checks for Proper Repo Folder
+
+<img src="../frontend/src/pictures/scripts/wrongrepo.png" width="500"/>
+
+### Checks for Root Directory
+
+<img src="../frontend/src/pictures/scripts/wrongfolder.png" width="500"/>
