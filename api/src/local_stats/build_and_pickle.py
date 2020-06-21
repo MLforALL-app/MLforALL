@@ -32,7 +32,7 @@ def build_and_pickle(target_parameter, df_variables, csv_name, debug=False):
     X_test = scaler.transform(X_test)
     # models
     logreg = build_logistic_regression(X_train, y_train)
-    #tree = build_decision_tree(X_train, y_train)
+    tree = build_decision_tree(X_train, y_train)
     knn = build_knn(X_train, y_train)
     lda = build_lda(X_train, y_train)
     gnb = build_gnb(X_train, y_train)
@@ -43,7 +43,7 @@ def build_and_pickle(target_parameter, df_variables, csv_name, debug=False):
     pickle.dump(logreg, open(logregfile, 'wb'))
     treefile = 'tree_' + csv_name[0:-4] + '.sav'
     files_created.append(treefile)
-    pickle.dump(logreg, open(treefile, 'wb'))
+    pickle.dump(tree, open(treefile, 'wb'))
     knnfile = 'knn_' + csv_name[0:-4] + '.sav'
     files_created.append(knnfile)
     pickle.dump(knn, open(knnfile, 'wb'))
