@@ -28,7 +28,6 @@ export const createProject = (project) => {
 				info: {}
 			})
 			.then((snapshot) => {
-				//console.log(snapshot);
 				dispatch({ type: "CREATE_PROJECT", project, snapshot });
 			})
 			.catch((err) => {
@@ -46,7 +45,6 @@ export const updateContent = (content, pid) => {
 			.doc(pid)
 			.set({ content: content }, { merge: true })
 			.then((snapshot) => {
-				//console.log(snapshot);
 				dispatch({ type: "UPDATE_CONTENT" });
 			})
 			.catch((err) => {
@@ -62,34 +60,28 @@ export const updateContent = (content, pid) => {
 export const setWorkingProject = (project, pid) => {
 	return (dispatch, getState) => {
 		const uid = getState().firebase.auth.uid;
-		console.log("IN ACTION", project); 
-		console.log(uid);
-		console.log(pid);
-		dispatch({type : "SET_CURRENT_WORKING_PROJECT", project, pid, uid});
+		dispatch({ type: "SET_CURRENT_WORKING_PROJECT", project, pid, uid });
 	};
 };
 
 export const updateCurrentWorkingProject = (param, data) => {
 	return (dispatch) => {
-		console.log(param);
-		switch (param){
-			case "nanMethod" :
-				dispatch({type : "UPDATE_NAN", param, data});
+		switch (param) {
+			case "nanMethod":
+				dispatch({ type: "UPDATE_NAN", param, data });
 				break;
-			case "modelList" :
-				dispatch({type : "UPDATE_ML", param, data});
+			case "modelList":
+				dispatch({ type: "UPDATE_ML", param, data });
 				break;
-			case "targetParameter" :
-				dispatch({type : "UPDATE_TP", param, data});
+			case "targetParameter":
+				dispatch({ type: "UPDATE_TP", param, data });
 				break;
-			case "inputs" :
-				console.log("updating inputs");
-				dispatch({type : "UPDATE_INPUTS", param, data});
+			case "inputs":
+				dispatch({ type: "UPDATE_INPUTS", param, data });
 				break;
-			default :
-				dispatch({type : "MALFORMED_CWP_REQ"});
+			default:
+				dispatch({ type: "MALFORMED_CWP_REQ" });
 		}
-		
 	};
 };
 
@@ -99,17 +91,15 @@ export const bigPapa = (url, dispatch) => {
 		worker: true,
 		header: true,
 		complete: (results) => {
-			console.log(results);
 			const data = results.data;
-			dispatch({type : "CSV_DATA_IN_STORE", data});
-			console.log("All done!", results);
+			dispatch({ type: "CSV_DATA_IN_STORE", data });
 		}
 	});
 };
 
 /* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
 export const initCSV = (project, projID) => {
-	return (dispatch, getState, {getFirebase}) => {
+	return (dispatch, getState, { getFirebase }) => {
 		const uid = getState().firebase.auth.uid;
 		const csvPath = uid + "/" + projID + "/" + project.csvName;
 		const firebase = getFirebase();
@@ -117,20 +107,17 @@ export const initCSV = (project, projID) => {
 		csvRef
 			.getDownloadURL()
 			.then((url) => {
-				console.log("This the url", url);
 				bigPapa(url, dispatch);
-
 			})
 			.catch((err) => {
-				console.log("SOMETHING wrong uhOh", err);
-				dispatch({type: "CSV_FETCH_ERROR"});
+				console.log("Init CSV Error", err);
+				dispatch({ type: "CSV_FETCH_ERROR" });
 			});
-	}
+	};
 };
 
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
-		//console.log(csvName);
 		const firebase = getFirebase();
 		const uid = getState().firebase.auth.uid;
 		const csvPath = uid + "/" + pid + "/" + csv.name;
@@ -138,7 +125,6 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 		csvRef
 			.put(csv)
 			.then((snapshot) => {
-				//console.log("uploaded csv!");
 				dispatch({ type: "UPLOAD_CSV" });
 				const path = {
 					uid: uid,
@@ -159,6 +145,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 					});
 			})
 			.catch((err) => {
+				console.log("UploadToCSV Error", err);
 				dispatch({ type: "UPLOAD_CSV_ERROR" });
 			});
 	};
@@ -173,7 +160,12 @@ export const updateCsvData = (csv, project, pid) => {
 			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CSV_NAME" });
-				dispatch({type : "UPDATE_CURRENT_WORKING_PROJECT", project, pid, uid});
+				dispatch({
+					type: "UPDATE_CURRENT_WORKING_PROJECT",
+					project,
+					pid,
+					uid
+				});
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
@@ -185,15 +177,11 @@ export const deleteMLProject = (pid, uid, project) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
-		//console.log("DEL CSV", delCSV);
 		// might be a source of bugs in the future
 		var delVars = Object.values(project.models);
-		//console.log("TYPE OF DEL VARS", typeof delVars);
 		delVars.push(delCSV);
-		//console.log("TO DELETE", delVars);
 		// make async call to database
 		const firestore = getFirestore();
-		//console.log("STORAGE PATH", auth.uid + "/" + project.title);
 		firestore
 			.collection("projects")
 			.doc(pid)
@@ -202,6 +190,7 @@ export const deleteMLProject = (pid, uid, project) => {
 				dispatch({ type: "DELETE_PROJECT_DOC" });
 			})
 			.catch((err) => {
+				console.log("Delete project Firestore error", err);
 				dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
 			});
 		const storageRef = getFirebase().storage();
@@ -213,15 +202,13 @@ export const deleteMLProject = (pid, uid, project) => {
 					dispatch({ type: "DELETE_PROJECT_STORE" });
 				})
 				.catch((err) => {
+					console.log("Delete project Cloud Storage error", err);
 					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
 	};
 };
 //extras for handle csv
-
-
-
 
 const filterObj = (objState) => {
 	return Object.entries(objState)
@@ -231,9 +218,7 @@ const filterObj = (objState) => {
 
 export const buildModels = () => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
-		
 		const submissionData = getState().project.currentWorkingProject;
-		
 
 		const path = {
 			uid: submissionData.uid,
@@ -245,31 +230,26 @@ export const buildModels = () => {
 			csvName: submissionData.csvName,
 			nanMethod: submissionData.nanMethod
 		};
-		console.log(path);
 		axios
 			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
 			.then((res) => {
-				console.log("THIS IS RESULT", res);
-				dispatch({type : "CREATE_MODEL_SUCC"});
-
-				//console.log("Successfully created project models?");
+				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})
 			.catch((err) => {
 				console.log("THIS IS AN ERROR", err);
-				dispatch({type : "CREATE_MODEL_FAIL"});
+				dispatch({ type: "CREATE_MODEL_FAIL" });
 			});
-	}
-	
+	};
 };
 
 export const resetBuild = () => {
 	return (dispatch, getState, { getFirestore }) => {
-		dispatch({type : "RESET_BUILD"});
-	}
-}
+		dispatch({ type: "RESET_BUILD" });
+	};
+};
 
 export const clearStore = () => {
 	return (dispatch, getState, { getFirestore }) => {
-		dispatch({type : "CLEAR_STORE"});
-	}
-}
+		dispatch({ type: "CLEAR_STORE" });
+	};
+};

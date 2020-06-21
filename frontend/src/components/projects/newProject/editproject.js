@@ -6,13 +6,20 @@ import { compose } from "redux";
 import { Redirect } from "react-router-dom";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import UploadCSV from "./uploadcsv";
-import { setWorkingProject, initCSV, buildModels, updateContent, resetBuild, clearStore } from "../../../store/actions/projectActions";
+import {
+	setWorkingProject,
+	initCSV,
+	buildModels,
+	updateContent,
+	resetBuild,
+	clearStore
+} from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
 
-const 	addSpace = (list) => {
+const addSpace = (list) => {
 	return list.map((s) => " " + s);
 };
 
@@ -43,16 +50,12 @@ const filterObj = (objState) => {
 		.map(([key, val]) => key);
 };
 
-
-
 class EditProject extends Component {
 	state = {
 		projectState: "init",
 		waitForCSVUpload: false,
-		pLoad: false,
-		submitLoad: false,
+		submitLoad: false
 	};
-	
 
 	determineProjectState = () => {
 		if (!this.props.project) {
@@ -79,19 +82,19 @@ class EditProject extends Component {
 	};
 	componentDidUpdate = () => {
 		let project_process = this.determineProjectState();
-		console.log(project_process);
 		if (this.state.projectState !== project_process) {
 			if (this.state.projectState === 0) {
 				if (project_process < 2) {
-					console.log("DOING THIS THING");
 					this.setState({
 						waitForCSVUpload: true
 					});
 				}
 			}
-			if (project_process >= 2){
-				console.log("SETTING UP PROJECT!!!", this.props.project, this.props.projectID);
-				this.props.setWorkingProject(this.props.project, this.props.projectID);
+			if (project_process >= 2) {
+				this.props.setWorkingProject(
+					this.props.project,
+					this.props.projectID
+				);
 				this.props.initCSV(this.props.project, this.props.projectID);
 			}
 			this.setState({
@@ -99,20 +102,16 @@ class EditProject extends Component {
 			});
 		}
 		if (this.state.waitForCSVUpload && this.props.csvLoaded) {
-			console.log("SETTING TO FALSE");
 			this.setState({
 				waitForCSVUpload: false
 			});
 		}
-		if (project_process >= 3){
-			console.log(this.props.currentWorkingProject);
+		if (project_process >= 3) {
 		}
-
 	};
 	componentWillUnmount = () => {
 		this.props.resetBuild();
-		console.log(this.props.currentWorkingProject);
-	}
+	};
 	getContent = (content) => {
 		if (content === "") {
 			return (
@@ -122,9 +121,9 @@ class EditProject extends Component {
 				addSpace(filterObj(this.props.currentWorkingProject.inputs)) +
 				" using the following models: " +
 				addSpace(
-					filterObj(this.props.currentWorkingProject.modelList).map((s) =>
-						nameMapper(s)
-					)
+					filterObj(
+						this.props.currentWorkingProject.modelList
+					).map((s) => nameMapper(s))
 				)
 			);
 		} else {
@@ -134,13 +133,14 @@ class EditProject extends Component {
 
 	handleSubmit = (e) => {
 		this.setState({
-			submitLoad : true
-		})
-		this.props.updateContent(this.getContent(this.props.project.content), this.props.projectID);
+			submitLoad: true
+		});
+		this.props.updateContent(
+			this.getContent(this.props.project.content),
+			this.props.projectID
+		);
 		this.props.buildModels();
 	};
-
-	
 
 	render() {
 		const { project, auth, projectID } = this.props;
@@ -153,9 +153,9 @@ class EditProject extends Component {
 			);
 		if (auth.uid !== project.authorID)
 			return <Redirect to={`/project/${projectID}`} />;
-		if(this.props.built === true){
+		if (this.props.built === true) {
 			return <Redirect to={`/project/${projectID}`} />;
-			}
+		}
 		return (
 			<div className="build-project">
 				<div className="row container">
@@ -172,43 +172,47 @@ class EditProject extends Component {
 					!this.state.waitForCSVUpload ? (
 						<div>
 							{this.props.project.info.NaN === 0 ? (
-							<div className="row container"></div>
+								<div className="row container"></div>
 							) : (
-							<NanHandler project = {this.props.project}/>
+								<NanHandler project={this.props.project} />
 							)}
-							{(this.props.csvData && this.props.currentWorkingProject !== "initialized") ? (
+							{this.props.csvData &&
+							this.props.currentWorkingProject !==
+								"initialized" ? (
 								<div>
-									<DisplayCSV project={project} id={projectID} />
-									<ModelOutput project={project} id={projectID}/>
-									<ModelSelect project={project} id={projectID}/>
-									<ProjectStatus/>
+									<DisplayCSV
+										project={project}
+										id={projectID}
+									/>
+									<ModelOutput
+										project={project}
+										id={projectID}
+									/>
+									<ModelSelect
+										project={project}
+										id={projectID}
+									/>
+									<ProjectStatus />
 								</div>
-								
-							):(
+							) : (
 								<p>Waiting for csvData</p>
 							)}
-							
-							
-
-							
 
 							<div className="row container center">
-							<button
-								onClick={this.handleSubmit}
-								className="btn-large z-depth-0"
-							>
-								Build the model!
-							</button>
-							{this.state.submitLoad ? (
-								<div className="row">
-									<CircularProgress />
-								</div>
-							) : (
-								<span></span>
-							)}
+								<button
+									onClick={this.handleSubmit}
+									className="btn-large z-depth-0">
+									Build the model!
+								</button>
+								{this.state.submitLoad ? (
+									<div className="row">
+										<CircularProgress />
+									</div>
+								) : (
+									<span></span>
+								)}
+							</div>
 						</div>
-						</div>
-						
 					) : (
 						<span></span>
 					)
@@ -221,8 +225,6 @@ class EditProject extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-	//console.log(state);
-	//console.log(state.firestore.data);
 	const pid = props.match.params.pid;
 	return {
 		projectID: pid,
@@ -231,16 +233,17 @@ const mapStateToProps = (state, props) => {
 		auth: state.firebase.auth,
 		csvLoaded: state.project.csvLoaded,
 		currentWorkingProject: state.project.currentWorkingProject,
-		csvData : state.project.csvData,
-		built : state.project.built
+		csvData: state.project.csvData,
+		built: state.project.built
 	};
 };
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		setWorkingProject: (project, id) => dispatch(setWorkingProject(project, id)),
+		setWorkingProject: (project, id) =>
+			dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
-		buildModels : () => dispatch(buildModels()),
+		buildModels: () => dispatch(buildModels()),
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
 		resetBuild: () => dispatch(resetBuild()),
 		clearStore: () => dispatch(clearStore())
@@ -253,4 +256,3 @@ export default compose(
 		return [{ collection: "projects", doc: props.match.params.id }];
 	})
 )(EditProject);
- 

@@ -58,7 +58,6 @@ class DisplayCSV extends Component {
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
-		console.log("SETTING INPUTS");
 		this.setState((prevState) => {
 			var newInputs = prevState.inputs;
 			newInputs[dataKey] = !newInputs[dataKey];
@@ -82,15 +81,11 @@ class DisplayCSV extends Component {
 		return menuitems;
 	};
 	checkBoxChange = (colName) => (e) => {
-		console.log(e.target.checked);
-		console.log(colName);
 		this.setState((prevState) => {
 			var newInputs = prevState.inputs;
 			newInputs[colName] = !newInputs[colName];
 			return { ...prevState, inputs: newInputs };
 		});
-		console.log(this.props.inputs);
-		console.log("SETTING INPUTS");
 		this.props.setInputParameters(this.state.inputs);
 	};
 	checkBoxHeader = (colName, is_numeric) => (key) => {
@@ -131,8 +126,6 @@ class DisplayCSV extends Component {
 	getColumns = (keyList, firstRow) => {
 		var columns = [];
 		keyList.forEach((key) => {
-			console.log(key);
-			console.log("FIRSTROW", firstRow[key]);
 			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
 			columns.push(
@@ -150,12 +143,13 @@ class DisplayCSV extends Component {
 
 	componentDidUpdate = () => {
 		if (this.state.loading === true && this.props.inputs) {
-			this.setState({
-				csvArray: this.props.csvData,
-				inputs: this.props.inputs,
-				loading: false
+			this.setState((prevState, prevProps) => {
+				return {
+					csvArray: prevProps.csvData,
+					inputs: prevProps.inputs,
+					loading: false
+				};
 			});
-			console.log(this.state.inputs);
 		}
 	};
 

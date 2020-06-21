@@ -98,7 +98,6 @@ h6 {
 }
 .nav-wrapper {
 	background-color: #ffffff;
-	border-width: 0px;
 	box-shadow: 0 0 0 0;
 }
 .right a:hover,
@@ -130,7 +129,6 @@ a {
 	font-size: 1.5rem !important;
 	color: #283593 !important;
 	font-weight: 600 !important;
-	padding-bottom: 0px !important;
 }
 .slider-title {
 	padding-top: 2rem;

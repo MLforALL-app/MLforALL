@@ -1,3 +1,4 @@
+'''
 import pandas as pd
 import os  # provides functions for interacting with the operating system
 import numpy as np
@@ -5,6 +6,7 @@ import pandas as pd
 from matplotlib import pyplot as plt
 import matplotlib.pyplot as plt
 import seaborn as sns
+'''
 
 # This file is not actively used in our website yet
 
@@ -20,6 +22,8 @@ def dummyvisual():
 
 
 '''
+
+
 def getvisual(csv, gr, variables, color='blue'):
     assert(type(csv) == str)
     assert(type(variables) == list)

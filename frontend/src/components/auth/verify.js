@@ -29,14 +29,6 @@ class VerifyEmailProject extends Component {
 			);
 		}
 	};
-	componentDidMount() {
-		console.log("Mount");
-		console.log(this.props.auth);
-	}
-	componentDidUpdate() {
-		console.log("Update");
-		console.log(this.props.auth);
-	}
 	render() {
 		const { auth, sentMsg } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;

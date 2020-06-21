@@ -75,8 +75,6 @@ class SignIn extends Component {
 
 // Redux to associate state of this component with the props its passed in
 const mapStateToProps = (state, ownProps) => {
-	//console.log(ownProps);
-	//console.log("TODO, CHANGE LINK TO DEPENDING ON PAGE");
 	return { authError: state.auth.authError, auth: state.firebase.auth };
 };
 

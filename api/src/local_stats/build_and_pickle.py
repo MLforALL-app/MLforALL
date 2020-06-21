@@ -43,7 +43,7 @@ def build_and_pickle(target_parameter, df_variables, csv_name, debug=False):
     pickle.dump(logreg, open(logregfile, 'wb'))
     treefile = 'tree_' + csv_name[0:-4] + '.sav'
     files_created.append(treefile)
-    pickle.dump(logreg, open(treefile, 'wb'))
+    pickle.dump(tree, open(treefile, 'wb'))
     knnfile = 'knn_' + csv_name[0:-4] + '.sav'
     files_created.append(knnfile)
     pickle.dump(knn, open(knnfile, 'wb'))
@@ -101,7 +101,7 @@ def runtests():
     target = 'Genre'
     variables = ['Beats.Per.Minute', 'Energy', 'Danceability',
                  'Loudness..dB..', 'Liveness', 'Valence.', 'Length.']
-    files = build_and_pickle(target, variables, csv, debug=True)
+    build_and_pickle(target, variables, csv, debug=True)
 
 
 if __name__ == '__main__':

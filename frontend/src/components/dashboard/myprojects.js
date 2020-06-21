@@ -19,20 +19,8 @@ class MyProjects extends Component {
 		limit: 8,
 		greet: "Welcome to your central hub."
 	};
-	componentDidUpdate() {
-		/*
-		if (this.state.greet === "Hello") {
-			this.setState({
-				greet: this.props.profile.isLoaded
-					? greeting + " " + this.props.profile.firstName + "!"
-					: ""
-			});
-		}
-		*/
-	}
 	render() {
 		const { auth } = this.props;
-		//console.log("THIS IS prof", profile);
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;

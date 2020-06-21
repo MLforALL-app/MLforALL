@@ -1,5 +1,4 @@
 import os
-from visual import dummyvisual
 from predict import predict
 from build import build_and_pickle
 from variables import send_vars
@@ -107,4 +106,4 @@ def describe():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=int(os.environ.get('PORT', 8080)))
+    app.run(host='127.0.0.1', port=int(os.environ.get('PORT', 8080)))

@@ -3,7 +3,7 @@ import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
 	uploadCSVtoStorage,
-	updateCsvData,
+	updateCsvData
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 
@@ -16,8 +16,6 @@ class UploadCSV extends Component {
 	};
 
 	handleChange = (e) => {
-		//console.log(e.target.files[0]);
-		//console.log(this.getFileExtension(e.target.files[0].name));
 		if (!e.target.files[0]) {
 			return;
 		}
@@ -35,7 +33,6 @@ class UploadCSV extends Component {
 				showError: true
 			});
 		} else {
-			console.log("storing file locally");
 			this.setState({
 				csv: file,
 				showError: false,
@@ -51,7 +48,6 @@ class UploadCSV extends Component {
 	handleSubmit = (e) => {
 		e.preventDefault();
 		if (this.state.showError || this.state.csv === "") {
-			console.log("invalid submit.");
 			return;
 		}
 

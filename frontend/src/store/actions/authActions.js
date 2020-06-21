@@ -27,14 +27,12 @@ export const signOut = () => {
 };
 
 export const signUp = (newUser) => {
-	console.log("newUser info", newUser);
 	return (dispatch, getState, { getFirebase, getFirestore }) => {
 		const authRef = getFirebase().auth();
 		const firestore = getFirestore();
 		authRef
 			.createUserWithEmailAndPassword(newUser.email, newUser.password)
 			.then((response) => {
-				console.log("response", response);
 				firestore
 					.collection("users")
 					.doc(response.user.uid)
@@ -51,11 +49,10 @@ export const signUp = (newUser) => {
 				authRef.currentUser
 					.sendEmailVerification()
 					.then(() => {
-						console.log("Verification email sent");
 						dispatch({ type: "SEND_VERIFY" });
 					})
 					.catch((error) => {
-						console.log("Verification email error");
+						console.log("Verification email error", error);
 						dispatch({ type: "SEND_VERIFY_ERROR" });
 					});
 			})
@@ -72,7 +69,6 @@ export const sendVerify = () => {
 			.auth()
 			.currentUser.sendEmailVerification()
 			.then(() => {
-				console.log("Verification email sent");
 				dispatch({ type: "SEND_VERIFY" });
 			})
 			.catch((error) => {
@@ -89,7 +85,6 @@ export const resetPass = (email) => {
 			.auth()
 			.sendPasswordResetEmail(email)
 			.then(() => {
-				console.log("Reset email sent");
 				dispatch({ type: "SEND_RESET" });
 			})
 			.catch((error) => {

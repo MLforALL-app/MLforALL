@@ -17,7 +17,6 @@ const makeNotif = (item) => {
 
 const Notifications = (props) => {
 	const { notifications } = props;
-	//console.log("NOTIF PROPS", props);
 	return (
 		<div className="section notif-card">
 			<div className="card">
