@@ -22,6 +22,11 @@ const Signedinlinks = (props) => {
 				</NavLink>{" "}
 			</li>
 			<li>
+				<NavLink to="/help">
+					<span className="purple-text">help</span>
+				</NavLink>{" "}
+			</li>
+			<li>
 				<NavLink to="/" onClick={props.signOut}>
 					<span className="purple-text">Logout</span>
 				</NavLink>{" "}

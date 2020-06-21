@@ -58,7 +58,7 @@ function App() {
 							path="/create"
 							component={CreateProjectContainer}
 						/>
-						<Route exact path="/edu" component={MainDoc} />
+						<Route exact path="/help" component={MainDoc} />
 						<Route exact path="/" component={JoeLand} />
 						<Route path="/MLforAll" component={GHPages} />
 						<Route component={Lost} />
