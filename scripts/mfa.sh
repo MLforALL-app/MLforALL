@@ -2,7 +2,7 @@
 
 # To Use This Script, first do these two things
 # 1) chmod +x mfa.sh 
-# 2) alias `mfa /path/to/your/repo/mfa.sh` (add this to ~/.bashrc)
+# 2) alias mfa="/path/to/your/repo/mfa.sh" (add this to ~/.zshrc for mac)
 # then, you're good to go!
 # be sure to run all these from the root repo folder
 
@@ -29,7 +29,7 @@ function check_git() {
 }
 
 function check_dir() {
-  printf "Checking you're in the root directory... ಠ╭╮ಠ\n"
+  printf "Checking you're in the right directory... ಠ╭╮ಠ\n"
   dir=`pwd`
   if [ "${dir: -8}" != "MLforAll" ]
   then
@@ -47,33 +47,37 @@ function check() {
 }
 
 function ghpages_build() {
-  cd frontend
-  printf "Building and deploying to Github Pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-  npm run deploy 
-  cd ..
+  (
+    cd frontend
+    printf "Building and deploying to Github Pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
+    npm run deploy 
+  )
 }
 
 function ghpages_nobuild(){
-  cd frontend 
-  printf "Running gh-pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-  gh-pages -d build
-  cd ..
+  (
+    cd frontend 
+    printf "Running gh-pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
+    gh-pages -d build
+  )
 }
 
 function firebase () {
-  cd frontend 
-  printf "Deploying to Firebase (◕‿◕✿)\n\n"
-  firebase deploy 
-  cd ..
+  (
+    cd frontend 
+    printf "Deploying to Firebase (◕‿◕✿)\n\n"
+    firebase deploy 
+  )
 }
 
 function api () {
-  cd api
-  printf "Building Docker Image (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
-  gcloud builds submit --tag gcr.io/mlforall-api/flask-api
-  printf "Loading to Google Cloud Platform (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
-  gcloud run deploy "flask-api" --image gcr.io/mlforall-api/flask-api --platform=managed --region=us-east1
-  cd ..
+  (
+    cd api
+    printf "Building Docker Image (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
+    gcloud builds submit --tag gcr.io/mlforall-api/flask-api
+    printf "Loading to Google Cloud Platform (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
+    gcloud run deploy "flask-api" --image gcr.io/mlforall-api/flask-api --platform=managed --region=us-east1
+  )
 }
 
 function start() {
@@ -124,7 +128,7 @@ case "$subcommand" in
     ;;
   "" )
     check
-    printf "\nWelcome to MLforALL Custom CLI \nby Len Huang ヾ(⌐■_■)ノ♪\n\n"
+    printf "Welcome to MLforALL Custom CLI \nby Len Huang ヾ(⌐■_■)ノ♪\n\n"
     print_help
     shift $((OPTIND -1))
     ;;
