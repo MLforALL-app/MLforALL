@@ -2,8 +2,6 @@
 <img src="frontend/src/pictures/backgrounds/banner.jpeg" />
 </p>
 
-<h1 align="center"> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL </h1>
-
 <p align="center">
 <a href="https://www.codefactor.io/repository/github/lenghuang/mlforall"><img src="https://www.codefactor.io/repository/github/lenghuang/mlforall/badge" alt="CodeFactor" /></a>
 <a href="https://lgtm.com/projects/g/lenghuang/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
@@ -16,7 +14,7 @@ Making visualizations, machine learning, and data analysis easier for you!
 </p>
 
 
-## Our Tech Stack
+<h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL Tech Stack </h2>
 
 _Use the links to view more in-depth `README.md` files throughout the repo._
 
