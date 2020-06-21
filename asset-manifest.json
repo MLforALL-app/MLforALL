@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/MLforAll/static/css/main.4b279512.chunk.css",
-    "main.js": "/MLforAll/static/js/main.07b9ed46.chunk.js",
-    "main.js.map": "/MLforAll/static/js/main.07b9ed46.chunk.js.map",
+    "main.css": "/MLforAll/static/css/main.c1a1d7fc.chunk.css",
+    "main.js": "/MLforAll/static/js/main.dc2d6658.chunk.js",
+    "main.js.map": "/MLforAll/static/js/main.dc2d6658.chunk.js.map",
     "runtime-main.js": "/MLforAll/static/js/runtime-main.6a193048.js",
     "runtime-main.js.map": "/MLforAll/static/js/runtime-main.6a193048.js.map",
     "static/css/2.71916e70.chunk.css": "/MLforAll/static/css/2.71916e70.chunk.css",
-    "static/js/2.92080f4f.chunk.js": "/MLforAll/static/js/2.92080f4f.chunk.js",
-    "static/js/2.92080f4f.chunk.js.map": "/MLforAll/static/js/2.92080f4f.chunk.js.map",
+    "static/js/2.954b40a8.chunk.js": "/MLforAll/static/js/2.954b40a8.chunk.js",
+    "static/js/2.954b40a8.chunk.js.map": "/MLforAll/static/js/2.954b40a8.chunk.js.map",
     "index.html": "/MLforAll/index.html",
-    "precache-manifest.165db3131d3116811998ec76989a0ce0.js": "/MLforAll/precache-manifest.165db3131d3116811998ec76989a0ce0.js",
+    "precache-manifest.747620f7e1ef341b42b790246b06a64d.js": "/MLforAll/precache-manifest.747620f7e1ef341b42b790246b06a64d.js",
     "service-worker.js": "/MLforAll/service-worker.js",
     "static/css/2.71916e70.chunk.css.map": "/MLforAll/static/css/2.71916e70.chunk.css.map",
-    "static/css/main.4b279512.chunk.css.map": "/MLforAll/static/css/main.4b279512.chunk.css.map",
-    "static/js/2.92080f4f.chunk.js.LICENSE.txt": "/MLforAll/static/js/2.92080f4f.chunk.js.LICENSE.txt",
+    "static/css/main.c1a1d7fc.chunk.css.map": "/MLforAll/static/css/main.c1a1d7fc.chunk.css.map",
+    "static/js/2.954b40a8.chunk.js.LICENSE.txt": "/MLforAll/static/js/2.954b40a8.chunk.js.LICENSE.txt",
     "static/media/auth.svg": "/MLforAll/static/media/auth.a8c1f454.svg",
     "static/media/clf.svg": "/MLforAll/static/media/clf.02bb3bb5.svg",
     "static/media/create.svg": "/MLforAll/static/media/create.5c8b7d9f.svg",
@@ -36,8 +36,8 @@
   "entrypoints": [
     "static/js/runtime-main.6a193048.js",
     "static/css/2.71916e70.chunk.css",
-    "static/js/2.92080f4f.chunk.js",
-    "static/css/main.4b279512.chunk.css",
-    "static/js/main.07b9ed46.chunk.js"
+    "static/js/2.954b40a8.chunk.js",
+    "static/css/main.c1a1d7fc.chunk.css",
+    "static/js/main.dc2d6658.chunk.js"
   ]
 }
