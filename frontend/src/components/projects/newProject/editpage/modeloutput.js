@@ -12,7 +12,6 @@ class ModelOutput extends Component {
 		output: "Output"
 	};
 	handleDropdownOutput = (event) => {
-		console.log("setting output to ", event.target.value);
 		this.setState({ output: event.target.value });
 		this.props.setOutput(event.target.value);
 	};
@@ -62,10 +61,6 @@ class ModelOutput extends Component {
 }
 
 const mapStateToProps = (state) => {
-	if (state.project.csvData) {
-		console.log("Model Output!", state.project.csvData[0]);
-	}
-
 	return {
 		cols: state.project.csvData && state.project.csvData[0]
 	};

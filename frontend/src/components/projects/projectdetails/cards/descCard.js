@@ -16,18 +16,14 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
 	};
 	const handleSubmit = () => {
 		if (edit) {
-			console.log("submit");
 			setEdit(false);
 			setContent(content);
 			updateContent(content, pid);
 		} else {
-			console.log("begin edit");
 			setEdit(true);
 		}
 	};
 	const editButton = () => {
-		//console.log(auth);
-		//console.log(project);
 		if (auth.uid === project.authorID)
 			return (
 				<div onClick={handleSubmit}>

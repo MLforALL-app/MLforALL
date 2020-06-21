@@ -64,8 +64,6 @@ class UserProfile extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-	//console.log("STATE", state);
-	//console.log("ownProps", ownProps);
 	// need better way to do this
 	const pageAuthor = ownProps.match.params.uid;
 	const users = state.firestore.data.users;

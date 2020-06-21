@@ -8,8 +8,7 @@ const edit = () => {
 	return (
 		<button
 			className="btn-flat waves-effect waves-light"
-			style={{ display: "inline" }}
-		>
+			style={{ display: "inline" }}>
 			<span className="purple-text">Edit This Project</span>
 		</button>
 	);
@@ -25,11 +24,10 @@ const CSVCard = ({ pid, auth, project, history }) => {
 	csvRef
 		.getDownloadURL()
 		.then((url) => {
-			//console.log("This the url", url);
 			setcsvUrl(url);
 		})
 		.catch((err) => {
-			//console.log("SOMETHING wrong uhOh", err);
+			console.log("Download Error", err);
 		});
 
 	return (
@@ -66,8 +64,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 				<a target="_blank" rel="noreferrer noopener" href={csvUrl}>
 					<button
 						className="btn-flat waves-effect waves-light"
-						style={{ display: "inline" }}
-					>
+						style={{ display: "inline" }}>
 						Download the CSV Here
 					</button>
 				</a>

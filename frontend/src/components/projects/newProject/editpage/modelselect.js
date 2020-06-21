@@ -18,14 +18,11 @@ class ModelSelect extends Component {
 		models: this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
 	};
 	handleModelToggle = (value) => () => {
-		//console.log("VALUE IN HANDLE TOGGLE", value);
 		this.setState((prevState) => {
 			var newModels = prevState.models;
 			newModels[value] = !newModels[value];
 			return { models: newModels };
 		});
-		console.log(this.state.models);
-		console.log(this.props.cp);
 		this.props.updateModels(this.state.models);
 	};
 

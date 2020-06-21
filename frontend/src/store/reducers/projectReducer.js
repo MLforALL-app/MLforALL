@@ -70,7 +70,6 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_NAN":
-			console.log(action.data);
 			return {
 				...state,
 				currentWorkingProject: {
@@ -106,7 +105,6 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_INPUTS":
-			console.log(action.data);
 			return {
 				...state,
 				currentWorkingProject: {

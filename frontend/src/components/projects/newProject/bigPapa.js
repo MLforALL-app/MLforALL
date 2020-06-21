@@ -9,7 +9,6 @@ const bigPapa = (url, setState) => {
 			header: true,
 			dynamicTyping: true,
 			complete: (results) => {
-				//console.log("All done!", results);
 				setState({ temporary: results });
 			}
 		}

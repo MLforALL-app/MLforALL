@@ -5,7 +5,6 @@ import "../../../styling/build.css";
 
 const CreateLanding = () => {
 	const [begin, setBegin] = useState(false);
-	console.log("Createlanding");
 	if (begin) {
 		return <CreateProject />;
 	} else {

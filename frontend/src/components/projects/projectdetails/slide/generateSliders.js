@@ -53,11 +53,8 @@ const getDesc = (name) => {
 const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
-		// console.log("Current Var", v);
 		inputs[v.name] = v.q2;
-		// console.log(inputs[v.name]);
 	});
-	// console.log("INITIAL INPUTS", inputs);
 	return inputs;
 };
 
@@ -86,7 +83,6 @@ class GenerateSliders extends Component {
 	// hsc and hic are higher order functions to allow for generality
 	// of event handlers
 	handleSliderChange = (v) => {
-		// console.log("YOUR INPUTS", inputs);
 		return (event, newValue) => {
 			this.setState((prevState) => {
 				var alterState = prevState;
@@ -96,7 +92,6 @@ class GenerateSliders extends Component {
 		};
 	};
 	handleInputChange = (v) => {
-		//console.log("YOUR INPUTS", inputs);
 		return (event) => {
 			const newValue =
 				event.target.value === "" ? "" : Number(event.target.value);
@@ -125,18 +120,15 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			console.log("THIS IS PATH", path);
 			this.setState({ loading: true });
-			// console.log("BEFORE AXIOS, LOADING", loading);
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
-					//console.log("THIS IS RESULT", res);
 					// If things work, set the output and stop loading
 					this.setState({ output: res, loading: false });
 				})
 				.catch((err) => {
-					//console.log("THIS IS AN ERROR", err);
+					console.log("Prediction Error", err);
 					// If things don't work, server error and stop loading
 					this.setState({ output: "Server Error", loading: false });
 				});
@@ -144,7 +136,6 @@ class GenerateSliders extends Component {
 			// user has not picked a model yet
 			this.setState({ output: "Choose a model" });
 		}
-		// console.log("EXIT AXIOS LOADING STATE,", loading);
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here

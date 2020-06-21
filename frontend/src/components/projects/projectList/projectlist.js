@@ -86,8 +86,6 @@ class ProjectList extends Component {
 			.then((documentSnapshot) => {
 				const initNext = documentSnapshot.docs.map(this.docMap);
 				const lastVis = this.tail(documentSnapshot.docs);
-				//console.log("Init_next", initNext);
-				//console.log("Init_lastVis", lastVis.data().title);
 				// load the next page
 				this.setState((prev) => {
 					prev.lastVisible.push(lastVis);
@@ -106,9 +104,7 @@ class ProjectList extends Component {
 		const { nextPage, lastVisible } = this.state;
 		this.setState((prev) => {
 			// Load current snapshot from next
-			//console.log("pushing on nextpage");
 			prev.projects.push(nextPage);
-			//console.log("Updated projects", prev.projects);
 			return { projects: prev.projects };
 		});
 		// update "next page" with new page
@@ -121,12 +117,9 @@ class ProjectList extends Component {
 			.then((documentSnapshot) => {
 				const getNext = documentSnapshot.docs.map(this.docMap);
 				const lastVis = this.tail(documentSnapshot.docs);
-				//console.log("get_next", getNext);
-				//console.log("get_lastVis", lastVis.data().title);
 				// update next here, update lastVisible accordingly
 				this.setState((prev) => {
 					prev.lastVisible.push(lastVis);
-					//console.log("update last visible", prev.lastVisible);
 					return {
 						nextPage: getNext,
 						lastVisible: prev.lastVisible,
@@ -140,8 +133,6 @@ class ProjectList extends Component {
 		const increment = dir === "next" ? 1 : -1;
 		const { page, maxPage } = this.state;
 		return () => {
-			//console.log("page", page);
-			//console.log("maxPage", maxPage);
 			// maintain ordering as well
 			// only get projects while moving fwd
 			if (page >= maxPage - 1 && increment === 1) {
@@ -153,9 +144,7 @@ class ProjectList extends Component {
 		};
 	}
 	resetProjects() {
-		//console.log("reseting projects...");
 		this.setState(this.initState());
-		//console.log("reset:", this.state);
 		if (this.props.uid) {
 			this.initUserProjects();
 		} else {
@@ -166,21 +155,13 @@ class ProjectList extends Component {
 		this.resetProjects();
 	}
 	componentDidUpdate(prevProps) {
-		if (prevProps === undefined) {
-			console.log("no props");
-		} else if (prevProps !== this.props) {
-			//console.log("resetinng..");
+		if (prevProps && prevProps !== this.props) {
 			this.resetProjects();
-			//console.log("end reset");
 		}
 	}
 	render() {
 		const { projects, page } = this.state;
 		const { limit, uid } = this.props;
-		//console.log("render page", projects[page]);
-		//console.log("STATE OF PROJECTS");
-		//console.log("projects:", projects);
-		//console.log("end state of projects");
 		const shownextpre = projects[page]
 			? projects[page].length === limit
 			: true; // not sure

@@ -13,7 +13,6 @@ const inputToString = (inputs) => {
 			</div>
 		);
 	});
-	// console.log("PRETTY", pretty);
 	return pretty;
 };
 

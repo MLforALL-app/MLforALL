@@ -82,22 +82,15 @@ class EditProject extends Component {
 	};
 	componentDidUpdate = () => {
 		let project_process = this.determineProjectState();
-		console.log(project_process);
 		if (this.state.projectState !== project_process) {
 			if (this.state.projectState === 0) {
 				if (project_process < 2) {
-					console.log("DOING THIS THING");
 					this.setState({
 						waitForCSVUpload: true
 					});
 				}
 			}
 			if (project_process >= 2) {
-				console.log(
-					"SETTING UP PROJECT!!!",
-					this.props.project,
-					this.props.projectID
-				);
 				this.props.setWorkingProject(
 					this.props.project,
 					this.props.projectID
@@ -109,18 +102,15 @@ class EditProject extends Component {
 			});
 		}
 		if (this.state.waitForCSVUpload && this.props.csvLoaded) {
-			console.log("SETTING TO FALSE");
 			this.setState({
 				waitForCSVUpload: false
 			});
 		}
 		if (project_process >= 3) {
-			console.log(this.props.currentWorkingProject);
 		}
 	};
 	componentWillUnmount = () => {
 		this.props.resetBuild();
-		console.log(this.props.currentWorkingProject);
 	};
 	getContent = (content) => {
 		if (content === "") {
@@ -235,8 +225,6 @@ class EditProject extends Component {
 }
 
 const mapStateToProps = (state, props) => {
-	//console.log(state);
-	//console.log(state.firestore.data);
 	const pid = props.match.params.pid;
 	return {
 		projectID: pid,

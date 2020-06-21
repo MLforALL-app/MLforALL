@@ -73,8 +73,6 @@ class ProjectStatus extends Component {
 		if (this.props.CWP === undefined || this.props.CWP === {}) {
 			return <span>waiting</span>;
 		}
-		console.log(this.props.CWP.inputs);
-		console.log(this.props.CWP.models);
 		return (
 			<div className="row" style={{ padding: "2rem" }}>
 				{this.getStatus(
