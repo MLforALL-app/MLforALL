@@ -23,7 +23,7 @@ const Signedinlinks = (props) => {
 			</li>
 			<li>
 				<NavLink to="/help">
-					<span className="purple-text">help</span>
+					<span className="purple-text">Help</span>
 				</NavLink>{" "}
 			</li>
 			<li>
