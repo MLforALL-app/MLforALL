@@ -1,5 +1,4 @@
 import os
-from visual import dummyvisual
 from predict import predict
 from build import build_and_pickle
 from variables import send_vars

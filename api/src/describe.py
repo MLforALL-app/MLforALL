@@ -1,6 +1,3 @@
-import pandas as pd
-
-
 def count_NaN(df):
     '''
     REQUIRES: df some valid pandas dataframe

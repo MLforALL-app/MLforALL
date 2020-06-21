@@ -1,3 +1,4 @@
+'''
 import pandas as pd
 import pickle
 from sklearn.linear_model import LogisticRegression
@@ -8,6 +9,7 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+'''
 
 
 def floatCast(num):

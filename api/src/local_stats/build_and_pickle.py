@@ -32,7 +32,7 @@ def build_and_pickle(target_parameter, df_variables, csv_name, debug=False):
     X_test = scaler.transform(X_test)
     # models
     logreg = build_logistic_regression(X_train, y_train)
-    tree = build_decision_tree(X_train, y_train)
+    #tree = build_decision_tree(X_train, y_train)
     knn = build_knn(X_train, y_train)
     lda = build_lda(X_train, y_train)
     gnb = build_gnb(X_train, y_train)
@@ -101,7 +101,7 @@ def runtests():
     target = 'Genre'
     variables = ['Beats.Per.Minute', 'Energy', 'Danceability',
                  'Loudness..dB..', 'Liveness', 'Valence.', 'Length.']
-    files = build_and_pickle(target, variables, csv, debug=True)
+    build_and_pickle(target, variables, csv, debug=True)
 
 
 if __name__ == '__main__':
