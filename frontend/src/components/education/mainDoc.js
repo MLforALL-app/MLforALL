@@ -1,16 +1,16 @@
 import React from "react";
 import MakeDrawer from "./makeToolBar";
-import introduction from "./docs/introductionDocs"
-import logisticRegression from "./docs/logisticRegressionDocs"
+import introduction from "./docs/introductionDocs";
+import logisticRegression from "./docs/logisticRegressionDocs";
 import kNearestNeighbors from "./docs/kNearestNeighborsDocs";
 import gaussianNaiveBayes from "./docs/gaussianNaiveBayesDocs";
 import linearDiscriminantAnalysis from "./docs/linearDiscriminantAnalysisDocs";
 import supportVectorMachine from "./docs/supportVectorMachineDocs";
 import decisionTree from "./docs/decisionTreeDocs";
 
+// Hi maxwell
 
 const MainDoc = () => {
-	
 	const intro = [
 		{
 			to: "to0",
@@ -20,7 +20,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: introduction
 		}
-	]
+	];
 	const logreg = [
 		{
 			to: "to1",
@@ -30,7 +30,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: logisticRegression
 		}
-	]
+	];
 	const knn = [
 		{
 			to: "to2",
@@ -40,7 +40,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: kNearestNeighbors
 		}
-	]
+	];
 	const gnb = [
 		{
 			to: "to2",
@@ -50,7 +50,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: gaussianNaiveBayes
 		}
-	]
+	];
 	const lda = [
 		{
 			to: "to3",
@@ -60,7 +60,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: linearDiscriminantAnalysis
 		}
-	]
+	];
 	const svm = [
 		{
 			to: "to4",
@@ -70,7 +70,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: supportVectorMachine
 		}
-	]
+	];
 	const dt = [
 		{
 			to: "to5",
@@ -80,7 +80,7 @@ const MainDoc = () => {
 			imgurl: "",
 			content: decisionTree
 		}
-	]
+	];
 	return <MakeDrawer sections={[intro, logreg, knn, gnb, lda, svm, dt]} />;
 };
 
