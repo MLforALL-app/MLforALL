@@ -1,21 +1,22 @@
-import React from "react"
-import {header, bodyContent} from "./fileFormatter"
+import React from "react";
+import { header, bodyContent } from "./fileFormatter";
 
-const linearDiscriminantAnalysis =
-<p>
-{header("Linear Discriminant Analysis", "+2")}
+const linearDiscriminantAnalysis = (
+    <div>
+        {header("Linear Discriminant Analysis", "+2")}
 
-{header("What's it for?")}
+        {header("What's it for?")}
 
-{bodyContent(``)}
+        {bodyContent(``)}
 
-{header("How does it work?")}
+        {header("How does it work?")}
 
-{bodyContent(``)}
+        {bodyContent(``)}
 
-{header("Why does it work?")}
+        {header("Why does it work?")}
 
-{bodyContent(``)}
-</p>
+        {bodyContent(``)}
+    </div>
+);
 
 export default linearDiscriminantAnalysis;
