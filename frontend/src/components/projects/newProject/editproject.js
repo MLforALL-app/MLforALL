@@ -63,7 +63,7 @@ class EditProject extends Component {
 		} else if (this.props.project.csvName === "") {
 			return 1;
 		} else if (
-			!this.props.project.csvName === "" &&
+			this.props.project.csvName !== "" &&
 			this.props.project.models === []
 		) {
 			return 2;
