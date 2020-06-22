@@ -6,30 +6,59 @@ import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
+function arange(start, end, step) {
+    var arr = [];
+    for (var i = start; i < end; i += step) {
+        arr.push(i)
+    }
+    return arr;
+}
+
+function logistic_fn(beta, c, x) {
+    return function (x) {
+      return 1.0 / (1.0 + Math.exp(-1*beta*(x-c)))
+    }
+}
+
 function makePlot() {
     let data = [
         {
             type: "scatter", // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
-            x: [1, 2, 3], // more about "x": #scatter-x
+            mode: "markers",
+            x: arange(3, 6, 1), // more about "x": #scatter-x
             y: [1, 1, 1], // #scatter-y
+            name: "Yes",
             marker: {
                 // marker is an object, valid marker keys: #scatter-marker
-                color: "rgb(16, 32, 77)", // more about "marker.color": #scatter-marker-color
+                color: "rgb(255, 0, 0)", // more about "marker.color": #scatter-marker-color
+                size: 10,
             },
         },
         {
           type: "scatter", // all "scatter" attributes: https://plot.ly/javascript/reference/#scatter
-          x: [1, 2, 3], // more about "x": #scatter-x
+          mode: "markers",
+          x: arange(1, 4, 1), // more about "x": #scatter-x
           y: [0, 0, 0], // #scatter-y
+          name: "No",
           marker: {
               // marker is an object, valid marker keys: #scatter-marker
-              color: "rgb(5, 32, 77)", // more about "marker.color": #scatter-marker-color
+              color: "rgb(0, 0, 255)", // more about "marker.color": #scatter-marker-color
+              size: 10,
           },
+        },
+        {
+          type: "scatter",
+          x: arange(0, 7, 0.1),
+          y: arange(0, 7, 0.1).map(logistic_fn(3.0, 3)),
+          name: "Probability of Liking Math",
+          marker: {
+              color: "rgb(0, 0, 0)",
+          }
         },
     ];
     let layout = {
         // all "layout" attributes: #layout
-        title: "simple example", // more about "layout.title": #layout-title
+        title: "Probability of Liking Math Given Number of Math Classes Taken", // more about "layout.title": #layout-title
         xaxis: {
             // all "layout.xaxis" attributes: #layout-xaxis
             title: "Number of Math Classes Taken in College", // more about "layout.xaxis.title": #layout-xaxis-title
@@ -37,16 +66,11 @@ function makePlot() {
         yaxis: {
           title: "Likes Math"
         },
-        annotations: [
-            // all "annotation" attributes: #layout-annotations
-            {
-                text: "simple annotation", // #layout-annotations-text
-                x: 0, // #layout-annotations-x
-                xref: "paper", // #layout-annotations-xref
-                y: 0, // #layout-annotations-y
-                yref: "paper", // #layout-annotations-yref
-            },
-        ],
+        legend: {
+          bgcolor: "rgb(255, 255, 255)",
+        },
+        paper_bgcolor: "rgb(0, 0, 0, 0)",
+        plot_bgcolor: "rgb(0, 0, 0, 0)",
     };
     let config = {
         showLink: false,
