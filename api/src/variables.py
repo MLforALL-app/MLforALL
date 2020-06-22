@@ -1,5 +1,5 @@
-import pandas as pd
-import firebase as fb
+# import pandas as pd
+# import firebase as fb
 
 
 def get_information(df, input_variable):
@@ -9,7 +9,8 @@ def get_information(df, input_variable):
     ENSURES: a dictionary representation of descriptive stats
     """
     ref = df.describe()[input_variable]
-    likely_continuous = 1.*df[input_variable].nunique()/df[input_variable].count() > 0.05
+    likely_continuous = 1. * \
+        df[input_variable].nunique()/df[input_variable].count() > 0.05
     info = {
         "name": input_variable,
         "lo": ref[3],
