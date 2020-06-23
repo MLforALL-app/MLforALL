@@ -49,7 +49,7 @@ function firebaseDep () {
     printf "Building before deploying (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
     npm run build
     printf "Deploying to Firebase (◕‿◕✿)\n\n"
-    firebase deploy 
+    firebase deploy --only hosting
   )
 }
 
