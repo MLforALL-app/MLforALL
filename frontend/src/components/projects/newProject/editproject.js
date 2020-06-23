@@ -63,7 +63,7 @@ class EditProject extends Component {
 		} else if (this.props.project.csvName === "") {
 			return 1;
 		} else if (
-			!this.props.project.csvName === "" &&
+			this.props.project.csvName !== "" &&
 			this.props.project.models === []
 		) {
 			return 2;
@@ -97,16 +97,10 @@ class EditProject extends Component {
 				);
 				this.props.initCSV(this.props.project, this.props.projectID);
 			}
-			this.setState({
-				projectState: project_process
-			});
+			this.setState({ projectState: project_process });
 		}
 		if (this.state.waitForCSVUpload && this.props.csvLoaded) {
-			this.setState({
-				waitForCSVUpload: false
-			});
-		}
-		if (project_process >= 3) {
+			this.setState({ waitForCSVUpload: false });
 		}
 	};
 	componentWillUnmount = () => {
@@ -171,11 +165,6 @@ class EditProject extends Component {
 				{this.state.projectState >= 2 ? (
 					!this.state.waitForCSVUpload ? (
 						<div>
-							{this.props.project.info.NaN === 0 ? (
-								<div className="row container"></div>
-							) : (
-								<NanHandler project={this.props.project} />
-							)}
 							{this.props.csvData &&
 							this.props.currentWorkingProject !==
 								"initialized" ? (
@@ -183,6 +172,10 @@ class EditProject extends Component {
 									<DisplayCSV
 										project={project}
 										id={projectID}
+									/>
+									<NanHandler
+										count={this.props.project.info.NaN}
+										project={this.props.project}
 									/>
 									<ModelOutput
 										project={project}
@@ -195,9 +188,10 @@ class EditProject extends Component {
 									<ProjectStatus />
 								</div>
 							) : (
-								<p>Waiting for csvData</p>
+								<div className="container center">
+									<CircularProgress />
+								</div>
 							)}
-
 							<div className="row container center">
 								<button
 									onClick={this.handleSubmit}
