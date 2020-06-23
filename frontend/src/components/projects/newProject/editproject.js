@@ -199,8 +199,9 @@ class EditProject extends Component {
 									Build the model!
 								</button>
 								{this.state.submitLoad ? (
-									<div className="row">
+									<div className="row center">
 										<CircularProgress />
+										Loading your information...
 									</div>
 								) : (
 									<span></span>
