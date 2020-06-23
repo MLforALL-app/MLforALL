@@ -36,4 +36,4 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 
 -   [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
 -   [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
--   [Custom Link](https://www.mlforall.xyz/)
+-   [Custom Link](https://mlforall.xyz/)
