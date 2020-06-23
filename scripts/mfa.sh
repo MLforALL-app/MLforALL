@@ -13,7 +13,7 @@ function print_help () {
   printf "mfa api        ~~>    Deploys Python Flask API to Google Cloud Run\n"
   printf "mfa frontend   ~~>    Deploys ALL Frontend related services (Fb/Gh)\n"
   printf "mfa ghpages    ~~>    Deploys experimental build to Github Pages\n"
-  printf "mfa firebase   ~~>    Deploys production build to Firebase Hosting\n\n"
+  printf "mfa firebase   ~~>    Deploys production build to Firebase Hosting\n"
 }
 
 function check_git() {
@@ -53,15 +53,7 @@ function ghpages_build() {
   )
 }
 
-function ghpages_nobuild(){
-  (
-    cd frontend 
-    printf "Running gh-pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-    gh-pages -d build
-  )
-}
-
-function firebase () {
+function firebaseDep () {
   (
     cd frontend 
     printf "Deploying to Firebase (◕‿◕✿)\n\n"
@@ -83,7 +75,7 @@ function start() {
   printf "Starting MLforALL CLI...(╯°□°）╯︵ ┻━┻\n\n"
 }
 
-function end() {
+function endPrint() {
   printf "\n┬──┬ ノ( ゜-゜ノ) ....safely ending MLforALL CLI\n"
 }
 
@@ -98,14 +90,14 @@ start
 case "$subcommand" in
   all ) 
     check
-    firebase
-    ghpages_nobuild
+    firebaseDep
+    ghpages_build
     api
     shift $((OPTIND -1))
     ;;
   frontend )
     check
-    firebase
+    firebaseDep
     ghpages_nobuild
     shift $((OPTIND -1))
     ;;
@@ -121,7 +113,7 @@ case "$subcommand" in
     ;;
   firebase )
     check
-    firebase
+    firebaseDep
     shift $((OPTIND -1))
     ;;
   "" )
@@ -138,4 +130,4 @@ case "$subcommand" in
     exit 1
     ;;
 esac
-end
+endPrint
