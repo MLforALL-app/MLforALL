@@ -43,22 +43,20 @@ const MakeDrawer = ({ sections }) => {
 	return (
 		<div className={classes.root}>
 			<CssBaseline />
-			<AppBar position="fixed" className={classes.appBar}>
-			</AppBar>
+			<AppBar position="fixed" className={classes.appBar}></AppBar>
 			<Drawer
 				className={classes.drawer}
 				variant="permanent"
 				classes={{
 					paper: classes.drawerPaper
 				}}
-				anchor="left"
-			>
+				anchor="left">
 				<div className={classes.toolbar} />
 				{sections.map((subsection) => (
 					<React.Fragment>
 						{" "}
 						{
-						//<Divider />
+							//<Divider />
 						}
 						<List>
 							{subsection.map((obj) => (
@@ -66,8 +64,7 @@ const MakeDrawer = ({ sections }) => {
 									to={obj.to}
 									smooth="true"
 									duration="500"
-									offset={-80}
-								>
+									offset={-80}>
 									<ListItem button key={obj.text}>
 										<ListItemText primary={obj.text} />
 									</ListItem>
@@ -75,13 +72,16 @@ const MakeDrawer = ({ sections }) => {
 							))}
 						</List>
 						{
-						//<Divider />
+							//<Divider />
 						}
 					</React.Fragment>
 				))}
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
+				<h1 className="purple-text">
+					This page is still under construction
+				</h1>
 				{sections.map((subsection) => {
 					return subsection.map((obj) => {
 						return (
