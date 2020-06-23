@@ -89,7 +89,6 @@ case "$subcommand" in
   frontend )
     check
     firebaseDep
-    ghpages_nobuild
     shift $((OPTIND -1))
     ;;
   api )
