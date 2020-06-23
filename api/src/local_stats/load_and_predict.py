@@ -1,5 +1,5 @@
-import pandas as pd
-port pickle
+# import pandas as pd
+import pickle
 '''
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier

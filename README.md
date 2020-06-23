@@ -13,7 +13,6 @@
 Making visualizations, machine learning, and data analysis easier for you!
 </p>
 
-
 <h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL Tech Stack </h2>
 
 _Use the links to view more in-depth `README.md` files throughout the repo._
@@ -37,4 +36,4 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 
 -   [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
 -   [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
--   [Custom Link](mlforall.xyz)
+-   [Custom Link](https://www.mlforall.xyz/)
