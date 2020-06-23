@@ -11,9 +11,7 @@ function print_help () {
   printf "mfa            ~~>    Show this help display\n"
   printf "mfa all        ~~>    Deploys ALL services used in MLforALL\n"
   printf "mfa api        ~~>    Deploys Python Flask API to Google Cloud Run\n"
-  printf "mfa frontend   ~~>    Deploys ALL Frontend related services (Fb/Gh)\n"
-  printf "mfa ghpages    ~~>    Deploys experimental build to Github Pages\n"
-  printf "mfa firebase   ~~>    Deploys production build to Firebase Hosting\n"
+  printf "mfa frontend   ~~>    Deploys production build to Firebase Hosting\n"
 }
 
 function check_git() {
@@ -45,17 +43,11 @@ function check() {
   printf "All checks passed! ~(˘▾˘~) \n\n"
 }
 
-function ghpages_build() {
-  (
-    cd frontend
-    printf "Building and deploying to Github Pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-    npm run deploy 
-  )
-}
-
 function firebaseDep () {
   (
     cd frontend 
+    printf "Building before deploying (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
+    npm run build
     printf "Deploying to Firebase (◕‿◕✿)\n\n"
     firebase deploy 
   )
@@ -91,7 +83,6 @@ case "$subcommand" in
   all ) 
     check
     firebaseDep
-    ghpages_build
     api
     shift $((OPTIND -1))
     ;;
@@ -104,11 +95,6 @@ case "$subcommand" in
   api )
     check
     api
-    shift $((OPTIND -1))
-    ;;
-  ghpages )
-    check
-    ghpages_build
     shift $((OPTIND -1))
     ;;
   firebase )
