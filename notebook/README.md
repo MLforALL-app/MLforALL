@@ -9,5 +9,3 @@ https://jupyter.readthedocs.io/en/latest/install.html
 - `classify_testing.ipynb` The BIRTHPLACE of MLforALL. Basic notebook to learn how to use popular `sklearn` and `pandas`. 
 - `pyfb_testing.ipynb` Learning to use Firebase Python SDK
 - `testing_dataframes.ipynb` Deeper experimentation with statistical analyses
-
-Testing
