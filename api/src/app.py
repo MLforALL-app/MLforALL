@@ -57,7 +57,7 @@ def store():
 
     # Get firebase stuff
     bucket = fb.bucket_init()
-    db = fb.firestore.client()
+    db = fb.firestore_init()
 
     try:
         # populate storage with models

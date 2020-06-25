@@ -49,7 +49,7 @@ function firebaseDep () {
     printf "Building before deploying (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
     npm run build
     printf "Deploying to Firebase (◕‿◕✿)\n\n"
-    firebase deploy 
+    firebase deploy --only hosting
   )
 }
 
@@ -89,7 +89,6 @@ case "$subcommand" in
   frontend )
     check
     firebaseDep
-    ghpages_nobuild
     shift $((OPTIND -1))
     ;;
   api )
