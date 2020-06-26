@@ -61,12 +61,6 @@ def send_vars(df, db, proj_id, input_list, model_list, target_param):
              "models" with list of models user is using, "targetParam" with desired 
              output.
     """
-    print("LmAO XD")
-    print("LmAO XD")
-    print("LmAO XD")
-    print("LmAO XD")
-    print("LmAO XD")
-    print("LmAO XD")
     project_ref = db.collection("projects").document(proj_id)
     project_ref.update({"variables": get_variables(
         df, input_list), "models": get_model_obj(model_list), "targetParam": target_param})

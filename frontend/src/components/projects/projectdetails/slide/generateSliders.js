@@ -65,9 +65,7 @@ const initInputs = (variables) => {
 class GenerateSliders extends Component {
 	// Set initial model to be the first one
 	state = {
-		model: this.props.project
-			? ""
-			: Object.keys(this.props.project.models)[0],
+		model: Object.keys(this.props.project.models)[0],
 		inputs: initInputs(this.props.project.variables),
 		output: "",
 		loading: false,
@@ -119,7 +117,6 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			console.log("This is path", path);
 			this.setState({ loading: true });
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
