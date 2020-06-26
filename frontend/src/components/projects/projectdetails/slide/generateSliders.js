@@ -172,6 +172,7 @@ class GenerateSliders extends Component {
 								has accuracy{" "}
 								{project &&
 									project.models &&
+									project.models[model] &&
 									project.models[model].accuracy}
 								<HelpBox
 									placement="right"

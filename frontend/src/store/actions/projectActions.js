@@ -174,7 +174,7 @@ export const deleteMLProject = (pid, uid, project) => {
 		// get todelete files
 		const delCSV = project.csvName;
 		// might be a source of bugs in the future
-		var delVars = Object.values(project.models);
+		var delVars = Object.keys(project.models);
 		delVars.push(delCSV);
 		// make async call to database
 		const firestore = getFirestore();
