@@ -36,6 +36,19 @@ def get_variables(df, input_list):
     return variables
 
 
+def get_model_obj(model_list):
+    '''
+    REQUIRES: model_list a list of model codes (ie gnb, lda, etc)
+    ENSURES: a dictionary/object with keys as these codes. The values 
+             of this dictionary are dictionaries with the fields
+             "accuracy", and other future model metadata
+    '''
+    models = {}
+    for m in model_list:
+        models[m] = {"accuracy": 0.52, "pizza": "yummy"}
+    return models
+
+
 def send_vars(df, db, proj_id, input_list, model_list, target_param):
     """
     A function to update Google Firestore database accordingly
@@ -48,7 +61,13 @@ def send_vars(df, db, proj_id, input_list, model_list, target_param):
              "models" with list of models user is using, "targetParam" with desired 
              output.
     """
+    print("LmAO XD")
+    print("LmAO XD")
+    print("LmAO XD")
+    print("LmAO XD")
+    print("LmAO XD")
+    print("LmAO XD")
     project_ref = db.collection("projects").document(proj_id)
     project_ref.update({"variables": get_variables(
-        df, input_list), "models": model_list, "targetParam": target_param})
+        df, input_list), "models": get_model_obj(model_list), "targetParam": target_param})
     return None
