@@ -65,10 +65,9 @@ const initInputs = (variables) => {
 class GenerateSliders extends Component {
 	// Set initial model to be the first one
 	state = {
-		model:
-			Object.keys(this.props.project.models).length < 1
-				? ""
-				: Object.keys(this.props.project.models)[0],
+		model: this.props.project
+			? ""
+			: Object.keys(this.props.project.models)[0],
 		inputs: initInputs(this.props.project.variables),
 		output: "",
 		loading: false,

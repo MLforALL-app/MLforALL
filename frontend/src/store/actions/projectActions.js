@@ -169,27 +169,29 @@ export const updateCsvData = (csv, project, pid) => {
 	};
 };
 
-export const deleteMLProject = (pid, uid, project) => {
+export const deleteMLProject = (pid, uid, project, update) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
 		// might be a source of bugs in the future
 		var delVars = Object.keys(project.models);
-		delVars.push(delCSV);
-		// make async call to database
-		const firestore = getFirestore();
-		firestore
-			.collection("projects")
-			.doc(pid)
-			.delete()
-			.then((snapshot) => {
-				dispatch({ type: "DELETE_PROJECT_DOC" });
-			})
-			.catch((err) => {
-				console.log("Delete project Firestore error", err);
-				dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
-			});
+		if (!update) {
+			delVars.push(delCSV);
+			const firestore = getFirestore();
+			firestore
+				.collection("projects")
+				.doc(pid)
+				.delete()
+				.then((snapshot) => {
+					dispatch({ type: "DELETE_PROJECT_DOC" });
+				})
+				.catch((err) => {
+					console.log("Delete project Firestore error", err);
+					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
+				});
+		}
 		const storageRef = getFirebase().storage();
+		console.log("delVars", delVars);
 		delVars.forEach((filename) => {
 			storageRef
 				.ref(`${uid}/${pid}/${filename}`)
