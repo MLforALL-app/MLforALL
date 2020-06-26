@@ -66,9 +66,9 @@ class GenerateSliders extends Component {
 	// Set initial model to be the first one
 	state = {
 		model:
-			this.props.project.models.length < 1
+			Object.keys(this.props.project.models).length < 1
 				? ""
-				: this.props.project.models[0],
+				: Object.keys(this.props.project.models)[0],
 		inputs: initInputs(this.props.project.variables),
 		output: "",
 		loading: false,
@@ -120,6 +120,7 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
+			console.log("This is path", path);
 			this.setState({ loading: true });
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
@@ -153,59 +154,63 @@ class GenerateSliders extends Component {
 		}
 	}
 	render() {
+		const { project } = this.props;
+		const { model, resModel, resInputs, loading, output } = this.state;
 		return (
 			<div className="predict">
 				<div className="row slider-row">
 					<div className="container">
-						<div className="col s12">
-							<div className="slider-title">
-								<h5>
-									Type of model:{" "}
-									{Dropdown(
-										this.props.project,
-										this.state.model,
-										this.handleDropChange,
-										nameMapper
-									)}{" "}
-									<HelpBox
-										placement="right"
-										desc={getDesc(this.state.model)}
-									/>
-								</h5>
-							</div>
-							<div className="slider-contain">
-								{this.getslides(
-									this.props.project.variables,
-									this.handleSliderChange,
-									this.handleInputChange
-								)}
-								<div
-									className="row"
-									style={{
-										paddingTop: "2rem",
-										textAlign: "right"
-									}}>
-									<HelpBox
-										placement="left"
-										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
-									/>{" "}
-									<button
-										className="btn waves-effect waves-light anchor"
-										onClick={this.handleSubmit}>
-										<b>Generate</b>
-									</button>
-								</div>
+						<div className="slider-title">
+							<h5>
+								Type of model:{" "}
+								{Dropdown(
+									project,
+									model,
+									this.handleDropChange,
+									nameMapper
+								)}{" "}
+								has accuracy{" "}
+								{project &&
+									project.models &&
+									project.models[model].accuracy}
+								<HelpBox
+									placement="right"
+									desc={getDesc(model)}
+								/>
+							</h5>
+						</div>
+						<div className="slider-contain">
+							{this.getslides(
+								project.variables,
+								this.handleSliderChange,
+								this.handleInputChange
+							)}
+							<div
+								className="row"
+								style={{
+									paddingTop: "2rem",
+									textAlign: "right"
+								}}>
+								<HelpBox
+									placement="left"
+									desc="Click here to generate a prediction based off of the slider values you've chosen above!"
+								/>{" "}
+								<button
+									className="btn waves-effect waves-light anchor"
+									onClick={this.handleSubmit}>
+									<b>Generate</b>
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className="row slider-row">
 					{ResultCard(
-						this.state.resModel,
-						this.state.resInputs,
-						this.state.output,
-						this.props.project.targetParam,
-						this.state.loading,
+						resModel,
+						resInputs,
+						output,
+						project.targetParam,
+						loading,
 						nameMapper
 					)}{" "}
 				</div>
