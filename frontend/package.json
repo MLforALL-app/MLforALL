@@ -15,6 +15,7 @@
 		"firebase-tools": "^8.4.3",
 		"moment": "^2.25.3",
 		"papaparse": "^5.2.0",
+		"plotly.js-dist": "^1.54.5",
 		"react": "^16.13.1",
 		"react-device-detect": "^1.12.1",
 		"react-dom": "^16.13.1",
