@@ -1,21 +1,22 @@
-import React from "react"
-import {header, bodyContent} from "./fileFormatter"
+import React from "react";
+import { header, bodyContent } from "./fileFormatter";
 
-const supportVectorMachine =
-<p>
-{header("Support Vector Machine (Classifier)", "+2")}
+const supportVectorMachine = (
+    <div>
+        {header("Support Vector Machine (Classifier)", "+2")}
 
-{header("What's it for?")}
+        {header("What's it for?")}
 
-{bodyContent(``)}
+        {bodyContent(``)}
 
-{header("How does it work?")}
+        {header("How does it work?")}
 
-{bodyContent(``)}
+        {bodyContent(``)}
 
-{header("Why does it work?")}
+        {header("Why does it work?")}
 
-{bodyContent(``)}
-</p>
+        {bodyContent(``)}
+    </div>
+);
 
 export default supportVectorMachine;
