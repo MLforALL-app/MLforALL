@@ -118,6 +118,7 @@ class GenerateSliders extends Component {
 				inputs: Object.values(this.state.inputs)
 			};
 			this.setState({ loading: true });
+			console.log("THIS IS PATH", path)
 			axios
 				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
 				.then((res) => {
