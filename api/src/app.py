@@ -33,7 +33,7 @@ def predict_from_model():
     pid = req_data['projId']  # project id
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
-    
+
     model = Model.load_model(str(uid), str(pid), str(model))
     prediction = model.predict(inputs)
     return jsonify(prediction)
@@ -44,7 +44,7 @@ def predict_from_model():
 def store():
     # once we know what implement fetching the csv from firebase, that'll go in the call
     req_data = request.get_json()
-    
+
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
@@ -60,7 +60,7 @@ def store():
 
     df = fb.get_csv(bucket, fb.make_path(
         str(uid), str(proj_id), str(csv_name)))
-    
+
     data = Data(df, target_param, df_vars, nan_method)
     X_train, X_test, y_train, y_test = data.get_train_test_split()
 
@@ -96,7 +96,7 @@ def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
     req_data = request.get_json()
-    
+
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id

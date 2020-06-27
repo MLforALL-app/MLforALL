@@ -11,9 +11,7 @@ function print_help () {
   printf "mfa            ~~>    Show this help display\n"
   printf "mfa all        ~~>    Deploys ALL services used in MLforALL\n"
   printf "mfa api        ~~>    Deploys Python Flask API to Google Cloud Run\n"
-  printf "mfa frontend   ~~>    Deploys ALL Frontend related services (Fb/Gh)\n"
-  printf "mfa ghpages    ~~>    Deploys experimental build to Github Pages\n"
-  printf "mfa firebase   ~~>    Deploys production build to Firebase Hosting\n\n"
+  printf "mfa frontend   ~~>    Deploys production build to Firebase Hosting\n"
 }
 
 function check_git() {
@@ -45,27 +43,13 @@ function check() {
   printf "All checks passed! ~(˘▾˘~) \n\n"
 }
 
-function ghpages_build() {
-  (
-    cd frontend
-    printf "Building and deploying to Github Pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-    npm run deploy 
-  )
-}
-
-function ghpages_nobuild(){
+function firebaseDep () {
   (
     cd frontend 
-    printf "Running gh-pages (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
-    gh-pages -d build
-  )
-}
-
-function firebase () {
-  (
-    cd frontend 
+    printf "Building before deploying (☞ﾟヮﾟ)☞ ☜(ﾟヮﾟ☜)\n\n"
+    npm run build
     printf "Deploying to Firebase (◕‿◕✿)\n\n"
-    firebase deploy 
+    firebase deploy --only hosting
   )
 }
 
@@ -83,7 +67,7 @@ function start() {
   printf "Starting MLforALL CLI...(╯°□°）╯︵ ┻━┻\n\n"
 }
 
-function end() {
+function endPrint() {
   printf "\n┬──┬ ノ( ゜-゜ノ) ....safely ending MLforALL CLI\n"
 }
 
@@ -98,15 +82,13 @@ start
 case "$subcommand" in
   all ) 
     check
-    firebase
-    ghpages_nobuild
+    firebaseDep
     api
     shift $((OPTIND -1))
     ;;
   frontend )
     check
-    firebase
-    ghpages_nobuild
+    firebaseDep
     shift $((OPTIND -1))
     ;;
   api )
@@ -114,14 +96,9 @@ case "$subcommand" in
     api
     shift $((OPTIND -1))
     ;;
-  ghpages )
-    check
-    ghpages_build
-    shift $((OPTIND -1))
-    ;;
   firebase )
     check
-    firebase
+    firebaseDep
     shift $((OPTIND -1))
     ;;
   "" )
@@ -138,4 +115,4 @@ case "$subcommand" in
     exit 1
     ;;
 esac
-end
+endPrint

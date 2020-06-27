@@ -8,10 +8,6 @@ export const createProject = (project) => {
 		const fname = getState().firebase.profile.firstName;
 		const lname = getState().firebase.profile.lastName;
 		const uid = getState().firebase.auth.uid;
-		// We get the csv name from the csv project (called csvName for conveinence)
-		//const csvName = project.csvName.name;
-		//Store the file to upload for later
-		//project["csvName"] = csvName;
 		firestore
 			.collection("projects")
 			.add({
@@ -23,7 +19,7 @@ export const createProject = (project) => {
 				csvName: "",
 				targetParam: "",
 				content: "",
-				models: [],
+				models: {},
 				variables: [],
 				info: {}
 			})
@@ -173,27 +169,29 @@ export const updateCsvData = (csv, project, pid) => {
 	};
 };
 
-export const deleteMLProject = (pid, uid, project) => {
+export const deleteMLProject = (pid, uid, project, update) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
 		// might be a source of bugs in the future
-		var delVars = Object.values(project.models);
-		delVars.push(delCSV);
-		// make async call to database
-		const firestore = getFirestore();
-		firestore
-			.collection("projects")
-			.doc(pid)
-			.delete()
-			.then((snapshot) => {
-				dispatch({ type: "DELETE_PROJECT_DOC" });
-			})
-			.catch((err) => {
-				console.log("Delete project Firestore error", err);
-				dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
-			});
+		var delVars = Object.keys(project.models);
+		if (!update) {
+			delVars.push(delCSV);
+			const firestore = getFirestore();
+			firestore
+				.collection("projects")
+				.doc(pid)
+				.delete()
+				.then((snapshot) => {
+					dispatch({ type: "DELETE_PROJECT_DOC" });
+				})
+				.catch((err) => {
+					console.log("Delete project Firestore error", err);
+					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
+				});
+		}
 		const storageRef = getFirebase().storage();
+		console.log("delVars", delVars);
 		delVars.forEach((filename) => {
 			storageRef
 				.ref(`${uid}/${pid}/${filename}`)
