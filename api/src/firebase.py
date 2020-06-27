@@ -2,6 +2,7 @@
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
+from firebase_admin import firestore
 # from firebase_admin import firestore
 # Needed to process data
 import pandas as pd
