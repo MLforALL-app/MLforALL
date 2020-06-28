@@ -12,7 +12,7 @@
 <p align="center">
 Making visualizations, machine learning, and data analysis easier for you!
 </p>
-
+LOOK OVER HERE
 <h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL Tech Stack </h2>
 
 _Use the links to view more in-depth `README.md` files throughout the repo._
