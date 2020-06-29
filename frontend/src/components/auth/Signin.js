@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect, Link } from "react-router-dom";
 import authImg from "../../pictures/backgrounds/auth.svg";
+import "../../styling/background.css";
 
 class SignIn extends Component {
   // State to keep track of what user types
@@ -61,21 +62,7 @@ class SignIn extends Component {
             </div>
           </form>
         </div>
-        <img
-          img="authImg"
-          alt=""
-          src={authImg}
-          id="bgimg"
-          style={{
-            width: "100%",
-            height: "100%",
-            maxHeight: "100%",
-            position: "sticky",
-            bottom: "0px",
-            left: "50%",
-            zIndex: "-1",
-          }}
-        ></img>
+        <img className="auth-image" alt="" src={authImg}></img>
       </div>
     );
   }
