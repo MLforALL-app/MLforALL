@@ -5,7 +5,22 @@ import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
 import "../../styling/landing.css";
+import SignUp from "../auth/Signup";
+import { Element } from "react-scroll";
 import { Redirect } from "react-router-dom";
+
+const landSign = () => {
+	return (
+		<div className="row center">
+			<Element name="signup" className="element">
+				<h2 className="purple-text"> Sign Up Here </h2>
+				<div className="container land">
+					<SignUp />
+				</div>
+			</Element>
+		</div>
+	);
+};
 
 const makePicture = (name, title, link, picture) => {
 	return (
@@ -56,7 +71,12 @@ class About extends Component {
 	render() {
 		const { auth } = this.props;
 		if (!auth.uid) {
-			return <div className="">{headshot()}</div>;
+			return (
+				<div className="">
+					{headshot()}
+					{landSign()}
+				</div>
+			);
 		} else {
 			// Don't let people see landing page
 			return <Redirect to="/dashboard" />;

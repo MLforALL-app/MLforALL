@@ -4,7 +4,22 @@ import { connect } from "react-redux";
 import whoImg from "../../pictures/backgrounds/who.svg";
 // Import css files like this
 import "../../styling/landing.css";
+import SignUp from "../auth/Signup";
+import { Element } from "react-scroll";
 import { Redirect } from "react-router-dom";
+
+const landSign = () => {
+	return (
+		<div className="row center">
+			<Element name="signup" className="element">
+				<h2 className="purple-text"> Sign Up Here </h2>
+				<div className="container land">
+					<SignUp />
+				</div>
+			</Element>
+		</div>
+	);
+};
 
 const example = () => {
 	// I can do normal javascript stuff in this function
@@ -34,7 +49,7 @@ class Landing extends Component {
 						Note that to do javascript, you need curly braces{" "}
 					</h1>
 					{example()}
-					{example()}
+					{landSign()}
 				</div>
 			);
 		} else {
