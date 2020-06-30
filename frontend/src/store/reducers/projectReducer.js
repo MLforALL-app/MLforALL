@@ -51,6 +51,7 @@ const checkFull = (currentWorkingProject) => {
 };
 
 const projectReducer = (state = initState, action) => {
+	let cwp = {};
 	switch (action.type) {
 		case "CREATE_PROJECT":
 			return {
@@ -115,14 +116,15 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_ML":
-			console.log(checkFull(state.currentWorkingProject));
+			cwp =  {
+				...state.currentWorkingProject,
+				modelList: action.data
+			};
+			console.log(cwp);
 			return {
 				...state,
-				cWPFull: checkFull(state.currentWorkingProject),
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					modelList: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CSV_DATA_IN_STORE":
 			return {
@@ -136,24 +138,24 @@ const projectReducer = (state = initState, action) => {
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
-			console.log(checkFull(state.currentWorkingProject));
+			cwp =  {
+				...state.currentWorkingProject,
+				targetParameter: action.data
+			};
 			return {
 				...state,
-				cWPFull: checkFull(state.currentWorkingProject),
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					targetParameter: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
-			console.log(checkFull(state.currentWorkingProject));
+			cwp =  {
+				...state.currentWorkingProject,
+				inputs: action.data
+			};
 			return {
 				...state,
-				cWPFull: checkFull(state.currentWorkingProject),
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CREATE_MODEL_SUCC":
 			return {

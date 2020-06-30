@@ -204,10 +204,7 @@ class EditProject extends Component {
 									className="btn-large z-depth-0">
 									Build the model!
 								</button>
-								{
-									this.state.incompleteSub
-
-								}
+								<div className = "row" style={{color:"#ff0000"}}>{this.state.incompleteSub}</div>
 								{this.state.submitLoad ? (
 									<div className="row center">
 										<CircularProgress />
