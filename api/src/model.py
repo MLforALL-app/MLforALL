@@ -52,15 +52,14 @@ class Model:
         ENSURES: returns what that particularly trained model predicts
                 given those inputs
         """
-        X_predict = [list(map(lambda x: float(x), prediction_variables))]
+        X_predict = [list(map(float, prediction_variables))]
         if self.scaler is not None:
             X_predict = self.scaler.transform(X_predict)
         guess = self.model.predict(X_predict)
         # issues with jsonify and numpy Int64
         if(isinstance(guess[0], str)):
             return guess[0]
-        else:
-            return float(guess[0])
+        return float(guess[0])
     
     def get_accuracy(self, X, y):
         if self.scaler is not None:
@@ -87,9 +86,8 @@ class Model:
         unpickled_model = fb.get_pickle(bucket, path)
         if isinstance(unpickled_model, Model):
             return unpickled_model
-        else:
-            model = Model()
-            model.type = model_type
-            model.model = unpickled_model
+        model = Model()
+        model.type = model_type
+        model.model = unpickled_model
 
-            return model
+        return model

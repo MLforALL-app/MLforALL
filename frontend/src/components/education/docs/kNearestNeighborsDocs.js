@@ -4,20 +4,6 @@ import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
-function arange(start, end, step) {
-    var arr = [];
-    for (var i = start; i < end; i += step) {
-        arr.push(i)
-    }
-    return arr;
-}
-
-function linear_fn(beta0, beta1, x) {
-    return function (x) {
-      return beta0 + beta1*x;
-    }
-}
-
 function makePlot() {
     let data = [
         {
@@ -112,7 +98,7 @@ $k$-nearest neighbors is used to classify objects which belong to different cate
         {makePlot()}
 
         {bodyContent(`
-So to classify the unknown example, we look at the $k$ \"closest\" known examples and take our prediction is some function of those closest known examples (often a majority vote). If $k=2$ in this case, we would classify the unknown example as a cat.        
+So to classify the unknown example, we look at the $k$ "closest" known examples and take our prediction is some function of those closest known examples (often a majority vote). If $k=2$ in this case, we would classify the unknown example as a cat.        
 `)}
         {header("Technical Explanation")}
         {bodyContent(`

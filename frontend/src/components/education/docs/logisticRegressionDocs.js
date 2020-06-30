@@ -95,10 +95,10 @@ Logistic regression is used to estimate the probability that objects belong to d
         {makePlot()}
 
         {bodyContent(`
-The function above used to estimate the probability of liking math is the "sigmoid" or "logistic" function $g(x) = \\frac{1}{1+e^{-x}}$. During training, the model learns parameters $\\theta_0,\\dots,\\theta\_n$ associated with each input variable so that the predicted probability of liking math is 
+The function above used to estimate the probability of liking math is the "sigmoid" or "logistic" function $g(x) = \\frac{1}{1+e^{-x}}$. During training, the model learns parameters $\\theta_0,\\dots,\\theta_n$ associated with each input variable so that the predicted probability of liking math is 
 $$
 \\begin{equation}
-\\hat{p} = g(\\theta_0 + \\theta\_1x\_1 + \\dots + \\theta\_nx\_n)
+\\hat{p} = g(\\theta_0 + \\theta_1x_1 + \\dots + \\theta_nx_n)
 \\end{equation}
 $$
 

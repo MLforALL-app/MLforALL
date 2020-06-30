@@ -3,8 +3,8 @@ import firebase as fb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
-from model import *
-from data import *
+from model import Model
+from data import Data
 
 import sys
 

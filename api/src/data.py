@@ -38,11 +38,11 @@ class Data:
         # take care of nan values
         if method == "drop":
             return df.dropna()
-        elif method == "zeros":
+        if method == "zeros":
             return df.fillna(0)
-        elif method == "mean":
+        if method == "mean":
             return df.fillna(df.mean())
-        elif method == "median":
+        if method == "median":
             return df.fillna(df.median())
         else:
             raise ValueError("Invalid fill nan method")
@@ -110,7 +110,6 @@ class Data:
             variables.append(self.get_information(inp))
         return variables
 
-
     def send_vars(self, proj_id, model_list):
         """
         A function to update Google Firestore database accordingly
@@ -128,7 +127,6 @@ class Data:
         project_ref = db.collection("projects").document(proj_id)
         project_ref.update({"variables": self.get_variables(self.df_vars_str), 
             "models": self.get_model_obj(model_list), "targetParam": self.target_str})
-        return None
 
     def from_csv(uid, proj_id, csv_name):
         bucket = fb.bucket_init()

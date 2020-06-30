@@ -1,5 +1,5 @@
 import React from "react";
-import { header, bodyContent } from "./fileFormatter";
+import { header } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
