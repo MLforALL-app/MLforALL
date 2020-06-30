@@ -54,7 +54,8 @@ class EditProject extends Component {
   state = {
     projectState: "init",
     waitForCSVUpload: false,
-    submitLoad: false,
+	submitLoad: false,
+	incompleteSub: "",
   };
 	determineProjectState = () => {
 		if (!this.props.project) {
@@ -125,6 +126,12 @@ class EditProject extends Component {
 	};
 
   handleSubmit = (e) => {
+	if(!this.props.projectComplete){
+		this.setState({
+			incompleteSub : "Please Fill Out the Entire Model"
+		})
+		return;
+	}
     this.setState({
       submitLoad: true,
     });
@@ -197,6 +204,10 @@ class EditProject extends Component {
 									className="btn-large z-depth-0">
 									Build the model!
 								</button>
+								{
+									this.state.incompleteSub
+
+								}
 								{this.state.submitLoad ? (
 									<div className="row center">
 										<CircularProgress />
@@ -228,7 +239,8 @@ const mapStateToProps = (state, props) => {
     csvLoaded: state.project.csvLoaded,
     currentWorkingProject: state.project.currentWorkingProject,
     csvData: state.project.csvData,
-    built: state.project.built,
+	built: state.project.built,
+	projectComplete : state.project.cWPFull
   };
 };
 

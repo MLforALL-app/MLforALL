@@ -1,9 +1,10 @@
 const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
+	cWPFull : false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
-	built: false
+	built: false,
 };
 
 const initObj = (objList) => {
@@ -12,6 +13,41 @@ const initObj = (objList) => {
 		objState[item] = false;
 	});
 	return objState;
+};
+
+const atLeastOneTrue =  (boolObj) => {
+	let hasTrue = false;
+	for(const key in boolObj){
+		if(boolObj[key] === true){
+			hasTrue = true;
+			break;
+		}
+	}
+	return hasTrue;
+}; 
+
+const checkFull = (currentWorkingProject) => {
+	if (currentWorkingProject === "initialized"){
+		return false;
+	}else{
+		//check output
+		if(currentWorkingProject.targetParameter === ""){
+			console.log("block1");
+			return false;
+		}
+		//check that there is at least one input
+		if(!atLeastOneTrue(currentWorkingProject.inputs)){
+			console.log("block2");
+			return false;
+		}
+		//check that there is at least one model
+		if(!atLeastOneTrue(currentWorkingProject.modelList)){
+			console.log("block3");
+			return false;
+		}
+		return true;
+	}
+	
 };
 
 const projectReducer = (state = initState, action) => {
@@ -51,6 +87,7 @@ const projectReducer = (state = initState, action) => {
 			return {
 				...state,
 				built: false,
+				cWPFull : false,
 				currentWorkingProject: {
 					uid: action.uid,
 					projId: action.pid,
@@ -78,8 +115,10 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_ML":
+			console.log(checkFull(state.currentWorkingProject));
 			return {
 				...state,
+				cWPFull: checkFull(state.currentWorkingProject),
 				currentWorkingProject: {
 					...state.currentWorkingProject,
 					modelList: action.data
@@ -97,16 +136,20 @@ const projectReducer = (state = initState, action) => {
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
+			console.log(checkFull(state.currentWorkingProject));
 			return {
 				...state,
+				cWPFull: checkFull(state.currentWorkingProject),
 				currentWorkingProject: {
 					...state.currentWorkingProject,
 					targetParameter: action.data
 				}
 			};
 		case "UPDATE_INPUTS":
+			console.log(checkFull(state.currentWorkingProject));
 			return {
 				...state,
+				cWPFull: checkFull(state.currentWorkingProject),
 				currentWorkingProject: {
 					...state.currentWorkingProject,
 					inputs: action.data
