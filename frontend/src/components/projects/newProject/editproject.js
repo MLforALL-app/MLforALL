@@ -71,18 +71,12 @@ class EditProject extends Component {
 			return 3;
 		}
 	};
-	componentDidMount = () => {
-		//figure out if the csv already has been uploaded or will be uploaded
-		let project_process = this.determineProjectState();
-		if (project_process < 2) {
-			this.setState({
-				waitForCSVUpload: false
-			});
-		}
-	};
+
 	componentDidUpdate = () => {
 		let project_process = this.determineProjectState();
+		//handling project process change
 		if (this.state.projectState !== project_process) {
+			//handle setting up project
 			if (this.state.projectState === 0) {
 				if (project_process < 2) {
 					this.setState({
@@ -91,6 +85,7 @@ class EditProject extends Component {
 				}
 			}
 			if (project_process >= 2) {
+				console.log("setting up form submision");
 				this.props.setWorkingProject(
 					this.props.project,
 					this.props.projectID
@@ -105,6 +100,7 @@ class EditProject extends Component {
 	};
 	componentWillUnmount = () => {
 		this.props.resetBuild();
+		this.props.clearStore();
 	};
 	getContent = (content) => {
 		if (content === "") {
