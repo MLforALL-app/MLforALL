@@ -35,6 +35,7 @@ export const createProject = (project) => {
 export const updateContent = (content, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
+		console.log("updateContent", content);
 		const firestore = getFirestore();
 		firestore
 			.collection("projects")
@@ -42,9 +43,11 @@ export const updateContent = (content, pid) => {
 			.set({ content: content }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CONTENT" });
+				console.log("YAY: updated content");
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CONTENT_ERROR" });
+				console.log("FAIL: updated content");
 			});
 	};
 };
@@ -129,7 +132,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 				};
 				// After we upload the csv, update firestore with preliminary insights
 				axios
-					.post(`http://127.0.0.1:8080//describe`, path)
+					.post(`http://127.0.0.1:8080/describe`, path)
 					.then((res) => {
 						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})

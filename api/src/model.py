@@ -13,8 +13,9 @@ import pickle
 
 import sys
 
+
 class Model:
-    
+
     models = {
         "log_reg": LogisticRegression,
         "clf": DecisionTreeClassifier,
@@ -23,7 +24,7 @@ class Model:
         "gnb": GaussianNB,
         "svm": SVC,
     }
-    
+
     def __init__(self, model_type=""):
         """
         REQUIRES: model_type in models == True
@@ -43,7 +44,7 @@ class Model:
         self.scaler = MinMaxScaler()
         X = self.scaler.fit_transform(X)
         return self.model.fit(X, y.reshape(-1))
-    
+
     def predict(self, prediction_variables):
         """
         REQUIRES: loaded_model a representation of our loaded model object
@@ -60,7 +61,7 @@ class Model:
         if(isinstance(guess[0], str)):
             return guess[0]
         return float(guess[0])
-    
+
     def get_accuracy(self, X, y):
         if self.scaler is not None:
             X = self.scaler.transform(X)
@@ -69,7 +70,8 @@ class Model:
 
     def pickle(self):
         return pickle.dumps(self)
-    
+
+    @staticmethod
     def load_model(uid, pid, model_type):
         """
         REQUIRES: uid valid user id (string)

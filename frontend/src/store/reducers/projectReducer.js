@@ -33,11 +33,11 @@ const projectReducer = (state = initState, action) => {
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
 		case "UPLOAD_CSV":
-			return { ...state, csvLoaded: true };
+			return state;
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
-			return state;
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_METADATA_ERROR":
 			return state;
 		case "UPDATE_CSV_NAME":
