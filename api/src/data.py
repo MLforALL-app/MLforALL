@@ -44,8 +44,7 @@ class Data:
             return df.fillna(df.mean())
         if method == "median":
             return df.fillna(df.median())
-        else:
-            raise ValueError("Invalid fill nan method")
+        raise ValueError("Invalid fill nan method")
 
     def make_train_test_split(self, X, y):
         X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
