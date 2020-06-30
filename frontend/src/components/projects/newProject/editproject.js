@@ -133,7 +133,7 @@ class EditProject extends Component {
 	};
 
 	render() {
-		const { project, auth, projectID } = this.props;
+		const { project, auth, projectID, modelBuilt, dataBuilt } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!project)
 			return (
@@ -141,9 +141,7 @@ class EditProject extends Component {
 					<CircularProgress />
 				</div>
 			);
-		if (auth.uid !== project.authorID)
-			return <Redirect to={`/project/${projectID}`} />;
-		if (this.props.modelBuilt && this.props.dataBuilt) {
+		if ((modelBuilt && dataBuilt) || auth.uid !== project.authorID) {
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (
