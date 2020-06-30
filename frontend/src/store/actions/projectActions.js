@@ -129,10 +129,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 				};
 				// After we upload the csv, update firestore with preliminary insights
 				axios
-					.post(
-						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
-						path
-					)
+					.post(`http://127.0.0.1:8080//describe`, path)
 					.then((res) => {
 						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})
@@ -191,7 +188,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
 				});
 		}
 		const storageRef = getFirebase().storage();
-		console.log("delVars", delVars);
 		delVars.forEach((filename) => {
 			storageRef
 				.ref(`${uid}/${pid}/${filename}`)
@@ -229,7 +225,7 @@ export const buildModels = () => {
 			nanMethod: submissionData.nanMethod
 		};
 		axios
-			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
+			.post(`http://127.0.0.1:8080/store`, path)
 			.then((res) => {
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})

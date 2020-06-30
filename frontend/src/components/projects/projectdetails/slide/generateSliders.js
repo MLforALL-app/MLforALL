@@ -118,9 +118,9 @@ class GenerateSliders extends Component {
 				inputs: Object.values(this.state.inputs)
 			};
 			this.setState({ loading: true });
-			console.log("THIS IS PATH", path)
+			console.log("THIS IS PATH", path);
 			axios
-				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
+				.post(`http://127.0.0.1:8080/predict`, path)
 				.then((res) => {
 					// If things work, set the output and stop loading
 					this.setState({ output: res, loading: false });
@@ -160,21 +160,13 @@ class GenerateSliders extends Component {
 						<div className="slider-title">
 							<h5>
 								Type of model:{" "}
-								{Dropdown(
-									project,
-									model,
-									this.handleDropChange,
-									nameMapper
-								)}{" "}
+								{Dropdown(project, model, this.handleDropChange, nameMapper)}{" "}
 								has accuracy{" "}
 								{project &&
 									project.models &&
 									project.models[model] &&
-									project.models[model].accuracy}
-								<HelpBox
-									placement="right"
-									desc={getDesc(model)}
-								/>
+									project.models[model].accuracy.toFixed(4) * 100 + "%"}
+								<HelpBox placement="right" desc={getDesc(model)} />
 							</h5>
 						</div>
 						<div className="slider-contain">
