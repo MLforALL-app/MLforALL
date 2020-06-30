@@ -1,12 +1,19 @@
-# MLForEveryone
+<p align="center">
+<img src="frontend/src/pictures/backgrounds/banner.jpeg" />
+</p>
 
-[![CodeFactor](https://www.codefactor.io/repository/github/lenghuang/mlforall/badge)](https://www.codefactor.io/repository/github/lenghuang/mlforall)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/lenghuang/MLforAll/context:javascript)
-[![Language grade: Python](https://img.shields.io/lgtm/grade/python/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/lenghuang/MLforAll/context:python)
+<p align="center">
+<a href="https://www.codefactor.io/repository/github/lenghuang/mlforall"><img src="https://www.codefactor.io/repository/github/lenghuang/mlforall/badge" alt="CodeFactor" /></a>
+<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<p>
 
+<p align="center">
 Making visualizations, machine learning, and data analysis easier for you!
+</p>
 
-## Our Tech Stack
+<h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL Tech Stack </h2>
 
 _Use the links to view more in-depth `README.md` files throughout the repo._
 
@@ -29,4 +36,4 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 
 -   [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
 -   [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
--   [Custom Link](mlforall.xyz)
+-   [Custom Link](https://mlforall.xyz/)

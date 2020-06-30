@@ -12,7 +12,8 @@ import {
 	buildModels,
 	updateContent,
 	resetBuild,
-	clearStore
+	clearStore,
+	deleteMLProject
 } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
@@ -97,16 +98,10 @@ class EditProject extends Component {
 				);
 				this.props.initCSV(this.props.project, this.props.projectID);
 			}
-			this.setState({
-				projectState: project_process
-			});
+			this.setState({ projectState: project_process });
 		}
 		if (this.state.waitForCSVUpload && this.props.csvLoaded) {
-			this.setState({
-				waitForCSVUpload: false
-			});
-		}
-		if (project_process >= 3) {
+			this.setState({ waitForCSVUpload: false });
 		}
 	};
 	componentWillUnmount = () => {
@@ -132,13 +127,12 @@ class EditProject extends Component {
 	};
 
 	handleSubmit = (e) => {
+		const { project, auth, projectID } = this.props;
 		this.setState({
 			submitLoad: true
 		});
-		this.props.updateContent(
-			this.getContent(this.props.project.content),
-			this.props.projectID
-		);
+		this.props.deleteMLProject(projectID, auth.uid, project, true);
+		this.props.updateContent(this.getContent(project.content), projectID);
 		this.props.buildModels();
 	};
 
@@ -171,11 +165,6 @@ class EditProject extends Component {
 				{this.state.projectState >= 2 ? (
 					!this.state.waitForCSVUpload ? (
 						<div>
-							{this.props.project.info.NaN === 0 ? (
-								<div className="row container"></div>
-							) : (
-								<NanHandler project={this.props.project} />
-							)}
 							{this.props.csvData &&
 							this.props.currentWorkingProject !==
 								"initialized" ? (
@@ -183,6 +172,10 @@ class EditProject extends Component {
 									<DisplayCSV
 										project={project}
 										id={projectID}
+									/>
+									<NanHandler
+										count={this.props.project.info.NaN}
+										project={this.props.project}
 									/>
 									<ModelOutput
 										project={project}
@@ -195,9 +188,10 @@ class EditProject extends Component {
 									<ProjectStatus />
 								</div>
 							) : (
-								<p>Waiting for csvData</p>
+								<div className="container center">
+									<CircularProgress />
+								</div>
 							)}
-
 							<div className="row container center">
 								<button
 									onClick={this.handleSubmit}
@@ -205,8 +199,9 @@ class EditProject extends Component {
 									Build the model!
 								</button>
 								{this.state.submitLoad ? (
-									<div className="row">
+									<div className="row center">
 										<CircularProgress />
+										Loading your information...
 									</div>
 								) : (
 									<span></span>
@@ -243,6 +238,8 @@ const mapDispatchToProps = (dispatch) => {
 		setWorkingProject: (project, id) =>
 			dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
+		deleteMLProject: (pid, uid, project, update) =>
+			dispatch(deleteMLProject(pid, uid, project, update)),
 		buildModels: () => dispatch(buildModels()),
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
 		resetBuild: () => dispatch(resetBuild()),

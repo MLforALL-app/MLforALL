@@ -13,13 +13,12 @@ def one_hot(csv, cols, debug=False):
         cols = [cols]
     # create the onehot vals
     df = pd.read_csv(csv)
-    # onehotdfs = []
     for col in cols:
         print(col)
         y = pd.get_dummies(df[col], prefix=col)
         df.drop(col, axis=1, inplace=True)
-        for col in y:
-            df[col] = y[col]
+        for col_y in y:
+            df[col_y] = y[col_y]
     if debug:
         for col in df:
             print(col)

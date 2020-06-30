@@ -2,20 +2,21 @@ import React from "react";
 import { header, bodyContent } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
+
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
 function arange(start, end, step) {
-    var arr = [];
-    for (var i = start; i < end; i += step) {
-        arr.push(i)
-    }
-    return arr;
+	var arr = [];
+	for (var i = start; i < end; i += step) {
+		arr.push(i);
+	}
+	return arr;
 }
 
 function logistic_fn(beta, c, x) {
-    return function (x) {
-      return 1.0 / (1.0 + Math.exp(-1*beta*(x-c)))
-    }
+	return function (x) {
+		return 1.0 / (1.0 + Math.exp(-1 * beta * (x - c)));
+	};
 }
 
 function makePlot() {
@@ -132,7 +133,7 @@ $$\\begin{equation}
 \\end{equation}$$
 Here, $\\alpha$ is a learning rate. There are other ways to update weights as well, such as Newton's method. Note that this is a similar update rule to others you may have seen. Check out generalized linear models for more information.
 `)}
-    </div>
+	</div>
 );
 
 export default logisticRegression;
