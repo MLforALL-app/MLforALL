@@ -1,8 +1,6 @@
 import React from "react";
 import { header, bodyContent } from "./fileFormatter";
-//import Plotly from 'plotly.js-dist'
 import createPlotlyComponent from "react-plotlyjs";
-//See the list of possible plotly bundles at https://github.com/plotly/plotly.js/blob/master/dist/README.md#partial-bundles or roll your own
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
@@ -67,14 +65,14 @@ function makePlot() {
           title: "Likes Math"
         },
         legend: {
-          bgcolor: "rgb(255, 255, 255)",
+          bgcolor: "rgba(0, 0, 0, 0)",
         },
-        paper_bgcolor: "rgb(0, 0, 0, 0)",
-        plot_bgcolor: "rgb(0, 0, 0, 0)",
+        paper_bgcolor: "rgba(0, 0, 0, 0)",
+        plot_bgcolor: "rgba(0, 0, 0, 0)",
     };
     let config = {
         showLink: false,
-        displayModeBar: true,
+        displayModeBar: false,
     };
     return (
         <PlotlyComponent
@@ -89,20 +87,23 @@ function makePlot() {
 const logisticRegression = (
     <div>
         {header("Logistic Regression", "+2")}
-        {makePlot()}
-        {header("What's it for?")}
 
         {bodyContent(`
-Used for Binary Classification, i.e. $y\\in\\{0, 1\\}$. (Note that it can be extended to multiple classes)`)}
-
-        {header("How does it work?")}
-
-        {bodyContent(`
-Uses "sigmoid" or "logistic" function $g(z) = \\frac{1}{1+e^{-z}}$ and fits weights $\\theta = [\\theta_0, \\dots, \\theta_n]^{T}$ to predict $\\hat{y} := h_{\\theta}(x) = g(\\theta^{T}x)$. 
+Logistic regression is used to estimate the probability that objects belong to different categories based on information about those objects. For example, we could measure the height and weight of an animal and give the probability that the animal is a dog versus a cat. In the example below, we estimate the probability that a person likes math based on the number of math classes they've taken.     
 `)}
+        {makePlot()}
 
-        {header("Why does it work?")}
+        {bodyContent(`
+The function above used to estimate the probability of liking math is the "sigmoid" or "logistic" function $g(x) = \\frac{1}{1+e^{-x}}$. During training, the model learns parameters $\\theta_0,\\dots,\\theta\_n$ associated with each input variable so that the predicted probability of liking math is 
+$$
+\\begin{equation}
+\\hat{p} = g(\\theta_0 + \\theta\_1x\_1 + \\dots + \\theta\_nx\_n)
+\\end{equation}
+$$
 
+While we're only discussing logistic regression in the context of two possible categories, it can be extended to more than two categories as well.
+`)}
+        {header("Technical Explanation")}
         {bodyContent(`
 Notice that $g(z) \\in (0, 1)$. We want a model where $p(y=1\\mid x; \\theta) = \\hat{y}$. It follows that $p(y=0\\mid x; \\theta) = 1 - \\hat{y}$. Another way of saying this is
 $$\\begin{equation}
