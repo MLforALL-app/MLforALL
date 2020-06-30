@@ -12,7 +12,8 @@ import {
 	buildModels,
 	updateContent,
 	resetBuild,
-	clearStore
+	clearStore,
+	deleteMLProject
 } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
@@ -122,13 +123,12 @@ class EditProject extends Component {
 	};
 
 	handleSubmit = (e) => {
+		const { project, auth, projectID } = this.props;
 		this.setState({
 			submitLoad: true
 		});
-		this.props.updateContent(
-			this.getContent(this.props.project.content),
-			this.props.projectID
-		);
+		this.props.deleteMLProject(projectID, auth.uid, project, true);
+		this.props.updateContent(this.getContent(project.content), projectID);
 		this.props.buildModels();
 	};
 
@@ -223,6 +223,8 @@ const mapDispatchToProps = (dispatch) => {
 		setWorkingProject: (project, id) =>
 			dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
+		deleteMLProject: (pid, uid, project, update) =>
+			dispatch(deleteMLProject(pid, uid, project, update)),
 		buildModels: () => dispatch(buildModels()),
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
 		resetBuild: () => dispatch(resetBuild()),

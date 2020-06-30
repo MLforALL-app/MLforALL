@@ -3,6 +3,7 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import storage
 from firebase_admin import firestore
+# from firebase_admin import firestore
 # Needed to process data
 import pandas as pd
 # import numpy as np
@@ -19,11 +20,6 @@ def bucket_init():
             'storageBucket': 'mlforall-14bf7.appspot.com'
         })
     return storage.bucket()
-
-
-def firestore_init():
-    return firestore.client()
-    # initialize a client reference to firestore
 
 
 def make_path(uid, project_title, file_name):

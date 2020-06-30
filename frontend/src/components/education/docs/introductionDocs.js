@@ -1,9 +1,6 @@
-import React from "react"
-import {header} from "./fileFormatter"
+import React from "react";
+import { header } from "./fileFormatter";
 
-const introduction =
-    <p>
-{header("Help Page", "+3")}
-    </p>
+const introduction = <div>{header("Help Page", "+3")}</div>;
 
 export default introduction;

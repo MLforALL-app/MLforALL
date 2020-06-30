@@ -1,29 +1,31 @@
-import React from "react"
-import {header, bodyContent} from "./fileFormatter"
+import React from "react";
+import { header, bodyContent } from "./fileFormatter";
 
-const example =
-<p>
-{header("Example", "+2")}
+const example = (
+    <div>
+        {header("Example", "+2")}
 
-{header("What's it for?")}
+        {header("What's it for?")}
 
-{bodyContent(``)}
+        {bodyContent(``)}
 
-{header("How does it work?")}
+        {header("How does it work?")}
 
-<p align="center">
-  <img src="https://github.com/lenghuang/MLforAll/blob/master/frontend/src/pictures/headshots/max.jpg?raw=true" alt=""/>
-</p>
+        <p align="center">
+            <img
+                src="https://github.com/lenghuang/MLforAll/blob/master/frontend/src/pictures/headshots/max.jpg?raw=true"
+                alt=""
+            />
+        </p>
 
-{bodyContent(`
+        {bodyContent(`
 ![Me](https://github.com/lenghuang/MLforAll/blob/master/frontend/src/pictures/headshots/max.jpg?raw=true)
 `)}
 
-{header("Why does it work?")}
+        {header("Why does it work?")}
 
-{bodyContent(``)}
-</p>
-
-
+        {bodyContent(``)}
+    </div>
+);
 
 export default example;
