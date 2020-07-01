@@ -178,18 +178,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
 		var delVars = Object.keys(project.models);
 		if (!update) {
 			delVars.push(delCSV);
-			const firestore = getFirestore();
-			firestore
-				.collection("projects")
-				.doc(pid)
-				.delete()
-				.then((snapshot) => {
-					dispatch({ type: "DELETE_PROJECT_DOC" });
-				})
-				.catch((err) => {
-					console.log("Delete project Firestore error", err);
-					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
-				});
 		}
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
@@ -204,6 +192,20 @@ export const deleteMLProject = (pid, uid, project, update) => {
 					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
+		if (!update) {
+			const firestore = getFirestore();
+			firestore
+				.collection("projects")
+				.doc(pid)
+				.delete()
+				.then((snapshot) => {
+					dispatch({ type: "DELETE_PROJECT_DOC" });
+				})
+				.catch((err) => {
+					console.log("Delete project Firestore error", err);
+					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
+				});
+		}
 	};
 };
 //extras for handle csv

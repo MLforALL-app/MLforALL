@@ -165,10 +165,6 @@ class GenerateSliders extends Component {
 			console.log("updated state due to different props");
 		}
 	}
-	componentWillUnmount() {
-		this.setState({});
-		console.log("unmount clean the state");
-	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
