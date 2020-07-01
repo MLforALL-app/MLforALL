@@ -16,6 +16,9 @@ export default function PredictSlider(
 	handleInputChange,
 	value
 ) {
+	// unique key to append
+	const keyHash = (Math.random() * 1000).toFixed(0);
+
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
 	const continuous = varObj.continuous;
@@ -39,13 +42,14 @@ export default function PredictSlider(
 	}
 	const currentValue = value || typeof value === "number" ? value : 0;
 	return (
-		<div key={"container_" + param}>
+		<div key={"container_" + param + keyHash}>
 			<Typography id="continuous-slider" gutterBottom>
 				<b>{param}</b>
 			</Typography>
 			<Grid container spacing={1} alignItems="center">
-				<Grid item xs>
+				<Grid item xs key={"grid_slide_" + param + keyHash}>
 					<Slider
+						key={"slider_" + param + keyHash}
 						value={currentValue}
 						onChange={handleSliderChange}
 						aria-labelledby="input-slider"
@@ -55,8 +59,9 @@ export default function PredictSlider(
 						step={stepSize}
 					/>
 				</Grid>
-				<Grid item key={"input_" + param}>
+				<Grid item key={"grid_in_" + param + keyHash}>
 					<Input
+						key={"input_" + param + keyHash}
 						value={currentValue}
 						margin="dense"
 						onChange={handleInputChange}

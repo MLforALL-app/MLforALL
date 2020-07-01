@@ -145,7 +145,7 @@ class EditProject extends Component {
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		if (modelBuilt && dataBuilt) {
-			console.log("model and data built", modelBuilt && dataBuilt);
+			// console.log("model and data built", modelBuilt && dataBuilt);
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (

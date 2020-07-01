@@ -159,8 +159,9 @@ class GenerateSliders extends Component {
 		}
 	}
 	componentDidUpdate(prev) {
+		const projectNew = this.props.project;
 		if (prev && prev !== this.props) {
-			this.setState(refreshState(this.props.project));
+			this.setState(refreshState(projectNew));
 			// this.props.refreshCount();
 			console.log("updated state due to different props");
 		}
