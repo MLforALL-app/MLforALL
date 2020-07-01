@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
@@ -14,10 +14,8 @@ export default function PredictSlider(
 	varObj,
 	handleSliderChange,
 	handleInputChange,
-	valueNoRef
+	value
 ) {
-	const valueRef = useRef(valueNoRef);
-	const value = valueRef.current;
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
 	const continuous = varObj.continuous;
@@ -45,7 +43,6 @@ export default function PredictSlider(
 		const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
 		stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	}
-
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>

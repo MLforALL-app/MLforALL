@@ -1,4 +1,4 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
@@ -143,14 +143,14 @@ const GenerateSliders = ({ project, pid }) => {
 			return <p> NO SLIDERS YET </p>;
 		}
 	};
-	useLayoutEffect(() => {
+	useEffect(() => {
 		console.log("model", model);
 		console.log("inputs", inputs);
 		console.log("output", output);
 		setModel(model);
 		setInputs(inputs);
 		setOutput(output);
-		console.log("updated state due to different props");
+		console.log("genslider using effect");
 	}, [model, inputs, output]);
 	return (
 		<div className="predict">
