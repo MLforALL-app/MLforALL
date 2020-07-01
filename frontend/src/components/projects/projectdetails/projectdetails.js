@@ -14,11 +14,15 @@ import "../../../styling/projectdetails.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
+	console.log("ENTER PROJECT DETAILS");
 	const { pid, auth, project, history } = props;
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
 	if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-	console.log("project", project);
+	console.log(
+		"projectRecieved",
+		project && project.variables.map((o) => o.name)
+	);
 	if (project) {
 		return (
 			<div className="project-details">

@@ -59,28 +59,35 @@ const initInputs = (variables) => {
 	return inputs;
 };
 
+const useForceUpdate = () => {
+	console.log("force update");
+	return useState()[5];
+};
+
 /* REQUIRES: passed in props be a project a valid reference to Firebase
  * 			 firestore document, and uid the userID for current user
  * ENSURES: higher order function to create components for sliders and
  * 			result display */
 const GenerateSliders = ({ project, pid }) => {
 	// todo: add resInput and resModel
+	console.log("Recieved project genslide", project);
 	const [model, setModel] = useState(Object.keys(project.models)[0]);
 	const [inputs, setInputs] = useState(initInputs(project.variables));
 	const [output, setOutput] = useState("");
 	const [loading, setLoad] = useState(false);
-
+	console.log("State", [model, inputs, output]);
 	// hsc and hic are higher order functions to allow for generality
 	// of event handlers
 	const handleSliderChange = (v) => {
-		console.log("input v", v);
+		//console.log("input v", v);
 		return (event, newValue) => {
 			console.log("newValue", newValue);
-			var newInput = inputs;
-			newInput[v.name] = newValue;
-			console.log(newInput);
-			setInputs(newInput);
-			console.log(inputs[v.name]);
+			setInputs((prev) => {
+				var newInput = prev;
+				newInput[v.name] = newValue;
+				console.log(newInput);
+				return newInput;
+			});
 		};
 	};
 	const handleInputChange = (v) => {
@@ -90,7 +97,6 @@ const GenerateSliders = ({ project, pid }) => {
 			var newInput = inputs;
 			newInput[v.name] = newValue;
 			setInputs(newInput);
-			console.log(inputs);
 		};
 	};
 	// Event handle for dropdown menu
@@ -114,7 +120,7 @@ const GenerateSliders = ({ project, pid }) => {
 				inputs: Object.values(inputs)
 			};
 			setLoad(true);
-			console.log("THIS IS PATH", path);
+			console.log("path inputs", Object.keys(inputs));
 			axios
 				.post(`${apiHost}/predict`, path)
 				.then((res) => {
@@ -144,16 +150,18 @@ const GenerateSliders = ({ project, pid }) => {
 		}
 	};
 	useEffect(() => {
-		console.log("model", model);
-		console.log("inputs", inputs);
-		console.log("output", output);
-		setModel(model);
-		setInputs(inputs);
-		setOutput(output);
+		//console.log("model", model);
+		//console.log("inputs", inputs);
+		//console.log("output", output);
+		//setModel(model);
+		//setInputs(inputs);
+		//setOutput(output);
 		console.log("genslider using effect");
 	}, [model, inputs, output]);
+	useForceUpdate();
 	return (
 		<div className="predict">
+			{console.log("render")}
 			<div className="row slider-row">
 				<div className="container">
 					<div className="slider-title">
@@ -164,7 +172,7 @@ const GenerateSliders = ({ project, pid }) => {
 							{project &&
 								project.models &&
 								project.models[model] &&
-								project.models[model].accuracy * 100 + "%"}
+								(project.models[model].accuracy * 100).toFixed(2) + "%"}
 							<HelpBox placement="right" desc={getDesc(model)} />
 						</h5>
 					</div>

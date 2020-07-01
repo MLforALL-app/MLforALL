@@ -231,6 +231,7 @@ export const buildModels = () => {
 		axios
 			.post(`${apiHost}/store`, path)
 			.then((res) => {
+				console.log("Store: Create model success res", res);
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})
 			.catch((err) => {
