@@ -1,21 +1,10 @@
-import React, { Component } from "react";
+import React, { useState, useLayoutEffect } from "react";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
 import apiHost from "../../../../config/api.js";
 import axios from "axios";
-
-const updateState = (project) => {
-	return {
-		model: Object.keys(project.models)[0],
-		inputs: initInputs(project.variables),
-		output: "",
-		loading: false,
-		resInputs: {},
-		resModel: ""
-	};
-};
 
 // Helper function so model names get printed nicer
 const nameMapper = (name) => {
@@ -74,154 +63,148 @@ const initInputs = (variables) => {
  * 			 firestore document, and uid the userID for current user
  * ENSURES: higher order function to create components for sliders and
  * 			result display */
-class GenerateSliders extends Component {
-	// Set initial model to be the first one
-	state = updateState(this.props.project);
-	// event handler for when model dropdown menu changes
-	handleDropChange = (event) => {
-		this.setState({ model: event.target.value });
-	};
+const GenerateSliders = ({ project, pid }) => {
+	// todo: add resInput and resModel
+	const [model, setModel] = useState(Object.keys(project.models)[0]);
+	const [inputs, setInputs] = useState(initInputs(project.variables));
+	const [output, setOutput] = useState("");
+	const [loading, setLoad] = useState(false);
+
 	// hsc and hic are higher order functions to allow for generality
 	// of event handlers
-	handleSliderChange = (v) => {
+	const handleSliderChange = (v) => {
+		console.log("input v", v);
 		return (event, newValue) => {
-			this.setState((prevState) => {
-				var alterState = prevState;
-				alterState.inputs[v.name] = newValue;
-				return alterState;
-			});
+			console.log("newValue", newValue);
+			var newInput = inputs;
+			newInput[v.name] = newValue;
+			console.log(newInput);
+			setInputs(newInput);
+			console.log(inputs[v.name]);
 		};
 	};
-	handleInputChange = (v) => {
+	const handleInputChange = (v) => {
 		return (event) => {
-			const newValue =
-				event.target.value === "" ? "" : Number(event.target.value);
-			this.setState((prevState) => {
-				var alterState = prevState;
-				alterState.inputs[v.name] = newValue;
-				return alterState;
-			});
+			var newTarget = event.target.value;
+			var newValue = newTarget === "" ? "" : Number(newTarget);
+			var newInput = inputs;
+			newInput[v.name] = newValue;
+			setInputs(newInput);
+			console.log(inputs);
 		};
+	};
+	// Event handle for dropdown menu
+	const handleDropChange = (event) => {
+		setModel(event.target.value);
 	};
 	// Event handler for when user presses "Generate" button
-	handleSubmit = (event) => {
+	const handleSubmit = (event) => {
 		event.preventDefault();
 		// Update the inputs/models ur showing
-		this.setState((prevState) => {
-			return {
-				resInputs: prevState.inputs,
-				resModel: prevState.model
-			};
-		});
-		if (this.state.model === "") {
-			this.setState({ output: "chooseModel" });
-		} else if (
-			Object.keys(this.state.inputs).length !==
-			this.props.project.variables.length
-		) {
-			this.setState({ output: "chooseInput" });
+		if (model === "") {
+			setOutput("chooseModel");
+		} else if (Object.keys(inputs).length !== project.variables.length) {
+			setOutput("chooseInput");
 		} else {
 			// create path for API Post Request
 			const path = {
-				uid: this.props.project.authorID,
-				projId: this.props.pid,
-				model: this.state.model,
-				inputs: Object.values(this.state.inputs)
+				uid: project.authorID,
+				projId: pid,
+				model: model,
+				inputs: Object.values(inputs)
 			};
-			this.setState({ loading: true });
+			setLoad(true);
 			console.log("THIS IS PATH", path);
 			axios
 				.post(`${apiHost}/predict`, path)
 				.then((res) => {
 					// If things work, set the output and stop loading
-					this.setState({ output: res, loading: false });
+					setOutput(res);
+					setLoad(false);
 				})
 				.catch((err) => {
 					console.log("Prediction Error", err);
 					// If things don't work, server error and stop loading
-					this.setState({ output: "Server Error", loading: false });
+					setOutput("Server Error");
+					setLoad(false);
 				});
 		}
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	getslides(variables, hsc, hic) {
+	const getSlides = (variables, hsc, hic) => {
 		if (variables.length > 0) {
-			var output = [];
+			var slides = [];
 			variables.forEach((v) => {
-				output.push(
-					PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
-				);
+				slides.push(PredictSlider(v, hsc(v), hic(v), inputs[v.name]));
 			});
-			return <div>{output}</div>;
+			return <div>{slides}</div>;
 		} else {
 			return <p> NO SLIDERS YET </p>;
 		}
-	}
-	componentDidUpdate(prev) {
-		if (prev && prev !== this.props) {
-			updateState(this.props.project);
-			console.log("updated state due to different props");
-		}
-	}
-	render() {
-		const { project } = this.props;
-		const { model, resModel, resInputs, loading, output } = this.state;
-		console.log("RENDER STATE", this.state);
-		return (
-			<div className="predict">
-				<div className="row slider-row">
-					<div className="container">
-						<div className="slider-title">
-							<h5>
-								Type of model:{" "}
-								{Dropdown(project, model, this.handleDropChange, nameMapper)}{" "}
-								has accuracy{" "}
-								{project &&
-									project.models &&
-									project.models[model] &&
-									project.models[model].accuracy.toFixed(4) * 100 + "%"}
-								<HelpBox placement="right" desc={getDesc(model)} />
-							</h5>
-						</div>
-						<div className="slider-contain">
-							{this.getslides(
-								project.variables,
-								this.handleSliderChange,
-								this.handleInputChange
-							)}
-							<div
-								className="row"
-								style={{
-									paddingTop: "2rem",
-									textAlign: "right"
-								}}>
-								<HelpBox
-									placement="left"
-									desc="Click here to generate a prediction based off of the slider values you've chosen above!"
-								/>{" "}
-								<button
-									className="btn waves-effect waves-light anchor"
-									onClick={this.handleSubmit}>
-									<b>Generate</b>
-								</button>
-							</div>
+	};
+	useLayoutEffect(() => {
+		console.log("model", model);
+		console.log("inputs", inputs);
+		console.log("output", output);
+		setModel(model);
+		setInputs(inputs);
+		setOutput(output);
+		console.log("updated state due to different props");
+	}, [model, inputs, output]);
+	return (
+		<div className="predict">
+			<div className="row slider-row">
+				<div className="container">
+					<div className="slider-title">
+						<h5>
+							Type of model:{" "}
+							{Dropdown(project, model, handleDropChange, nameMapper)} has
+							accuracy{" "}
+							{project &&
+								project.models &&
+								project.models[model] &&
+								project.models[model].accuracy * 100 + "%"}
+							<HelpBox placement="right" desc={getDesc(model)} />
+						</h5>
+					</div>
+					<div className="slider-contain">
+						{getSlides(
+							project.variables,
+							handleSliderChange,
+							handleInputChange
+						)}
+						<div
+							className="row"
+							style={{
+								paddingTop: "2rem",
+								textAlign: "right"
+							}}>
+							<HelpBox
+								placement="left"
+								desc="Click here to generate a prediction based off of the slider values you've chosen above!"
+							/>{" "}
+							<button
+								className="btn waves-effect waves-light anchor"
+								onClick={handleSubmit}>
+								<b>Generate</b>
+							</button>
 						</div>
 					</div>
 				</div>
-				<div className="row slider-row">
-					{ResultCard(
-						resModel,
-						resInputs,
-						output,
-						project.targetParam,
-						loading,
-						nameMapper
-					)}{" "}
-				</div>
 			</div>
-		);
-	}
-}
+			<div className="row slider-row">
+				{ResultCard(
+					model,
+					inputs,
+					output,
+					project.targetParam,
+					loading,
+					nameMapper
+				)}{" "}
+			</div>
+		</div>
+	);
+};
 
 export default GenerateSliders;

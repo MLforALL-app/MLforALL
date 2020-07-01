@@ -43,11 +43,9 @@ const showResults = (output, inputs) => {
  * ENSURES: a card display the results of a Predict API call */
 
 const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
-	return (
-		<div className="container center slider-contain">
-			{loading ? (
-				<CircularProgress />
-			) : (
+	if (!loading) {
+		return (
+			<div className="container center slider-contain">
 				<span>
 					<p> {target} is... </p>
 					<h4>
@@ -62,9 +60,15 @@ const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 					</p>
 					<div className="header-subrow">{showResults(output, inputs)}</div>
 				</span>
-			)}
-		</div>
-	);
+			</div>
+		);
+	} else {
+		return (
+			<div className="container center slider-contain">
+				<CircularProgress />
+			</div>
+		);
+	}
 };
 
 export default ResultCard;

@@ -1,19 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import Input from "@material-ui/core/Input";
-
-// Helper function to clean up long numbers for labels
-/*
-const clean = (n) => {
-	if (n < 1 && n >= 0) {
-		return n.toFixed(3);
-	} else {
-		return Math.ceil(n);
-	}
-};
-*/
 
 /* REQUIRES: varObj some object with name, lo, hi, q1, q2, q3 fields
  *			 handleSliderChange a valid handler to control states in
@@ -25,8 +14,10 @@ export default function PredictSlider(
 	varObj,
 	handleSliderChange,
 	handleInputChange,
-	value
+	valueNoRef
 ) {
+	const valueRef = useRef(valueNoRef);
+	const value = valueRef.current;
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
 	const continuous = varObj.continuous;
