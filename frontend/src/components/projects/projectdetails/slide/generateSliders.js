@@ -180,7 +180,7 @@ class GenerateSliders extends Component {
 								{project &&
 									project.models &&
 									project.models[model] &&
-									project.models[model].accuracy * 100 + "%"}
+									project.models[model].accuracy.toFixed(4) * 100 + "%"}
 								<HelpBox placement="right" desc={getDesc(model)} />
 							</h5>
 						</div>
