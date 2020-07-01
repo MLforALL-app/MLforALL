@@ -141,7 +141,11 @@ class EditProject extends Component {
 					<CircularProgress />
 				</div>
 			);
-		if ((modelBuilt && dataBuilt) || auth.uid !== project.authorID) {
+		if (auth.uid !== project.authorID) {
+			return <Redirect to={`/project/${projectID}`} />;
+		}
+		if (modelBuilt && dataBuilt) {
+			// console.log("model and data built", modelBuilt && dataBuilt);
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (

@@ -104,7 +104,7 @@ def describe():
     csv_name = req_data['csvName']
 
     data = Data.from_csv(uid, proj_id, csv_name)
-    description = data.pre_describe()
+    description = data.pre_describe(proj_id)
     return jsonify(description)
 
 

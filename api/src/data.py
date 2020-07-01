@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
-
 import firebase as fb
+
 
 class Data:
     def __init__(self, df, target_parameter, df_variables, nan_method="drop"):
@@ -32,7 +32,8 @@ class Data:
 
             # now target contains the labels, and df contains the variables
             self.X_train, self.X_test, self.y_train, self.y_test = \
-                self.make_train_test_split(self.processed_df.to_numpy(), self.target.to_numpy())
+                self.make_train_test_split(
+                    self.processed_df.to_numpy(), self.target.to_numpy())
 
     def nan_handler(self, df, method):
         # take care of nan values
@@ -47,7 +48,8 @@ class Data:
         raise ValueError("Invalid fill nan method")
 
     def make_train_test_split(self, X, y):
-        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, random_state=0)
         return X_train, X_test, y_train, y_test
 
     def get_train_test_split(self):
@@ -59,7 +61,7 @@ class Data:
         ENSURES:  returns the number of NaN's in the entire dataframe 
         '''
         return int(self.df.isnull().sum().sum())
-    
+
     def get_info(self):
         '''
         REQUIRES: df some valid pandas dataframe
@@ -69,16 +71,16 @@ class Data:
         info['NaN'] = self.count_NaN()
         return info
 
-    def pre_describe(self):
+    def pre_describe(self, proj_id):
         '''
         ENSURES:  updates the proj_id firestore document to contain a field with info
         '''
-
+        db = fb.firestore_init()
         info = self.get_info()
         project_ref = db.collection("projects").document(proj_id)
         project_ref.update({"info": info})
         return info
-    
+
     def get_information(self, input_variable):
         """
         Function to return descriptive stats to display on our sliders
@@ -86,7 +88,9 @@ class Data:
         ENSURES: a dictionary representation of descriptive stats
         """
         ref = self.df.describe()[input_variable]
-        likely_continuous = 1.*self.df[input_variable].nunique()/self.df[input_variable].count() > 0.05
+        likely_continuous = 1. * \
+            self.df[input_variable].nunique(
+            )/self.df[input_variable].count() > 0.05
         info = {
             "name": input_variable,
             "lo": ref[3],
@@ -124,16 +128,16 @@ class Data:
         db = fb.firestore.client()
 
         project_ref = db.collection("projects").document(proj_id)
-        project_ref.update({"variables": self.get_variables(self.df_vars_str), 
-            "models": self.get_model_obj(model_list), "targetParam": self.target_str})
+        project_ref.update({"variables": self.get_variables(self.df_vars_str),
+                            "models": self.get_model_obj(model_list), "targetParam": self.target_str})
 
+    @staticmethod
     def from_csv(uid, proj_id, csv_name):
         bucket = fb.bucket_init()
-        db = fb.firestore.client()
         # Get the dataframe
         df = fb.get_csv(bucket, fb.make_path(
             str(uid), str(proj_id), str(csv_name)))
-        
+
         return Data(df, None, None, None)
 
     def get_model_obj(self, model_list):
@@ -145,5 +149,6 @@ class Data:
         '''
         models = {}
         for m in model_list:
-            models[m.type] = {"accuracy": m.get_accuracy(self.X_test, self.y_test)}
+            models[m.type] = {"accuracy": m.get_accuracy(
+                self.X_test, self.y_test)}
         return models

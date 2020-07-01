@@ -33,11 +33,11 @@ const projectReducer = (state = initState, action) => {
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
 		case "UPLOAD_CSV":
-			return { ...state, csvLoaded: true };
+			return state;
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
-			return state;
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_METADATA_ERROR":
 			return state;
 		case "UPDATE_CSV_NAME":
@@ -45,6 +45,7 @@ const projectReducer = (state = initState, action) => {
 		case "UPDATE_CSV_NAME_ERROR":
 			return state;
 		case "UPDATE_CONTENT":
+			console.log("Setting databuilt to true");
 			return { ...state, dataBuilt: true };
 		case "UPDATE_CONTENT_ERROR":
 			return state;
@@ -114,6 +115,7 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "CREATE_MODEL_SUCC":
+			console.log("Setting modelBuilt to true");
 			return {
 				...state,
 				modelBuilt: true

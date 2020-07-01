@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiHost from "../../config/api.js";
 import Papa from "papaparse";
 
 export const createProject = (project) => {
@@ -35,6 +36,7 @@ export const createProject = (project) => {
 export const updateContent = (content, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
+		console.log("updateContent", content);
 		const firestore = getFirestore();
 		firestore
 			.collection("projects")
@@ -42,9 +44,11 @@ export const updateContent = (content, pid) => {
 			.set({ content: content }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CONTENT" });
+				console.log("YAY: updated content");
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CONTENT_ERROR" });
+				console.log("FAIL: updated content");
 			});
 	};
 };
@@ -129,7 +133,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 				};
 				// After we upload the csv, update firestore with preliminary insights
 				axios
-					.post(`http://127.0.0.1:8080//describe`, path)
+					.post(`${apiHost}/describe`, path)
 					.then((res) => {
 						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})
@@ -174,18 +178,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
 		var delVars = Object.keys(project.models);
 		if (!update) {
 			delVars.push(delCSV);
-			const firestore = getFirestore();
-			firestore
-				.collection("projects")
-				.doc(pid)
-				.delete()
-				.then((snapshot) => {
-					dispatch({ type: "DELETE_PROJECT_DOC" });
-				})
-				.catch((err) => {
-					console.log("Delete project Firestore error", err);
-					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
-				});
 		}
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
@@ -200,6 +192,20 @@ export const deleteMLProject = (pid, uid, project, update) => {
 					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
+		if (!update) {
+			const firestore = getFirestore();
+			firestore
+				.collection("projects")
+				.doc(pid)
+				.delete()
+				.then((snapshot) => {
+					dispatch({ type: "DELETE_PROJECT_DOC" });
+				})
+				.catch((err) => {
+					console.log("Delete project Firestore error", err);
+					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
+				});
+		}
 	};
 };
 //extras for handle csv
@@ -225,8 +231,9 @@ export const buildModels = () => {
 			nanMethod: submissionData.nanMethod
 		};
 		axios
-			.post(`http://127.0.0.1:8080/store`, path)
+			.post(`${apiHost}/store`, path)
 			.then((res) => {
+				console.log("Store: Create model success res", res);
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})
 			.catch((err) => {
