@@ -3,6 +3,7 @@ import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
+import apiHost from "../../../../config/api.js";
 import axios from "axios";
 
 const updateState = (project) => {
@@ -130,7 +131,7 @@ class GenerateSliders extends Component {
 			this.setState({ loading: true });
 			console.log("THIS IS PATH", path);
 			axios
-				.post(`http://127.0.0.1:8080/predict`, path)
+				.post(`${apiHost}/predict`, path)
 				.then((res) => {
 					// If things work, set the output and stop loading
 					this.setState({ output: res, loading: false });

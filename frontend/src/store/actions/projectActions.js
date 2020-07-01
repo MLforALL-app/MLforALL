@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiHost from "../../config/api.js";
 import Papa from "papaparse";
 
 export const createProject = (project) => {
@@ -132,7 +133,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 				};
 				// After we upload the csv, update firestore with preliminary insights
 				axios
-					.post(`http://127.0.0.1:8080/describe`, path)
+					.post(`${apiHost}/describe`, path)
 					.then((res) => {
 						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})
@@ -228,7 +229,7 @@ export const buildModels = () => {
 			nanMethod: submissionData.nanMethod
 		};
 		axios
-			.post(`http://127.0.0.1:8080/store`, path)
+			.post(`${apiHost}/store`, path)
 			.then((res) => {
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})
