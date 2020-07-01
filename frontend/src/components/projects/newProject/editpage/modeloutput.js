@@ -15,7 +15,13 @@ class ModelOutput extends Component {
 		this.setState({ output: event.target.value });
 		this.props.setOutput(event.target.value);
 	};
-
+	componentDidMount = () => {
+		console.log("MOUNTING OUTPUT", this.props.selectedOutput);
+		this.setState({
+			output : this.props.selectedOutput
+		});
+		this.props.setOutput(this.props.selectedOutput);
+	}
 	getMenuItems = (headers) => {
 		var menuitems = [];
 		headers.forEach((h) => {

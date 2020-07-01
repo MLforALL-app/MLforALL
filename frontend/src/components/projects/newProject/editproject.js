@@ -189,6 +189,7 @@ class EditProject extends Component {
 									<DisplayCSV
 										project={project}
 										id={projectID}
+										selectedVariables={this.props.project.variables}
 									/>
 									<NanHandler
 										count={this.props.project.info.NaN}
@@ -197,10 +198,12 @@ class EditProject extends Component {
 									<ModelOutput
 										project={project}
 										id={projectID}
+										selectedOutput={this.props.project.targetParam}
 									/>
 									<ModelSelect
 										project={project}
 										id={projectID}
+										selectedModels={this.props.project.models}
 									/>
 									<ProjectStatus />
 								</div>
