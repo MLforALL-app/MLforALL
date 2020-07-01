@@ -18,6 +18,7 @@ const ProjectDetails = (props) => {
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
 	if (!auth.emailVerified) return <Redirect to={`/verify`} />;
+	console.log("project", project);
 	if (project) {
 		return (
 			<div className="project-details">
@@ -26,12 +27,7 @@ const ProjectDetails = (props) => {
 				</div>
 				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
 				<div className="row container">
-					<CSVCard
-						pid={pid}
-						auth={auth}
-						project={project}
-						history={history}
-					/>
+					<CSVCard pid={pid} auth={auth} project={project} history={history} />
 				</div>
 			</div>
 		);
@@ -39,8 +35,7 @@ const ProjectDetails = (props) => {
 		return (
 			<div className="container center">
 				<Link to="/dashboard">
-					There was an error loading this project... click here to go
-					back
+					There was an error loading this project... click here to go back
 				</Link>
 				{/*<Redirect to="/dashboard" />*/}
 			</div>

@@ -66,7 +66,7 @@ class Model:
         if self.scaler is not None:
             X = self.scaler.transform(X)
         guess = self.model.predict(X)
-        return np.mean(guess == y.reshape(-1))
+        return round(np.mean(guess == y.reshape(-1)), 4)
 
     def pickle(self):
         return pickle.dumps(self)

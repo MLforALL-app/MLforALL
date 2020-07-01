@@ -5,6 +5,17 @@ import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
 import axios from "axios";
 
+const updateState = (project) => {
+	return {
+		model: Object.keys(project.models)[0],
+		inputs: initInputs(project.variables),
+		output: "",
+		loading: false,
+		resInputs: {},
+		resModel: ""
+	};
+};
+
 // Helper function so model names get printed nicer
 const nameMapper = (name) => {
 	switch (name) {
@@ -64,15 +75,7 @@ const initInputs = (variables) => {
  * 			result display */
 class GenerateSliders extends Component {
 	// Set initial model to be the first one
-	state = {
-		model: Object.keys(this.props.project.models)[0],
-		inputs: initInputs(this.props.project.variables),
-		output: "",
-		loading: false,
-		resInputs: {},
-		resModel: ""
-	};
-
+	state = updateState(this.props.project);
 	// event handler for when model dropdown menu changes
 	handleDropChange = (event) => {
 		this.setState({ model: event.target.value });
@@ -109,7 +112,14 @@ class GenerateSliders extends Component {
 				resModel: prevState.model
 			};
 		});
-		if (this.state.model !== "") {
+		if (this.state.model === "") {
+			this.setState({ output: "chooseModel" });
+		} else if (
+			Object.keys(this.state.inputs).length !==
+			this.props.project.variables.length
+		) {
+			this.setState({ output: "chooseInput" });
+		} else {
 			// create path for API Post Request
 			const path = {
 				uid: this.props.project.authorID,
@@ -130,9 +140,6 @@ class GenerateSliders extends Component {
 					// If things don't work, server error and stop loading
 					this.setState({ output: "Server Error", loading: false });
 				});
-		} else {
-			// user has not picked a model yet
-			this.setState({ output: "Choose a model" });
 		}
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
@@ -150,9 +157,16 @@ class GenerateSliders extends Component {
 			return <p> NO SLIDERS YET </p>;
 		}
 	}
+	componentDidUpdate(prev) {
+		if (prev && prev !== this.props) {
+			updateState(this.props.project);
+			console.log("updated state due to different props");
+		}
+	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
+		console.log("RENDER STATE", this.state);
 		return (
 			<div className="predict">
 				<div className="row slider-row">
@@ -165,7 +179,7 @@ class GenerateSliders extends Component {
 								{project &&
 									project.models &&
 									project.models[model] &&
-									project.models[model].accuracy.toFixed(4) * 100 + "%"}
+									project.models[model].accuracy * 100 + "%"}
 								<HelpBox placement="right" desc={getDesc(model)} />
 							</h5>
 						</div>
