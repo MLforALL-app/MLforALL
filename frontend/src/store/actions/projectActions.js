@@ -92,11 +92,24 @@ export const bigPapa = (url, dispatch) => {
 		header: true,
 		complete: (results) => {
 			const data = results.data;
+			console.log("parsed cloud csv data ");
 			dispatch({ type: "CSV_DATA_IN_STORE", data });
 		}
 	});
 };
-
+export const parseExisting = (file, dispatch) => {
+	console.log(file);
+	console.log(typeof(file));
+	Papa.parse(file, {
+		worker: true,
+		header: true,
+		complete: (results) => {
+			const data = results.data;
+			console.log("parsed existing csv data ");
+			dispatch({ type: "CSV_DATA_IN_STORE", data });
+		}
+	});
+};
 /* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
 export const initCSV = (project, projID) => {
 	return (dispatch, getState, { getFirebase }) => {
@@ -115,9 +128,18 @@ export const initCSV = (project, projID) => {
 			});
 	};
 };
-
+//in cases wehre we just uploaded the csv, use that instead of fetching
+export const setUpPreloadedCsv = () => {
+	return (dispatch, getState, { getFirebase }) => {
+		const csv = getState().project.csvHolding;
+		console.log("grabbing uploaded csv ");
+		console.log(csv);
+		parseExisting(csv, dispatch);
+	};
+};
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
+		dispatch({type : "QUICK_CSV", csv});
 		const firebase = getFirebase();
 		const uid = getState().firebase.auth.uid;
 		const csvPath = uid + "/" + pid + "/" + csv.name;
@@ -125,7 +147,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 		csvRef
 			.put(csv)
 			.then((snapshot) => {
-				dispatch({ type: "UPLOAD_CSV" });
+				dispatch({ type: "UPLOAD_CSV"});
 				const path = {
 					uid: uid,
 					projId: pid,

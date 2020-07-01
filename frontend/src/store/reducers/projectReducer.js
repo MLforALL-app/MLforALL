@@ -5,6 +5,7 @@ const initState = {
 	currentWorkingProject: "initialized",
 	csvUrl: "",
 	built: false,
+	csvHolding: {},
 };
 
 const initObj = (objList) => {
@@ -68,8 +69,13 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
+		case "QUICK_CSV":
+			console.log(action.csv);
+			return { ...state, 
+					csvHolding : action.csv };
 		case "UPLOAD_CSV":
-			return { ...state, csvLoaded: true };
+			return {...state,
+				csvLoaded : true}
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
@@ -127,6 +133,7 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "CSV_DATA_IN_STORE":
+			console.log("PUTTING CSVDATA IN STORE!!!!");
 			return {
 				...state,
 				csvData: action.data,
