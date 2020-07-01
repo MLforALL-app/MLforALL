@@ -24,12 +24,6 @@ export default function PredictSlider(
 	const q1 = varObj.q1;
 	const q2 = varObj.q2;
 	const q3 = varObj.q3;
-	/*
-	const hi = clean(varObj.hi);
-	const lo = clean(varObj.lo);
-	const q1 = clean(varObj.q1);
-	const q2 = clean(varObj.q2);
-	const q3 = clean(varObj.q3); */
 
 	// List of points we want to mark
 	const marks = [
@@ -43,6 +37,7 @@ export default function PredictSlider(
 		const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
 		stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	}
+	// const defaultValue = typeof value === "number" ? value : 21;
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
@@ -51,7 +46,7 @@ export default function PredictSlider(
 			<Grid container spacing={1} alignItems="center">
 				<Grid item xs>
 					<Slider
-						value={typeof value === "number" ? value : 0}
+						value={value ? value : 0}
 						onChange={handleSliderChange}
 						aria-labelledby="input-slider"
 						marks={marks}
