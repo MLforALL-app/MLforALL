@@ -37,7 +37,7 @@ export default function PredictSlider(
 		const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
 		stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	}
-	// const defaultValue = typeof value === "number" ? value : 21;
+	const currentValue = value || typeof value === "number" ? value : 0;
 	return (
 		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
@@ -46,7 +46,7 @@ export default function PredictSlider(
 			<Grid container spacing={1} alignItems="center">
 				<Grid item xs>
 					<Slider
-						value={value ? value : 0}
+						value={currentValue}
 						onChange={handleSliderChange}
 						aria-labelledby="input-slider"
 						marks={marks}
@@ -57,7 +57,7 @@ export default function PredictSlider(
 				</Grid>
 				<Grid item key={"input_" + param}>
 					<Input
-						value={value}
+						value={currentValue}
 						margin="dense"
 						onChange={handleInputChange}
 						inputProps={{
