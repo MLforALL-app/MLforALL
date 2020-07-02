@@ -63,7 +63,7 @@ const MakeDrawer = ({ sections }) => {
 								<Link
 									to={obj.to}
 									smooth="true"
-									duration="500"
+									duration={500}
 									offset={-80}>
 									<ListItem button key={obj.text}>
 										<ListItemText primary={obj.text} />
@@ -79,9 +79,6 @@ const MakeDrawer = ({ sections }) => {
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
-				<h1 className="purple-text">
-					This page is still under construction
-				</h1>
 				{sections.map((subsection) => {
 					return subsection.map((obj) => {
 						return (
@@ -89,10 +86,7 @@ const MakeDrawer = ({ sections }) => {
 								<Typography variant="h2">
 									{obj.title}
 								</Typography>
-								<Typography paragraph>{obj.content}</Typography>
-								<Typography paragraph>{obj.preimg}</Typography>
-								<img src={obj.imgurl} alt={obj.preimg} />
-								<Typography paragraph>{obj.postimg}</Typography>
+								{obj.content}
 							</Element>
 						);
 					});
