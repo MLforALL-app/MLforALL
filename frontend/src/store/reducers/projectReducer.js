@@ -1,21 +1,64 @@
 const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
+	cWPFull: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
+	csvHolding: {},
 	modelBuilt: false,
 	dataBuilt: false
+
 };
 
-const initObj = (objList) => {
-	var objState = {};
-	objList.forEach((item) => {
-		objState[item] = false;
-	});
-	return objState;
+
+const atLeastOneTrue = (boolObj) => {
+	
+	console.log(Object.keys(boolObj));
+	for (var key in boolObj) {
+		//if (!boolObj.hasOwnProperty(key)) continue;
+		console.log(key);
+		if (boolObj[key] === true) {
+			console.log("IS TRUE", boolObj);
+			return true;
+		}
+	}
+	console.log("FALSE", boolObj);
+	return false;
+};
+
+const checkFull = (currentWorkingProject) => {
+	console.log("CHECKING FULL!!");
+	if (currentWorkingProject === "initialized") {
+		return false;
+	} else {
+		//check output
+		if (currentWorkingProject.targetParameter === "") {
+			console.log("block1");
+			return false;
+		}
+
+		//check that there is at least one model
+		if (!atLeastOneTrue(currentWorkingProject.modelList)) {
+			console.log("block2");
+			return false;
+		}
+		//check that there is at least one input
+		if (!atLeastOneTrue(currentWorkingProject.inputs)) {
+			console.log(currentWorkingProject.inputs);
+			console.log("block3");
+			return false;
+		}
+		console.log(
+			"SUCCSESS",
+			currentWorkingProject.inputs,
+			currentWorkingProject.modelList
+		);
+		return true;
+	}
 };
 
 const projectReducer = (state = initState, action) => {
+	let cwp = {};
 	switch (action.type) {
 		case "CREATE_PROJECT":
 			return {
@@ -32,6 +75,9 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
+		case "QUICK_CSV":
+			console.log(action.csv);
+			return { ...state, csvHolding: action.csv };
 		case "UPLOAD_CSV":
 			return state;
 		case "UPLOAD_CSV_ERROR":
@@ -52,6 +98,7 @@ const projectReducer = (state = initState, action) => {
 		case "SET_CURRENT_WORKING_PROJECT":
 			return {
 				...state,
+				cWPFull: false,
 				modelBuilt: false,
 				currentWorkingProject: {
 					uid: action.uid,
@@ -65,7 +112,8 @@ const projectReducer = (state = initState, action) => {
 						knn: false,
 						clf: false,
 						gnb: false,
-						svm: false
+						svm: false,
+						lda: false
 					},
 					inputs: {},
 					content: ""
@@ -80,39 +128,44 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_ML":
+			cwp = {
+				...state.currentWorkingProject,
+				modelList: action.data
+			};
+			console.log(cwp);
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					modelList: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CSV_DATA_IN_STORE":
+			console.log("PUTTING CSVDATA IN STORE!!!!");
 			return {
 				...state,
-				csvData: action.data,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: initObj(Object.keys(action.data[0]))
-				}
+				csvData: action.data
 			};
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
+			cwp = {
+				...state.currentWorkingProject,
+				targetParameter: action.data
+			};
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					targetParameter: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
+			console.log("UPDATING INPUTS", action.data);
+			cwp = {
+				...state.currentWorkingProject,
+				inputs: action.data
+			};
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CREATE_MODEL_SUCC":
 			console.log("Setting modelBuilt to true");
@@ -131,6 +184,13 @@ const projectReducer = (state = initState, action) => {
 			};
 		case "CLEAR_STORE":
 			return initState;
+		case "UPDATE_CHECK":
+			cwp = state.currentWorkingProject;
+			return {
+				...state,
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
+			};
 		default:
 			return state;
 	}

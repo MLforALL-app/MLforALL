@@ -54,7 +54,7 @@ class DisplayCSV extends Component {
 		redirect: false,
 		loading: false,
 		error: false,
-		inputs: {}
+		inputs: this.initObj(Object.keys(this.props.csvData[0]))
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
@@ -81,6 +81,7 @@ class DisplayCSV extends Component {
 		return menuitems;
 	};
 	checkBoxChange = (colName) => (e) => {
+		console.log("changing a checkbox");
 		this.setState((prevState) => {
 			var newInputs = prevState.inputs;
 			newInputs[colName] = !newInputs[colName];
@@ -107,6 +108,7 @@ class DisplayCSV extends Component {
 							value="bottom"
 							control={<Checkbox color="primary" />}
 							label=""
+							checked = {this.state.inputs[colName] ? true : false}
 							labelPlacement="bottom"
 							onChange={this.checkBoxChange(colName)}
 						/>
@@ -142,6 +144,7 @@ class DisplayCSV extends Component {
 	};
 
 	componentDidUpdate = () => {
+		console.log("EDIT CSV PROPS", this.state);
 		if (this.state.loading === true && this.props.inputs) {
 			this.setState((prevState, prevProps) => {
 				return {
@@ -153,6 +156,14 @@ class DisplayCSV extends Component {
 		}
 	};
 
+	componentDidMount = () => {
+		console.log("EDIT CSV PROPS", this.props.selectedVariables);
+		let thingsToSelect = this.props.selectedVariables;
+	    thingsToSelect.forEach((item) => {
+			console.log("THIS IS AN ITEM", item);
+			this.checkBoxChange(item.name)(null);
+		});
+	};
 	render() {
 		return (
 			<div className="displaycsv">

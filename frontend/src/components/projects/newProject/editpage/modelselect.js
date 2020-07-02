@@ -7,9 +7,16 @@ import { updateCurrentWorkingProject } from "../../../../store/actions/projectAc
 
 class ModelSelect extends Component {
 	initObj = (objList) => {
+		console.log(this.props.selectedModels);
 		var objState = {};
 		objList.forEach((item) => {
-			objState[item] = false;
+			let models = Object.keys(this.props.selectedModels);
+			if(models.includes(item)){
+				objState[item] = true;
+			}else{
+				objState[item] = false;
+			}
+			
 		});
 		return objState;
 	};
@@ -24,6 +31,9 @@ class ModelSelect extends Component {
 			return { models: newModels };
 		});
 		this.props.updateModels(this.state.models);
+	};
+	componentDidMount = () => {
+		this.props.updateModels(this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]));
 	};
 
 	render() {
