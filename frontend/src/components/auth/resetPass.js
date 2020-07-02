@@ -5,75 +5,69 @@ import { Redirect } from "react-router-dom";
 import authImg from "../../pictures/backgrounds/auth.svg";
 
 class ResetPass extends Component {
-	// State to keep track of what user types
-	state = {
-		email: ""
-	};
+  // State to keep track of what user types
+  state = {
+    email: "",
+  };
 
-	// eventHandler to update our state the way text has
-	handleChange = (e) => {
-		this.setState({
-			[e.target.id]: e.target.value
-		});
-	};
+  // eventHandler to update our state the way text has
+  handleChange = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
+  };
 
-	// Call REDUX action signIn to sign user in given state
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.props.resetPass(this.state.email);
-	};
+  // Call REDUX action signIn to sign user in given state
+  handleSubmit = (e) => {
+    e.preventDefault();
+    this.props.resetPass(this.state.email);
+  };
 
-	render() {
-		// from props, retrieve authError and auth objects
-		const { msg, auth } = this.props;
-		const message = (msg) => {
-			if (msg === "noo") {
-				return <p className="red-text">Email could not be sent</p>;
-			} else if (msg === "yay") {
-				return <p className="green-text">Email Sent!</p>;
-			} else {
-				return <p>{msg}</p>;
-			}
-		};
-		// route protection, shouldn't be able to sign in again
-		if (auth.uid) return <Redirect to="/dashboard" />;
-		return (
-			<div className="forgot">
-				<div className="container">
-					<h1 className="purple-text">Forgot Your Password?</h1>
-					<form onSubmit={this.handleSubmit}>
-						<div className="input-field">
-							<label htmlFor="email">Email</label>
-							<input
-								type="email"
-								id="email"
-								onChange={this.handleChange}
-							/>
-						</div>
-						<div className="input-field">
-							<button className="btn z-depth-0 anchor">
-								Reset
-							</button>
-						</div>
-						{message(msg)}
-					</form>
-				</div>
-				<img src={authImg} alt=""></img>
-			</div>
-		);
-	}
+  render() {
+    // from props, retrieve authError and auth objects
+    const { msg, auth } = this.props;
+    const message = (msg) => {
+      if (msg === "noo") {
+        return <p className="red-text">Email could not be sent</p>;
+      } else if (msg === "yay") {
+        return <p className="green-text">Email Sent!</p>;
+      } else {
+        return <p>{msg}</p>;
+      }
+    };
+    // route protection, shouldn't be able to sign in again
+    if (auth.uid) return <Redirect to="/dashboard" />;
+    return (
+      <div className="forgot">
+        <div className="container">
+          <h1 className="purple-text">Forgot Your Password?</h1>
+          <form onSubmit={this.handleSubmit}>
+            <div className="input-field">
+              <label htmlFor="email">Email</label>
+              <input type="email" id="email" onChange={this.handleChange} />
+            </div>
+            <div className="input-field">
+              <button className="btn z-depth-0 anchor">Reset</button>
+            </div>
+            {message(msg)}
+          </form>
+        </div>
+        <img className="auth-image" src={authImg} alt=""></img>
+      </div>
+    );
+  }
 }
 
 // Redux to associate state of this component with the props its passed in
 const mapStateToProps = (state) => {
-	return { msg: state.auth.sent.reset, auth: state.firebase.auth };
+  return { msg: state.auth.sent.reset, auth: state.firebase.auth };
 };
 
 // Redux to associate action call to a dispatch
 const mapDispatchToProps = (dispatch) => {
-	return {
-		resetPass: (email) => dispatch(resetPass(email))
-	};
+  return {
+    resetPass: (email) => dispatch(resetPass(email)),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ResetPass);
