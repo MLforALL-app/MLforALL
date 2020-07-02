@@ -4,7 +4,7 @@ const initState = {
 	cWPFull: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
-	csvHolding: {}
+	csvHolding: {},
 	modelBuilt: false,
 	dataBuilt: false
 

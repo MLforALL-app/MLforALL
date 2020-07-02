@@ -148,6 +148,7 @@ class EditProject extends Component {
 
   handleSubmit = (e) => {
 	console.log("SUBMITTING", this.props.projectComplete);
+	const { project, auth, projectID } = this.props;
 	if(!this.props.projectComplete){
 		this.setState({
 			incompleteSub : "Please Fill Out the Entire Model"
@@ -266,7 +267,7 @@ const mapStateToProps = (state, props) => {
     currentWorkingProject: state.project.currentWorkingProject,
     csvData: state.project.csvData,
 	  modelBuilt: state.project.modelBuilt,
-		dataBuilt: state.project.dataBuilt
+		dataBuilt: state.project.dataBuilt,
 	projectComplete : state.project.cWPFull,
 	csvHolding : state.project.csvHolding
   };
