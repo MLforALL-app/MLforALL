@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-
+//issue number 60 add banner/background
 const ProjectSummary = ({ project }) => {
 	const shorten = (s) => {
 		return s.length < 15 ? s : s.substr(0, 13) + "..";
