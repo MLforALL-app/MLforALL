@@ -14,7 +14,8 @@ import {
   resetBuild,
   clearStore,
   setUpPreloadedCsv,
-  updateCurrentWorkingProject
+  updateCurrentWorkingProject,
+	deleteMLProject
 } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
@@ -22,43 +23,45 @@ import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
 
 const addSpace = (list) => {
-  return list.map((s) => " " + s);
+	return list.map((s) => " " + s);
 };
 
 const nameMapper = (name) => {
-  switch (name) {
-    case "":
-      return "Nothing Selected Yet";
-    case "log_reg":
-      return "Logistic Regression";
-    case "gnb":
-      return "Gauss Naive Bayes";
-    case "knn":
-      return "K-Nearest Neighbors";
-    case "svm":
-      return "Support Vector Machine";
-    case "clf":
-      return "Decision Tree Classifier";
-    case "lda":
-      return "Linear Discriminant Analysis";
-    default:
-      return "Error: Not valid model name";
-  }
+	switch (name) {
+		case "":
+			return "Nothing Selected Yet";
+		case "log_reg":
+			return "Logistic Regression";
+		case "gnb":
+			return "Gauss Naive Bayes";
+		case "knn":
+			return "K-Nearest Neighbors";
+		case "svm":
+			return "Support Vector Machine";
+		case "clf":
+			return "Decision Tree Classifier";
+		case "lda":
+			return "Linear Discriminant Analysis";
+		default:
+			return "Error: Not valid model name";
+	}
 };
 
 const filterObj = (objState) => {
-  return Object.entries(objState)
-    .filter(([key, val]) => val)
-    .map(([key, val]) => key);
+	return Object.entries(objState)
+		.filter(([key, val]) => val)
+		.map(([key, val]) => key);
 };
 
 class EditProject extends Component {
+
   state = {
     projectState: 0,
     waitForCSVUpload: false,
 	submitLoad: false,
 	incompleteSub: "",
   };
+
 	determineProjectState = () => {
 		if (!this.props.project) {
 			return 0;
@@ -106,7 +109,9 @@ class EditProject extends Component {
 					console.log("new csv!");
 					this.props.setUpPreloadedCsv();
 				}
-				
+				this.props.setWorkingProject(this.props.project, this.props.projectID);
+				this.props.initCSV(this.props.project, this.props.projectID);
+
 			}
 			this.setState({ projectState: project_process });
 		}
@@ -130,15 +135,16 @@ class EditProject extends Component {
 				addSpace(filterObj(this.props.currentWorkingProject.inputs)) +
 				" using the following models: " +
 				addSpace(
-					filterObj(
-						this.props.currentWorkingProject.modelList
-					).map((s) => nameMapper(s))
+					filterObj(this.props.currentWorkingProject.modelList).map((s) =>
+						nameMapper(s)
+					)
 				)
 			);
 		} else {
 			return content;
 		}
 	};
+
 
   handleSubmit = (e) => {
 	console.log("SUBMITTING", this.props.projectComplete);
@@ -151,6 +157,7 @@ class EditProject extends Component {
     this.setState({
       submitLoad: true,
     });
+    this.props.deleteMLProject(projectID, auth.uid, project, true);
     this.props.updateContent(
       this.getContent(this.props.project.content),
       this.props.projectID
@@ -159,7 +166,7 @@ class EditProject extends Component {
   };
 
 	render() {
-		const { project, auth, projectID } = this.props;
+		const { project, auth, projectID, modelBuilt, dataBuilt } = this.props;
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!project)
 			return (
@@ -167,9 +174,11 @@ class EditProject extends Component {
 					<CircularProgress />
 				</div>
 			);
-		if (auth.uid !== project.authorID)
+		if (auth.uid !== project.authorID) {
 			return <Redirect to={`/project/${projectID}`} />;
-		if (this.props.built === true) {
+		}
+		if (modelBuilt && dataBuilt) {
+			// console.log("model and data built", modelBuilt && dataBuilt);
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (
@@ -188,8 +197,7 @@ class EditProject extends Component {
 					!this.state.waitForCSVUpload ? (
 						<div>
 							{this.props.csvData &&
-							this.props.currentWorkingProject !==
-								"initialized" ? (
+							this.props.currentWorkingProject !== "initialized" ? (
 								<div>
 									<DisplayCSV
 										project={project}
@@ -247,6 +255,7 @@ class EditProject extends Component {
 }
 
 const mapStateToProps = (state, props) => {
+
   const pid = props.match.params.pid;
   return {
     projectID: pid,
@@ -256,7 +265,8 @@ const mapStateToProps = (state, props) => {
     csvLoaded: state.project.csvLoaded,
     currentWorkingProject: state.project.currentWorkingProject,
     csvData: state.project.csvData,
-	built: state.project.built,
+	  modelBuilt: state.project.modelBuilt,
+		dataBuilt: state.project.dataBuilt
 	projectComplete : state.project.cWPFull,
 	csvHolding : state.project.csvHolding
   };
@@ -272,13 +282,16 @@ const mapDispatchToProps = (dispatch) => {
     resetBuild: () => dispatch(resetBuild()),
 	clearStore: () => dispatch(clearStore()),
 	setUpPreloadedCsv: () => dispatch(setUpPreloadedCsv()),
+  deleteMLProject: (pid, uid, project, update) =>
+			dispatch(deleteMLProject(pid, uid, project, update)),
 	updateCheck: () => dispatch(updateCurrentWorkingProject("update_check", null))
   };
+
 };
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  firestoreConnect((props) => {
-    if (!props.auth) return [];
-    return [{ collection: "projects", doc: props.match.params.id }];
-  })
+	connect(mapStateToProps, mapDispatchToProps),
+	firestoreConnect((props) => {
+		if (!props.auth) return [];
+		return [{ collection: "projects", doc: props.match.params.id }];
+	})
 )(EditProject);

@@ -26,7 +26,7 @@ class DeleteProject extends Component {
 	handleDelete = (pid, auth, project, history) => {
 		return () => {
 			this.setState({ open: false });
-			this.props.deleteMLProject(pid, auth.uid, project);
+			this.props.deleteMLProject(pid, auth.uid, project, false);
 			history.push(`/myprofile`);
 		};
 	};
@@ -92,8 +92,8 @@ const mapStateToProps = (state) => {
 // We want to associate a dispatch call to the project action deleteMLProject
 const mapDispatchToProps = (dispatch) => {
 	return {
-		deleteMLProject: (id, auth, project) =>
-			dispatch(deleteMLProject(id, auth, project))
+		deleteMLProject: (id, auth, project, update) =>
+			dispatch(deleteMLProject(id, auth, project, update))
 	};
 };
 

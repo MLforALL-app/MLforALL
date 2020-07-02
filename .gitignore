@@ -1,6 +1,8 @@
 .DS_store
 .ipynb_checkpoints/
 *.sav
+
+# Configurations
 frontend/src/config/*
 
 # Begin CRA Generated .gitignore

@@ -4,8 +4,10 @@ const initState = {
 	cWPFull: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
-	built: false,
 	csvHolding: {}
+	modelBuilt: false,
+	dataBuilt: false
+
 };
 
 
@@ -77,11 +79,11 @@ const projectReducer = (state = initState, action) => {
 			console.log(action.csv);
 			return { ...state, csvHolding: action.csv };
 		case "UPLOAD_CSV":
-			return { ...state, csvLoaded: true };
+			return state;
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
-			return state;
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_METADATA_ERROR":
 			return state;
 		case "UPDATE_CSV_NAME":
@@ -89,14 +91,15 @@ const projectReducer = (state = initState, action) => {
 		case "UPDATE_CSV_NAME_ERROR":
 			return state;
 		case "UPDATE_CONTENT":
-			return state;
+			console.log("Setting databuilt to true");
+			return { ...state, dataBuilt: true };
 		case "UPDATE_CONTENT_ERROR":
 			return state;
 		case "SET_CURRENT_WORKING_PROJECT":
 			return {
 				...state,
-				built: false,
 				cWPFull: false,
+				modelBuilt: false,
 				currentWorkingProject: {
 					uid: action.uid,
 					projId: action.pid,
@@ -165,16 +168,18 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "CREATE_MODEL_SUCC":
+			console.log("Setting modelBuilt to true");
 			return {
 				...state,
-				built: true
+				modelBuilt: true
 			};
 		case "CREATE_MODEL_FAIL":
 			return state;
 		case "RESET_BUILD":
 			return {
 				...state,
-				built: false,
+				modelBuilt: false,
+				dataBuilt: false,
 				currentWorkingProject: "initialized"
 			};
 		case "CLEAR_STORE":

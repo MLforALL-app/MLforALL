@@ -10,6 +10,11 @@ import pickle
 from io import StringIO
 
 
+def firestore_init():
+    return firestore.client()
+    # initialize a client reference to firestore
+
+
 def bucket_init():
     # initialize reference to Google Cloud Storage bucket
     # avoid initializing app twice
@@ -19,11 +24,6 @@ def bucket_init():
             'storageBucket': 'mlforall-14bf7.appspot.com'
         })
     return storage.bucket()
-
-
-def firestore_init():
-    return firestore.client()
-    # initialize a client reference to firestore
 
 
 def make_path(uid, project_title, file_name):

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
@@ -14,24 +14,35 @@ import "../../../styling/projectdetails.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
+	console.log("ENTER PROJECT DETAILS");
 	const { pid, auth, project, history } = props;
+	const [count, setCount] = useState(0);
+	const refreshCount = () => {
+		console.log("refreshing count");
+		setCount((i) => i + 1);
+	};
+	console.log("count", count);
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
 	if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-	if (project) {
+	console.log(
+		"projectRecieved",
+		project && project.variables.map((o) => o.name)
+	);
+	if (project && count === 0) {
 		return (
 			<div className="project-details">
 				<div className="row container">
 					<DescCard project={project} pid={pid} />
 				</div>
-				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
+				<GenerateSliders
+					refreshCount={refreshCount}
+					project={project}
+					uid={auth.uid}
+					pid={pid}
+				/>
 				<div className="row container">
-					<CSVCard
-						pid={pid}
-						auth={auth}
-						project={project}
-						history={history}
-					/>
+					<CSVCard pid={pid} auth={auth} project={project} history={history} />
 				</div>
 			</div>
 		);
@@ -39,8 +50,7 @@ const ProjectDetails = (props) => {
 		return (
 			<div className="container center">
 				<Link to="/dashboard">
-					There was an error loading this project... click here to go
-					back
+					There was an error loading this project... click here to go back
 				</Link>
 				{/*<Redirect to="/dashboard" />*/}
 			</div>
