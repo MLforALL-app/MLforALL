@@ -1,11 +1,11 @@
 const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
-	cWPFull : false,
+	cWPFull: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
 	built: false,
-	csvHolding: {},
+	csvHolding: {}
 };
 
 const initObj = (objList) => {
@@ -16,47 +16,49 @@ const initObj = (objList) => {
 	return objState;
 };
 
-const atLeastOneTrue =  (boolObj) => {
-	console.log("checking one true" ,boolObj);
+const atLeastOneTrue = (boolObj) => {
+	console.log("checking one true", boolObj);
 	console.log(Object.keys(boolObj));
-	for(var key in boolObj){
+	for (var key in boolObj) {
 		//if (!boolObj.hasOwnProperty(key)) continue;
 		console.log(key);
-		if(boolObj[key] === true){
+		if (boolObj[key] === true) {
 			console.log("checking", key);
 			return true;
 		}
 	}
 	return false;
-}; 
+};
 
 const checkFull = (currentWorkingProject) => {
 	console.log("CHECKING FULL!!");
-	if (currentWorkingProject === "initialized"){
+	if (currentWorkingProject === "initialized") {
 		return false;
-	}else{
+	} else {
 		//check output
-		if(currentWorkingProject.targetParameter === ""){
+		if (currentWorkingProject.targetParameter === "") {
 			console.log("block1");
 			return false;
 		}
 
 		//check that there is at least one model
-		if(!atLeastOneTrue(currentWorkingProject.modelList)){
-			
+		if (!atLeastOneTrue(currentWorkingProject.modelList)) {
 			console.log("block2");
 			return false;
 		}
 		//check that there is at least one input
-		if(!atLeastOneTrue(currentWorkingProject.inputs)){
+		if (!atLeastOneTrue(currentWorkingProject.inputs)) {
 			console.log(currentWorkingProject.inputs);
 			console.log("block3");
 			return false;
 		}
-		console.log("SUCCSESS", currentWorkingProject.inputs, currentWorkingProject.modelList);
+		console.log(
+			"SUCCSESS",
+			currentWorkingProject.inputs,
+			currentWorkingProject.modelList
+		);
 		return true;
 	}
-	
 };
 
 const projectReducer = (state = initState, action) => {
@@ -79,11 +81,9 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "QUICK_CSV":
 			console.log(action.csv);
-			return { ...state, 
-					csvHolding : action.csv };
+			return { ...state, csvHolding: action.csv };
 		case "UPLOAD_CSV":
-			return {...state,
-				csvLoaded : true}
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
@@ -102,7 +102,7 @@ const projectReducer = (state = initState, action) => {
 			return {
 				...state,
 				built: false,
-				cWPFull : false,
+				cWPFull: false,
 				currentWorkingProject: {
 					uid: action.uid,
 					projId: action.pid,
@@ -131,7 +131,7 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_ML":
-			cwp =  {
+			cwp = {
 				...state.currentWorkingProject,
 				modelList: action.data
 			};
@@ -154,7 +154,7 @@ const projectReducer = (state = initState, action) => {
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
-			cwp =  {
+			cwp = {
 				...state.currentWorkingProject,
 				targetParameter: action.data
 			};
@@ -165,7 +165,7 @@ const projectReducer = (state = initState, action) => {
 			};
 		case "UPDATE_INPUTS":
 			console.log("UPDATING INPUTS", Object.keys(action.data));
-			cwp =  {
+			cwp = {
 				...state.currentWorkingProject,
 				inputs: action.data
 			};

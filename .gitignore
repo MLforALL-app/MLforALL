@@ -1,7 +1,7 @@
 .DS_store
 .ipynb_checkpoints/
 *.sav
-frontend/src/config/fbConfig.js
+frontend/src/config/*
 
 # Begin CRA Generated .gitignore
 
