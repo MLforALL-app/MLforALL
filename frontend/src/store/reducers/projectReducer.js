@@ -17,17 +17,21 @@ const initObj = (objList) => {
 };
 
 const atLeastOneTrue =  (boolObj) => {
-	let hasTrue = false;
-	for(const key in boolObj){
+	console.log("checking one true" ,boolObj);
+	console.log(Object.keys(boolObj));
+	for(var key in boolObj){
+		//if (!boolObj.hasOwnProperty(key)) continue;
+		console.log(key);
 		if(boolObj[key] === true){
-			hasTrue = true;
-			break;
+			console.log("checking", key);
+			return true;
 		}
 	}
-	return hasTrue;
+	return false;
 }; 
 
 const checkFull = (currentWorkingProject) => {
+	console.log("CHECKING FULL!!");
 	if (currentWorkingProject === "initialized"){
 		return false;
 	}else{
@@ -36,16 +40,20 @@ const checkFull = (currentWorkingProject) => {
 			console.log("block1");
 			return false;
 		}
-		//check that there is at least one input
-		if(!atLeastOneTrue(currentWorkingProject.inputs)){
+
+		//check that there is at least one model
+		if(!atLeastOneTrue(currentWorkingProject.modelList)){
+			
 			console.log("block2");
 			return false;
 		}
-		//check that there is at least one model
-		if(!atLeastOneTrue(currentWorkingProject.modelList)){
+		//check that there is at least one input
+		if(!atLeastOneTrue(currentWorkingProject.inputs)){
+			console.log(currentWorkingProject.inputs);
 			console.log("block3");
 			return false;
 		}
+		console.log("SUCCSESS", currentWorkingProject.inputs, currentWorkingProject.modelList);
 		return true;
 	}
 	
@@ -107,7 +115,8 @@ const projectReducer = (state = initState, action) => {
 						knn: false,
 						clf: false,
 						gnb: false,
-						svm: false
+						svm: false,
+						lda: false
 					},
 					inputs: {},
 					content: ""
@@ -155,6 +164,7 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
+			console.log("UPDATING INPUTS", Object.keys(action.data));
 			cwp =  {
 				...state.currentWorkingProject,
 				inputs: action.data

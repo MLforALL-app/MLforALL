@@ -137,6 +137,7 @@ class EditProject extends Component {
 	};
 
   handleSubmit = (e) => {
+	console.log("SUBMITTING", this.props.projectComplete);
 	if(!this.props.projectComplete){
 		this.setState({
 			incompleteSub : "Please Fill Out the Entire Model"

@@ -10,8 +10,8 @@ class ModelSelect extends Component {
 		console.log(this.props.selectedModels);
 		var objState = {};
 		objList.forEach((item) => {
-			console.log(this.props.selectedModels.includes(item));
-			if(this.props.selectedModels.includes(item)){
+			let models = Object.keys(this.props.selectedModels);
+			if(models.includes(item)){
 				objState[item] = true;
 			}else{
 				objState[item] = false;
@@ -35,7 +35,7 @@ class ModelSelect extends Component {
 	componentDidMount = () => {
 		this.props.updateModels(this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]));
 	};
-	
+
 	render() {
 		return (
 			<div className="row container">
