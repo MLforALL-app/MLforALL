@@ -40,9 +40,8 @@ const Dropdown = (project, currentModel, handleChange, nameMapper) => {
 				<Select
 					value={currentModel}
 					onChange={handleChange}
-					displayEmpty
-				>
-					{getMenuItems(project.models, nameMapper)}
+					displayEmpty>
+					{getMenuItems(Object.keys(project.models), nameMapper)}
 				</Select>
 			</FormControl>
 		</span>

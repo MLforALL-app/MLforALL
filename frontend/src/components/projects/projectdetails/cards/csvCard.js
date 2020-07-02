@@ -26,9 +26,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
 		.then((url) => {
 			setcsvUrl(url);
 		})
-		.catch((err) => {
-			console.log("Download Error", err);
-		});
+		.catch((err) => {});
 
 	return (
 		<div className="col s12" style={{ textAlign: "right" }}>
@@ -39,9 +37,8 @@ const CSVCard = ({ pid, auth, project, history }) => {
 				<div className="col s0 m5"></div>
 				<div className="col s12 m7">
 					<p>
-						Curious to learn more? Use the link below to download
-						the CSV. Feeling rough around the edges? Edit or delete
-						your project!
+						Curious to learn more? Use the link below to download the CSV.
+						Feeling rough around the edges? Edit or delete your project!
 					</p>
 				</div>
 			</div>
