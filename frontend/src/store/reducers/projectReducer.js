@@ -8,25 +8,19 @@ const initState = {
 	csvHolding: {}
 };
 
-const initObj = (objList) => {
-	var objState = {};
-	objList.forEach((item) => {
-		objState[item] = false;
-	});
-	return objState;
-};
 
 const atLeastOneTrue = (boolObj) => {
-	console.log("checking one true", boolObj);
+	
 	console.log(Object.keys(boolObj));
 	for (var key in boolObj) {
 		//if (!boolObj.hasOwnProperty(key)) continue;
 		console.log(key);
 		if (boolObj[key] === true) {
-			console.log("checking", key);
+			console.log("IS TRUE", boolObj);
 			return true;
 		}
 	}
+	console.log("FALSE", boolObj);
 	return false;
 };
 
@@ -145,11 +139,7 @@ const projectReducer = (state = initState, action) => {
 			console.log("PUTTING CSVDATA IN STORE!!!!");
 			return {
 				...state,
-				csvData: action.data,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: initObj(Object.keys(action.data[0]))
-				}
+				csvData: action.data
 			};
 		case "CSV_FETCH_ERROR":
 			return state;
@@ -164,7 +154,7 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
-			console.log("UPDATING INPUTS", Object.keys(action.data));
+			console.log("UPDATING INPUTS", action.data);
 			cwp = {
 				...state.currentWorkingProject,
 				inputs: action.data
@@ -189,6 +179,13 @@ const projectReducer = (state = initState, action) => {
 			};
 		case "CLEAR_STORE":
 			return initState;
+		case "UPDATE_CHECK":
+			cwp = state.currentWorkingProject;
+			return {
+				...state,
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
+			};
 		default:
 			return state;
 	}

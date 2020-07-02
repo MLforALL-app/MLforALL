@@ -79,6 +79,9 @@ export const updateCurrentWorkingProject = (param, data) => {
 			case "inputs":
 				dispatch({ type: "UPDATE_INPUTS", param, data });
 				break;
+			case "update_check":
+				dispatch({type: "UPDATE_CHECK"});
+				break;
 			default:
 				dispatch({ type: "MALFORMED_CWP_REQ" });
 		}

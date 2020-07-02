@@ -13,7 +13,8 @@ import {
   updateContent,
   resetBuild,
   clearStore,
-  setUpPreloadedCsv
+  setUpPreloadedCsv,
+  updateCurrentWorkingProject
 } from "../../../store/actions/projectActions";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
@@ -73,12 +74,12 @@ class EditProject extends Component {
 		}
 	};
 
-	componentDidUpdate = () => {
+	componentDidUpdate = (prevProps) => {
 		let project_process = this.determineProjectState();
 		//handling project process change
 		console.log("prevState", this.state.projectState);
 		console.log("newState", project_process);
-		console.log(this.props);
+		console.log(this.props.currentWorkingProject);
 		if (this.state.projectState !== project_process) {
 			//handle setting up project
 			if (this.state.projectState === 0) {
@@ -111,6 +112,9 @@ class EditProject extends Component {
 		}
 		if (this.state.waitForCSVUpload && this.props.csvLoaded) {
 			this.setState({ waitForCSVUpload: false });
+		}
+		if(prevProps && prevProps.currentWorkingProject !== this.props.currentWorkingProject){
+			this.props.updateCheck();
 		}
 	};
 	componentWillUnmount = () => {
@@ -267,7 +271,8 @@ const mapDispatchToProps = (dispatch) => {
     updateContent: (content, pid) => dispatch(updateContent(content, pid)),
     resetBuild: () => dispatch(resetBuild()),
 	clearStore: () => dispatch(clearStore()),
-	setUpPreloadedCsv: () => dispatch(setUpPreloadedCsv())
+	setUpPreloadedCsv: () => dispatch(setUpPreloadedCsv()),
+	updateCheck: () => dispatch(updateCurrentWorkingProject("update_check", null))
   };
 };
 export default compose(

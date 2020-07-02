@@ -54,7 +54,7 @@ class DisplayCSV extends Component {
 		redirect: false,
 		loading: false,
 		error: false,
-		inputs: {}
+		inputs: this.initObj(Object.keys(this.props.csvData[0]))
 	};
 	// Handlers for things on the page
 	handleHeaderClick = ({ columnData, dataKey, event }) => {
