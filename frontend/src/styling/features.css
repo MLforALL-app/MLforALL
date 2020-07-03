@@ -1,0 +1,6 @@
+.lp-img {
+	height: 100%;
+}
+.lp-header {
+	height: calc(25rem + 20vh);
+}

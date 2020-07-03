@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // Import images like this
-import whoImg from "../../pictures/backgrounds/who.svg";
+import img1 from "../../pictures/landing/LP1.svg";
+import img2 from "../../pictures/landing/LP2.svg";
 // Import css files like this
 import "../../styling/landing.css";
+import "../../styling/features.css";
 import SignUp from "../auth/Signup";
-import { Element } from "react-scroll";
+import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
 
 const landSign = () => {
@@ -21,19 +23,43 @@ const landSign = () => {
 	);
 };
 
-const example = () => {
-	// I can do normal javascript stuff in this function
-	var x = 1 + 2 + 3;
-	// I can print things to debug. View this by doing inspect element
-	console.log("This is x", x);
-	// And then the result of this, besides being normal js, can also be HTML! (or JSX)
+const Header = () => {
 	return (
-		<div className="container">
-			<img src={whoImg} alt=""></img>
-			And in here I can do normal HTML things like <b>THIS</b>. Ideally, you
-			canwrite various sections of the pages as different functions to keep
-			things organized, and then you can call as necessary in the main class.
+		<div className="row center">
+			<div className="col s0 m4 lp-header">
+				<img className="lp-img" src={img1} alt="" />
+			</div>
+			<div className="col s12 m4 container lp-header land">
+				<div>
+					<h1 className="purple-text">MLforALL</h1>
+					<p>
+						Create, share, explore, and play with Machine Learning Models
+						created by others.
+					</p>
+				</div>
+				<div style={{ paddingTop: "2rem" }}>
+					<span>
+						<button className="btn btn-outline anchor-160 waves-effect waves-light z-depth-0">
+							Sign Up
+						</button>
+						<button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
+							Create
+						</button>
+					</span>
+				</div>
+			</div>
+			<div className="col s0 m4 lp-header">
+				<img className="lp-img" src={img2} alt="" />
+			</div>
 		</div>
+	);
+};
+
+const LearnMore = () => {
+	return (
+		<Link to="signup">
+			<hr />
+		</Link>
 	);
 };
 
@@ -43,13 +69,9 @@ class Landing extends Component {
 		if (!auth.uid) {
 			return (
 				<div className="white-background-landing">
-					{example()}
-					<h1 className="pink-text">
-						{" "}
-						Note that to do javascript, you need curly braces{" "}
-					</h1>
-					{example()}
-					{landSign()}
+					<Header />
+					<LearnMore />
+					<Header />
 				</div>
 			);
 		} else {
