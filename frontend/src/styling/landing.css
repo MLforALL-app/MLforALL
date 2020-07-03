@@ -12,9 +12,16 @@
 .authImg {
 	width: 100%;
 }
-.land {
+.land-col {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+.land-row {
+	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	align-items: center;
 	flex-wrap: wrap;
@@ -32,9 +39,9 @@
 	padding-top: calc(1rem + 3vw + 5px);
 }
 .headshot-img {
-	height: 200px;
-	width: 200px;
-	border-radius: 100px;
+	height: calc(8rem + 9vh + 1vw);
+	width: calc(8rem + 9vh + 1vw);
+	border-radius: 100%;
 }
 .headshot-img-wrapper {
 	padding: 5px;
@@ -65,8 +72,10 @@
 	.goals {
 		padding-bottom: calc(30vh + 50vw);
 	}
-	#learn-more-landing,
 	.anchor-link {
 		display: none;
+	}
+	.brand-logo {
+		left: 19% !important;
 	}
 }

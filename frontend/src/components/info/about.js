@@ -4,6 +4,8 @@ import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
+import meghaImg from "../../pictures/headshots/megha.jpg";
+import rongImg from "../../pictures/headshots/rong.jpg";
 import "../../styling/landing.css";
 import SignUp from "../auth/Signup";
 import { Element } from "react-scroll";
@@ -14,7 +16,7 @@ const landSign = () => {
 		<div className="row center">
 			<Element name="signup" className="element">
 				<h2 className="purple-text"> Sign Up Here </h2>
-				<div className="container land">
+				<div className="container land-row">
 					<SignUp />
 				</div>
 			</Element>
@@ -22,9 +24,48 @@ const landSign = () => {
 	);
 };
 
+const team = [
+	{
+		name: "Davis Wojnovich",
+		title: "Data Science Lead",
+		link: "https://www.linkedin.com/in/davis-wojnovich-560740165/",
+		img: davImg
+	},
+	{
+		name: "Joseph Kim",
+		title: "UI Design Lead",
+		link: "https://www.linkedin.com/in/josephkimdesign/",
+		img: joeImg
+	},
+	{
+		name: "Len Huang",
+		title: "Agile / Tech Lead",
+		link: "https://www.linkedin.com/in/len-huang/",
+		img: lenImg
+	},
+	{
+		name: "Max Hirsch",
+		title: "Machine Learning Lead",
+		link: "https://www.linkedin.com/in/max-hirsch/",
+		img: maxImg
+	},
+	{
+		name: "Megha Jain",
+		title: "Software Engineer",
+		link: "https://mlforall.xyz",
+		img: meghaImg
+	},
+	{
+		name: "Rong Feng Ye",
+		title: "Software Engineer",
+		link: "https://www.linkedin.com/in/rong-ye/",
+		img: rongImg
+	}
+];
+
 const makePicture = (name, title, link, picture) => {
 	return (
-		<div className="col s6 m3 center container">
+		<div key={name} style={{ padding: "1.8rem" }} className="center">
 			<a target="_blank" rel="noreferrer noopener" href={link}>
 				<img className="headshot-img" src={picture} alt="Dav" />
 			</a>
@@ -36,32 +77,10 @@ const makePicture = (name, title, link, picture) => {
 
 const headshot = () => {
 	return (
-		<div className="land land-headshot">
-			<div className="row">
-				{makePicture(
-					"Davis Wojnovich",
-					"Lead Data Science",
-					"https://www.linkedin.com/in/davis-wojnovich-560740165/",
-					davImg
-				)}
-				{makePicture(
-					"Joseph Kim",
-					"UI/UX Design",
-					"https://www.linkedin.com/in/josephkimdesign/",
-					joeImg
-				)}
-				{makePicture(
-					"Len Huang",
-					"Product / Tech Lead",
-					"https://www.linkedin.com/in/len-huang-622403178",
-					lenImg
-				)}
-				{makePicture(
-					"Max Hirsch",
-					"Head of ML Content",
-					"https://www.linkedin.com/in/max-hirsch/",
-					maxImg
-				)}
+		<div className="center container">
+			<h2 className="purple-text">Meet Our Team</h2>
+			<div className="land-row">
+				{team.map((p) => makePicture(p.name, p.title, p.link, p.img))}
 			</div>
 		</div>
 	);

@@ -33,46 +33,27 @@ class SignUp extends Component {
 				<form onSubmit={this.handleSubmit} className="white z-depth-1">
 					<div className="input-field">
 						<label htmlFor="firstName">First Name</label>
-						<input
-							type="text"
-							id="firstName"
-							onChange={this.handleChange}
-						/>
+						<input type="text" id="firstName" onChange={this.handleChange} />
 					</div>
 					<div className="input-field">
 						<label htmlFor="lastName">Last Name</label>
-						<input
-							type="text"
-							id="lastName"
-							onChange={this.handleChange}
-						/>
+						<input type="text" id="lastName" onChange={this.handleChange} />
 					</div>
 					<div className="input-field">
 						<label htmlFor="email">Email</label>
-						<input
-							type="email"
-							id="email"
-							onChange={this.handleChange}
-						/>
+						<input type="email" id="email" onChange={this.handleChange} />
 					</div>
 					<div className="input-field">
 						<label htmlFor="password">Password</label>
-						<input
-							type="password"
-							id="password"
-							onChange={this.handleChange}
-						/>
+						<input type="password" id="password" onChange={this.handleChange} />
 					</div>
-					<div className="center land">
+					<div className="center land-col">
 						<button className="btn waves-effect waves-light anchor z-depth-0">
 							<span>SIGN UP</span>
 						</button>
 						<div className="container">
 							<br />
-							<Link to="/signin">
-								{" "}
-								Already a user? Sign in here.
-							</Link>
+							<Link to="/signin"> Already a user? Sign in here.</Link>
 						</div>
 						<div className="red-text center">
 							{authError ? <p>{authError}</p> : null}
