@@ -24,18 +24,6 @@ const landSign = () => {
 	);
 };
 
-const makePicture = (name, title, link, picture) => {
-	return (
-		<div key={name} style={{ padding: "1.8rem" }} className="center">
-			<a target="_blank" rel="noreferrer noopener" href={link}>
-				<img className="headshot-img" src={picture} alt="Dav" />
-			</a>
-			<h5>{name}</h5>
-			<h6>{title}</h6>
-		</div>
-	);
-};
-
 const team = [
 	{
 		name: "Davis Wojnovich",
@@ -75,12 +63,25 @@ const team = [
 	}
 ];
 
-const headshot = () => {
-	const pictures = team.map((p) => makePicture(p.name, p.title, p.link, p.img));
+const makePicture = (name, title, link, picture) => {
 	return (
-		<div className="row center">
+		<div key={name} style={{ padding: "1.8rem" }} className="center">
+			<a target="_blank" rel="noreferrer noopener" href={link}>
+				<img className="headshot-img" src={picture} alt="Dav" />
+			</a>
+			<h5>{name}</h5>
+			<h6>{title}</h6>
+		</div>
+	);
+};
+
+const headshot = () => {
+	return (
+		<div className="center container">
 			<h2 className="purple-text">Meet Our Team</h2>
-			<div className="container land-row">{pictures}</div>
+			<div className="land-row">
+				{team.map((p) => makePicture(p.name, p.title, p.link, p.img))}
+			</div>
 		</div>
 	);
 };
