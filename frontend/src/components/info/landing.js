@@ -25,7 +25,7 @@ const example = () => {
 	// I can do normal javascript stuff in this function
 	var x = 1 + 2 + 3;
 	// I can print things to debug. View this by doing inspect element
-	console.log("This is x", x);
+	//console.log("This is x", x);
 	// And then the result of this, besides being normal js, can also be HTML! (or JSX)
 	return (
 		<div className="container">
@@ -37,13 +37,36 @@ const example = () => {
 	);
 };
 
+
+const Inc = (move) => {
+	return (<div className = "container center"> 
+		<button onClick={move} className = "btn waves-effect waves-light">
+			Click Me
+		</button>
+	</div>)
+};
+
 class Landing extends Component {
+	state = {
+		count: 0
+	};
+
+	handleClick = () => {
+		this.setState((prev) => {
+			return {
+				count: prev.count + 1
+			};
+		});
+	};
+
 	render() {
+		console.log("count =" ,this.state.count)
 		const { auth } = this.props;
 		if (!auth.uid) {
 			return (
 				<div className="white-background-landing">
 					{example()}
+					{Inc(this.handleClick)}
 					<h1 className="pink-text">
 						{" "}
 						Note that to do javascript, you need curly braces{" "}
