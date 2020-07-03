@@ -4,3 +4,8 @@
 .lp-header {
 	height: calc(25rem + 20vh);
 }
+.lp-line {
+	text-align: center;
+	width: calc(20rem + 60vw);
+	font-weight: 800;
+}

@@ -57,8 +57,8 @@ const Header = () => {
 
 const LearnMore = () => {
 	return (
-		<Link to="signup">
-			<hr />
+		<Link to="signup" transition={500} smooth={true}>
+			<hr className="lp-line" />
 		</Link>
 	);
 };
