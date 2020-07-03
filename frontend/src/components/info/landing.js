@@ -13,7 +13,7 @@ const landSign = () => {
 		<div className="row center">
 			<Element name="signup" className="element">
 				<h2 className="purple-text"> Sign Up Here </h2>
-				<div className="container land">
+				<div className="container land-col">
 					<SignUp />
 				</div>
 			</Element>
