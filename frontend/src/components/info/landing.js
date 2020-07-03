@@ -10,7 +10,7 @@ import SignUp from "../auth/Signup";
 import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
 
-const landSign = () => {
+const LandSign = () => {
 	return (
 		<div className="row center">
 			<Element name="signup" className="element">
@@ -72,6 +72,7 @@ class Landing extends Component {
 					<Header />
 					<LearnMore />
 					<Header />
+					<LandSign />
 				</div>
 			);
 		} else {
