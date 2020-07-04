@@ -7,6 +7,10 @@ import firebase as fb
 
 class Data:
     def __init__(self, df, target_parameter, df_variables, nan_method="drop"):
+        # firestore project source. change this during testing and host locally
+        self.project_source = "projects"
+        # self.project_source = "projects-production"
+
         # keep as original data (no in place changes, just in case)
         self.df = df
         self.processed = False
@@ -77,7 +81,7 @@ class Data:
         '''
         db = fb.firestore_init()
         info = self.get_info()
-        project_ref = db.collection("projects").document(proj_id)
+        project_ref = db.collection(self.project_source).document(proj_id)
         project_ref.update({"info": info})
         return info
 
@@ -127,7 +131,7 @@ class Data:
         """
         db = fb.firestore.client()
 
-        project_ref = db.collection("projects").document(proj_id)
+        project_ref = db.collection(self.project_source).document(proj_id)
         project_ref.update({"variables": self.get_variables(self.df_vars_str),
                             "models": self.get_model_obj(model_list), "targetParam": self.target_str})
 

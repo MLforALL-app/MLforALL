@@ -3,6 +3,7 @@ import FormatList from "./formatList";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { db } from "../../../config/fbConfig";
+import projectSource from "../../../config/collection";
 import "../../../styling/dashboard.css";
 import "../../../styling/cards.css";
 
@@ -64,11 +65,8 @@ class ProjectList extends Component {
 		// don't have pagination for an indivdual user's projects
 		const { orderBy, uid } = this.props;
 		const dir = this.getDir(orderBy);
-		const ref = db.collection("projects");
-		const query = ref
-			.orderBy(orderBy, dir)
-			.where("authorID", "==", uid)
-			.get();
+		const ref = db.collection(projectSource);
+		const query = ref.orderBy(orderBy, dir).where("authorID", "==", uid).get();
 		query
 			.then((documentSnapshot) => {
 				const myProjects = documentSnapshot.docs.map(this.docMap);
@@ -80,7 +78,7 @@ class ProjectList extends Component {
 		// put the first page in "next" to be called by getProject
 		const { orderBy, limit } = this.props;
 		const dir = this.getDir(orderBy);
-		const ref = db.collection("projects");
+		const ref = db.collection(projectSource);
 		const query = ref.orderBy(orderBy, dir).limit(limit).get();
 		query
 			.then((documentSnapshot) => {
@@ -108,9 +106,10 @@ class ProjectList extends Component {
 			return { projects: prev.projects };
 		});
 		// update "next page" with new page
-		const ref = db.collection("projects");
+		const ref = db.collection(projectSource);
 		const dir = this.getDir(orderBy);
-		ref.orderBy(orderBy, dir)
+		ref
+			.orderBy(orderBy, dir)
 			.limit(limit)
 			.startAt(this.tail(lastVisible))
 			.get()
@@ -162,19 +161,13 @@ class ProjectList extends Component {
 	render() {
 		const { projects, page } = this.state;
 		const { limit, uid } = this.props;
-		const shownextpre = projects[page]
-			? projects[page].length === limit
-			: true; // not sure
+		const shownextpre = projects[page] ? projects[page].length === limit : true; // not sure
 		const showNext = uid ? false : shownextpre;
 		return (
 			<div className="project-list section">
 				<FormatList projects={projects[page]} />
 				<div className="row pagination-select">
-					{projects[page] ? (
-						this.pageArrows(page > 0, showNext)
-					) : (
-						<span></span>
-					)}
+					{projects[page] ? this.pageArrows(page > 0, showNext) : <span></span>}
 				</div>
 			</div>
 		);
