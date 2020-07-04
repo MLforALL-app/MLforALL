@@ -37,7 +37,6 @@ export const createProject = (project) => {
 export const updateContent = (content, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		// make async call to database
-		console.log("updateContent", content);
 		const firestore = getFirestore();
 		firestore
 			.collection(projectSource)
@@ -45,11 +44,9 @@ export const updateContent = (content, pid) => {
 			.set({ content: content }, { merge: true })
 			.then((snapshot) => {
 				dispatch({ type: "UPDATE_CONTENT" });
-				console.log("YAY: updated content");
 			})
 			.catch((err) => {
 				dispatch({ type: "UPDATE_CONTENT_ERROR" });
-				console.log("FAIL: updated content");
 			});
 	};
 };
@@ -96,20 +93,16 @@ export const bigPapa = (url, dispatch) => {
 		header: true,
 		complete: (results) => {
 			const data = results.data;
-			console.log("parsed cloud csv data ");
 			dispatch({ type: "CSV_DATA_IN_STORE", data });
 		}
 	});
 };
 export const parseExisting = (file, dispatch) => {
-	console.log(file);
-	console.log(typeof file);
 	Papa.parse(file, {
 		worker: true,
 		header: true,
 		complete: (results) => {
 			const data = results.data;
-			console.log("parsed existing csv data ");
 			dispatch({ type: "CSV_DATA_IN_STORE", data });
 		}
 	});
@@ -136,8 +129,6 @@ export const initCSV = (project, projID) => {
 export const setUpPreloadedCsv = () => {
 	return (dispatch, getState, { getFirebase }) => {
 		const csv = getState().project.csvHolding;
-		console.log("grabbing uploaded csv ");
-		console.log(csv);
 		parseExisting(csv, dispatch);
 	};
 };
@@ -259,7 +250,6 @@ export const buildModels = () => {
 		axios
 			.post(`${apiHost}/store`, path)
 			.then((res) => {
-				console.log("Store: Create model success res", res);
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})
 			.catch((err) => {

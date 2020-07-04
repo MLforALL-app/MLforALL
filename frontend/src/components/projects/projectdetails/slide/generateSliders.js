@@ -88,9 +88,7 @@ class GenerateSliders extends Component {
 			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
-				//console.log("before", alterState.inputs[v.name]);
 				alterState.inputs[v.name] = newValue;
-				//console.log("after", alterState.inputs[v.name]);
 				return alterState;
 			});
 		};
@@ -133,7 +131,6 @@ class GenerateSliders extends Component {
 				inputs: Object.values(this.state.inputs)
 			};
 			this.setState({ loading: true });
-			console.log("THIS IS PATH", path);
 			axios
 				.post(`${apiHost}/predict`, path)
 				.then((res) => {
@@ -165,14 +162,11 @@ class GenerateSliders extends Component {
 		const projectNew = this.props.project;
 		if (prev && prev !== this.props) {
 			this.setState(refreshState(projectNew));
-			// this.props.refreshCount();
-			// console.log("updated state due to different props");
 		}
 	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
-		// console.log("RENDER STATE", this.state);
 		return (
 			<div className="predict">
 				<div className="row slider-row">
