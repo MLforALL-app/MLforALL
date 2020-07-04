@@ -84,15 +84,16 @@ class GenerateSliders extends Component {
 	// hsc and hic are higher order functions to allow for generality
 	// of event handlers
 	handleSliderChange = (v) => {
-		const handler = (event, newValue) => {
+		return (event, newValue) => {
 			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
+				//console.log("before", alterState.inputs[v.name]);
 				alterState.inputs[v.name] = newValue;
+				//console.log("after", alterState.inputs[v.name]);
 				return alterState;
 			});
 		};
-		return handler;
 	};
 	handleInputChange = (v) => {
 		return (event) => {
