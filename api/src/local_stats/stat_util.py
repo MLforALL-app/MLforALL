@@ -45,7 +45,7 @@ def get_descripive(csv, cols):
         descriptive_list[col] = stats
     return descriptive_list
 
-# FIXME this will either have to be added to our build and pickle, or we might have to tag our train and test set in the csv.
+# this will either have to be added to our build and pickle, or we might have to tag our train and test set in the csv.
 
 
 def get_confusion_matrix(model, df, X, y):
