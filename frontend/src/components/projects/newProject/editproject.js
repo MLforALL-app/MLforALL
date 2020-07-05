@@ -21,7 +21,9 @@ import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
+import BuildProject from "./editpage/comfirmbuild";
 import projectSource from "../../../config/collection";
+
 
 const addSpace = (list) => {
 	return list.map((s) => " " + s);
@@ -222,26 +224,13 @@ class EditProject extends Component {
 							) : (
 								<div className="container center">
 									<CircularProgress />
-									Not getting csv data and cwp
 								</div>
 							)}
 							<div className="row container center">
-								<button
-									onClick={this.handleSubmit}
-									className="btn-large z-depth-0">
-									Build the model!
-								</button>
-								<div className="row" style={{ color: "#ff0000" }}>
-									{this.state.incompleteSub}
-								</div>
-								{this.state.submitLoad ? (
-									<div className="row center">
-										<CircularProgress />
-										Loading your information...
-									</div>
-								) : (
-									<span></span>
-								)}
+								<BuildProject getContent = {this.getContent}
+								              handleSubmit = {this.handleSubmit} 
+											  submitLoad = {this.state.submitLoad}/>
+								<div className = "row" style={{color:"#ff0000"}}>{this.state.incompleteSub}</div>							
 							</div>
 						</div>
 					) : (
