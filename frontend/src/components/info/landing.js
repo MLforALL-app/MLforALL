@@ -23,16 +23,7 @@ const LandSign = () => {
 	);
 };
 
-<<<<<<< HEAD
-const example = () => {
-	// I can do normal javascript stuff in this function
-	var x = 1 + 2 + 3;
-	// I can print things to debug. View this by doing inspect element
-	//console.log("This is x", x);
-	// And then the result of this, besides being normal js, can also be HTML! (or JSX)
-=======
 const Header = () => {
->>>>>>> ca6e5d080809a9397564a13cc854f45e52b326d5
 	return (
 		<div className="row center">
 			<div className="col s0 m4 lp-header">
@@ -64,58 +55,24 @@ const Header = () => {
 	);
 };
 
-<<<<<<< HEAD
-
-const Inc = (move) => {
-	return (<div className = "container center"> 
-		<button onClick={move} className = "btn waves-effect waves-light">
-			Click Me
-		</button>
-	</div>)
-=======
 const LearnMore = () => {
 	return (
 		<Link to="signup" transition={500} smooth={true}>
 			<hr className="lp-line" />
 		</Link>
 	);
->>>>>>> ca6e5d080809a9397564a13cc854f45e52b326d5
 };
 
 class Landing extends Component {
-	state = {
-		count: 0
-	};
-
-	handleClick = () => {
-		this.setState((prev) => {
-			return {
-				count: prev.count + 1
-			};
-		});
-	};
-
 	render() {
-		console.log("count =" ,this.state.count)
 		const { auth } = this.props;
 		if (!auth.uid) {
 			return (
 				<div className="white-background-landing">
-<<<<<<< HEAD
-					{example()}
-					{Inc(this.handleClick)}
-					<h1 className="pink-text">
-						{" "}
-						Note that to do javascript, you need curly braces{" "}
-					</h1>
-					{example()}
-					{landSign()}
-=======
 					<Header />
 					<LearnMore />
 					<Header />
 					<LandSign />
->>>>>>> ca6e5d080809a9397564a13cc854f45e52b326d5
 				</div>
 			);
 		} else {

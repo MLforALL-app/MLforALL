@@ -1,0 +1,51 @@
+.img-row {
+	width: 100%;
+	overflow: "hidden";
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #eeeeee;
+	padding-bottom: 0px;
+}
+.ap-header {
+	height: calc(12rem + 5vh);
+}
+.abt {
+  padding-top: 15px;
+}
+.ap-line {
+	text-align: center;
+	width: calc(20rem + 60vw);
+	font-weight: 800;
+}
+.aplearn {
+  padding-bottom: calc(3rem + 5vh);
+}
+.ap2 {
+	height: calc(25rem + 20vh);
+}
+.p-signup {
+  font-weight: 500;
+  font-size: 125%;
+}
+.ap-touch {
+  height: calc(25rem + 20vh);
+  position: relative;
+}
+.leftimg {
+  left: 0; 
+  height: 80%;
+  /* background-color: red; */
+  z-index: 1;
+}
+.rightimg {
+  right: 0;
+  height: 80%;
+  /* background-color: blue; */
+  
+}
+.wwa {
+  font-weight: bold;
+}
+.leftimg1 {
+  background-color: red;
+}

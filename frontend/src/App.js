@@ -40,6 +40,7 @@ function App() {
 						<Route exact path="/project/:pid" component={ProjectDetails} />
 						<Route exact path="/edit/:pid" component={EditProject} />
 						<Route exact path="/forgot" component={Forgot} />
+						<Route exact path="/signin" component={SignIn} />
 						<Route exact path="/create" component={CreateProjectContainer} />
 						<Route exact path="/help" component={MainDoc} />
 						<Route exact path="/about" component={About} />
