@@ -77,11 +77,6 @@ class BuildProject extends Component {
                     </DialogActions>
                     </div>
             )}        
-									
-								
-									
-								
-					
 				</Dialog>
                 
 			</span>

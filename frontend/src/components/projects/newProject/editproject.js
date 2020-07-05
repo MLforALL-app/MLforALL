@@ -81,9 +81,6 @@ class EditProject extends Component {
 	componentDidUpdate = (prevProps) => {
 		let project_process = this.determineProjectState();
 		//handling project process change
-		console.log("prevState", this.state.projectState);
-		console.log("newState", project_process);
-		console.log(this.props.currentWorkingProject);
 		if (this.state.projectState !== project_process) {
 			//handle setting up project
 			if (this.state.projectState === 0) {
@@ -95,7 +92,6 @@ class EditProject extends Component {
 			}
 			//setting up model selection page
 			if (project_process >= 2) {
-				console.log("SETING FORM SUBMISSION");
 				this.props.setWorkingProject(
 					this.props.project,
 					this.props.projectID
@@ -103,11 +99,9 @@ class EditProject extends Component {
 				//if csv is not in store (not just uploaded) get it
 				if(this.state.projectState === 0){
 					//if we are loading a project that already has an uploaded csv
-					console.log("previously set csv");
 					this.props.initCSV(this.props.project, this.props.projectID);
 				}else{
 					//if we are loading a project with a newly uploaded csv
-					console.log("new csv!");
 					this.props.setUpPreloadedCsv();
 				}
 				this.props.setWorkingProject(this.props.project, this.props.projectID);
@@ -148,7 +142,6 @@ class EditProject extends Component {
 
 
   handleSubmit = (e) => {
-	console.log("SUBMITTING", this.props.projectComplete);
 	const { project, auth, projectID } = this.props;
 	if(!this.props.projectComplete){
 		this.setState({
@@ -180,7 +173,6 @@ class EditProject extends Component {
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		if (modelBuilt && dataBuilt) {
-			// console.log("model and data built", modelBuilt && dataBuilt);
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (
