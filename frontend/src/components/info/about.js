@@ -40,58 +40,55 @@ const Header = () => {
 
 const OurGoal = () => {
   return (
-    <div>
-      <div
-        className="row img-row center ap2"
-        style={{ backgroundImage: `url(${img1})`, backgroundColor: "white" }}
-      >
-        <div className="">
-          <div className="col s0 m3"></div>
-          <div className="col s12 m6">
-            <br /> <br /> <br /> <br /> <br /> <br />
-            <h4 className="purple-text boldText">Our Goal</h4>
-            <br />
-            <p>
-              MLforALL is a platform designed by four ambitious students, Davis,
-              Joseph, Len, and Max seeking to spread the excitement behind
-              machine learning models to people from all kinds of backgrounds.
-              MLforALL simplifies the math and the small details and grants you
-              freedom to make observations, draw conclusions, and create
-              visualizations about data.
-            </p>
-          </div>
-          <div className="col s0 m3"></div>
-        </div>
-      </div>
-    </div>
-  );
+		<div
+			className="row img-row"
+			style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
+		>
+			<div className="row center ap2">
+				<div className="col s0 m3"></div>
+				<div className="col s12 m6">
+					<br /> <br /> <br /> <br /> <br /> <br />
+					<h4 className="purple-text boldText">Our Goal</h4>
+					<br />
+					<p>
+							MLforALL is a platform designed by four ambitious students, Davis,
+							Joseph, Len, and Max seeking to spread the excitement behind
+							machine learning models to people from all kinds of backgrounds.
+							MLforALL simplifies the math and the small details and grants you
+							freedom to make observations, draw conclusions, and create
+							visualizations about data.
+					</p>
+				</div>
+				<div className="col s0 m3"></div>
+			</div>
+		</div>
+	);
 };
+
 
 const WWA = () => {
   return (
-    <div>
-      <div
-        className="row img-row"
-        style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
-      >
-        <div className="row center ap2">
-          <div className="col s0 m3"></div>
-          <div className="col s12 m6">
-            <br /> <br /> <br /> <br /> <br /> <br />
-            <h4 className="purple-text boldText">Who We Are</h4>
-            <br />
-            <p>
-              Davis, Joseph, Len, and Max are from all different areas of
-              studies, places of the world, and walks of life. But what brings
-              them together is their shared interest in educating people about
-              topics they're passionate about.
-              <strong> #MyHeartIsInTheWork</strong>
-            </p>
-          </div>
-          <div className="col s0 m3"></div>
-        </div>
-      </div>
-    </div>
+		<div
+			className="row img-row"
+			style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
+		>
+			<div className="row center ap2">
+				<div className="col s0 m3"></div>
+				<div className="col s12 m6">
+					<br /> <br /> <br /> <br /> <br /> <br />
+					<h4 className="purple-text boldText">Who We Are</h4>
+					<br />
+					<p>
+						Davis, Joseph, Len, and Max are from all different areas of
+						studies, places of the world, and walks of life. But what brings
+						them together is their shared interest in educating people about
+						topics they're passionate about.
+						<strong> #MyHeartIsInTheWork</strong>
+					</p>
+				</div>
+				<div className="col s0 m3"></div>
+			</div>
+		</div>
   );
 };
 
