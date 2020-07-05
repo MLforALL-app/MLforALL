@@ -22,7 +22,9 @@ import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
+import BuildProject from "./editpage/comfirmbuild";
 import projectSource from "../../../config/collection";
+
 
 const filterObj = (objState) => {
 	return Object.entries(objState)
@@ -56,9 +58,6 @@ class EditProject extends Component {
 	componentDidUpdate = (prevProps) => {
 		let project_process = this.determineProjectState();
 		//handling project process change
-		console.log("prevState", this.state.projectState);
-		console.log("newState", project_process);
-		console.log(this.props.currentWorkingProject);
 		if (this.state.projectState !== project_process) {
 			//handle setting up project
 			if (this.state.projectState === 0) {
@@ -70,16 +69,13 @@ class EditProject extends Component {
 			}
 			//setting up model selection page
 			if (project_process >= 2) {
-				console.log("SETING FORM SUBMISSION");
 				this.props.setWorkingProject(this.props.project, this.props.projectID);
 				//if csv is not in store (not just uploaded) get it
 				if (this.state.projectState === 0) {
 					//if we are loading a project that already has an uploaded csv
-					console.log("previously set csv");
 					this.props.initCSV(this.props.project, this.props.projectID);
 				} else {
 					//if we are loading a project with a newly uploaded csv
-					console.log("new csv!");
 					this.props.setUpPreloadedCsv();
 				}
 				this.props.setWorkingProject(this.props.project, this.props.projectID);
@@ -120,8 +116,9 @@ class EditProject extends Component {
 		}
 	};
 
+
+
 	handleSubmit = (e) => {
-		console.log("SUBMITTING", this.props.projectComplete);
 		const { project, auth, projectID } = this.props;
 		if (!this.props.projectComplete) {
 			this.setState({
@@ -129,6 +126,7 @@ class EditProject extends Component {
 			});
 			return;
 		}
+
 		this.setState({
 			submitLoad: true
 		});
@@ -153,7 +151,6 @@ class EditProject extends Component {
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		if (modelBuilt && dataBuilt) {
-			// console.log("model and data built", modelBuilt && dataBuilt);
 			return <Redirect to={`/project/${projectID}`} />;
 		}
 		return (
@@ -198,26 +195,13 @@ class EditProject extends Component {
 							) : (
 								<div className="container center">
 									<CircularProgress />
-									Not getting csv data and cwp
 								</div>
 							)}
 							<div className="row container center">
-								<button
-									onClick={this.handleSubmit}
-									className="btn-large z-depth-0">
-									Build the model!
-								</button>
-								<div className="row" style={{ color: "#ff0000" }}>
-									{this.state.incompleteSub}
-								</div>
-								{this.state.submitLoad ? (
-									<div className="row center">
-										<CircularProgress />
-										Loading your information...
-									</div>
-								) : (
-									<span></span>
-								)}
+								<BuildProject getContent = {this.getContent}
+								              handleSubmit = {this.handleSubmit} 
+											  submitLoad = {this.state.submitLoad}/>
+								<div className = "row" style={{color:"#ff0000"}}>{this.state.incompleteSub}</div>							
 							</div>
 						</div>
 					) : (

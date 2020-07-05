@@ -12,6 +12,7 @@ const initState = {
 const atLeastOneTrue = (boolObj) => {
 	for (var key in boolObj) {
 		if (boolObj[key]) {
+
 			return true;
 		}
 	}
@@ -26,7 +27,6 @@ const checkFull = (currentWorkingProject) => {
 		if (currentWorkingProject.targetParameter === "") {
 			return false;
 		}
-
 		//check that there is at least one model
 		if (!atLeastOneTrue(currentWorkingProject.modelList)) {
 			return false;
