@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ProjectList from "../projects/projectList/projectlist";
+import projectSource from "../../config/collection";
 import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -14,9 +15,7 @@ class UserProfile extends Component {
 	render() {
 		const { auth, user, pageuid } = this.props;
 		const { orderBy, limit } = this.state;
-		const poss = user
-			? user.firstName + " " + user.lastName + "'s models"
-			: "";
+		const poss = user ? user.firstName + " " + user.lastName + "'s models" : "";
 		// Route Protection
 		if (!auth.uid) return <Redirect to="/" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
@@ -41,15 +40,9 @@ class UserProfile extends Component {
 							orderBy={this.state.orderBy}
 							me={true}
 						/>
-						<h4 style={{ float: "left" }}>
-							View other people's projects
-						</h4>
+						<h4 style={{ float: "left" }}>View other people's projects</h4>
 					</div>
-					<ProjectList
-						orderBy={orderBy}
-						limit={limit}
-						uid={pageuid}
-					/>
+					<ProjectList orderBy={orderBy} limit={limit} uid={pageuid} />
 					<div className="center">
 						<Link to="/create">
 							<button className="btn btn-sec z-depth-0">
@@ -80,7 +73,7 @@ const mapStateToProps = (state, ownProps) => {
 export default compose(
 	connect(mapStateToProps),
 	firestoreConnect([
-		{ collection: "projects", orderBy: ["createdAt", "desc"] },
+		{ collection: projectSource, orderBy: ["createdAt", "desc"] },
 		{ collection: "users" }
 	])
 )(UserProfile);

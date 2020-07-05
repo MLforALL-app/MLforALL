@@ -7,52 +7,34 @@ const initState = {
 	csvHolding: {},
 	modelBuilt: false,
 	dataBuilt: false
-
 };
 
-
 const atLeastOneTrue = (boolObj) => {
-	
-	console.log(Object.keys(boolObj));
 	for (var key in boolObj) {
-		//if (!boolObj.hasOwnProperty(key)) continue;
-		console.log(key);
-		if (boolObj[key] === true) {
-			console.log("IS TRUE", boolObj);
+		if (boolObj[key]) {
 			return true;
 		}
 	}
-	console.log("FALSE", boolObj);
 	return false;
 };
 
 const checkFull = (currentWorkingProject) => {
-	console.log("CHECKING FULL!!");
 	if (currentWorkingProject === "initialized") {
 		return false;
 	} else {
 		//check output
 		if (currentWorkingProject.targetParameter === "") {
-			console.log("block1");
 			return false;
 		}
 
 		//check that there is at least one model
 		if (!atLeastOneTrue(currentWorkingProject.modelList)) {
-			console.log("block2");
 			return false;
 		}
 		//check that there is at least one input
 		if (!atLeastOneTrue(currentWorkingProject.inputs)) {
-			console.log(currentWorkingProject.inputs);
-			console.log("block3");
 			return false;
 		}
-		console.log(
-			"SUCCSESS",
-			currentWorkingProject.inputs,
-			currentWorkingProject.modelList
-		);
 		return true;
 	}
 };
@@ -76,7 +58,6 @@ const projectReducer = (state = initState, action) => {
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
 		case "QUICK_CSV":
-			console.log(action.csv);
 			return { ...state, csvHolding: action.csv };
 		case "UPLOAD_CSV":
 			return state;
@@ -91,7 +72,6 @@ const projectReducer = (state = initState, action) => {
 		case "UPDATE_CSV_NAME_ERROR":
 			return state;
 		case "UPDATE_CONTENT":
-			console.log("Setting databuilt to true");
 			return { ...state, dataBuilt: true };
 		case "UPDATE_CONTENT_ERROR":
 			return state;
@@ -132,14 +112,12 @@ const projectReducer = (state = initState, action) => {
 				...state.currentWorkingProject,
 				modelList: action.data
 			};
-			console.log(cwp);
 			return {
 				...state,
 				cWPFull: checkFull(cwp),
 				currentWorkingProject: cwp
 			};
 		case "CSV_DATA_IN_STORE":
-			console.log("PUTTING CSVDATA IN STORE!!!!");
 			return {
 				...state,
 				csvData: action.data
@@ -157,7 +135,6 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
-			console.log("UPDATING INPUTS", action.data);
 			cwp = {
 				...state.currentWorkingProject,
 				inputs: action.data
@@ -168,7 +145,6 @@ const projectReducer = (state = initState, action) => {
 				currentWorkingProject: cwp
 			};
 		case "CREATE_MODEL_SUCC":
-			console.log("Setting modelBuilt to true");
 			return {
 				...state,
 				modelBuilt: true
