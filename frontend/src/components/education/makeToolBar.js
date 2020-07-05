@@ -42,8 +42,6 @@ const MakeDrawer = ({ sections }) => {
 
 	return (
 		<div className={classes.root}>
-			<CssBaseline />
-			<AppBar position="fixed" className={classes.appBar}></AppBar>
 			<Drawer
 				className={classes.drawer}
 				variant="permanent"
@@ -51,41 +49,31 @@ const MakeDrawer = ({ sections }) => {
 					paper: classes.drawerPaper
 				}}
 				anchor="left">
-				<div className={classes.toolbar} />
 				{sections.map((subsection) => (
-					<React.Fragment>
-						{" "}
-						{
-							//<Divider />
-						}
-						<List>
-							{subsection.map((obj) => (
-								<Link
-									to={obj.to}
-									smooth="true"
-									duration={500}
-									offset={-80}>
-									<ListItem button key={obj.text}>
-										<ListItemText primary={obj.text} />
-									</ListItem>
-								</Link>
-							))}
-						</List>
-						{
-							//<Divider />
-						}
-					</React.Fragment>
+					<List key={`subsec_${subsection && subsection[0].to}`}>
+						{subsection.map((obj) => (
+							<Link
+								key={`link_${obj.to}`}
+								to={obj.to}
+								smooth="true"
+								duration={500}
+								offset={-80}>
+								<ListItem button key={obj.text}>
+									<ListItemText primary={obj.text} />
+								</ListItem>
+							</Link>
+						))}
+					</List>
 				))}
 			</Drawer>
 			<main className={classes.content}>
 				<div className={classes.toolbar} />
+				<h1 className="purple-text">Help Page</h1>
 				{sections.map((subsection) => {
 					return subsection.map((obj) => {
 						return (
-							<Element name={obj.to} className="element">
-								<Typography variant="h2">
-									{obj.title}
-								</Typography>
+							<Element name={obj.to} className="element" key={`elem_${obj.to}`}>
+								<h2 className="purple-text">{obj.title}</h2>
 								{obj.content}
 							</Element>
 						);
