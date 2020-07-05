@@ -4,6 +4,8 @@ import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
 
+const font = { size: 14, color: "#fff" };
+
 function makePlot() {
 	let data = [
 		{
@@ -290,10 +292,7 @@ function makePlot() {
 			{
 				x: 0,
 				y: 12,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[23]<868.20",
 				xref: "x1",
 				yref: "y1",
@@ -306,10 +305,7 @@ function makePlot() {
 			{
 				x: -2.25,
 				y: 11,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[27]<0.13",
 				xref: "x1",
 				yref: "y1",
@@ -322,10 +318,7 @@ function makePlot() {
 			{
 				x: 2.25,
 				y: 11,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[6]<0.06",
 				xref: "x1",
 				yref: "y1",
@@ -338,10 +331,7 @@ function makePlot() {
 			{
 				x: -4.25,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[21]<30.14",
 				xref: "x1",
 				yref: "y1",
@@ -354,10 +344,7 @@ function makePlot() {
 			{
 				x: -0.25,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[21]<27.52",
 				xref: "x1",
 				yref: "y1",
@@ -370,10 +357,7 @@ function makePlot() {
 			{
 				x: 1.75,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[1]<18.96",
 				xref: "x1",
 				yref: "y1",
@@ -386,10 +370,7 @@ function makePlot() {
 			{
 				x: 2.75,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -402,10 +383,7 @@ function makePlot() {
 			{
 				x: -4.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -418,10 +396,7 @@ function makePlot() {
 			{
 				x: -3.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[11]<0.86",
 				xref: "x1",
 				yref: "y1",
@@ -434,10 +409,7 @@ function makePlot() {
 			{
 				x: 1.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -450,10 +422,7 @@ function makePlot() {
 			{
 				x: 2.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -466,10 +435,7 @@ function makePlot() {
 			{
 				x: -0.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.16",
 				xref: "x1",
 				yref: "y1",
@@ -482,10 +448,7 @@ function makePlot() {
 			{
 				x: 0.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -498,10 +461,7 @@ function makePlot() {
 			{
 				x: -4.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -514,10 +474,7 @@ function makePlot() {
 			{
 				x: -3.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.14",
 				xref: "x1",
 				yref: "y1",
@@ -530,10 +487,7 @@ function makePlot() {
 			{
 				x: -1.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.14",
 				xref: "x1",
 				yref: "y1",
@@ -546,10 +500,7 @@ function makePlot() {
 			{
 				x: -0.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -562,10 +513,7 @@ function makePlot() {
 			{
 				x: -3.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -578,10 +526,7 @@ function makePlot() {
 			{
 				x: -2.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[0]<12.11",
 				xref: "x1",
 				yref: "y1",
@@ -594,10 +539,7 @@ function makePlot() {
 			{
 				x: -1.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -610,10 +552,7 @@ function makePlot() {
 			{
 				x: -0.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[12]<1.91",
 				xref: "x1",
 				yref: "y1",
@@ -626,10 +565,7 @@ function makePlot() {
 			{
 				x: -3.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -642,10 +578,7 @@ function makePlot() {
 			{
 				x: -2.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
@@ -658,10 +591,7 @@ function makePlot() {
 			{
 				x: -1.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
@@ -674,10 +604,7 @@ function makePlot() {
 			{
 				x: -0.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",

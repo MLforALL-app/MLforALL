@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
-import { nameMapper } from "./editCSV";
+import { nameMapper } from "../../../../store/actions/nameMapper";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 
 class ModelSelect extends Component {
@@ -11,12 +11,11 @@ class ModelSelect extends Component {
 		var objState = {};
 		objList.forEach((item) => {
 			let models = Object.keys(this.props.selectedModels);
-			if(models.includes(item)){
+			if (models.includes(item)) {
 				objState[item] = true;
-			}else{
+			} else {
 				objState[item] = false;
 			}
-			
 		});
 		return objState;
 	};
@@ -33,7 +32,9 @@ class ModelSelect extends Component {
 		this.props.updateModels(this.state.models);
 	};
 	componentDidMount = () => {
-		this.props.updateModels(this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"]));
+		this.props.updateModels(
+			this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
+		);
 	};
 
 	render() {

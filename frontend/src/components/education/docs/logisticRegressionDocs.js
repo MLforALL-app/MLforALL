@@ -87,6 +87,7 @@ function makePlot() {
 
 const logisticRegression = (
 	<div>
+		<h1 className="purple-text"> Help Page </h1>
 		{header("Logistic Regression", "+2")}
 
 		{bodyContent(`

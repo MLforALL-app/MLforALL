@@ -7,10 +7,11 @@ from sklearn.metrics import confusion_matrix
 
 
 def one_hot(csv, cols, debug=False):
-    assert(type(csv) == str)
-    assert(type(cols) == list or type(cols) == str)
-    if type(cols) != list:
-        cols = [cols]
+    # use isinstance(csv, str)
+    # assert(type(csv) == str)
+    # assert(type(cols) == list or type(cols) == str)
+    # if type(cols) != list:
+    #     cols = [cols]
     # create the onehot vals
     df = pd.read_csv(csv)
     for col in cols:
@@ -33,10 +34,10 @@ def one_hot(csv, cols, debug=False):
 
 
 def get_descripive(csv, cols):
-    assert(type(csv) == str)
-    assert(type(cols) == list or type(cols) == str)
-    if type(cols) != list:
-        cols = [cols]
+    # assert(type(csv) == str)
+    # assert(type(cols) == list or type(cols) == str)
+    # if type(cols) != list:
+    #    cols = [cols]
     df = pd.read_csv(csv)
     descriptive_list = {}
     for col in cols:
@@ -44,7 +45,7 @@ def get_descripive(csv, cols):
         descriptive_list[col] = stats
     return descriptive_list
 
-# TODO this will either have to be added to our build and pickle, or we might have to tag our train and test set in the csv.
+# FIXME this will either have to be added to our build and pickle, or we might have to tag our train and test set in the csv.
 
 
 def get_confusion_matrix(model, df, X, y):
