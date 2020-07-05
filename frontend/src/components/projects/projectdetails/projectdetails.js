@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
+import projectSource from "../../../config/collection";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -14,33 +15,17 @@ import "../../../styling/projectdetails.css";
  */
 const ProjectDetails = (props) => {
 	// id = unique projID, auth = firebase auth object, project = firestore
-	console.log("ENTER PROJECT DETAILS");
 	const { pid, auth, project, history } = props;
-	const [count, setCount] = useState(0);
-	const refreshCount = () => {
-		console.log("refreshing count");
-		setCount((i) => i + 1);
-	};
-	console.log("count", count);
 	// Route protection
 	if (!auth.uid) return <Redirect to="/" />;
 	if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-	console.log(
-		"projectRecieved",
-		project && project.variables.map((o) => o.name)
-	);
-	if (project && count === 0) {
+	if (project) {
 		return (
 			<div className="project-details">
 				<div className="row container">
 					<DescCard project={project} pid={pid} />
 				</div>
-				<GenerateSliders
-					refreshCount={refreshCount}
-					project={project}
-					uid={auth.uid}
-					pid={pid}
-				/>
+				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
 				<div className="row container">
 					<CSVCard pid={pid} auth={auth} project={project} history={history} />
 				</div>
@@ -63,7 +48,7 @@ const ProjectDetails = (props) => {
  * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state, ownProps) => {
 	const pid = ownProps.match.params.pid;
-	const projects = state.firestore.data.projects;
+	const projects = state.firestore.data[projectSource];
 	const project = projects ? projects[pid] : null;
 	// lets change this to somehow query in firestoreConnect
 	return {
@@ -75,5 +60,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect([{ collection: "projects" }])
+	firestoreConnect([{ collection: projectSource }])
 )(ProjectDetails);

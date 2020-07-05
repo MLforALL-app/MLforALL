@@ -16,9 +16,6 @@ export default function PredictSlider(
 	handleInputChange,
 	value
 ) {
-	// unique key to append
-	const keyHash = (Math.random() * 1000).toFixed(0);
-
 	// Get descriptive stats from firestore project document variables subfield
 	const param = varObj.name;
 	const continuous = varObj.continuous;
@@ -27,6 +24,12 @@ export default function PredictSlider(
 	const q1 = varObj.q1;
 	const q2 = varObj.q2;
 	const q3 = varObj.q3;
+	/*
+	const hi = clean(varObj.hi);
+	const lo = clean(varObj.lo);
+	const q1 = clean(varObj.q1);
+	const q2 = clean(varObj.q2);
+	const q3 = clean(varObj.q3); */
 
 	// List of points we want to mark
 	const marks = [
@@ -40,17 +43,16 @@ export default function PredictSlider(
 		const ss = Math.pow(Math.abs(hi - lo) / 150, 0.975);
 		stepSize = ss <= 0.1 ? ss : Math.ceil(ss);
 	}
-	const currentValue = value || typeof value === "number" ? value : 0;
+
 	return (
-		<div key={"container_" + param + keyHash}>
+		<div key={"container_" + param}>
 			<Typography id="continuous-slider" gutterBottom>
 				<b>{param}</b>
 			</Typography>
 			<Grid container spacing={1} alignItems="center">
-				<Grid item xs key={"grid_slide_" + param + keyHash}>
+				<Grid item xs>
 					<Slider
-						key={"slider_" + param + keyHash}
-						value={currentValue}
+						value={typeof value === "number" ? value : 0}
 						onChange={handleSliderChange}
 						aria-labelledby="input-slider"
 						marks={marks}
@@ -59,10 +61,9 @@ export default function PredictSlider(
 						step={stepSize}
 					/>
 				</Grid>
-				<Grid item key={"grid_in_" + param + keyHash}>
+				<Grid item key={"input_" + param}>
 					<Input
-						key={"input_" + param + keyHash}
-						value={currentValue}
+						value={value}
 						margin="dense"
 						onChange={handleInputChange}
 						inputProps={{

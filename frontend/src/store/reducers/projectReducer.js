@@ -7,14 +7,12 @@ const initState = {
 	csvHolding: {},
 	modelBuilt: false,
 	dataBuilt: false
-
 };
-
 
 const atLeastOneTrue = (boolObj) => {
 	for (var key in boolObj) {
-		//if (!boolObj.hasOwnProperty(key)) continue;
-		if (boolObj[key] === true) {
+		if (boolObj[key]) {
+
 			return true;
 		}
 	}
