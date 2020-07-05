@@ -47,7 +47,7 @@ class ModelSelect extends Component {
 							header="Click the models!"
 							placement="right-end"
 							desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
-							link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
+							link="help"
 							linkdesc="Learn more here"
 						/>
 					</span>
