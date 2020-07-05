@@ -7,7 +7,6 @@ import { updateCurrentWorkingProject } from "../../../../store/actions/projectAc
 
 class ModelSelect extends Component {
 	initObj = (objList) => {
-		console.log(this.props.selectedModels);
 		var objState = {};
 		objList.forEach((item) => {
 			let models = Object.keys(this.props.selectedModels);
