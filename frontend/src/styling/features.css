@@ -1,11 +1,47 @@
 .lp-img {
-	height: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+.row-bg {
+  background-color: white;
+  background-position: center;
+  /* background-size: contain; */
+  background-repeat: no-repeat;
+  text-align: center;
+  height: auto;
+  width: auto;
+}
+
+.left-block {
+  display: inline-block;
+  text-align: left;
+  vertical-align: bottom;
+}
+
+.fullrow-bg {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  z-index: 0;
+}
+
+.third-img {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+}
+
+.half-img {
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 .lp-header {
-	height: calc(25rem + 20vh);
+  height: calc(25rem + 20vh);
 }
 .lp-line {
-	text-align: center;
-	width: calc(20rem + 60vw);
-	font-weight: 800;
+  text-align: center;
+  width: calc(20rem + 60vw);
+  font-weight: 800;
 }
