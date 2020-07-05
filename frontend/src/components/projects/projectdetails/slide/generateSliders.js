@@ -85,6 +85,7 @@ class GenerateSliders extends Component {
 	// of event handlers
 	handleSliderChange = (v) => {
 		return (event, newValue) => {
+			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
 				alterState.inputs[v.name] = newValue;
@@ -94,6 +95,7 @@ class GenerateSliders extends Component {
 	};
 	handleInputChange = (v) => {
 		return (event) => {
+			event.preventDefault();
 			const newValue =
 				event.target.value === "" ? "" : Number(event.target.value);
 			this.setState((prevState) => {
@@ -129,7 +131,6 @@ class GenerateSliders extends Component {
 				inputs: Object.values(this.state.inputs)
 			};
 			this.setState({ loading: true });
-			console.log("THIS IS PATH", path);
 			axios
 				.post(`${apiHost}/predict`, path)
 				.then((res) => {
@@ -137,7 +138,6 @@ class GenerateSliders extends Component {
 					this.setState({ output: res, loading: false });
 				})
 				.catch((err) => {
-					console.log("Prediction Error", err);
 					// If things don't work, server error and stop loading
 					this.setState({ output: "Server Error", loading: false });
 				});
@@ -145,7 +145,7 @@ class GenerateSliders extends Component {
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	getslides(variables, hsc, hic) {
+	getSlides(variables, hsc, hic) {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
@@ -162,14 +162,11 @@ class GenerateSliders extends Component {
 		const projectNew = this.props.project;
 		if (prev && prev !== this.props) {
 			this.setState(refreshState(projectNew));
-			// this.props.refreshCount();
-			console.log("updated state due to different props");
 		}
 	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
-		console.log("RENDER STATE", this.state);
 		return (
 			<div className="predict">
 				<div className="row slider-row">
@@ -187,7 +184,7 @@ class GenerateSliders extends Component {
 							</h5>
 						</div>
 						<div className="slider-contain">
-							{this.getslides(
+							{this.getSlides(
 								project.variables,
 								this.handleSliderChange,
 								this.handleInputChange
