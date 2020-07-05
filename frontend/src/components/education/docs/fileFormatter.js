@@ -3,7 +3,7 @@ import MathJax from "react-mathjax";
 import RemarkMathPlugin from "remark-math";
 
 export function header(str) {
-	return <h4>{str}</h4>;
+	return <h4 className="purple-text">{str}</h4>;
 }
 
 export function bodyContent(str) {
@@ -25,3 +25,11 @@ export function bodyContent(str) {
 		</MathJax.Provider>
 	);
 }
+
+export const purpleTheme = "#283593";
+export const purpleLight = "#7a5eeb";
+export const purpleDark = "#261473";
+export const pinkTheme = "#f8bbd0";
+export const pinkLight = "#ffdbfd";
+export const pinkDark = "#cf88cb";
+export const grey = "#c7c7c7";

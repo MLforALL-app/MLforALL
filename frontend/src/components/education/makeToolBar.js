@@ -73,8 +73,10 @@ const MakeDrawer = ({ sections }) => {
 					return subsection.map((obj) => {
 						return (
 							<Element name={obj.to} className="element" key={`elem_${obj.to}`}>
-								<h2 className="purple-text">{obj.title}</h2>
-								{obj.content}
+								<div className="container">
+									<h2 className="purple-text">{obj.title}</h2>
+									{obj.content}
+								</div>
 							</Element>
 						);
 					});
