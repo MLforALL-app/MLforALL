@@ -39,9 +39,8 @@ function App() {
 						<Route exact path="/dashboard" component={Dashboard} />
 						<Route exact path="/project/:pid" component={ProjectDetails} />
 						<Route exact path="/edit/:pid" component={EditProject} />
-						<Route exact path="/verify" component={VerifyEmailProject} />
-						<Route exact path="/signin" component={SignIn} />
 						<Route exact path="/forgot" component={Forgot} />
+						<Route exact path="/signin" component={SignIn} />
 						<Route exact path="/create" component={CreateProjectContainer} />
 						<Route exact path="/help" component={MainDoc} />
 						<Route exact path="/about" component={About} />
@@ -54,7 +53,23 @@ function App() {
 			</BrowserRouter>
 		);
 	} else {
-		return <Mobile />;
+		return (
+			<BrowserRouter>
+				<div className="App">
+					<Navbar />
+					<ScrollToTop />
+					<Switch>
+						<Route exact path="/verify" component={VerifyEmailProject} />
+						<Route exact path="/forgot" component={Forgot} />
+						<Route exact path="/signin" component={SignIn} />
+						<Route exact path="/about" component={About} />
+						<Route exact path="/" component={Landing} />
+						<Route path="/MLforAll" component={GHPages} />
+						<Route component={Mobile} />
+					</Switch>
+				</div>
+			</BrowserRouter>
+		);
 	}
 }
 
