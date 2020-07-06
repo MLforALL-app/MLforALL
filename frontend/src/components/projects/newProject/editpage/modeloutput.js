@@ -16,7 +16,6 @@ class ModelOutput extends Component {
 		this.props.setOutput(event.target.value);
 	};
 	componentDidMount = () => {
-		console.log("MOUNTING OUTPUT", this.props.selectedOutput);
 		let previousOutput = this.props.selectedOutput;
 		this.setState({
 			output : previousOutput

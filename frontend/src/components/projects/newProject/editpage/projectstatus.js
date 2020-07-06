@@ -1,30 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
-};
-
-const addSpace = (list) => {
-	return list.map((s) => " " + s);
-};
+import { nameMapper, addSpace } from "../../../../store/actions/nameMapper";
 
 class ProjectStatus extends Component {
 	state = {
@@ -53,12 +29,10 @@ class ProjectStatus extends Component {
 						</span>
 						<h6>
 							This model will take these parameters:
-							<span className="purple-text">
-								{addSpace(inputs)}
-							</span>
+							<span className="purple-text">{addSpace(inputs)}</span>
 							<br /> to attempt to predict{" "}
-							<span className="purple-text">{output}</span> <br />{" "}
-							using these algorithms:
+							<span className="purple-text">{output}</span> <br /> using these
+							algorithms:
 							<span className="purple-text">
 								{addSpace(models.map((s) => nameMapper(s)))}
 							</span>
