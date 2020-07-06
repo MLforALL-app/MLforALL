@@ -6,7 +6,6 @@
 <a href="https://www.codefactor.io/repository/github/mlforall-app/mlforall"><img src="https://www.codefactor.io/repository/github/mlforall-app/mlforall/badge" alt="CodeFactor" /></a>
 <a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
 <a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
-HTML
 <a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
 <p>
 
