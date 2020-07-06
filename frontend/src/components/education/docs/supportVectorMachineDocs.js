@@ -1,5 +1,5 @@
 import React from "react";
-import { header } from "./fileFormatter";
+import { header, purpleTheme, purpleLight, pinkTheme } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -28,7 +28,7 @@ function makePlot() {
 			name: "Yes",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(255, 0, 0)", // more about "marker.color": #scatter-marker-color
+				color: pinkTheme, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -40,7 +40,7 @@ function makePlot() {
 			name: "No",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(0, 0, 255)", // more about "marker.color": #scatter-marker-color
+				color: purpleLight, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -50,7 +50,7 @@ function makePlot() {
 			y: arange(1, 6, 0.1).map(linear_fn(5.5, -0.5)),
 			name: "Decision Boundary",
 			marker: {
-				color: "rgb(0, 0, 0)"
+				color: purpleTheme
 			}
 		},
 		{
@@ -59,7 +59,7 @@ function makePlot() {
 			y: arange(1, 6, 0.1).map(linear_fn(3, -0.5)),
 			name: "Margin",
 			marker: {
-				color: "rgb(0, 0, 0)"
+				color: purpleTheme
 			},
 			line: {
 				dash: "dot"
@@ -71,7 +71,7 @@ function makePlot() {
 			y: arange(1, 6, 0.1).map(linear_fn(8, -0.5)),
 			showlegend: false,
 			marker: {
-				color: "rgb(0, 0, 0)"
+				color: purpleTheme
 			},
 			line: {
 				dash: "dot"

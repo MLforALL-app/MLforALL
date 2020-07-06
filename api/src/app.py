@@ -2,11 +2,8 @@ import os
 import firebase as fb
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-
 from model import Model
 from data import Data
-
-import sys
 
 app = Flask(__name__)
 app.config["DEBUG"] = True

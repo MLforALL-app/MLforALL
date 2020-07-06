@@ -1,5 +1,11 @@
 import React from "react";
-import { header, bodyContent } from "./fileFormatter";
+import {
+	header,
+	bodyContent,
+	pinkTheme,
+	purpleTheme,
+	pinkDark
+} from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -14,7 +20,7 @@ function makePlot() {
 			name: "Cat",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(255, 0, 0)", // more about "marker.color": #scatter-marker-color
+				color: pinkTheme, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -26,7 +32,7 @@ function makePlot() {
 			name: "Wolf",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(0, 0, 255)", // more about "marker.color": #scatter-marker-color
+				color: pinkDark, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -38,7 +44,7 @@ function makePlot() {
 			name: "Dog",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(0, 255, 0)", // more about "marker.color": #scatter-marker-color
+				color: purpleTheme, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -89,7 +95,7 @@ function makePlot() {
 
 const kNearestNeighbors = (
 	<div>
-		{header("k-Nearest Neighbors", "+2")}
+		{header("k-Nearest Neighbors")}
 
 		{bodyContent(`
 $k$-nearest neighbors is used to classify objects which belong to different categories based on information about those objects and similarity of this information to known examples. For example, we could measure the height and weight of an animal, and if the height and weight look like those of a dog, we guess that the animal is a dog. In the example below, we mimic this idea.

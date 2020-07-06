@@ -57,7 +57,11 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
 									<b>{nameMapper(value)} </b>
 								</div>
 								<div style={{ float: "right" }}>
-									<HelpBox desc={desc[value]} />
+									<HelpBox
+										desc={desc[value]}
+										link="help"
+										linkdesc="Learn more here"
+									/>
 								</div>
 								<div style={{ clear: "both" }}></div>
 							</div>
@@ -67,7 +71,11 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
 									<b>{nameMapper(value)} </b>
 								</div>
 								<div style={{ float: "right" }}>
-									<HelpBox desc={desc[value]} />
+									<HelpBox
+										desc={desc[value]}
+										link="help"
+										linkdesc="Learn more here"
+									/>
 								</div>
 								<div style={{ clear: "both" }}></div>
 							</div>

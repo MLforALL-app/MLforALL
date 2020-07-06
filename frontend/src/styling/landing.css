@@ -1,70 +1,69 @@
 .img-row {
-  width: 100%;
-  overflow: "hidden";
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-color: #eeeeee;
-  padding-bottom: 0px;
+	width: 100%;
+	overflow: "hidden";
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-color: #eeeeee;
 }
 .white-background-landing {
-  background-color: #fefefe;
+	background-color: #fefefe;
 }
 
 .land {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
 }
 .land-head {
-  height: calc(12rem + 20vw + 65px);
+	height: calc(12rem + 20vw + 65px);
 }
 .land-who {
-  height: calc(10rem + 12vw + 50px);
+	height: calc(10rem + 12vw + 50px);
 }
 .land-sign {
-  height: calc(20rem + 25vw + 50px);
+	height: calc(20rem + 25vw + 50px);
 }
 .land-headshot {
-  padding-top: calc(1rem + 3vw + 5px);
+	padding-top: calc(1rem + 3vw + 5px);
 }
 .headshot-img {
-  height: 200px;
-  width: 200px;
-  border-radius: 100px;
+	height: 200px;
+	width: 200px;
+	border-radius: 100px;
 }
 .headshot-img-wrapper {
-  padding: 5px;
+	padding: 5px;
 }
 .anchor {
-  width: 200px;
+	width: 200px;
 }
 .anchor-160 {
-  width: 160px;
-  border-width: 2px;
-  border-style: solid;
+	width: 160px;
+	border-width: 2px;
+	border-style: solid;
 }
 .header-subrow {
-  padding: 10px;
+	padding: 10px;
 }
 .goals {
-  padding-top: calc(10vh + 5vw + 1rem);
-  padding-bottom: calc(18vh + 10vw + 12rem);
+	padding-top: calc(10vh + 5vw + 1rem);
+	padding-bottom: calc(18vh + 10vw + 12rem);
 }
 .video {
-  padding-top: calc(5vh + 2.5vw + 1.5rem);
-  padding-bottom: calc(8vh + 5vw + 2rem);
+	padding-top: calc(5vh + 2.5vw + 1.5rem);
+	padding-bottom: calc(8vh + 5vw + 2rem);
 }
 @media only screen and (max-width: 565px) {
-  .row {
-    background-image: none !important;
-  }
-  .goals {
-    padding-bottom: calc(30vh + 50vw);
-  }
-  #learn-more-landing,
-  .anchor-link {
-    display: none;
-  }
+	.row {
+		background-image: none !important;
+	}
+	.goals {
+		padding-bottom: calc(30vh + 50vw);
+	}
+	#learn-more-landing,
+	.anchor-link {
+		display: none;
+	}
 }

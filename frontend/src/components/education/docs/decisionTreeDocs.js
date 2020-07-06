@@ -1,14 +1,16 @@
 import React from "react";
-import { header } from "./fileFormatter";
+import { header, pinkTheme, purpleDark, grey } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
+
+const font = { size: 14, color: "#000000" };
 
 function makePlot() {
 	let data = [
 		{
 			line: {
-				color: "rgb(210,210,210)",
+				color: purpleDark,
 				width: 1
 			},
 			mode: "lines",
@@ -223,11 +225,11 @@ function makePlot() {
 			],
 			marker: {
 				line: {
-					color: "rgb(50,50,50)",
+					color: pinkTheme,
 					width: 1
 				},
 				size: 15,
-				color: "#6175c1",
+				color: pinkTheme,
 				symbol: "hexagram"
 			},
 			opacity: 0.8,
@@ -290,401 +292,326 @@ function makePlot() {
 			{
 				x: 0,
 				y: 12,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[23]<868.20",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -2.25,
 				y: 11,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[27]<0.13",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 2.25,
 				y: 11,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[6]<0.06",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -4.25,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[21]<30.14",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -0.25,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[21]<27.52",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 1.75,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[1]<18.96",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 2.75,
 				y: 10,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -4.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -3.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[11]<0.86",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 1.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 2.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -0.75,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.16",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: 0.25,
 				y: 9,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -4.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -3.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.14",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -1.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[24]<0.14",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -0.25,
 				y: 8,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -3.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -2.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[0]<12.11",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -1.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -0.75,
 				y: 7,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "Ft[12]<1.91",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -3.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -2.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -1.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "1",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			},
 			{
 				x: -0.25,
 				y: 6,
-				font: {
-					size: 14,
-					color: "#fff"
-				},
+				font: font,
 				text: "0",
 				xref: "x1",
 				yref: "y1",
-				bgcolor: "#6175c1",
+				bgcolor: pinkTheme,
 				borderpad: 4,
 				showarrow: false,
-				bordercolor: "#c7c7c7",
+				bordercolor: grey,
 				borderwidth: 2
 			}
 		],
@@ -707,7 +634,7 @@ function makePlot() {
 
 const decisionTree = (
 	<div>
-		{header("Decision Tree (Classifier)", "+2")}
+		{header("Decision Tree (Classifier)")}
 		{makePlot()}
 	</div>
 );
