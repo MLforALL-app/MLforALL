@@ -6,7 +6,8 @@ const initState = {
 	csvUrl: "",
 	csvHolding: {},
 	modelBuilt: false,
-	dataBuilt: false
+	dataBuilt: false,
+	buildFail: false,
 };
 
 const atLeastOneTrue = (boolObj) => {
@@ -150,7 +151,8 @@ const projectReducer = (state = initState, action) => {
 				modelBuilt: true
 			};
 		case "CREATE_MODEL_FAIL":
-			return state;
+			return {...state,
+					buildFail : true};
 		case "RESET_BUILD":
 			return {
 				...state,
