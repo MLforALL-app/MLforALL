@@ -47,7 +47,7 @@ class NaanHandler extends Component {
 										displayEmpty>
 										{this.getMenuItems([
 											"drop",
-											"zero",
+											"zeros",
 											"median",
 											"mean"
 										])}
