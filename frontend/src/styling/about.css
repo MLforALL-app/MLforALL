@@ -27,10 +27,6 @@
   font-weight: 500;
   font-size: 125%;
 }
-.ap-touch {
-  height: calc(25rem + 20vh);
-  position: relative;
-}
 .leftimg {
   left: 0; 
   height: 80%;
@@ -48,4 +44,7 @@
 }
 .leftimg1 {
   background-color: red;
+}
+.SM{
+  margin: 10px; 
 }

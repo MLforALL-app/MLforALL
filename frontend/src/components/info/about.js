@@ -6,14 +6,15 @@ import lenImg from "../../pictures/headshots/len.JPG";
 import maxImg from "../../pictures/headshots/max.jpg";
 import meghaImg from "../../pictures/headshots/megha.jpg";
 import rongImg from "../../pictures/headshots/rong.jpg";
-import img1 from "../../pictures/about/ausvg1.svg";
+// import img1 from "../../pictures/about/ausvg1.svg";
 import img3 from "../../pictures/about/ausvg3.svg";
 import img7 from "../../pictures/about/ausvg7.svg";
 import "../../styling/landing.css";
 import "../../styling/about.css";
-import SignUp from "../auth/Signup";
+// import SignUp from "../auth/Signup";
 import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
+import { SocialIcon } from "react-social-icons";
 
 const Header = () => {
   return (
@@ -28,67 +29,98 @@ const Header = () => {
         </div>
         <div className="col s0 m3"></div>
       </div>
-
+			<br />
       <div className="row center aplearn">
         <Link to="signup" transition={500} smooth={true}>
           <hr className="ap-line" />
         </Link>
+				<LearnMore />
       </div>
     </div>
   );
 };
 
-const OurGoal = () => {
+const LearnMore = () => {
   return (
-		<div
-			className="row img-row"
-			style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
-		>
-			<div className="row center ap2">
-				<div className="col s0 m3"></div>
-				<div className="col s12 m6">
-					<br /> <br /> <br /> <br /> <br /> <br />
-					<h4 className="purple-text boldText">Our Goal</h4>
-					<br />
-					<p>
-							MLforALL is a platform designed by four ambitious students, Davis,
-							Joseph, Len, and Max seeking to spread the excitement behind
-							machine learning models to people from all kinds of backgrounds.
-							MLforALL simplifies the math and the small details and grants you
-							freedom to make observations, draw conclusions, and create
-							visualizations about data.
-					</p>
-				</div>
-				<div className="col s0 m3"></div>
-			</div>
-		</div>
-	);
+    <Link to="signup" transition={500} smooth={true}>
+      <p
+        style={{
+          textAlign: "center",
+          margin: "0",
+          color: "grey",
+          cursor: "pointer",
+        }}
+      >
+        Learn more
+      </p>
+      <p style={{ textAlign: "center", margin: "0" }}>
+        <i
+          class="arrow down"
+          style={{
+            border: "solid grey",
+            borderWidth: "0 1.5px 1.5px 0",
+            display: "inline-block",
+            padding: "3px",
+            transform: "rotate(45deg)",
+            WebkitTransform: "rotate(45deg)",
+            cursor: "pointer",
+          }}
+        ></i>
+      </p>
+    </Link>
+  );
 };
 
+const OurGoal = () => {
+  return (
+    <div
+      className="row img-row"
+      style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
+    >
+      <div className="row center ap2">
+        <div className="col s0 m3"></div>
+        <div className="col s12 m6">
+          <br /> <br /> <br /> <br /> <br /> <br />
+          <h4 className="purple-text boldText">Our Goal</h4>
+          <br />
+          <p>
+            MLforALL is a platform designed by four ambitious students, Davis,
+            Joseph, Len, and Max seeking to spread the excitement behind machine
+            learning models to people from all kinds of backgrounds. MLforALL
+            simplifies the math and the small details and grants you freedom to
+            make observations, draw conclusions, and create visualizations about
+            data.
+          </p>
+        </div>
+        <div className="col s0 m3"></div>
+      </div>
+    </div>
+  );
+};
 
 const WWA = () => {
   return (
-		<div
-			className="row img-row"
-			style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
-		>
-			<div className="row center ap2">
-				<div className="col s0 m3"></div>
-				<div className="col s12 m6">
-					<br /> <br /> <br /> <br /> <br /> <br />
-					<h4 className="purple-text boldText">Who We Are</h4>
-					<br />
-					<p>
-						Davis, Joseph, Len, and Max are from all different areas of
-						studies, places of the world, and walks of life. But what brings
-						them together is their shared interest in educating people about
-						topics they're passionate about.
-						<strong> #MyHeartIsInTheWork</strong>
-					</p>
-				</div>
-				<div className="col s0 m3"></div>
-			</div>
-		</div>
+    <div
+      className="row img-row"
+      style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
+    >
+      <div className="row center ap2">
+        <div className="col s0 m3"></div>
+        <div className="col s12 m6">
+          <br /> <br /> <br /> <br /> <br /> <br />
+          <h4 className="purple-text boldText">Who We Are</h4>
+          <br />
+          <p>
+            Davis, Joseph, Len, and Max are from all different areas of studies,
+            places of the world, and walks of life. But what brings them
+            together is their shared interest in educating people about topics
+            they're passionate about.
+            <strong> #MyHeartIsInTheWork</strong>
+          </p>
+        </div>
+        <div className="col s0 m3"></div>
+      </div>
+    </div>
   );
 };
 
@@ -162,7 +194,7 @@ const landSign = () => {
         style={{ backgroundImage: `url(${img7})`, backgroundColor: "white" }}
       >
         <div className="row center">
-          <div className="container ap-touch center">
+          <div className="container ap-header center">
             <Element name="signup" className="element">
               <span>
                 <h4 className="purple-text">Get In Touch!</h4>
@@ -174,7 +206,21 @@ const landSign = () => {
                 </p>
               </span>
               <div className="container land-row">
-                <SignUp className="center" />
+                <SocialIcon
+                  url="http://linkedin.com/company/mlforall"
+                  className="SM"
+                />
+                <SocialIcon
+                  url="https://www.instagram.com/ml.for.all/"
+                  className="SM"
+                />
+                <SocialIcon
+                  url="https://github.com/lenghuang/MLforAll"
+                  className="SM"
+                />
+                <SocialIcon url="mlforall.cmu@gmail.com" className="SM" />
+
+                {/* <SignUp className="center" /> */}
               </div>
             </Element>
           </div>
