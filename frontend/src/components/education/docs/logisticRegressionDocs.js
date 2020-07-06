@@ -1,5 +1,11 @@
 import React from "react";
-import { header, bodyContent } from "./fileFormatter";
+import {
+	header,
+	bodyContent,
+	pinkTheme,
+	pinkDark,
+	purpleTheme
+} from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 
@@ -29,7 +35,7 @@ function makePlot() {
 			name: "Yes",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(255, 0, 0)", // more about "marker.color": #scatter-marker-color
+				color: pinkDark, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -41,7 +47,7 @@ function makePlot() {
 			name: "No",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
-				color: "rgb(0, 0, 255)", // more about "marker.color": #scatter-marker-color
+				color: pinkTheme, // more about "marker.color": #scatter-marker-color
 				size: 10
 			}
 		},
@@ -51,7 +57,7 @@ function makePlot() {
 			y: arange(0, 7, 0.1).map(logistic_fn(3.0, 3)),
 			name: "Probability of Liking Math",
 			marker: {
-				color: "rgb(0, 0, 0)"
+				color: purpleTheme
 			}
 		}
 	];
@@ -87,6 +93,7 @@ function makePlot() {
 
 const logisticRegression = (
 	<div>
+		<h1 className="purple-text"> Help Page </h1>
 		{header("Logistic Regression", "+2")}
 
 		{bodyContent(`

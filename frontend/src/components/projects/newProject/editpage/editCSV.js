@@ -13,27 +13,6 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 
-export const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
-};
-
 class DisplayCSV extends Component {
 	// Our flip boolean object data structure thing functions
 	filterObj = (objState) => {
@@ -107,7 +86,7 @@ class DisplayCSV extends Component {
 							value="bottom"
 							control={<Checkbox color="primary" />}
 							label=""
-							checked = {this.state.inputs[colName] ? true : false}
+							checked={this.state.inputs[colName] ? true : false}
 							labelPlacement="bottom"
 							onChange={this.checkBoxChange(colName)}
 						/>
@@ -156,7 +135,7 @@ class DisplayCSV extends Component {
 
 	componentDidMount = () => {
 		let thingsToSelect = this.props.selectedVariables;
-	    thingsToSelect.forEach((item) => {
+		thingsToSelect.forEach((item) => {
 			this.checkBoxChange(item.name)(null);
 		});
 	};
@@ -177,8 +156,7 @@ class DisplayCSV extends Component {
 						<div className="row container">
 							<h5>
 								<b>
-									1. I want to consider these input
-									parameters...{" "}
+									1. I want to consider these input parameters...{" "}
 									<span className="pink-text">
 										<HelpBox
 											header="Click to Toggle Parameters"
@@ -195,16 +173,12 @@ class DisplayCSV extends Component {
 								headerHeight={60}
 								rowHeight={25}
 								rowCount={this.props.csvData.length}
-								rowGetter={({ index }) =>
-									this.props.csvData[index]
-								}
+								rowGetter={({ index }) => this.props.csvData[index]}
 								rowClassName={({ index }) => {
 									if (index < 0) {
 										return styles.headerRow;
 									} else {
-										return index % 2 === 0
-											? "evenRow"
-											: "oddRow";
+										return index % 2 === 0 ? "evenRow" : "oddRow";
 									}
 								}}>
 								{this.getColumns(

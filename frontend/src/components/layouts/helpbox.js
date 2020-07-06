@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { withStyles } from "@material-ui/core/styles";
 import HelpIcon from "@material-ui/icons/Help";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -21,6 +22,7 @@ class HelpBox extends Component {
 		const { header, desc, placement, link, linkdesc } = this.props;
 		return (
 			<HtmlTooltip
+				interactive
 				leaveDelay={link ? 750 : 100}
 				title={
 					<React.Fragment>
@@ -28,7 +30,7 @@ class HelpBox extends Component {
 						<p>
 							{desc}
 							<br />
-							<a href={link}>{linkdesc}</a>
+							<Link to={`/${link}`}>{linkdesc}</Link>
 						</p>
 					</React.Fragment>
 				}

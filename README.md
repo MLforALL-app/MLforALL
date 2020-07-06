@@ -3,10 +3,11 @@
 </p>
 
 <p align="center">
-<a href="https://www.codefactor.io/repository/github/lenghuang/mlforall"><img src="https://www.codefactor.io/repository/github/lenghuang/mlforall/badge" alt="CodeFactor" /></a>
-<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
-<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
-<a href="https://lgtm.com/projects/g/lenghuang/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/lenghuang/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://www.codefactor.io/repository/github/mlforall-app/mlforall"><img src="https://www.codefactor.io/repository/github/mlforall-app/mlforall/badge" alt="CodeFactor" /></a>
+<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+HTML
+<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
 <p>
 
 <p align="center">
@@ -19,21 +20,21 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 
 ### [Frontend:](https://github.com/lenghuang/MLforAll/tree/master/frontend/src)
 
--   Materialize-CSS
--   Material-UI
--   ReactJS
--   Redux
+- Materialize-CSS
+- Material-UI
+- ReactJS
+- Redux
 
 ### [Backend:](https://github.com/lenghuang/MLforAll/tree/master/api)
 
--   Firebase Authentication, Firestore
--   Flask RestAPI
--   Google Cloud Platform, Storage
--   sci-kit learn
--   Pandas
+- Firebase Authentication, Firestore
+- Flask RestAPI
+- Google Cloud Platform, Storage
+- sci-kit learn
+- Pandas
 
 ## Links
 
--   [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
--   [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
--   [Custom Link](https://mlforall.xyz/)
+- [In Progress Testing Link](https://lenghuang.github.io/MLforAll/)
+- [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
+- [Custom Link](https://mlforall.xyz/)

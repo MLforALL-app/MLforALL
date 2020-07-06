@@ -17,6 +17,7 @@ import {
 	updateCurrentWorkingProject,
 	deleteMLProject
 } from "../../../store/actions/projectActions";
+import { nameMapper, addSpace } from "../../../store/actions/nameMapper";
 import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
@@ -24,31 +25,6 @@ import ProjectStatus from "./editpage/projectstatus";
 import BuildProject from "./editpage/comfirmbuild";
 import projectSource from "../../../config/collection";
 
-
-const addSpace = (list) => {
-	return list.map((s) => " " + s);
-};
-
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gauss Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
-};
 
 const filterObj = (objState) => {
 	return Object.entries(objState)

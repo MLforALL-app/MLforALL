@@ -1,5 +1,5 @@
 import React from "react";
-import { header, bodyContent } from "./fileFormatter";
+import { header, bodyContent, pinkTheme, purpleLight } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -29,7 +29,7 @@ function makePlot() {
 			y: arange(0, 7, 0.1).map(gaussian_density_fn(3, 0.2)),
 			name: "Female",
 			marker: {
-				color: "rgb(255, 0, 0)"
+				color: pinkTheme
 			}
 		},
 		{
@@ -38,7 +38,7 @@ function makePlot() {
 			y: arange(0, 7, 0.1).map(gaussian_density_fn(5, 0.3)),
 			name: "Male",
 			marker: {
-				color: "rgb(0, 0, 255)"
+				color: purpleLight
 			}
 		}
 	];
@@ -75,7 +75,7 @@ function makePlot() {
 
 const gaussianNaiveBayes = (
 	<div>
-		{header("Gaussian Naive Bayes", "+2")}
+		{header("Gaussian Naive Bayes")}
 		{makePlot()}
 
 		{header("Technical Explanation")}

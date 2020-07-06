@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { nameMapper } from "../../../../store/actions/nameMapper";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
@@ -15,28 +16,6 @@ const refreshState = (project) => {
 		resInputs: {},
 		resModel: ""
 	};
-};
-
-// Helper function so model names get printed nicer
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gaussian Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
 };
 
 // Helper function for brief descriptions about each model
@@ -180,7 +159,12 @@ class GenerateSliders extends Component {
 									project.models &&
 									project.models[model] &&
 									(project.models[model].accuracy * 100).toFixed(2) + "%"}
-								<HelpBox placement="right" desc={getDesc(model)} />
+								<HelpBox
+									placement="right"
+									desc={getDesc(model)}
+									link="help"
+									linkdesc="Learn more here"
+								/>
 							</h5>
 						</div>
 						<div className="slider-contain">
