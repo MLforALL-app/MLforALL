@@ -4,6 +4,7 @@ import Signedinlinks from "./Singedinlinks";
 import Signedoutlinks from "./Singedoutlinks";
 import { connect } from "react-redux";
 import logo from "../../pictures/backgrounds/logo.png";
+import { isBrowser } from "react-device-detect";
 
 // use parent div className = "navbar-fixed" if you want sticky
 const Navbar = (props) => {
@@ -24,7 +25,7 @@ const Navbar = (props) => {
 							style={{ height: "2rem" }}
 						/>
 						<span className="purple-text">
-							<b> forALL</b>
+							{isBrowser ? <b> forALL</b> : <b></b>}
 						</span>
 					</Link>
 					{links}
