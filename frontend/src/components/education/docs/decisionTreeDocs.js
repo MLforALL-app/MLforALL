@@ -1,5 +1,5 @@
 import React from "react";
-import { header, pinkTheme, purpleDark, grey } from "./fileFormatter";
+import { header, bodyContent, pinkTheme, purpleDark, grey } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -234,30 +234,30 @@ function makePlot() {
 			},
 			opacity: 0.8,
 			text: [
-				"Ft[23]<868.20",
-				"Ft[27]<0.13",
-				"Ft[6]<0.06",
-				"Ft[21]<30.14",
-				"Ft[1]<18.96",
-				"0",
-				"Ft[21]<27.52",
-				"Ft[11]<0.86",
-				"0",
+				"Height < 5.5",
+				"Weight < 150",
+				"Has Tail?",
+				"Length < 3.2",
+				"Has Scales?",
+				"Length < 6.7",
 				"0",
 				"1",
-				"Ft[24]<0.16",
+				"Eats Meat?",
 				"1",
 				"0",
+				"Has Hair?",
 				"0",
-				"Ft[24]<0.14",
-				"Ft[24]<0.14",
+				"0",
+				"Has Hair?",
+				"Weight < 10",
+				"0",
 				"1",
+				"Eats Plants?",
 				"1",
-				"Ft[0]<12.11",
-				"Ft[12]<1.91",
-				"1",
+				"External Fertilization?",
 				"1",
 				"0",
+				"1",
 				"0"
 			],
 			hoverinfo: "text"
@@ -267,7 +267,7 @@ function makePlot() {
 		font: {
 			size: 12
 		},
-		title: "Decision Tree Visualization",
+		title: "Classifying Animal Type",
 		xaxis: {
 			showgrid: false,
 			showline: false,
@@ -293,7 +293,7 @@ function makePlot() {
 				x: 0,
 				y: 12,
 				font: font,
-				text: "Ft[23]<868.20",
+				text: "Height < 5.5",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -306,7 +306,7 @@ function makePlot() {
 				x: -2.25,
 				y: 11,
 				font: font,
-				text: "Ft[27]<0.13",
+				text: "Weight < 150",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -319,7 +319,7 @@ function makePlot() {
 				x: 2.25,
 				y: 11,
 				font: font,
-				text: "Ft[6]<0.06",
+				text: "Has Tail?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -332,7 +332,7 @@ function makePlot() {
 				x: -4.25,
 				y: 10,
 				font: font,
-				text: "Ft[21]<30.14",
+				text: "Length < 3.2",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -345,7 +345,7 @@ function makePlot() {
 				x: -0.25,
 				y: 10,
 				font: font,
-				text: "Ft[21]<27.52",
+				text: "Has Scales?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -358,7 +358,7 @@ function makePlot() {
 				x: 1.75,
 				y: 10,
 				font: font,
-				text: "Ft[1]<18.96",
+				text: "Length < 6.7",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -397,7 +397,7 @@ function makePlot() {
 				x: -3.75,
 				y: 9,
 				font: font,
-				text: "Ft[11]<0.86",
+				text: "Eats Meat?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -436,7 +436,7 @@ function makePlot() {
 				x: -0.75,
 				y: 9,
 				font: font,
-				text: "Ft[24]<0.16",
+				text: "Has Hair?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -475,7 +475,7 @@ function makePlot() {
 				x: -3.25,
 				y: 8,
 				font: font,
-				text: "Ft[24]<0.14",
+				text: "Has Hair?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -488,7 +488,7 @@ function makePlot() {
 				x: -1.25,
 				y: 8,
 				font: font,
-				text: "Ft[24]<0.14",
+				text: "Weight < 10",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -527,7 +527,7 @@ function makePlot() {
 				x: -2.75,
 				y: 7,
 				font: font,
-				text: "Ft[0]<12.11",
+				text: "Eats Plants?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -553,7 +553,7 @@ function makePlot() {
 				x: -0.75,
 				y: 7,
 				font: font,
-				text: "Ft[12]<1.91",
+				text: "External Fertilization?",
 				xref: "x1",
 				yref: "y1",
 				bgcolor: pinkTheme,
@@ -635,7 +635,13 @@ function makePlot() {
 const decisionTree = (
 	<div>
 		{header("Decision Tree (Classifier)")}
+		{bodyContent(`
+A decision true is used to classify objects into different categories by asking yes/no questions. For example, it can be used to classify animal type based on traits of an animal (0 and 1 are two types of animals):
+`)}
 		{makePlot()}
+		{bodyContent(`
+Because it uses yes/no questions to make decisions, a decision tree is highly interpretable.		
+`)}
 	</div>
 );
 
