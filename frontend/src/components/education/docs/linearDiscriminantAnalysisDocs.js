@@ -1,5 +1,5 @@
 import React from "react";
-import { header, pinkTheme, purpleLight, purpleTheme } from "./fileFormatter";
+import { header, pinkTheme, purpleLight, purpleTheme, bodyContent } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -25,7 +25,7 @@ function makePlot() {
 			mode: "markers",
 			x: [1, 2, 2, 3, 4], // more about "x": #scatter-x
 			y: [1, -1, 2, 1.5], // #scatter-y
-			name: "Yes",
+			name: "Cat",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
 				color: pinkTheme, // more about "marker.color": #scatter-marker-color
@@ -37,7 +37,7 @@ function makePlot() {
 			mode: "markers",
 			x: [4, 4, 5, 6], // more about "x": #scatter-x
 			y: [8, 6, 7, 5], // #scatter-y
-			name: "No",
+			name: "Dog",
 			marker: {
 				// marker is an object, valid marker keys: #scatter-marker
 				color: purpleLight, // more about "marker.color": #scatter-marker-color
@@ -56,13 +56,13 @@ function makePlot() {
 	];
 	let layout = {
 		// all "layout" attributes: #layout
-		title: "Probability of Liking Math Given Number of Math Classes Taken", // more about "layout.title": #layout-title
+		title: "Animal Type by Weight and Length", // more about "layout.title": #layout-title
 		xaxis: {
 			// all "layout.xaxis" attributes: #layout-xaxis
-			title: "Number of Math Classes Taken in College" // more about "layout.xaxis.title": #layout-xaxis-title
+			title: "Length" // more about "layout.xaxis.title": #layout-xaxis-title
 		},
 		yaxis: {
-			title: "Likes Math"
+			title: "Weight"
 		},
 		legend: {
 			bgcolor: "rgba(0, 0, 0, 0)"
@@ -87,7 +87,13 @@ function makePlot() {
 const linearDiscriminantAnalysis = (
 	<div>
 		{header("Linear Discriminant Analysis", "+2")}
+		{bodyContent(`
+Linear Discriminant Analysis (LDA) is used to classify objects into different categories by fitting planes (lines in the example below) which separate the categories. It assumes that the data associated with each class is normally distributed but that class covariances (variance in one dimension) are the same between different classes. Here, we predict animal type based on height and weight:
+`)}
 		{makePlot()}
+		{bodyContent(`
+Note that LDA works best with continuous data because we assume normality of data associated with each class, and the normal distribution is continuous.
+`)}
 	</div>
 );
 
