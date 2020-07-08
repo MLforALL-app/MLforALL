@@ -55,6 +55,7 @@ class EditProject extends Component {
     };
 
     componentDidUpdate = (prevProps) => {
+        console.log(this.props.project.info.variable_info);
         let project_process = this.determineProjectState();
         //handling project process change
         if (this.state.projectState !== project_process) {
@@ -168,7 +169,9 @@ class EditProject extends Component {
                     !this.state.waitForCSVUpload ? (
                         <div>
                             {this.props.csvData &&
-                            this.props.currentWorkingProject !== "initialized" ? (
+                             this.props.project.info &&
+                             this.props.project.info.variable_info &&
+                             this.props.currentWorkingProject !== "initialized" ? (
                                 <div>
                                     <DisplayCSV
                                         project={project}

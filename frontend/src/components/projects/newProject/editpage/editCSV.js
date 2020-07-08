@@ -71,7 +71,7 @@ class DisplayCSV extends Component {
 		return (
 			<div>
 				<div>
-					{!(this.props.variableInfo[i].selectable) ? (
+					{!(this.props.variableInfo && this.props.variableInfo[i].selectable) ? (
 						<FormControlLabel
 							className="purple-text"
 							value="bottom"
@@ -136,7 +136,10 @@ class DisplayCSV extends Component {
 	};
 
 	componentDidMount = () => {
+		console.log("MOUNTING CSV");
 		console.log(this.props.variableInfo);
+		console.log(this.props.variableInfo[0]);
+		console.log(typeof(this.props.variableInfo));
 		let thingsToSelect = this.props.selectedVariables;
 		thingsToSelect.forEach((item) => {
 			this.checkBoxChange(item.name)(null);
@@ -150,7 +153,7 @@ class DisplayCSV extends Component {
 				) : (
 					<span></span>
 				)}
-				{(this.props.csvData && this.props.csvData.length) === 0 ? (
+				{(this.props.variableInfo && (this.props.variableInfo.length === 0) &&this.props.csvData && this.props.csvData.length) === 0 ? (
 					<div className="container center">
 						<CircularProgress />
 					</div>
