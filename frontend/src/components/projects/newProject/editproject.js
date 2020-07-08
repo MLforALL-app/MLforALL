@@ -174,6 +174,7 @@ class EditProject extends Component {
                                         project={project}
                                         id={projectID}
                                         selectedVariables={this.props.project.variables}
+                                        variableInfo={this.props.project.info.variable_info}
                                     />
                                     <NanHandler
                                         count={this.props.project.info.NaN}
