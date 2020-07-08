@@ -88,11 +88,11 @@ const linearDiscriminantAnalysis = (
 	<div>
 		{header("Linear Discriminant Analysis", "+2")}
 		{bodyContent(`
-Linear Discriminant Analysis (LDA) is used to classify objects into different categories by fitting planes (lines in the example below) which separate the categories. It assumes that the data associated with each class is normally distributed but that class covariances (variance in one dimension) are the same between different classes. Here, we predict animal type based on height and weight:
+Linear discriminant analysis (LDA) is used to classify objects into different categories by fitting planes (lines in the example below) which separate the categories. It assumes that the data associated with each class is normally distributed but that class covariances (variance in one dimension) are the same between different classes. Here, we predict animal type based on height and weight:
 `)}
 		{makePlot()}
 		{bodyContent(`
-Note that LDA works best with continuous data because we assume normality of data associated with each class, and the normal distribution is continuous.
+In this example, anything above the line would be classified as a dog, while anything below the line would be classified as a cat. Note that LDA works best with continuous data because we assume normality of data associated with each class, and the normal distribution is continuous.
 `)}
 	</div>
 );
