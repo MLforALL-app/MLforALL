@@ -10,7 +10,7 @@
 	height: calc(12rem + 5vh);
 }
 .abt {
-  padding-top: 15px;
+	padding-top: 15px;
 }
 .ap-line {
 	text-align: center;
@@ -20,31 +20,28 @@
 .aplearn {
   padding-bottom: calc(3rem + 5vh);
 }
-.ap2 {
-	height: calc(25rem + 20vh);
-}
 .p-signup {
   font-weight: 500;
   font-size: 125%;
 }
-.leftimg {
-  left: 0; 
-  height: 80%;
-  /* background-color: red; */
-  z-index: 1;
-}
-.rightimg {
-  right: 0;
-  height: 80%;
-  /* background-color: blue; */
-  
-}
 .wwa {
   font-weight: bold;
 }
-.leftimg1 {
-  background-color: red;
-}
-.SM{
+.SM {
   margin: 10px; 
+}
+.OG {
+	padding-top: calc(2rem + 1vh);
+	font-weight: bold;
+}
+.GIT {
+	padding-top: calc(2rem + 5vh);
+	font-weight: bold;
+}
+.apland {
+	padding-bottom: calc(5rem + 6vh);
+}
+.headShot {
+	margin-left: calc(3rem + 6vw);
+	margin-right: calc(3rem + 6vw);
 }

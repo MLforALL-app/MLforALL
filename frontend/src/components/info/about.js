@@ -15,6 +15,9 @@ import "../../styling/about.css";
 import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
+import { isBrowser } from "react-device-detect";
+// import { firestoreConnect } from "react-redux-firebase";
+// import { compose } from "redux";
 
 const Header = () => {
   return (
@@ -23,18 +26,23 @@ const Header = () => {
         <div className="col s0 m3"></div>
         <div className="col s12 m6 container ap-header">
           <div>
-            <h1 className="purple-text abt">About Us</h1>
+            <h1
+              className="purple-text abt"
+              style={isBrowser ? { fontSize: "90px" } : {}}
+            >
+              About Us
+            </h1>
             <p>Learn more about the team.</p>
           </div>
         </div>
         <div className="col s0 m3"></div>
       </div>
-			<br />
+      <br />
       <div className="row center aplearn">
         <Link to="signup" transition={500} smooth={true}>
           <hr className="ap-line" />
         </Link>
-				<LearnMore />
+        <LearnMore />
       </div>
     </div>
   );
@@ -55,7 +63,7 @@ const LearnMore = () => {
       </p>
       <p style={{ textAlign: "center", margin: "0" }}>
         <i
-          class="arrow down"
+          className="arrow down"
           style={{
             border: "solid grey",
             borderWidth: "0 1.5px 1.5px 0",
@@ -77,11 +85,17 @@ const OurGoal = () => {
       className="row img-row"
       style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
     >
-      <div className="row center ap2">
-        <div className="col s0 m3"></div>
-        <div className="col s12 m6">
-          <br /> <br /> <br /> <br /> <br /> <br />
-          <h4 className="purple-text boldText">Our Goal</h4>
+      <div
+        className="row center"
+        style={
+          isBrowser
+            ? { height: "calc(25rem + 20vh)" }
+            : { height: "calc(15rem + 15vh)" }
+        }
+      >
+        <div className="col s1 m3"></div>
+        <div className="col s10 m6">
+          <h3 className="purple-text boldText OG">Our Goal</h3>
           <br />
           <p>
             MLforALL is a platform designed by four ambitious students, Davis,
@@ -92,7 +106,7 @@ const OurGoal = () => {
             data.
           </p>
         </div>
-        <div className="col s0 m3"></div>
+        <div className="col s1 m3"></div>
       </div>
     </div>
   );
@@ -104,11 +118,17 @@ const WWA = () => {
       className="row img-row"
       style={{ backgroundImage: `url(${img3})`, backgroundColor: "white" }}
     >
-      <div className="row center ap2">
-        <div className="col s0 m3"></div>
-        <div className="col s12 m6">
-          <br /> <br /> <br /> <br /> <br /> <br />
-          <h4 className="purple-text boldText">Who We Are</h4>
+      <div
+        className="row center"
+        style={
+          isBrowser
+            ? { height: "calc(25rem + 15vh)" }
+            : { height: "calc(15rem + 15vh)" }
+        }
+      >
+        <div className="col s1 m3"></div>
+        <div className="col s10 m6">
+      <h3 className="purple-text boldText OG">Who We Are</h3>
           <br />
           <p>
             Davis, Joseph, Len, and Max are from all different areas of studies,
@@ -118,13 +138,14 @@ const WWA = () => {
             <strong> #MyHeartIsInTheWork</strong>
           </p>
         </div>
-        <div className="col s0 m3"></div>
+        <div className="col s1 m3"></div>
       </div>
     </div>
   );
 };
 
-const team = [
+
+const teamr1 = [
   {
     name: "Davis Wojnovich",
     title: "Data Science Lead",
@@ -136,7 +157,8 @@ const team = [
     title: "UI Design Lead",
     link: "https://www.linkedin.com/in/josephkimdesign/",
     img: joeImg,
-  },
+  }];
+const teamr2 = [
   {
     name: "Len Huang",
     title: "Agile / Tech Lead",
@@ -148,7 +170,8 @@ const team = [
     title: "Machine Learning Lead",
     link: "https://www.linkedin.com/in/max-hirsch/",
     img: maxImg,
-  },
+  }];
+const teamr3 = [
   {
     name: "Megha Jain",
     title: "Software Engineer",
@@ -160,14 +183,29 @@ const team = [
     title: "Software Engineer",
     link: "https://www.linkedin.com/in/rong-ye/",
     img: rongImg,
-  },
-];
+  }];
 
 const makePicture = (name, title, link, picture) => {
   return (
-    <div key={name} style={{ padding: "1.8rem" }} className="center">
+    <div key={name} style={{ padding: "4em 9vw"}} className="center">
       <a target="_blank" rel="noreferrer noopener" href={link}>
-        <img className="headshot-img" src={picture} alt="Dav" />
+        <img
+          src={picture}
+          alt="Dav"
+          style={
+            isBrowser
+              ? {
+                  height: "calc(8rem + 9vh + 1vw)",
+                  width: "calc(8rem + 9vh + 1vw)",
+                  borderRadius: "100%",
+                }
+              : {
+                  height: "calc(4rem + 4vh + 1vw)",
+                  width: "calc(4rem + 4vh + 1vw)",
+                  borderRadius: "100%",
+                }
+          }
+        />
       </a>
       <h5>{name}</h5>
       <h6>{title}</h6>
@@ -177,10 +215,16 @@ const makePicture = (name, title, link, picture) => {
 
 const headshot = () => {
   return (
-    <div className="center container">
+    <div className="center headShot">
       <h4 className="purple-text">Meet Our Team</h4>
       <div className="land-row">
-        {team.map((p) => makePicture(p.name, p.title, p.link, p.img))}
+        {teamr1.map((p) => makePicture(p.name, p.title, p.link, p.img))}
+      </div>
+      <div className="land-row">
+        {teamr2.map((p) => makePicture(p.name, p.title, p.link, p.img))}
+      </div>
+      <div className="land-row">
+        {teamr3.map((p) => makePicture(p.name, p.title, p.link, p.img))}
       </div>
     </div>
   );
@@ -194,16 +238,10 @@ const landSign = () => {
         style={{ backgroundImage: `url(${img7})`, backgroundColor: "white" }}
       >
         <div className="row center">
-          <div className="container ap-header center">
+          <div className="container apland center">
             <Element name="signup" className="element">
               <span>
-                <h4 className="purple-text">Get In Touch!</h4>
-              </span>
-              <span>
-                <p className="p-signup">
-                  Please fill out this form and we will be in touch as soon as
-                  possible!
-                </p>
+                <h3 className="purple-text GIT">Get In Touch!</h3>
               </span>
               <div className="container land-row">
                 <SocialIcon
@@ -219,7 +257,6 @@ const landSign = () => {
                   className="SM"
                 />
                 <SocialIcon url="mlforall.cmu@gmail.com" className="SM" />
-
                 {/* <SignUp className="center" /> */}
               </div>
             </Element>
@@ -232,7 +269,7 @@ const landSign = () => {
 
 class About extends Component {
   render() {
-    const { auth } = this.props;
+    const { auth} = this.props;
     if (!auth.uid) {
       return (
         <div className="white-background-landing">
