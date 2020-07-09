@@ -94,9 +94,11 @@ const Land2 = () => {
             Machine Learning Model.
             <br />
           </h5>
-          <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
-            Create
-          </button>
+          <div style={{ paddingTop: "20px" }}>
+            <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
+              Create
+            </button>
+          </div>
         </div>
       </div>
 
