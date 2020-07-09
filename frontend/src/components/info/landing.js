@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 // Import images like this
 import img1 from "../../pictures/landing/LP1.svg";
-import img2 from "../../pictures/landing/LP2.svg";
 import img3 from "../../pictures/landing/LP3.svg";
 import img4 from "../../pictures/landing/LP4.svg";
 import img5 from "../../pictures/landing/LP5.svg";
@@ -20,7 +21,7 @@ import { Redirect } from "react-router-dom";
 const LandSign = () => {
   return (
     <div
-      className="row img-row"
+      className="row fullrow-bg"
       style={{ backgroundImage: `url(${img9})`, backgroundColor: "white" }}
     >
       <div className="container land land-sign" style={{ textAlign: "center" }}>
@@ -34,53 +35,55 @@ const LandSign = () => {
   );
 };
 
-const Header = () => {
+const Header = (biz) => {
   return (
-    <div className="row center">
-      <div className="col s0 m4 lp-header">
-        <img className="fullrow-bg" src={img1} alt="" />
-      </div>
-      <div className="col s12 m4 container lp-header land">
+    <div
+      className="row fullrow-bg "
+      style={{ backgroundImage: `url(${img1})`, backgroundColor: "white" }}
+    >
+      <div
+        className="container col s12 m4 offset-m4 lp-header land-col"
+        style={{ textAlign: "center" }}
+      >
         <div>
-          <h1 className="purple-text">MLforALL</h1>
-          <p>
-            Create, share, explore, and play with Machine Learning Models
-            created by others.
-          </p>
+          <h1 className="purple-text"> {biz ? biz.landing.tagline : ""}</h1>
+          <h6>
+            {" "}
+            <p>{biz ? biz.landing.goal : ""}</p>{" "}
+          </h6>
         </div>
-        <div style={{ paddingTop: "2rem" }}>
-          <span>
+        <div style={{ paddingTop: "3rem" }}>
+          <span style={{ whiteSpace: "nowrap" }}>
             <button className="btn btn-outline anchor-160 waves-effect waves-light z-depth-0">
               Sign Up
             </button>
+            <div className="divider"></div>
             <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
               Create
             </button>
           </span>
         </div>
       </div>
-      <div className="col s0 m4 lp-header">
-        <img className="fullrow-bg" src={img2} alt="" />
-      </div>
     </div>
   );
 };
 
-const Land2 = () => {
+const Land2 = (biz) => {
   return (
     <div className="row center">
+      <h4>
+        {" "}
+        <br /> {biz ? biz.landing.intro : ""}
+      </h4>
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg land-col"
         style={{ backgroundImage: `url(${img3})` }}
       >
-        <div className="left-block" style={{ paddingTop: "19%" }}>
-          <h4 className="purple-text" style={{ fontSize: "2.5vw" }}>
-            Create your own Machine <br /> Learning Models!
-          </h4>
-          <h5 style={{ fontSize: "1.5vw" }}>
-            Be guided through a beginner-friendly <br /> process on how to
-            create a Machine <br />
-            Learning Model.
+        <div className="left-block container lp-text">
+          <h4 className="purple-text">{biz ? biz.landing.lp2Head : ""}</h4>
+          <h5>
+            {biz ? biz.landing.lp2Text : ""}
+            <br />
           </h5>
           <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
             Create
@@ -89,56 +92,47 @@ const Land2 = () => {
       </div>
 
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg"
         style={{ backgroundImage: `url(${img4})` }}
       ></div>
     </div>
   );
 };
 
-const Land3 = () => {
+const Land3 = (biz) => {
   return (
     <div className="row center">
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg"
         style={{ backgroundImage: `url(${img5})` }}
       ></div>
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg land-col"
         style={{ backgroundImage: `url(${img6})` }}
       >
-        <div className="left-block" style={{ paddingTop: "15%" }}>
-          <h4 className="purple-text" style={{ fontSize: "2.5vw" }}>
-            Play around with other <br /> Machine Learning Models!
-          </h4>
-          <h5 style={{ fontSize: "1.5vw" }}>
-            Test out other people/s models and see <br /> how they perform!
-          </h5>
+        <div className="left-block container">
+          <h4 className="purple-text">{biz ? biz.landing.lp3Head : ""}</h4>
+          <h5>{biz ? biz.landing.lp3Text : ""}</h5>
         </div>
       </div>
     </div>
   );
 };
 
-const Land4 = () => {
+const Land4 = (biz) => {
   return (
     <div className="row center">
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg land-col"
         style={{ backgroundImage: `url(${img7})` }}
       >
-        <div className="left-block" style={{ paddingTop: "10%" }}>
-          <h4 className="purple-text" style={{ fontSize: "2.5vw" }}>
-            Explore and Discover <br /> new Models!
-          </h4>
-          <h5 style={{ fontSize: "1.5vw" }}>
-            Share your Machine Learning Model <br /> with the world, and view
-            others as well
-          </h5>
+        <div className="left-block container lp-text">
+          <h4 className="purple-text">{biz ? biz.landing.lp4Head : ""}</h4>
+          <h5>{biz ? biz.landing.lp4Text : ""}</h5>
         </div>
       </div>
       <div
-        className="col s6 m6 lp-header row-bg"
+        className="col s0 m6 lp-header row-bg"
         style={{ backgroundImage: `url(${img8})` }}
       ></div>
     </div>
@@ -147,7 +141,7 @@ const Land4 = () => {
 
 const LearnMoreLine = () => {
   return (
-    <Link to="signup" transition={500} smooth={true}>
+    <Link to="Body" transition={500} smooth={true}>
       <hr className="lp-line" style={{ cursor: "pointer" }} />
     </Link>
   );
@@ -155,7 +149,7 @@ const LearnMoreLine = () => {
 
 const LearnMore = () => {
   return (
-    <Link to="signup" transition={500} smooth={true}>
+    <Link to="Body" transition={500} smooth={true}>
       <p
         style={{
           textAlign: "center",
@@ -168,7 +162,7 @@ const LearnMore = () => {
       </p>
       <p style={{ textAlign: "center", margin: "0" }}>
         <i
-          class="arrow down"
+          className="arrow down"
           style={{
             border: "solid grey",
             borderWidth: "0 1.5px 1.5px 0",
@@ -184,18 +178,29 @@ const LearnMore = () => {
   );
 };
 
+const Body = (biz) => {
+  return (
+    <div className="landing-container">
+      {Land2(biz)}
+      {Land3(biz)}
+      {Land4(biz)}
+    </div>
+  );
+};
+
 class Landing extends Component {
   render() {
-    const { auth } = this.props;
+    const { auth, biz } = this.props;
     if (!auth.uid) {
       return (
         <div className="white-background-landing">
-          <Header />
+          {Header(biz)}
           <LearnMoreLine />
           <LearnMore />
-          <Land2 />
-          <Land3 />
-          <Land4 />
+          <Element name="Body" className="element">
+            {Body(biz)}
+          </Element>
+          <LearnMoreLine />
           <LandSign />
         </div>
       );
@@ -210,7 +215,13 @@ class Landing extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
+    biz: state.firestore.data.business,
   };
 };
 
-export default connect(mapStateToProps)(Landing);
+// export default connect(mapStateToProps)(Landing);
+
+export default compose(
+  connect(mapStateToProps),
+  firestoreConnect([{ collection: "business" }])
+)(Landing);
