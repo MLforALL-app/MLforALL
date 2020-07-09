@@ -16,6 +16,8 @@ import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 import { isBrowser } from "react-device-detect";
+// import { firestoreConnect } from "react-redux-firebase";
+// import { compose } from "redux";
 
 const Header = () => {
   return (
@@ -61,7 +63,7 @@ const LearnMore = () => {
       </p>
       <p style={{ textAlign: "center", margin: "0" }}>
         <i
-          class="arrow down"
+          className="arrow down"
           style={{
             border: "solid grey",
             borderWidth: "0 1.5px 1.5px 0",
@@ -126,7 +128,7 @@ const WWA = () => {
       >
         <div className="col s1 m3"></div>
         <div className="col s10 m6">
-          <h3 className="purple-text boldText OG">Who We Are</h3>
+      <h3 className="purple-text boldText OG">Who We Are</h3>
           <br />
           <p>
             Davis, Joseph, Len, and Max are from all different areas of studies,
@@ -141,6 +143,7 @@ const WWA = () => {
     </div>
   );
 };
+
 
 const teamr1 = [
   {
@@ -266,7 +269,7 @@ const landSign = () => {
 
 class About extends Component {
   render() {
-    const { auth } = this.props;
+    const { auth} = this.props;
     if (!auth.uid) {
       return (
         <div className="white-background-landing">
