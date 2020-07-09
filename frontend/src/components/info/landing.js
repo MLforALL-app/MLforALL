@@ -35,7 +35,7 @@ const LandSign = () => {
   );
 };
 
-const Header = (biz) => {
+const Header = () => {
   return (
     <div
       className="row fullrow-bg "
@@ -46,17 +46,23 @@ const Header = (biz) => {
         style={{ textAlign: "center" }}
       >
         <div>
-          <h1 className="purple-text"> {biz ? biz.landing.tagline : ""}</h1>
+          <h1 className="purple-text"> MLforALL </h1>
           <h6>
             {" "}
-            <p>{biz ? biz.landing.goal : ""}</p>{" "}
+            <p>
+              {" "}
+              Create, share, explore, and play with Machine Learning Models
+              created by others.
+            </p>{" "}
           </h6>
         </div>
         <div style={{ paddingTop: "3rem" }}>
           <span style={{ whiteSpace: "nowrap" }}>
-            <button className="btn btn-outline anchor-160 waves-effect waves-light z-depth-0">
-              Sign Up
-            </button>
+            <Link to="signup" transition={500} smooth={true}>
+              <button className="btn btn-outline anchor-160 waves-effect waves-light z-depth-0">
+                Sign Up
+              </button>
+            </Link>
             <div className="divider"></div>
             <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
               Create
@@ -68,21 +74,24 @@ const Header = (biz) => {
   );
 };
 
-const Land2 = (biz) => {
+const Land2 = () => {
   return (
     <div className="row center">
       <h4>
         {" "}
-        <br /> {biz ? biz.landing.intro : ""}
+        <br /> What can you do here?
       </h4>
       <div
         className="col s0 m6 lp-header row-bg land-col"
         style={{ backgroundImage: `url(${img3})` }}
       >
         <div className="left-block container lp-text">
-          <h4 className="purple-text">{biz ? biz.landing.lp2Head : ""}</h4>
+          <h4 className="purple-text">
+            Create your own Machine Learning Models!
+          </h4>
           <h5>
-            {biz ? biz.landing.lp2Text : ""}
+            Be guided through a beginner-friendly process on how to create a
+            Machine Learning Model.
             <br />
           </h5>
           <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
@@ -99,7 +108,7 @@ const Land2 = (biz) => {
   );
 };
 
-const Land3 = (biz) => {
+const Land3 = () => {
   return (
     <div className="row center">
       <div
@@ -111,15 +120,17 @@ const Land3 = (biz) => {
         style={{ backgroundImage: `url(${img6})` }}
       >
         <div className="left-block container">
-          <h4 className="purple-text">{biz ? biz.landing.lp3Head : ""}</h4>
-          <h5>{biz ? biz.landing.lp3Text : ""}</h5>
+          <h4 className="purple-text">
+            Play around with other Machine Learning Models!
+          </h4>
+          <h5>Test out other people/s models and see how they perform!</h5>
         </div>
       </div>
     </div>
   );
 };
 
-const Land4 = (biz) => {
+const Land4 = () => {
   return (
     <div className="row center">
       <div
@@ -127,8 +138,11 @@ const Land4 = (biz) => {
         style={{ backgroundImage: `url(${img7})` }}
       >
         <div className="left-block container lp-text">
-          <h4 className="purple-text">{biz ? biz.landing.lp4Head : ""}</h4>
-          <h5>{biz ? biz.landing.lp4Text : ""}</h5>
+          <h4 className="purple-text">Explore and Discover new Models!</h4>
+          <h5>
+            Share your Machine Learning Model with the world, and view others as
+            well
+          </h5>
         </div>
       </div>
       <div
@@ -178,27 +192,27 @@ const LearnMore = () => {
   );
 };
 
-const Body = (biz) => {
+const Body = () => {
   return (
     <div className="landing-container">
-      {Land2(biz)}
-      {Land3(biz)}
-      {Land4(biz)}
+      {Land2()}
+      {Land3()}
+      {Land4()}
     </div>
   );
 };
 
 class Landing extends Component {
   render() {
-    const { auth, biz } = this.props;
+    const { auth } = this.props;
     if (!auth.uid) {
       return (
         <div className="white-background-landing">
-          {Header(biz)}
+          {Header()}
           <LearnMoreLine />
           <LearnMore />
           <Element name="Body" className="element">
-            {Body(biz)}
+            {Body()}
           </Element>
           <LearnMoreLine />
           <LandSign />
@@ -215,7 +229,6 @@ class Landing extends Component {
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
-    biz: state.firestore.data.business,
   };
 };
 
