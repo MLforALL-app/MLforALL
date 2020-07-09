@@ -76,7 +76,15 @@ function makePlot() {
 const gaussianNaiveBayes = (
 	<div>
 		{header("Gaussian Naive Bayes")}
+		{bodyContent(`
+Gaussian Naive Bayes is used to classify objects into different categories assuming the predictors for that category are normally distributed (i.e. look like the bell curve below). One common example is classifying males and females based on height:		
+`)}
 		{makePlot()}
+		{bodyContent(`
+In this example, if we observe an individual with a height where the left curve is "taller" than the right curve (formally, we say the probability density of the female height curve is greater at this point), then we classify that individual as a female.
+
+Because we use assume that the data is normally distributed, we can determine probabilities that observations belong to one class or the other, but in practice, the classifications based on this model are good while the probability statements are not good.
+`)}
 
 		{header("Technical Explanation")}
 
