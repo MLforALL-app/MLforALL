@@ -13,6 +13,7 @@
 	animation-name: card;
 	animation-duration: 310ms;
 	animation-iteration-count: 1;
+	max-width: 500px;
 }
 @keyframes card {
 	0% {

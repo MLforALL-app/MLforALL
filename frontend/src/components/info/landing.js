@@ -234,9 +234,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-// export default connect(mapStateToProps)(Landing);
-
-export default compose(
-  connect(mapStateToProps),
-  firestoreConnect([{ collection: "business" }])
-)(Landing);
+export default connect(mapStateToProps)(Landing);
