@@ -93,9 +93,12 @@ const OurGoal = () => {
 					<h3 className="purple-text boldText OG">Our Goal</h3>
 					<br />
 					<p>
-						MLforALL is a platform designed by four ambitious students, Davis,
-						Joseph, Len, and Max seeking to spread the excitement behind machine
-						learning models to people from all kinds of backgrounds. MLforALL
+						MLforALL guides you in learning about and experimenting with machine
+						learning without coding experience. Machine learning is a hot topic
+						and used everywhere. However, it can be difficult to find where to
+						start learning about it, and how! That's why Davis and Len started
+						this platform where you can create, explore, and play with machine
+						learning models in our guided and streamlined process. MLforALL
 						simplifies the math and the small details and grants you freedom to
 						make observations, draw conclusions, and create visualizations about
 						data.
@@ -124,10 +127,11 @@ const WWA = () => {
 					<h3 className="purple-text boldText OG">Who We Are</h3>
 					<br />
 					<p>
-						Davis, Joseph, Len, and Max are from all different areas of studies,
-						places of the world, and walks of life. But what brings them
-						together is their shared interest in educating people about topics
-						they're passionate about.
+						Our team is comprised of people from various walks of life and areas
+						of the world. But what brings us together is our background as
+						Carnegie Mellon University students and our desire to educate people
+						about something that's increasingly important and relevant: machine
+						learning. <br />
 						<strong> #MyHeartIsInTheWork</strong>
 					</p>
 				</div>
