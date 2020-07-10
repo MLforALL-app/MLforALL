@@ -121,9 +121,11 @@ const Land2 = () => {
 const Land3 = () => {
 	const landthree = [
 		<div
+			key="image"
 			className={"col s12 m6 row-bg" + lpHeader}
 			style={{ backgroundImage: showImg(img5, true) }}></div>,
 		<div
+			key="text"
 			className={"col s12 m6 row-bg land-col" + lpHeader}
 			style={{ backgroundImage: showImg(img6) }}>
 			<div className="left-block container">
