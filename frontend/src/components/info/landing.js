@@ -14,9 +14,16 @@ import "../../styling/landing.css";
 import "../../styling/features.css";
 import SignUp from "../auth/Signup";
 import { Element, Link } from "react-scroll";
-import { Redirect } from "react-router-dom";
+import { Redirect, NavLink } from "react-router-dom";
 // import is browser
 import { isBrowser } from "react-device-detect";
+
+const showImg = (img, b) => {
+	return isBrowser || b ? `url(${img})` : "";
+};
+
+const lpHeader = isBrowser ? " lp-header" : " lp-header-mobile";
+const lpText = isBrowser ? " lp-text" : "";
 
 const LandSign = () => {
 	return (
@@ -40,7 +47,7 @@ const Header = () => {
 			className="row fullrow-bg "
 			style={{ backgroundImage: `url(${img1})`, backgroundColor: "white" }}>
 			<div
-				className="container col s12 m4 offset-m4 lp-header land-col"
+				className={"container col s12 m4 offset-m4 land-col" + lpHeader}
 				style={{ textAlign: "center" }}>
 				<div>
 					<h1 style={{ fontSize: "5 rem" }} className="purple-text">
@@ -64,9 +71,11 @@ const Header = () => {
 							</button>
 						</Link>
 						<div className="divider"></div>
-						<button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
-							Create
-						</button>
+						<NavLink to="/signin">
+							<button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
+								Create
+							</button>
+						</NavLink>
 					</span>
 				</div>
 			</div>
@@ -75,7 +84,6 @@ const Header = () => {
 };
 
 const Land2 = () => {
-	const imageCol = isBrowser ? "lp-header" : "";
 	return (
 		<div className="row center">
 			<h4>
@@ -83,9 +91,9 @@ const Land2 = () => {
 				<br /> What can you do here?
 			</h4>
 			<div
-				className={`col s12 m6 row-bg land-col ${imageCol}`}
-				style={{ backgroundImage: `url(${img3})` }}>
-				<div className="left-block container lp-text">
+				className={`col s12 m6 row-bg land-col ${lpHeader}`}
+				style={{ backgroundImage: showImg(img3) }}>
+				<div className={`left-block container ${lpText}`}>
 					<h4 className="purple-text">
 						Create your own Machine Learning Models!
 					</h4>
@@ -95,36 +103,40 @@ const Land2 = () => {
 						<br />
 					</h5>
 					<div style={{ paddingTop: "20px" }}>
-						<button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
-							Create
-						</button>
+						<NavLink to="/signin">
+							<button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0">
+								Create
+							</button>
+						</NavLink>
 					</div>
 				</div>
 			</div>
-
 			<div
-				className="col s12 m6 lp-header row-bg"
-				style={{ backgroundImage: `url(${img4})` }}></div>
+				className={"col s12 m6 row-bg" + lpHeader}
+				style={{ backgroundImage: showImg(img4, true) }}></div>
 		</div>
 	);
 };
 
 const Land3 = () => {
+	const landthree = [
+		<div
+			className={"col s12 m6 row-bg" + lpHeader}
+			style={{ backgroundImage: showImg(img5, true) }}></div>,
+		<div
+			className={"col s12 m6 row-bg land-col" + lpHeader}
+			style={{ backgroundImage: showImg(img6) }}>
+			<div className="left-block container">
+				<h4 className="purple-text">
+					Play around with other Machine Learning Models!
+				</h4>
+				<h5>Test out other people/s models and see how they perform!</h5>
+			</div>
+		</div>
+	];
 	return (
 		<div className="row center">
-			<div
-				className="col s12 m6 lp-header row-bg"
-				style={{ backgroundImage: `url(${img5})` }}></div>
-			<div
-				className="col s12 m6 lp-header row-bg land-col"
-				style={{ backgroundImage: `url(${img6})` }}>
-				<div className="left-block container">
-					<h4 className="purple-text">
-						Play around with other Machine Learning Models!
-					</h4>
-					<h5>Test out other people/s models and see how they perform!</h5>
-				</div>
-			</div>
+			{isBrowser ? landthree : landthree.reverse()}
 		</div>
 	);
 };
@@ -133,9 +145,9 @@ const Land4 = () => {
 	return (
 		<div className="row center">
 			<div
-				className="col s12 m6 lp-header row-bg land-col"
-				style={{ backgroundImage: `url(${img7})` }}>
-				<div className="left-block container lp-text">
+				className={"col s12 m6 row-bg land-col" + lpHeader}
+				style={{ backgroundImage: showImg(img7) }}>
+				<div className={"left-block container" + lpText}>
 					<h4 className="purple-text">Explore and Discover new Models!</h4>
 					<h5>
 						Share your Machine Learning Model with the world, and view others as
@@ -144,8 +156,8 @@ const Land4 = () => {
 				</div>
 			</div>
 			<div
-				className="col s12 m6 lp-header row-bg"
-				style={{ backgroundImage: `url(${img8})` }}></div>
+				className={"col s12 m6 row-bg" + lpHeader}
+				style={{ backgroundImage: showImg(img8, true) }}></div>
 		</div>
 	);
 };
