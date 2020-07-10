@@ -30,7 +30,7 @@ class SignUp extends Component {
 		const { authError } = this.props;
 		return (
 			<div className="container" style={{ paddingTop: "2rem" }}>
-				<form onSubmit={this.handleSubmit} className="white z-depth-1">
+				<form onSubmit={this.handleSubmit}>
 					<div className="input-field">
 						<label htmlFor="firstName">First Name</label>
 						<input type="text" id="firstName" onChange={this.handleChange} />
