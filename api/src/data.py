@@ -1,5 +1,6 @@
 from sklearn.model_selection import train_test_split
 import firebase as fb
+import numpy as np
 
 
 class Data:
@@ -62,7 +63,7 @@ class Data:
         ENSURES:  returns the number of NaN's in the entire dataframe 
         '''
         return int(self.df.isnull().sum().sum())
-    
+
     def get_excluded_features(self):
         filteredColumns = self.df.dtypes[self.df.dtypes == np.object]
         listOfColumnNames = list(filteredColumns.index)
@@ -111,7 +112,7 @@ class Data:
             "q3": ref[6],
             "continuous": True if likely_continuous else False,
         }
-        
+
         if not info["continuous"]:
             info["isString"] = True if self.df[input_variable].dtype == np.object else False
             if info["isString"]:

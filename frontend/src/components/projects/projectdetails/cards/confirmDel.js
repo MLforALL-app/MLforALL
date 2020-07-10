@@ -39,7 +39,7 @@ class DeleteProject extends Component {
 					className="btn-flat waves-effect waves-light"
 					style={{ display: "inline" }}
 					onClick={this.handleClickOpen}>
-					<span className="pink-text">Delete This Project</span>
+					<span className="purple-text">Delete This Project</span>
 				</button>
 				<Dialog
 					open={this.state.open}
@@ -51,9 +51,8 @@ class DeleteProject extends Component {
 					</DialogTitle>
 					<DialogContent>
 						<DialogContentText id="alert-dialog-description">
-							Are you sure you want to delete this absolutely
-							awesome machine learning model for you and others to
-							experiment with?
+							Are you sure you want to delete this absolutely awesome machine
+							learning model for you and others to experiment with?
 						</DialogContentText>
 					</DialogContent>
 					<DialogActions>
@@ -66,12 +65,7 @@ class DeleteProject extends Component {
 						<button
 							className="btn-flat waves-effect waves-light"
 							style={{ display: "inline", color: "red" }}
-							onClick={this.handleDelete(
-								pid,
-								auth,
-								project,
-								history
-							)}>
+							onClick={this.handleDelete(pid, auth, project, history)}>
 							Delete Forever {" :("}
 						</button>
 					</DialogActions>

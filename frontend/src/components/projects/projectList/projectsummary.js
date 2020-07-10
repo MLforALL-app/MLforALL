@@ -7,7 +7,7 @@ const ProjectSummary = ({ project }) => {
 	};
 	return (
 		<div className="project-summary">
-			<div className="card z-depth-1">
+			<div className="card z-depth-1" style={{ maxWidth: "500px" }}>
 				<div className="card-content content-sum">
 					<span className="card-title"> {project.title} </span>
 					<p>
@@ -21,11 +21,7 @@ const ProjectSummary = ({ project }) => {
 						{moment(project.createdAt.toDate()).calendar()}
 					</div>
 					<div style={{ float: "right" }}>
-						{shorten(
-							project.authorFirstName +
-								" " +
-								project.authorLastName
-						)}{" "}
+						{shorten(project.authorFirstName + " " + project.authorLastName)}{" "}
 						<span className="hearts">&hearts;</span>
 					</div>
 					<div style={{ clear: "both" }}></div>
