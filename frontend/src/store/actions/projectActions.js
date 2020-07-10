@@ -1,4 +1,6 @@
 import axios from "axios";
+import apiHost from "../../config/api";
+import projectSource from "../../config/collection";
 import Papa from "papaparse";
 
 export const createProject = (project) => {
@@ -8,12 +10,8 @@ export const createProject = (project) => {
 		const fname = getState().firebase.profile.firstName;
 		const lname = getState().firebase.profile.lastName;
 		const uid = getState().firebase.auth.uid;
-		// We get the csv name from the csv project (called csvName for conveinence)
-		//const csvName = project.csvName.name;
-		//Store the file to upload for later
-		//project["csvName"] = csvName;
 		firestore
-			.collection("projects")
+			.collection(projectSource)
 			.add({
 				...project,
 				authorFirstName: fname,
@@ -23,7 +21,7 @@ export const createProject = (project) => {
 				csvName: "",
 				targetParam: "",
 				content: "",
-				models: [],
+				models: {},
 				variables: [],
 				info: {}
 			})
@@ -41,7 +39,7 @@ export const updateContent = (content, pid) => {
 		// make async call to database
 		const firestore = getFirestore();
 		firestore
-			.collection("projects")
+			.collection(projectSource)
 			.doc(pid)
 			.set({ content: content }, { merge: true })
 			.then((snapshot) => {
@@ -79,6 +77,9 @@ export const updateCurrentWorkingProject = (param, data) => {
 			case "inputs":
 				dispatch({ type: "UPDATE_INPUTS", param, data });
 				break;
+			case "update_check":
+				dispatch({ type: "UPDATE_CHECK" });
+				break;
 			default:
 				dispatch({ type: "MALFORMED_CWP_REQ" });
 		}
@@ -96,7 +97,16 @@ export const bigPapa = (url, dispatch) => {
 		}
 	});
 };
-
+export const parseExisting = (file, dispatch) => {
+	Papa.parse(file, {
+		worker: true,
+		header: true,
+		complete: (results) => {
+			const data = results.data;
+			dispatch({ type: "CSV_DATA_IN_STORE", data });
+		}
+	});
+};
 /* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
 export const initCSV = (project, projID) => {
 	return (dispatch, getState, { getFirebase }) => {
@@ -115,9 +125,16 @@ export const initCSV = (project, projID) => {
 			});
 	};
 };
-
+//in cases wehre we just uploaded the csv, use that instead of fetching
+export const setUpPreloadedCsv = () => {
+	return (dispatch, getState, { getFirebase }) => {
+		const csv = getState().project.csvHolding;
+		parseExisting(csv, dispatch);
+	};
+};
 export const uploadCSVtoStorage = (csv, project, pid) => {
 	return (dispatch, getState, { getFirebase }) => {
+		dispatch({ type: "QUICK_CSV", csv });
 		const firebase = getFirebase();
 		const uid = getState().firebase.auth.uid;
 		const csvPath = uid + "/" + pid + "/" + csv.name;
@@ -133,10 +150,7 @@ export const uploadCSVtoStorage = (csv, project, pid) => {
 				};
 				// After we upload the csv, update firestore with preliminary insights
 				axios
-					.post(
-						`https://flask-api-aomh7gr2xq-ue.a.run.app/describe`,
-						path
-					)
+					.post(`${apiHost}/describe`, path)
 					.then((res) => {
 						dispatch({ type: "UPLOAD_CSV_METADATA" });
 					})
@@ -155,7 +169,7 @@ export const updateCsvData = (csv, project, pid) => {
 	return (dispatch, getState, { getFirestore }) => {
 		const firestore = getFirestore();
 		const uid = getState().firebase.auth.uid;
-		const projectRef = firestore.collection("projects").doc(pid);
+		const projectRef = firestore.collection(projectSource).doc(pid);
 		projectRef
 			.set({ csvName: csv.name }, { merge: true })
 			.then((snapshot) => {
@@ -173,26 +187,15 @@ export const updateCsvData = (csv, project, pid) => {
 	};
 };
 
-export const deleteMLProject = (pid, uid, project) => {
+export const deleteMLProject = (pid, uid, project, update) => {
 	return (dispatch, getState, { getFirestore, getFirebase }) => {
 		// get todelete files
 		const delCSV = project.csvName;
 		// might be a source of bugs in the future
-		var delVars = Object.values(project.models);
-		delVars.push(delCSV);
-		// make async call to database
-		const firestore = getFirestore();
-		firestore
-			.collection("projects")
-			.doc(pid)
-			.delete()
-			.then((snapshot) => {
-				dispatch({ type: "DELETE_PROJECT_DOC" });
-			})
-			.catch((err) => {
-				console.log("Delete project Firestore error", err);
-				dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
-			});
+		var delVars = Object.keys(project.models);
+		if (!update) {
+			delVars.push(delCSV);
+		}
 		const storageRef = getFirebase().storage();
 		delVars.forEach((filename) => {
 			storageRef
@@ -206,6 +209,20 @@ export const deleteMLProject = (pid, uid, project) => {
 					dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
 				});
 		});
+		if (!update) {
+			const firestore = getFirestore();
+			firestore
+				.collection(projectSource)
+				.doc(pid)
+				.delete()
+				.then((snapshot) => {
+					dispatch({ type: "DELETE_PROJECT_DOC" });
+				})
+				.catch((err) => {
+					console.log("Delete project Firestore error", err);
+					dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
+				});
+		}
 	};
 };
 //extras for handle csv
@@ -231,7 +248,7 @@ export const buildModels = () => {
 			nanMethod: submissionData.nanMethod
 		};
 		axios
-			.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/store`, path)
+			.post(`${apiHost}/store`, path)
 			.then((res) => {
 				dispatch({ type: "CREATE_MODEL_SUCC" });
 			})

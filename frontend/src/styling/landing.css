@@ -4,11 +4,11 @@
   background-size: cover;
   background-repeat: no-repeat;
   background-color: #eeeeee;
-  padding-bottom: 0px;
 }
 .white-background-landing {
   background-color: #fefefe;
 }
+
 .authImg {
   width: 100%;
 }
@@ -26,7 +26,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
+
 .land-head {
   height: calc(12rem + 20vw + 65px);
 }

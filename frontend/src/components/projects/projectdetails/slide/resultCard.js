@@ -1,5 +1,4 @@
 import React from "react";
-// import axios from "axios";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 // Pretty Print a list of input parameters and their values
@@ -17,8 +16,8 @@ const inputToString = (inputs) => {
 
 // Text to display the results of a guess
 const showResults = (output, inputs) => {
-	if (output === "") {
-		return <p className="pres"> ~~choose your inputs~~ </p>;
+	if (output === "" || output === "chooseInput") {
+		return <p className="pres"> ~~choose your inputs first~~ </p>;
 	} else if (output === "Server Error") {
 		return (
 			<p className="pres">
@@ -44,11 +43,9 @@ const showResults = (output, inputs) => {
  * ENSURES: a card display the results of a Predict API call */
 
 const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
-	return (
-		<div className="container center slider-contain">
-			{loading ? (
-				<CircularProgress />
-			) : (
+	if (!loading) {
+		return (
+			<div className="container center slider-contain">
 				<span>
 					<p> {target} is... </p>
 					<h4>
@@ -63,9 +60,15 @@ const ResultCard = (model, inputs, output, target, loading, nameMapper) => {
 					</p>
 					<div className="header-subrow">{showResults(output, inputs)}</div>
 				</span>
-			)}
-		</div>
-	);
+			</div>
+		);
+	} else {
+		return (
+			<div className="container center slider-contain">
+				<CircularProgress />
+			</div>
+		);
+	}
 };
 
 export default ResultCard;

@@ -2,6 +2,7 @@ import React from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
+import projectSource from "../../../config/collection";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
@@ -26,12 +27,7 @@ const ProjectDetails = (props) => {
 				</div>
 				<GenerateSliders project={project} uid={auth.uid} pid={pid} />
 				<div className="row container">
-					<CSVCard
-						pid={pid}
-						auth={auth}
-						project={project}
-						history={history}
-					/>
+					<CSVCard pid={pid} auth={auth} project={project} history={history} />
 				</div>
 			</div>
 		);
@@ -39,8 +35,7 @@ const ProjectDetails = (props) => {
 		return (
 			<div className="container center">
 				<Link to="/dashboard">
-					There was an error loading this project... click here to go
-					back
+					There was an error loading this project... click here to go back
 				</Link>
 				{/*<Redirect to="/dashboard" />*/}
 			</div>
@@ -53,7 +48,7 @@ const ProjectDetails = (props) => {
  * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state, ownProps) => {
 	const pid = ownProps.match.params.pid;
-	const projects = state.firestore.data.projects;
+	const projects = state.firestore.data[projectSource];
 	const project = projects ? projects[pid] : null;
 	// lets change this to somehow query in firestoreConnect
 	return {
@@ -65,5 +60,5 @@ const mapStateToProps = (state, ownProps) => {
 
 export default compose(
 	connect(mapStateToProps),
-	firestoreConnect([{ collection: "projects" }])
+	firestoreConnect([{ collection: projectSource }])
 )(ProjectDetails);

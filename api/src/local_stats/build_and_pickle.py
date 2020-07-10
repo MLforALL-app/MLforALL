@@ -11,10 +11,10 @@ from sklearn.preprocessing import MinMaxScaler
 
 
 def build_and_pickle(target_parameter, df_variables, csv_name, debug=False):
-    assert(type(target_parameter) == str)
-    assert(type(df_variables) == list)
+    assert(isinstance(target_parameter, str))
+    assert(isinstance(df_variables, list))
     assert(len(df_variables) > 0)  # must have parameters
-    assert(type(csv_name) == str)
+    assert(isinstance(csv_name, str))
     df = pd.read_csv(csv_name)
     target = df[target_parameter]
     col_name_list = list(df.columns)

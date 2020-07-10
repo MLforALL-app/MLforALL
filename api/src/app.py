@@ -1,11 +1,9 @@
 import os
-from predict import predict
-from build import build_and_pickle
-from variables import send_vars
 import firebase as fb
-from describe import pre_describe
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from model import Model
+from data import Data
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
@@ -18,7 +16,7 @@ def home():
         <!DOCTYPE html>
         <body style="width: 880px; margin: auto;">
         <h1> ML For All </h1>
-        <p>Welcome to Davis and Len's API for ML For All </p>
+        <p>Welcome to Davis, Max, and Len's API for ML For All </p>
         </body>
             """
 
@@ -32,12 +30,10 @@ def predict_from_model():
     pid = req_data['projId']  # project id
     model = req_data['model']  # desired model name
     inputs = req_data['inputs']  # df vars / x_predict
-    # Get firebase stuff
-    path = fb.make_path(str(uid), str(pid), str(model))
-    bucket = fb.bucket_init()
-    # Get loaded model and predict
-    loaded_model = fb.get_pickle(bucket, path)
-    return jsonify(predict(loaded_model, inputs))
+
+    model = Model.load_model(str(uid), str(pid), str(model))
+    prediction = model.predict(inputs)
+    return jsonify(prediction)
 
 
 # assume csv has been made, now upload models
@@ -45,6 +41,7 @@ def predict_from_model():
 def store():
     # once we know what implement fetching the csv from firebase, that'll go in the call
     req_data = request.get_json()
+
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
@@ -57,24 +54,30 @@ def store():
 
     # Get firebase stuff
     bucket = fb.bucket_init()
-    db = fb.firestore_init()
+
+    df = fb.get_csv(bucket, fb.make_path(
+        str(uid), str(proj_id), str(csv_name)))
+
+    data = Data(df, target_param, df_vars, nan_method)
+    X_train, X_test, y_train, y_test = data.get_train_test_split()
 
     try:
         # populate storage with models
-        for model in model_list:
-            # retrieve the csv everytime due to some weird "key errors"
-            df = fb.get_csv(bucket, fb.make_path(
-                str(uid), str(proj_id), str(csv_name)))
+        trained_models = []
+        for model_type in model_list:
+            model = Model(model_type)
+            model.build(X_train, y_train)
             # get the saved model in byte form
-            pickle_bytes = build_and_pickle(
-                df, target_param, df_vars, model, nan_method=str(nan_method))
+            pickle_bytes = model.pickle()
             # send it to firebase storage
             fb.send_pickle(bucket, pickle_bytes,
-                           fb.make_path(str(uid), str(proj_id), str(model)))
+                           fb.make_path(str(uid), str(proj_id), str(model_type)))
+            trained_models.append(model)
         # update firestore with descriptive stats (IQR)
-        send_vars(df, db, proj_id, df_vars, model_list, target_param)
+        data.send_vars(proj_id, trained_models)
         return "it worked"
     except ValueError as e:
+        print(f"failed {e}")
         return f"it failed: {e}"
 
 
@@ -90,19 +93,16 @@ def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
     req_data = request.get_json()
+
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
     uid = req_data['uid']  # user id
     proj_id = req_data['projId']  # unique project hash
     csv_name = req_data['csvName']
-    # Get firebase stuff
-    bucket = fb.bucket_init()
-    db = fb.firestore.client()
-    # Get the dataframe
-    df = fb.get_csv(bucket, fb.make_path(
-        str(uid), str(proj_id), str(csv_name)))
-    # Generate info
-    return jsonify(pre_describe(db, df, proj_id))
+
+    data = Data.from_csv(uid, proj_id, csv_name)
+    description = data.pre_describe(proj_id)
+    return jsonify(description)
 
 
 if __name__ == '__main__':

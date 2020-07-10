@@ -1,21 +1,648 @@
-import React from "react"
-import {header, bodyContent} from "./fileFormatter"
+import React from "react";
+import { header, bodyContent, pinkTheme, purpleDark, grey } from "./fileFormatter";
+import createPlotlyComponent from "react-plotlyjs";
+import Plotly from "plotly.js/dist/plotly-cartesian";
+const PlotlyComponent = createPlotlyComponent(Plotly);
 
-const decisionTree =
-<p>
-{header("Decision Tree (Classifier)", "+2")}
+const font = { size: 14, color: "#000000" };
 
-{header("What's it for?")}
+function makePlot() {
+	let data = [
+		{
+			line: {
+				color: purpleDark,
+				width: 1
+			},
+			mode: "lines",
+			type: "scatter",
+			x: [
+				0,
+				-2.25,
+				null,
+				0,
+				2.25,
+				null,
+				-2.25,
+				-4.25,
+				null,
+				-2.25,
+				-0.25,
+				null,
+				2.25,
+				1.75,
+				null,
+				2.25,
+				2.75,
+				null,
+				-4.25,
+				-4.75,
+				null,
+				-4.25,
+				-3.75,
+				null,
+				1.75,
+				1.25,
+				null,
+				1.75,
+				2.25,
+				null,
+				-0.25,
+				-0.75,
+				null,
+				-0.25,
+				0.25,
+				null,
+				-3.75,
+				-4.25,
+				null,
+				-3.75,
+				-3.25,
+				null,
+				-0.75,
+				-1.25,
+				null,
+				-0.75,
+				-0.25,
+				null,
+				-3.25,
+				-3.75,
+				null,
+				-3.25,
+				-2.75,
+				null,
+				-1.25,
+				-1.75,
+				null,
+				-1.25,
+				-0.75,
+				null,
+				-2.75,
+				-3.25,
+				null,
+				-2.75,
+				-2.25,
+				null,
+				-0.75,
+				-1.25,
+				null,
+				-0.75,
+				-0.25,
+				null
+			],
+			y: [
+				12,
+				11,
+				null,
+				12,
+				11,
+				null,
+				11,
+				10,
+				null,
+				11,
+				10,
+				null,
+				11,
+				10,
+				null,
+				11,
+				10,
+				null,
+				10,
+				9,
+				null,
+				10,
+				9,
+				null,
+				10,
+				9,
+				null,
+				10,
+				9,
+				null,
+				10,
+				9,
+				null,
+				10,
+				9,
+				null,
+				9,
+				8,
+				null,
+				9,
+				8,
+				null,
+				9,
+				8,
+				null,
+				9,
+				8,
+				null,
+				8,
+				7,
+				null,
+				8,
+				7,
+				null,
+				8,
+				7,
+				null,
+				8,
+				7,
+				null,
+				7,
+				6,
+				null,
+				7,
+				6,
+				null,
+				7,
+				6,
+				null,
+				7,
+				6,
+				null
+			],
+			hoverinfo: "none"
+		},
+		{
+			mode: "markers",
+			name: "",
+			type: "scatter",
+			x: [
+				0,
+				-2.25,
+				2.25,
+				-4.25,
+				-0.25,
+				1.75,
+				2.75,
+				-4.75,
+				-3.75,
+				1.25,
+				2.25,
+				-0.75,
+				0.25,
+				-4.25,
+				-3.25,
+				-1.25,
+				-0.25,
+				-3.75,
+				-2.75,
+				-1.75,
+				-0.75,
+				-3.25,
+				-2.25,
+				-1.25,
+				-0.25
+			],
+			y: [
+				12,
+				11,
+				11,
+				10,
+				10,
+				10,
+				10,
+				9,
+				9,
+				9,
+				9,
+				9,
+				9,
+				8,
+				8,
+				8,
+				8,
+				7,
+				7,
+				7,
+				7,
+				6,
+				6,
+				6,
+				6
+			],
+			marker: {
+				line: {
+					color: pinkTheme,
+					width: 1
+				},
+				size: 15,
+				color: pinkTheme,
+				symbol: "hexagram"
+			},
+			opacity: 0.8,
+			text: [
+				"Height < 5.5",
+				"Weight < 150",
+				"Has Tail?",
+				"Length < 3.2",
+				"Has Scales?",
+				"Length < 6.7",
+				"0",
+				"1",
+				"Eats Meat?",
+				"1",
+				"0",
+				"Has Hair?",
+				"0",
+				"0",
+				"Has Hair?",
+				"Weight < 10",
+				"0",
+				"1",
+				"Eats Plants?",
+				"1",
+				"External Fertilization?",
+				"1",
+				"0",
+				"1",
+				"0"
+			],
+			hoverinfo: "text"
+		}
+	];
+	let layout = {
+		font: {
+			size: 12
+		},
+		title: "Classifying Animal Type",
+		xaxis: {
+			showgrid: false,
+			showline: false,
+			zeroline: false,
+			showticklabels: false
+		},
+		yaxis: {
+			showgrid: false,
+			showline: false,
+			zeroline: false,
+			showticklabels: false
+		},
+		margin: {
+			b: 85,
+			l: 40,
+			r: 40,
+			t: 100
+		},
+		hovermode: "closest",
+		showlegend: false,
+		annotations: [
+			{
+				x: 0,
+				y: 12,
+				font: font,
+				text: "Height < 5.5",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -2.25,
+				y: 11,
+				font: font,
+				text: "Weight < 150",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 2.25,
+				y: 11,
+				font: font,
+				text: "Has Tail?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -4.25,
+				y: 10,
+				font: font,
+				text: "Length < 3.2",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -0.25,
+				y: 10,
+				font: font,
+				text: "Has Scales?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 1.75,
+				y: 10,
+				font: font,
+				text: "Length < 6.7",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 2.75,
+				y: 10,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -4.75,
+				y: 9,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -3.75,
+				y: 9,
+				font: font,
+				text: "Eats Meat?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 1.25,
+				y: 9,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 2.25,
+				y: 9,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -0.75,
+				y: 9,
+				font: font,
+				text: "Has Hair?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: 0.25,
+				y: 9,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -4.25,
+				y: 8,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -3.25,
+				y: 8,
+				font: font,
+				text: "Has Hair?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -1.25,
+				y: 8,
+				font: font,
+				text: "Weight < 10",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -0.25,
+				y: 8,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -3.75,
+				y: 7,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -2.75,
+				y: 7,
+				font: font,
+				text: "Eats Plants?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -1.75,
+				y: 7,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -0.75,
+				y: 7,
+				font: font,
+				text: "External Fertilization?",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -3.25,
+				y: 6,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -2.25,
+				y: 6,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -1.25,
+				y: 6,
+				font: font,
+				text: "1",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			},
+			{
+				x: -0.25,
+				y: 6,
+				font: font,
+				text: "0",
+				xref: "x1",
+				yref: "y1",
+				bgcolor: pinkTheme,
+				borderpad: 4,
+				showarrow: false,
+				bordercolor: grey,
+				borderwidth: 2
+			}
+		],
+		plot_bgcolor: "rgb(0, 0, 0, 0)",
+		paper_bgcolor: "rgb(0, 0, 0, 0)"
+	};
+	let config = {
+		showLink: false,
+		displayModeBar: false
+	};
+	return (
+		<PlotlyComponent
+			className="whatever"
+			data={data}
+			layout={layout}
+			config={config}
+		/>
+	);
+}
 
-{bodyContent(``)}
-
-{header("How does it work?")}
-
-{bodyContent(``)}
-
-{header("Why does it work?")}
-
-{bodyContent(``)}
-</p>
+const decisionTree = (
+	<div>
+		{header("Decision Tree (Classifier)")}
+		{bodyContent(`
+A decision true is used to classify objects into different categories by asking yes/no questions. For example, it can be used to classify animal type based on traits of an animal (0 and 1 are two types of animals):
+`)}
+		{makePlot()}
+		{bodyContent(`
+Because it uses yes/no questions to make decisions, a decision tree is highly interpretable.		
+`)}
+	</div>
+);
 
 export default decisionTree;

@@ -1,30 +1,21 @@
 import React, { Component } from "react";
+import { nameMapper } from "../../../../store/actions/nameMapper";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
 import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
+import apiHost from "../../../../config/api.js";
 import axios from "axios";
 
-// Helper function so model names get printed nicer
-const nameMapper = (name) => {
-	switch (name) {
-		case "":
-			return "Nothing Selected Yet";
-		case "log_reg":
-			return "Logistic Regression";
-		case "gnb":
-			return "Gaussian Naive Bayes";
-		case "knn":
-			return "K-Nearest Neighbors";
-		case "svm":
-			return "Support Vector Machine";
-		case "clf":
-			return "Decision Tree Classifier";
-		case "lda":
-			return "Linear Discriminant Analysis";
-		default:
-			return "Error: Not valid model name";
-	}
+const refreshState = (project) => {
+	return {
+		model: Object.keys(project.models)[0],
+		inputs: initInputs(project.variables),
+		output: "",
+		loading: false,
+		resInputs: {},
+		resModel: ""
+	};
 };
 
 // Helper function for brief descriptions about each model
@@ -64,18 +55,7 @@ const initInputs = (variables) => {
  * 			result display */
 class GenerateSliders extends Component {
 	// Set initial model to be the first one
-	state = {
-		model:
-			this.props.project.models.length < 1
-				? ""
-				: this.props.project.models[0],
-		inputs: initInputs(this.props.project.variables),
-		output: "",
-		loading: false,
-		resInputs: {},
-		resModel: ""
-	};
-
+	state = refreshState(this.props.project);
 	// event handler for when model dropdown menu changes
 	handleDropChange = (event) => {
 		this.setState({ model: event.target.value });
@@ -84,6 +64,7 @@ class GenerateSliders extends Component {
 	// of event handlers
 	handleSliderChange = (v) => {
 		return (event, newValue) => {
+			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
 				alterState.inputs[v.name] = newValue;
@@ -93,6 +74,7 @@ class GenerateSliders extends Component {
 	};
 	handleInputChange = (v) => {
 		return (event) => {
+			event.preventDefault();
 			const newValue =
 				event.target.value === "" ? "" : Number(event.target.value);
 			this.setState((prevState) => {
@@ -112,7 +94,14 @@ class GenerateSliders extends Component {
 				resModel: prevState.model
 			};
 		});
-		if (this.state.model !== "") {
+		if (this.state.model === "") {
+			this.setState({ output: "chooseModel" });
+		} else if (
+			Object.keys(this.state.inputs).length !==
+			this.props.project.variables.length
+		) {
+			this.setState({ output: "chooseInput" });
+		} else {
 			// create path for API Post Request
 			const path = {
 				uid: this.props.project.authorID,
@@ -122,24 +111,20 @@ class GenerateSliders extends Component {
 			};
 			this.setState({ loading: true });
 			axios
-				.post(`https://flask-api-aomh7gr2xq-ue.a.run.app/predict`, path)
+				.post(`${apiHost}/predict`, path)
 				.then((res) => {
 					// If things work, set the output and stop loading
 					this.setState({ output: res, loading: false });
 				})
 				.catch((err) => {
-					console.log("Prediction Error", err);
 					// If things don't work, server error and stop loading
 					this.setState({ output: "Server Error", loading: false });
 				});
-		} else {
-			// user has not picked a model yet
-			this.setState({ output: "Choose a model" });
 		}
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	getslides(variables, hsc, hic) {
+	getSlides(variables, hsc, hic) {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
@@ -152,60 +137,68 @@ class GenerateSliders extends Component {
 			return <p> NO SLIDERS YET </p>;
 		}
 	}
+	componentDidUpdate(prev) {
+		const projectNew = this.props.project;
+		if (prev && prev !== this.props) {
+			this.setState(refreshState(projectNew));
+		}
+	}
 	render() {
+		const { project } = this.props;
+		const { model, resModel, resInputs, loading, output } = this.state;
 		return (
 			<div className="predict">
 				<div className="row slider-row">
 					<div className="container">
-						<div className="col s12">
-							<div className="slider-title">
-								<h5>
-									Type of model:{" "}
-									{Dropdown(
-										this.props.project,
-										this.state.model,
-										this.handleDropChange,
-										nameMapper
-									)}{" "}
-									<HelpBox
-										placement="right"
-										desc={getDesc(this.state.model)}
-									/>
-								</h5>
-							</div>
-							<div className="slider-contain">
-								{this.getslides(
-									this.props.project.variables,
-									this.handleSliderChange,
-									this.handleInputChange
-								)}
-								<div
-									className="row"
-									style={{
-										paddingTop: "2rem",
-										textAlign: "right"
-									}}>
-									<HelpBox
-										placement="left"
-										desc="Click here to generate a prediction based off of the slider values you've chosen above!"
-									/>{" "}
-									<button
-										className="btn waves-effect waves-light anchor"
-										onClick={this.handleSubmit}>
-										<b>Generate</b>
-									</button>
-								</div>
+						<div className="slider-title">
+							<h5>
+								Type of model:{" "}
+								{Dropdown(project, model, this.handleDropChange, nameMapper)}{" "}
+								has accuracy{" "}
+								{project &&
+									project.models &&
+									project.models[model] &&
+									(project.models[model].accuracy * 100).toFixed(2) + "%"}
+								<HelpBox
+									placement="right"
+									desc={getDesc(model)}
+									link="help"
+									linkdesc="Learn more here"
+								/>
+							</h5>
+						</div>
+						<div className="slider-contain">
+							{this.getSlides(
+								project.variables,
+								this.handleSliderChange,
+								this.handleInputChange
+							)}
+							<div
+								className="row"
+								style={{
+									paddingTop: "2rem",
+									textAlign: "right"
+								}}>
+								<HelpBox
+									placement="left"
+									desc="Click here to generate a prediction based off of the slider values you've chosen above!"
+								/>{" "}
+								<button
+									className="btn waves-effect waves-light anchor"
+									onClick={this.handleSubmit}>
+									<b>Generate</b>
+								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className="row slider-row">
 					{ResultCard(
-						this.state.resModel,
-						this.state.resInputs,
-						this.state.output,
-						this.props.project.targetParam,
-						this.state.loading,
+						resModel,
+						resInputs,
+						output,
+						project.targetParam,
+						loading,
 						nameMapper
 					)}{" "}
 				</div>

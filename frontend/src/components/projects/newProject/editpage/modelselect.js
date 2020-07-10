@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import ModelCheck from "./modelcheck";
 import HelpBox from "../../../layouts/helpbox";
-import { nameMapper } from "./editCSV";
+import { nameMapper } from "../../../../store/actions/nameMapper";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 
 class ModelSelect extends Component {
 	initObj = (objList) => {
 		var objState = {};
 		objList.forEach((item) => {
-			objState[item] = false;
+			let models = Object.keys(this.props.selectedModels);
+			if (models.includes(item)) {
+				objState[item] = true;
+			} else {
+				objState[item] = false;
+			}
 		});
 		return objState;
 	};
@@ -25,6 +30,11 @@ class ModelSelect extends Component {
 		});
 		this.props.updateModels(this.state.models);
 	};
+	componentDidMount = () => {
+		this.props.updateModels(
+			this.initObj(["log_reg", "knn", "clf", "gnb", "svm", "lda"])
+		);
+	};
 
 	render() {
 		return (
@@ -36,7 +46,7 @@ class ModelSelect extends Component {
 							header="Click the models!"
 							placement="right-end"
 							desc="There's many ways to set up machine learning models. That mean's there also many algorithms used to achieve this predictive power. Click on the link to learn more!"
-							link="https://www.youtube.com/watch?v=hSlb1ezRqfA"
+							link="help"
 							linkdesc="Learn more here"
 						/>
 					</span>

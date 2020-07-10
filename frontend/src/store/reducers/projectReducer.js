@@ -1,20 +1,47 @@
 const initState = {
 	curUserProjID: "init",
 	csvLoaded: false,
+	cWPFull: false,
 	currentWorkingProject: "initialized",
 	csvUrl: "",
-	built: false
+	csvHolding: {},
+	modelBuilt: false,
+	dataBuilt: false,
+	buildFail: false,
 };
 
-const initObj = (objList) => {
-	var objState = {};
-	objList.forEach((item) => {
-		objState[item] = false;
-	});
-	return objState;
+const atLeastOneTrue = (boolObj) => {
+	for (var key in boolObj) {
+		if (boolObj[key]) {
+
+			return true;
+		}
+	}
+	return false;
+};
+
+const checkFull = (currentWorkingProject) => {
+	if (currentWorkingProject === "initialized") {
+		return false;
+	} else {
+		//check output
+		if (currentWorkingProject.targetParameter === "") {
+			return false;
+		}
+		//check that there is at least one model
+		if (!atLeastOneTrue(currentWorkingProject.modelList)) {
+			return false;
+		}
+		//check that there is at least one input
+		if (!atLeastOneTrue(currentWorkingProject.inputs)) {
+			return false;
+		}
+		return true;
+	}
 };
 
 const projectReducer = (state = initState, action) => {
+	let cwp = {};
 	switch (action.type) {
 		case "CREATE_PROJECT":
 			return {
@@ -31,12 +58,14 @@ const projectReducer = (state = initState, action) => {
 			return state;
 		case "DELETE_PROJECT_STORE_ERROR":
 			return state;
+		case "QUICK_CSV":
+			return { ...state, csvHolding: action.csv };
 		case "UPLOAD_CSV":
-			return { ...state, csvLoaded: true };
+			return state;
 		case "UPLOAD_CSV_ERROR":
 			return state;
 		case "UPLOAD_CSV_METADATA":
-			return state;
+			return { ...state, csvLoaded: true };
 		case "UPLOAD_CSV_METADATA_ERROR":
 			return state;
 		case "UPDATE_CSV_NAME":
@@ -44,13 +73,14 @@ const projectReducer = (state = initState, action) => {
 		case "UPDATE_CSV_NAME_ERROR":
 			return state;
 		case "UPDATE_CONTENT":
-			return state;
+			return { ...state, dataBuilt: true };
 		case "UPDATE_CONTENT_ERROR":
 			return state;
 		case "SET_CURRENT_WORKING_PROJECT":
 			return {
 				...state,
-				built: false,
+				cWPFull: false,
+				modelBuilt: false,
 				currentWorkingProject: {
 					uid: action.uid,
 					projId: action.pid,
@@ -63,7 +93,8 @@ const projectReducer = (state = initState, action) => {
 						knn: false,
 						clf: false,
 						gnb: false,
-						svm: false
+						svm: false,
+						lda: false
 					},
 					inputs: {},
 					content: ""
@@ -78,55 +109,66 @@ const projectReducer = (state = initState, action) => {
 				}
 			};
 		case "UPDATE_ML":
+			cwp = {
+				...state.currentWorkingProject,
+				modelList: action.data
+			};
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					modelList: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CSV_DATA_IN_STORE":
 			return {
 				...state,
-				csvData: action.data,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: initObj(Object.keys(action.data[0]))
-				}
+				csvData: action.data
 			};
 		case "CSV_FETCH_ERROR":
 			return state;
 		case "UPDATE_TP":
+			cwp = {
+				...state.currentWorkingProject,
+				targetParameter: action.data
+			};
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					targetParameter: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "UPDATE_INPUTS":
+			cwp = {
+				...state.currentWorkingProject,
+				inputs: action.data
+			};
 			return {
 				...state,
-				currentWorkingProject: {
-					...state.currentWorkingProject,
-					inputs: action.data
-				}
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
 			};
 		case "CREATE_MODEL_SUCC":
 			return {
 				...state,
-				built: true
+				modelBuilt: true
 			};
 		case "CREATE_MODEL_FAIL":
-			return state;
+			return {...state,
+					buildFail : true};
 		case "RESET_BUILD":
 			return {
 				...state,
-				built: false,
+				modelBuilt: false,
+				dataBuilt: false,
 				currentWorkingProject: "initialized"
 			};
 		case "CLEAR_STORE":
 			return initState;
+		case "UPDATE_CHECK":
+			cwp = state.currentWorkingProject;
+			return {
+				...state,
+				cWPFull: checkFull(cwp),
+				currentWorkingProject: cwp
+			};
 		default:
 			return state;
 	}
