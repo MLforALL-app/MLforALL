@@ -28,7 +28,7 @@ const showResults = (output, inputs) => {
 		);
 	} else {
 		return (
-			<div className="land" style={{ textAlign: "justify !important" }}>
+			<div className="land-col" style={{ textAlign: "justify !important" }}>
 				{inputToString(inputs)}
 			</div>
 		);

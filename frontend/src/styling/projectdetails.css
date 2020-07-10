@@ -12,19 +12,6 @@ h6 {
 	font-size: 1.2rem;
 }
 
-/* Fix for the flying logo */
-@media only screen and (min-width: 565px) {
-	.brand-logo {
-		left: 15% !important;
-	}
-}
-@media only screen and (max-width: 565px) {
-	.brand-logo,
-	.btn-floating,
-	.notif-card {
-		display: none !important;
-	}
-}
 .content-sum {
 	height: 150px;
 }

@@ -61,6 +61,7 @@
 	},
 	"devDependencies": {
 		"gh-pages": "^3.0.0",
+		"react-social-icons": "^4.1.0",
 		"yargs-parser": "^18.1.3"
 	}
 }
