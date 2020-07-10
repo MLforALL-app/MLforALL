@@ -1,55 +1,55 @@
 .lp-img {
-  height: 100%;
-  z-index: -1;
+	height: 100%;
+	z-index: -1;
 }
 .divider {
-  width: 20px;
-  height: auto;
-  display: inline-block;
+	width: 20px;
+	height: auto;
+	display: inline-block;
 }
 
 .row-bg {
-  background-color: white;
-  background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position-y: 50%;
-  text-align: center;
+	background-color: white;
+	background-position: center;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position-y: 50%;
+	text-align: center;
 }
 
 .left-block {
-  display: inline-block;
-  text-align: left;
-  vertical-align: bottom;
+	display: inline-block;
+	text-align: left;
+	vertical-align: bottom;
 }
 
 .landing-container {
-  overflow: hidden;
-  margin-left: 0 auto;
-  margin-right: 0 auto;
-  padding: 0 20px 0 20px;
+	overflow: hidden;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	padding: 0 20px 0 20px;
 }
 .lp-text {
-  overflow: hidden;
-  margin-left: 0 auto;
-  margin-right: 0 auto;
-  padding: 0 0 0 60px;
+	overflow: hidden;
+	margin-left: 0 auto;
+	margin-right: 0 auto;
+	padding: 0 0 0 60px;
 }
 
 .fullrow-bg {
-  background-color: white;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  text-align: center;
-  z-index: 0;
+	background-color: white;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	text-align: center;
+	z-index: 0;
 }
 
 .lp-header {
-  height: calc(30rem + 20vh);
+	height: calc(30rem + 20vh);
 }
 .lp-line {
-  text-align: center;
-  width: calc(20rem + 60vw);
-  font-weight: 800;
+	text-align: center;
+	width: 88%;
+	font-weight: 800;
 }

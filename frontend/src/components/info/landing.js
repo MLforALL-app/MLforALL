@@ -15,6 +15,8 @@ import "../../styling/features.css";
 import SignUp from "../auth/Signup";
 import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
+// import is browser
+import { isBrowser } from "react-device-detect";
 
 const LandSign = () => {
 	return (
@@ -73,6 +75,7 @@ const Header = () => {
 };
 
 const Land2 = () => {
+	const imageCol = isBrowser ? "lp-header" : "";
 	return (
 		<div className="row center">
 			<h4>
@@ -80,7 +83,7 @@ const Land2 = () => {
 				<br /> What can you do here?
 			</h4>
 			<div
-				className="col s0 m6 lp-header row-bg land-col"
+				className={`col s12 m6 row-bg land-col ${imageCol}`}
 				style={{ backgroundImage: `url(${img3})` }}>
 				<div className="left-block container lp-text">
 					<h4 className="purple-text">
@@ -100,7 +103,7 @@ const Land2 = () => {
 			</div>
 
 			<div
-				className="col s0 m6 lp-header row-bg"
+				className="col s12 m6 lp-header row-bg"
 				style={{ backgroundImage: `url(${img4})` }}></div>
 		</div>
 	);
@@ -110,10 +113,10 @@ const Land3 = () => {
 	return (
 		<div className="row center">
 			<div
-				className="col s0 m6 lp-header row-bg"
+				className="col s12 m6 lp-header row-bg"
 				style={{ backgroundImage: `url(${img5})` }}></div>
 			<div
-				className="col s0 m6 lp-header row-bg land-col"
+				className="col s12 m6 lp-header row-bg land-col"
 				style={{ backgroundImage: `url(${img6})` }}>
 				<div className="left-block container">
 					<h4 className="purple-text">
@@ -130,7 +133,7 @@ const Land4 = () => {
 	return (
 		<div className="row center">
 			<div
-				className="col s0 m6 lp-header row-bg land-col"
+				className="col s12 m6 lp-header row-bg land-col"
 				style={{ backgroundImage: `url(${img7})` }}>
 				<div className="left-block container lp-text">
 					<h4 className="purple-text">Explore and Discover new Models!</h4>
@@ -141,7 +144,7 @@ const Land4 = () => {
 				</div>
 			</div>
 			<div
-				className="col s0 m6 lp-header row-bg"
+				className="col s12 m6 lp-header row-bg"
 				style={{ backgroundImage: `url(${img8})` }}></div>
 		</div>
 	);

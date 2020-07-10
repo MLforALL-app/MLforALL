@@ -39,7 +39,7 @@ const Header = () => {
 			<br />
 			<div className="row center aplearn">
 				<Link to="signup" transition={500} smooth={true}>
-					<hr className="ap-line" />
+					<hr className="lp-line" />
 				</Link>
 				<LearnMore />
 			</div>
