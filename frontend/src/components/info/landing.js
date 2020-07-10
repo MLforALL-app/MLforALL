@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
 // Import images like this
 import img1 from "../../pictures/landing/LP1.svg";
 import img3 from "../../pictures/landing/LP3.svg";
