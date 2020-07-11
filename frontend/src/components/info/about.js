@@ -149,18 +149,18 @@ const teamr1 = [
 		img: davImg
 	},
 	{
-		name: "Joseph Kim",
-		title: "UI Design Lead",
-		link: "https://www.linkedin.com/in/josephkimdesign/",
-		img: joeImg
-	}
-];
-const teamr2 = [
-	{
 		name: "Len Huang",
 		title: "Agile / Tech Lead",
 		link: "https://www.linkedin.com/in/len-huang/",
 		img: lenImg
+	}
+];
+const teamr2 = [
+	{
+		name: "Joseph Kim",
+		title: "UI Design Lead",
+		link: "https://www.linkedin.com/in/josephkimdesign/",
+		img: joeImg
 	},
 	{
 		name: "Max Hirsch",
@@ -173,7 +173,7 @@ const teamr3 = [
 	{
 		name: "Megha Jain",
 		title: "Software Engineer",
-		link: "https://mlforall.xyz",
+		link: "www.linkedin.com/in/meghaj2",
 		img: meghaImg
 	},
 	{
