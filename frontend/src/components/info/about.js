@@ -173,7 +173,7 @@ const teamr3 = [
 	{
 		name: "Megha Jain",
 		title: "Software Engineer",
-		link: "www.linkedin.com/in/meghaj2",
+		link: "https://www.linkedin.com/in/meghaj2",
 		img: meghaImg
 	},
 	{
