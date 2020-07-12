@@ -70,8 +70,19 @@ class Data:
         '''
         info = {}
         info['NaN'] = self.count_NaN()
-        info['variable_info'] = self.get_variables(self.df.columns.tolist())
+        info['variable_info'] = self.get_usable_variables(self.df.columns.tolist())
         return info
+
+    def get_usable_variables(self, input_list):
+        '''
+        REQUIRES: strings in the input list are valid keys of the datafram 
+        ENSURES: A list containing a dictionaries that specifiy the usabliliy
+                 status in models of all variables provided in the input list
+        '''
+        variables = []
+        for inp in input_list:
+            variables.append(self.get_usable(inp))
+        return variables
 
     def pre_describe(self, proj_id):
         '''
@@ -98,7 +109,6 @@ class Data:
             ref = ref[input_variable]
             info = {
                 "name": input_variable,
-                "selectable" : True,
                 "lo": ref[3],
                 "hi": ref[7],
                 "q1": ref[4],
@@ -111,6 +121,36 @@ class Data:
             likely_continuous = 1. * \
                 self.df[input_variable].nunique(
                 )/self.df[input_variable].count() > 0.05
+            info = {
+                "selectable" : True,
+                "continuous" : False,
+                "drop_down" : True,
+                "name": input_variable,
+                "allVarOptions" : self.df[input_variable].unique().tolist()
+            }
+        return info
+
+
+    def get_usable(self, input_variable):
+        """
+        Function to specify which variables are usable on select
+        REQUIRES: df some valid pandas dataframe, input_variable a valid key
+        ENSURES: a dictionary with usability status
+        """
+        ref = self.df.describe()
+        if input_variable in ref:
+            print(input_variable)
+            likely_continuous = 1. * \
+                self.df[input_variable].nunique(
+                )/self.df[input_variable].count() > 0.05
+            ref = ref[input_variable]
+            info = {
+                "selectable" : True
+            }
+        else:
+            likely_continuous = 1. * \
+                self.df[input_variable].nunique(
+                )/self.df[input_variable].count() > 0.05
             if likely_continuous:
                 info = {
                     "selectable": False
@@ -118,10 +158,6 @@ class Data:
             else:
                 info = {
                     "selectable" : True,
-                    "continuous" : False,
-                    "drop_down" : True,
-                    "name": input_variable,
-                    "allVarOptions" : self.df[input_variable].unique().tolist()
                 }
         return info
 
