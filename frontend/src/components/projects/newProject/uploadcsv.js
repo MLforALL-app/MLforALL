@@ -161,7 +161,7 @@ class UploadCSV extends Component {
                   <div style={{ fontSize: 20 }}>
                     <strong>Choose a file </strong>or drag it here
                   </div>
-                </p>) : this.state.fileName}
+                </p>) : "Uploaded Successfully"}
               </div>
               {/* this is just the submit button */}
               <div className="input-field">
