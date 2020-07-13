@@ -5,8 +5,8 @@ import firebase as fb
 class Data:
     def __init__(self, df, target_parameter, df_variables, nan_method="drop"):
         # firestore project source. change this during testing and host locally
-        # self.project_source = "projects"
-        self.project_source = "projects-production"
+        self.project_source = "projects"
+        # self.project_source = "projects-production"
 
         # keep as original data (no in place changes, just in case)
         self.df = df
