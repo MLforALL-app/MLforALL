@@ -13,7 +13,8 @@ class UploadCSV extends Component {
     csv: "",
     fileUploadMessage: "Waiting For File...",
     showError: false,
-		errorText: "",
+    errorText: "",
+    drag: false,
   };
 
   handleChange = (e) => {
@@ -103,7 +104,17 @@ class UploadCSV extends Component {
   };
 
   dragOverHandler = (e) => {
-		e.preventDefault();
+    e.preventDefault();
+  };
+
+  dragEnterHandler = () => {
+    console.log("entered");
+    this.setState({ drag: true });
+  };
+
+  dragLeaveHandler = () => {
+    console.log("left");
+    this.setState({ drag: false });
   };
 
   render() {
@@ -151,18 +162,27 @@ class UploadCSV extends Component {
                 </div>
               </div>
               <div
+                // finish making conditional rendering when file is dragged over
                 id="drop_zone"
+                className={this.state.drag ? "" : "dborder"}
                 onDrop={this.dropHandler}
-								onDragOver={this.dragOverHandler}
-								style={{backgroundColor: "#F5F5F5", color: "#636B7F"}}
+                onDragOver={this.dragOverHandler}
+                onDragEnter={this.dragEnterHandler}
+                onDragLeave={this.dragLeaveHandler}
+                style={{ backgroundColor: "#F5F5F5", color: "#636B7F" }}
               >
-								<br />
-								{(this.state.csv === "") ?
-                (<p className="center" >
-                  <div style={{ fontSize: 20 }}>
-                    <strong>Choose a file </strong>or drag it here
-                  </div>
-                </p>) : "Uploaded Successfully"}
+                <br />
+                {this.state.csv === "" ? (
+                  <p className="center">
+                    <div style={{ fontSize: 20 }}>
+                      <strong>Choose a file </strong>or drag it here
+                    </div>
+                  </p>
+                ) : (
+                  <p className="center " style={{ fontSize: 20 }}>
+                    <strong>File Uploaded</strong>
+                  </p>
+                )}
               </div>
               {/* this is just the submit button */}
               <div className="input-field">
