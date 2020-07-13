@@ -71,9 +71,10 @@ class UploadCSV extends Component {
   };
 
   dropHandler = (e) => {
-    console.log(e);
-    console.log(e.dataTransfer);
-    console.log(e.dataTransfer.files[0]);
+    // console.log(e);
+    // console.log(e.dataTransfer);
+    // console.log(e.dataTransfer.files[0]);
+    e.preventDefault();
     if (!e.dataTransfer.files[0]) {
       return;
     }
