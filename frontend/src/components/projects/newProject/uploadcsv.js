@@ -48,6 +48,7 @@ class UploadCSV extends Component {
     return filename.split(".").pop();
   };
 
+  // dragged files are within the event differently
   getFileExtensionDrop = (filename) => {
     return filename.split("/").pop();
   };
@@ -71,10 +72,8 @@ class UploadCSV extends Component {
     );
   };
 
+  // The 'handleSubmit' for drag and dropped files
   dropHandler = (e) => {
-    // console.log(e);
-    // console.log(e.dataTransfer);
-    // console.log(e.dataTransfer.files[0]);
     e.preventDefault();
     if (!e.dataTransfer.files[0]) {
       return;
@@ -103,6 +102,7 @@ class UploadCSV extends Component {
     }
   };
 
+  // Prevents files from being downloaded when dragged into the screen
   dragOverHandler = (e) => {
     e.preventDefault();
   };
@@ -138,7 +138,7 @@ class UploadCSV extends Component {
             ) : (
               <span></span>
             )}
-            {/* This is the form */}
+            {/* Submit through computer form */}
             <form onSubmit={this.handleSubmit}>
               <div className="file-field input-field">
                 <div
@@ -161,6 +161,7 @@ class UploadCSV extends Component {
                   />
                 </div>
               </div>
+              {/* Drag and Drop box */}
               <div
                 // finish making conditional rendering when file is dragged over
                 id="drop_zone"
@@ -184,7 +185,7 @@ class UploadCSV extends Component {
                   </p>
                 )}
               </div>
-              {/* this is just the submit button */}
+              {/* this is the submit button */}
               <div className="input-field">
                 <button
                   className="btn waves-effect waves-light z-depth-0"
