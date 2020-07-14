@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
-import Guide from "./guidingInfo";
 import { createProject } from "../../../store/actions/projectActions";
 
 class CreateProject extends Component {
@@ -13,7 +12,9 @@ class CreateProject extends Component {
     console.log("name of the project", e.target.value);
     this.setState({
       [e.target.id]: e.target.value,
-    });
+		});
+		console.log("look", this.state);
+		// console.log("Here", [e.target.id]);
   };
   handleSubmit = (e) => {
     e.preventDefault();

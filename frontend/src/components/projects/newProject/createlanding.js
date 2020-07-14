@@ -4,7 +4,6 @@ import CreateProject from "./createproject";
 import "../../../styling/build.css";
 
 const CreateLanding = () => {
-  const [begin, setBegin] = useState(false);
   return (
     <Fragment>
       <div className="row container">
