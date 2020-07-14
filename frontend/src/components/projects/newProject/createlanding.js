@@ -26,7 +26,6 @@ const CreateLanding = () => {
         </div>
         <div className="col s6" style={{paddingLeft: "5vw"}}>
           <CreateProject />
-          {/* <img className="create-animation" src={createImg} alt="" /> */}
         </div>
       </div>
       <div className="row container center" style={{paddingTop: "5vh"}}>

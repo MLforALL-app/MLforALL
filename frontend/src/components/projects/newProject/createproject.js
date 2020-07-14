@@ -6,19 +6,24 @@ import { createProject } from "../../../store/actions/projectActions";
 class CreateProject extends Component {
   state = {
     title: "",
+    showWarning: false,
   };
   handleChange = (e) => {
-    console.log("event", e);
     console.log("name of the project", e.target.value);
     this.setState({
       [e.target.id]: e.target.value,
-		});
-		console.log("look", this.state);
-		// console.log("Here", [e.target.id]);
+    });
+    console.log("look", this.state);
+    // console.log("Here", [e.target.id]);
   };
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.createProject(this.state);
+    if (this.state.title === "") {
+      this.setState({ showWarning: true });
+    } else {
+      this.setState({ showWarning: false });
+      this.props.createProject(this.state);
+    }
   };
   render() {
     const { auth } = this.props;
@@ -26,20 +31,22 @@ class CreateProject extends Component {
     if (!auth.emailVerified) return <Redirect to={`/verify`} />;
     return (
       <div className="create-project">
-        <div className="row container">
-          {/* <h1 className="purple-text">Create Project</h1> */}
-        </div>
         <div className="row slider-row">
           <div
             className="container"
             style={{
               backgroundColor: "#F5F5F5",
               width: "100%",
-							border: "2px dashed #283593",
-							borderRadius: "15px"
+              border: "2px dashed #283593",
+              borderRadius: "15px",
             }}
           >
             <form onSubmit={this.handleSubmit}>
+              {this.state.showWarning ? (
+                <p style={{ color: "red" }}>Please Enter a Project Name</p>
+              ) : (
+                <p></p>
+              )}
               <div className="input-field">
                 <label htmlFor="title">Insert a title here!</label>
                 <input
@@ -57,8 +64,6 @@ class CreateProject extends Component {
             </form>
           </div>
         </div>
-        {/* Do something with handling the click */}
-        {/* <Guide /> */}
       </div>
     );
   }
