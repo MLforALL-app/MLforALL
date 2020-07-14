@@ -120,7 +120,7 @@ export const initCSV = (project, projID) => {
 				bigPapa(url, dispatch);
 			})
 			.catch((err) => {
-				console.log("Init CSV Error", err);
+				// console.log("Init CSV Error", err);
 				dispatch({ type: "CSV_FETCH_ERROR" });
 			});
 	};
