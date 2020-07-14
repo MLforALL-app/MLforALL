@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import { Link } from "react-scroll";
 
 function Signedoutlinks() {
@@ -16,9 +16,15 @@ function Signedoutlinks() {
 				</NavLink>
 			</li>
 			<li>
-				<Link to="signup" smooth="true" duration={500}>
-					<span className="purple-text">Sign Up</span>
-				</Link>{" "}
+				{useLocation().pathName === "/" ? (
+					<Link to="signup" smooth="true" duration={500}>
+						<span className="purple-text">Sign Up</span>
+					</Link>
+				) : (
+					<NavLink to="/">
+						<span className="purple-text">Sign Up</span>
+					</NavLink>
+				)}
 			</li>
 		</ul>
 	);
