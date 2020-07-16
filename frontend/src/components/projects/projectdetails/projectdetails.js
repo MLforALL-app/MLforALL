@@ -47,6 +47,7 @@ const ProjectDetails = (props) => {
  * auth object, and project object. We get the entire projects
  * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state, ownProps) => {
+	console.log("Look here bro", state);
 	const pid = ownProps.match.params.pid;
 	const projects = state.firestore.data[projectSource];
 	const project = projects ? projects[pid] : null;

@@ -1,4 +1,6 @@
 import React from "react";
+import { firestoreConnect } from "react-redux-firebase";
+
 const examples = () => {
   return (
     <div className="col s12 m6">

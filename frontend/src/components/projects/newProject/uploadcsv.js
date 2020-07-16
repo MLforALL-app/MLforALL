@@ -6,7 +6,7 @@ import {
   updateCsvData,
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
-import "../../../styling/drag.css";
+import "../../../styling/createproject.css";
 
 class UploadCSV extends Component {
   state = {
