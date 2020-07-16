@@ -78,7 +78,7 @@ def store():
         return jsonify({"result": "success"}), 200
     except ValueError as e:
         print(f"failed {e}")
-        return jsonify({"result" : "failure", "error": "520", "message": f"Buil Failed: {e}"}), 500
+        return jsonify({"result" : "failure", "error": "520", "message": f"Build Failed: {e}"}), 500
 
 
 @app.route('/visual', methods=['GET'])
