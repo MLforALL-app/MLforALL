@@ -31,8 +31,16 @@ const CreateLanding = () => {
           <img className="create-animation" src={createImg} alt="" />
         </div>
       </div>
-      <div className="row container center" style={{ paddingTop: "5vh" }}>
-        <CreateProject />
+      <div style={{ position: "relative" }}>
+        <h4
+          className="purple-text"
+          style={{ position: "absolute", left: "15vw" , top: "10px"}}
+        >
+          Start by naming your project
+        </h4>
+        <div className="row container center" style={{ paddingTop: "5vh" }}>
+          <CreateProject />
+        </div>
       </div>
     </Fragment>
   );

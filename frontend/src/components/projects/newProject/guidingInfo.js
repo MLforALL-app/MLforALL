@@ -1,5 +1,5 @@
 import React from "react";
-import { firestoreConnect } from "react-redux-firebase";
+// import { firestoreConnect } from "react-redux-firebase";
 
 const examples = () => {
   return (
