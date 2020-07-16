@@ -6,10 +6,13 @@ import "../../../styling/build.css";
 const CreateLanding = () => {
   return (
     <Fragment>
-      <div className="row container">
+      <div className="row container ">
         <h1 className="purple-text">Welcome to Create Project! </h1>
-        <div className="col s6 create-animation" style={{paddingRight: "5vw"}}>
-					<br/>
+        <div
+          className="col s12 m6 create-animation"
+          style={{ paddingRight: "5vw" }}
+        >
+          <br />
           <ul>
             <li>
               <h5>1. Download or Upload your own CSV datasets</h5>
@@ -24,12 +27,12 @@ const CreateLanding = () => {
             </li>
           </ul>
         </div>
-        <div className="col s6" style={{paddingLeft: "5vw"}}>
-          <CreateProject />
+        <div className="col s0 m6" style={{ paddingLeft: "5vw" }}>
+          <img className="create-animation" src={createImg} alt="" />
         </div>
       </div>
-      <div className="row container center" style={{paddingTop: "5vh"}}>
-        <img className="create-animation" src={createImg} alt="" />
+      <div className="row container center" style={{ paddingTop: "5vh" }}>
+        <CreateProject />
       </div>
     </Fragment>
   );

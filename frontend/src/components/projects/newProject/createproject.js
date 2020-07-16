@@ -36,9 +36,7 @@ class CreateProject extends Component {
             className="container"
             style={{
               backgroundColor: "#F5F5F5",
-              width: "100%",
-              border: "2px dashed #283593",
-              borderRadius: "15px",
+              width: "100%"
             }}
           >
             <form onSubmit={this.handleSubmit}>
