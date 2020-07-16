@@ -23,6 +23,7 @@ class CreateProjectContainer extends Component {
 }
 
 const mapStateToProps = (state) => {
+	// console.log("Look here bro", state);
 	return {
 		auth: state.firebase.auth,
 		projID: state.project.curUserProjID

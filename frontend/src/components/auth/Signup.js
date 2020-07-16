@@ -29,8 +29,8 @@ class SignUp extends Component {
 		// from props, retrieve authError and auth objects
 		const { authError } = this.props;
 		return (
-			<div className="container" style={{ paddingTop: "2rem", margin: "0"}}>
-				<form onSubmit={this.handleSubmit} className="white z-depth-1">
+			<div className="container" style={{ paddingTop: "2rem" }}>
+				<form onSubmit={this.handleSubmit}>
 					<div className="input-field">
 						<label htmlFor="firstName">First Name</label>
 						<input type="text" id="firstName" onChange={this.handleChange} />

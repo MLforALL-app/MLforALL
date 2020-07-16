@@ -2,6 +2,7 @@ import React from "react";
 import firebase from "firebase/app";
 console.log("sup", firebase);
 
+
 const examples = () => {
   return (
     <div className="col s12 m6">
@@ -33,16 +34,38 @@ const findMore = () => {
       <h5> Other Places To Find </h5>
       <ul>
         <li>
-          <a href="https://www.kaggle.com/datasets">Check out Kaggle,</a>
+          <a
+            href="https://www.kaggle.com/datasets"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Check out Kaggle,
+          </a>
         </li>
         <li>
-          <a href="https://data.world/">data.world (needs login),</a>
+          <a
+            href="https://data.world/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            data.world (needs login),
+          </a>
         </li>
         <li>
-          <a href="https://registry.opendata.aws/">Amazon's open registry,</a>
+          <a
+            href="https://registry.opendata.aws/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
+            Amazon's open registry,
+          </a>
         </li>
         <li>
-          <a href="https://datasetsearch.research.google.com/">
+          <a
+            href="https://datasetsearch.research.google.com/"
+            rel="noopener noreferrer"
+            target="_blank"
+          >
             {" "}
             or Google's dataset search engine!
           </a>
