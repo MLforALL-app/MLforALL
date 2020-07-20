@@ -35,9 +35,11 @@ class Model:
             self.type = None
             self.model = None
         self.scaler = None
+        self.onehot_features = None
 
-    def build(self, X, y):
+    def build(self, X, y, onehot_features):
         self.scaler = MinMaxScaler()
+        self.onehot_features = onehot_features
         X = self.scaler.fit_transform(X)
         return self.model.fit(X, y.reshape(-1))
 
@@ -49,7 +51,20 @@ class Model:
         ENSURES: returns what that particularly trained model predicts
                 given those inputs
         """
-        X_predict = [list(map(float, prediction_variables))]
+        X_predict = []
+        i, j = (0, 0)
+        categorical_indices = [self.onehot_features[feature]["index"] for feature in list(self.onehot_features)]
+        categorical_vals = [self.onehot_features[feature]["values"] for feature in list(self.onehot_features)]
+        while j < len(categorical_indices) and i < len(prediction_variables):
+            if i != categorical_indices[j]:
+                X_predict.append(prediction_variables[i])
+            else:
+                for feature in categorical_vals[j]:
+                    X_predict.append(1. * (prediction_variables[i] == feature))
+                j += 1
+            i += 1
+        
+        X_predict = [list(map(float, X_predict))]
         if self.scaler is not None:
             X_predict = self.scaler.transform(X_predict)
         guess = self.model.predict(X_predict)

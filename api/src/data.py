@@ -31,6 +31,7 @@ class Data:
                     col_name_list.remove(col)
 
             self.processed_df = self.processed_df.drop(col_name_list, axis=1)
+            self.processed_df, self.onehot_features = Data.make_onehot_df(self.processed_df)
 
             # now target contains the labels, and df contains the variables
             self.X_train, self.X_test, self.y_train, self.y_test = \
@@ -48,6 +49,24 @@ class Data:
         if method == "median":
             return df.fillna(df.median())
         raise ValueError("Invalid fill nan method")
+    
+    @staticmethod
+    def make_onehot_df(df):
+        categorical_features = {}
+        for i, col in enumerate(list(df.columns)):
+            unique_vals = df[col].unique()
+            if len(unique_vals) / df[col].count() <= 0.05:
+                categorical_features[col] = {"index": i, "values": unique_vals}
+        for feature in list(categorical_features):
+            unique_vals = categorical_features[feature]["values"]
+            for uval in unique_vals:
+                # assumes no col with name feature + str(uval)
+                df[feature + str(uval)] = 1. * (df[feature] == uval)
+        df = df.drop(list(categorical_features), axis=1)
+        return df, categorical_features
+    
+    def get_onehot_dict(self):
+        return self.onehot_features
 
     def make_train_test_split(self, X, y):
         X_train, X_test, y_train, y_test = train_test_split(
