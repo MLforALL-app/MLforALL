@@ -7,15 +7,21 @@ const ProjectSummary = ({ project }) => {
     return s.length < 15 ? s : s.substr(0, 13) + "..";
   };
 
-  //   const background = () => {
-  // 	  return {project ? project.backgroundImage : `url(${img1})`}
-  //   }
+  const bg = () => {
+    return `url(${project.projPic})`
+      ? `url(${project.projPic})`
+      : `url(${img1})`;
+  };
+
   return (
     <div className="project-summary">
       <div className="card z-depth-1" style={{ maxWidth: "300px" }}>
         <div
           className="card-picture"
-          style={{ backgroundImage: `url(${img1})`, backgroundColor: "white" }}
+          style={{
+            backgroundImage: bg(),
+            backgroundColor: "#283593",
+          }}
         ></div>
         <div className="card-content content-sum">
           <span className="card-title"> {project.title} </span>
