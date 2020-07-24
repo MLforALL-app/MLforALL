@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/MLforALL/static/css/main.65c06e88.chunk.css",
-    "main.js": "/MLforALL/static/js/main.3690e95f.chunk.js",
-    "main.js.map": "/MLforALL/static/js/main.3690e95f.chunk.js.map",
+    "main.css": "/MLforALL/static/css/main.9b8010de.chunk.css",
+    "main.js": "/MLforALL/static/js/main.fe841b9f.chunk.js",
+    "main.js.map": "/MLforALL/static/js/main.fe841b9f.chunk.js.map",
     "runtime-main.js": "/MLforALL/static/js/runtime-main.b303e372.js",
     "runtime-main.js.map": "/MLforALL/static/js/runtime-main.b303e372.js.map",
     "static/css/2.71916e70.chunk.css": "/MLforALL/static/css/2.71916e70.chunk.css",
-    "static/js/2.d96e0c09.chunk.js": "/MLforALL/static/js/2.d96e0c09.chunk.js",
-    "static/js/2.d96e0c09.chunk.js.map": "/MLforALL/static/js/2.d96e0c09.chunk.js.map",
+    "static/js/2.7a063204.chunk.js": "/MLforALL/static/js/2.7a063204.chunk.js",
+    "static/js/2.7a063204.chunk.js.map": "/MLforALL/static/js/2.7a063204.chunk.js.map",
     "index.html": "/MLforALL/index.html",
-    "precache-manifest.73cb3467aec8486e8c2c31bb1b668cf3.js": "/MLforALL/precache-manifest.73cb3467aec8486e8c2c31bb1b668cf3.js",
+    "precache-manifest.830bb3779d5c8828a36a80183dae4f77.js": "/MLforALL/precache-manifest.830bb3779d5c8828a36a80183dae4f77.js",
     "service-worker.js": "/MLforALL/service-worker.js",
     "static/css/2.71916e70.chunk.css.map": "/MLforALL/static/css/2.71916e70.chunk.css.map",
-    "static/css/main.65c06e88.chunk.css.map": "/MLforALL/static/css/main.65c06e88.chunk.css.map",
-    "static/js/2.d96e0c09.chunk.js.LICENSE.txt": "/MLforALL/static/js/2.d96e0c09.chunk.js.LICENSE.txt",
+    "static/css/main.9b8010de.chunk.css.map": "/MLforALL/static/css/main.9b8010de.chunk.css.map",
+    "static/js/2.7a063204.chunk.js.LICENSE.txt": "/MLforALL/static/js/2.7a063204.chunk.js.LICENSE.txt",
     "static/media/LP1.svg": "/MLforALL/static/media/LP1.2578d977.svg",
     "static/media/LP3.svg": "/MLforALL/static/media/LP3.4ef5d28b.svg",
-    "static/media/LP4.svg": "/MLforALL/static/media/LP4.dec6bed4.svg",
+    "static/media/LP4.svg": "/MLforALL/static/media/LP4.1889760b.svg",
     "static/media/LP5.svg": "/MLforALL/static/media/LP5.94c6534f.svg",
     "static/media/LP6.svg": "/MLforALL/static/media/LP6.d1869db6.svg",
     "static/media/LP7.svg": "/MLforALL/static/media/LP7.eb19e6ff.svg",
-    "static/media/LP8.svg": "/MLforALL/static/media/LP8.2dcc45d5.svg",
+    "static/media/LP8.svg": "/MLforALL/static/media/LP8.b51f233a.svg",
     "static/media/LP9.svg": "/MLforALL/static/media/LP9.598387c8.svg",
     "static/media/ausvg3.svg": "/MLforALL/static/media/ausvg3.f436cff4.svg",
     "static/media/ausvg7.svg": "/MLforALL/static/media/ausvg7.0b418a67.svg",
@@ -45,8 +45,8 @@
   "entrypoints": [
     "static/js/runtime-main.b303e372.js",
     "static/css/2.71916e70.chunk.css",
-    "static/js/2.d96e0c09.chunk.js",
-    "static/css/main.65c06e88.chunk.css",
-    "static/js/main.3690e95f.chunk.js"
+    "static/js/2.7a063204.chunk.js",
+    "static/css/main.9b8010de.chunk.css",
+    "static/js/main.fe841b9f.chunk.js"
   ]
 }
