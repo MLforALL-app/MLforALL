@@ -4,9 +4,9 @@
 
 @media only screen and (max-width: 992px) {
 	.brand-logo {
-    left: 19% !important;
-    -webkit-transform: translateX(-19%) !important;
-    transform: translateX(-19%) !important;
+    left: 12% !important;
+    -webkit-transform: translateX(-12%) !important;
+    transform: translateX(-12%) !important;
   }
 }
 
