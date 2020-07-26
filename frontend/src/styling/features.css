@@ -1,3 +1,46 @@
+.MLforAll1 {
+  font-family: Helvetica;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 96px;
+	line-height: 110px;
+	color: #283593;
+}
+.lpButtons {
+	height: 45px;
+	line-height: 23px;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+.MLforAll2 {
+	font-family: Helvetica;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 130%;
+	/* or 31px */
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #000000;
+}
+.WTD {
+	/* 
+	position: absolute;
+	width: 397px;
+	height: 41px;
+	left: 522px;
+	top: 940px;*/
+	font-family: Helvetica;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 41px;
+	/* display: flex;
+	align-items: center;
+	text-align: center;  */
+	padding-top: 3em;
+} 
 .lp-img {
 	height: 100%;
 	z-index: -1;
@@ -33,9 +76,12 @@
 	overflow: hidden;
 	margin-left: 0 auto;
 	margin-right: 0 auto;
-	padding: 0 0 0 60px;
+	padding: 0 0 0 90px;
 }
-
+.purpleHeader {
+	line-height: 130%; 
+	font-size: 36px
+}
 .fullrow-bg {
 	background-color: white;
 	background-position: center;
@@ -43,6 +89,10 @@
 	background-repeat: no-repeat;
 	text-align: center;
 	z-index: 0;
+}
+.infoText {
+	font-size: 24px; 
+	line-height: 130% 
 }
 
 .lp-header {

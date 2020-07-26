@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import {
   uploadCSVtoStorage,
   updateCsvData,
+  initializeCSVForProject
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "../../../styling/createproject.css";
@@ -59,6 +60,7 @@ class UploadCSV extends Component {
       return;
     }
     console.log(this.state.csv);
+    //case on whether we need to put an example into storage
     this.props.uploadCSVtoStorage(
       this.state.csv,
       this.props.project,
@@ -68,7 +70,8 @@ class UploadCSV extends Component {
     this.props.updateCsvData(
       this.state.csv,
       this.props.project,
-      this.props.projectID
+      this.props.projectID,
+      false 
     );
   };
 
@@ -115,6 +118,14 @@ class UploadCSV extends Component {
   dragLeaveHandler = () => {
     console.log("left");
     this.setState({ drag: false });
+  };
+
+  // Passed into Guide to handle the event of clicking an example link
+  clickHandler = (value) => () => {
+    //case on value "which is name of file, to reference to storage"
+    const {initializeCSVForProject, projectID} = this.props;
+    initializeCSVForProject(null, value, projectID);
+    // console.log("LOOK HERE", value);
   };
 
   render() {
@@ -197,7 +208,7 @@ class UploadCSV extends Component {
             </form>
           </div>
         </div>
-        <Guide />
+        <Guide clickHandle={this.clickHandler} />
       </div>
     );
   }
@@ -215,6 +226,8 @@ const mapDispatchToProps = (dispatch) => {
       dispatch(uploadCSVtoStorage(csv, project, id)),
     updateCsvData: (csv, project, id) =>
       dispatch(updateCsvData(csv, project, id)),
+    initializeCSVForProject: (csv, example, pid) => 
+      dispatch(initializeCSVForProject(csv, example, pid)),
   };
 };
 

@@ -93,14 +93,16 @@ def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
     req_data = request.get_json()
-
+    print(f'this is the reqdata {req_data}')
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
-    uid = req_data['uid']  # user id
+    # uid = req_data['uid']  # user id
     proj_id = req_data['projId']  # unique project hash
-    csv_name = req_data['csvName']
-
-    data = Data.from_csv(uid, proj_id, csv_name)
+    # csv_name = req_data['csvName']
+    newPath = req_data['csvPath']
+    # data = Data.from_csv(uid, proj_id, csv_name)
+    #test
+    data = Data.from_csv(newPath)
     description = data.pre_describe(proj_id)
     return jsonify(description)
 

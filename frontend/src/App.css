@@ -1,3 +1,19 @@
 .App-link {
 	color: #382980;
 }
+
+@media only screen and (max-width: 992px) {
+	.brand-logo {
+    left: 19% !important;
+    -webkit-transform: translateX(-19%) !important;
+    transform: translateX(-19%) !important;
+  }
+}
+
+/* @media only screen and (max-width: 565px) {
+	.brand-logo {
+    left: 5% !important;
+    -webkit-transform: translateX(-5%) !important;
+    transform: translateX(-5%) !important;
+  }
+} */

@@ -6,8 +6,16 @@
 	background-color: #eeeeee;
 	padding-bottom: 0px;
 }
+.infoText {
+	font-size: 24px; 
+	line-height: 130% 
+}
+.purpleHeader {
+	line-height: 130%; 
+	font-size: 36px
+}
 .ap-header {
-	height: calc(12rem + 5vh);
+	height: calc(15rem + 8vh);
 }
 .abt {
 	padding-top: 15px;
@@ -18,7 +26,7 @@
 	font-weight: 800;
 }
 .aplearn {
-  padding-bottom: calc(3rem + 5vh);
+  padding-bottom: calc(4rem + 5vh);
 }
 .p-signup {
   font-weight: 500;
