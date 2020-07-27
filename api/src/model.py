@@ -63,6 +63,10 @@ class Model:
                     X_predict.append(1. * (prediction_variables[i] == feature))
                 j += 1
             i += 1
+
+        while i < len(prediction_variables):
+            X_predict.append(prediction_variables[i])
+            i += 1
         
         X_predict = [list(map(float, X_predict))]
         if self.scaler is not None:
