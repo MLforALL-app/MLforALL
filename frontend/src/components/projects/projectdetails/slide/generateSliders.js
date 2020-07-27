@@ -109,6 +109,7 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
+			console.log(path);
 			this.setState({ loading: true });
 			axios
 				.post(`${apiHost}/predict`, path)

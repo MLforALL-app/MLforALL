@@ -72,7 +72,6 @@ class BuildProject extends Component {
                     onClose={this.handleClose}
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
-                    classes = "card"
                     >
                     
                         

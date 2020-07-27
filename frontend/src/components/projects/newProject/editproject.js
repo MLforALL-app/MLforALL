@@ -158,12 +158,15 @@ class EditProject extends Component {
 					!this.state.waitForCSVUpload ? (
 						<div>
 							{this.props.csvData &&
+							this.props.project.info &&
+							this.props.project.info.excludedFeatures &&
 							this.props.currentWorkingProject !== "initialized" ? (
 								<div>
 									<DisplayCSV
 										project={project}
 										id={projectID}
 										selectedVariables={this.props.project.variables}
+										variableInfo={this.props.project.info.excludedFeatures}
 									/>
 									<NanHandler
 										count={this.props.project.info.NaN}

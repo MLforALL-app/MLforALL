@@ -67,11 +67,11 @@ class DisplayCSV extends Component {
 		});
 		this.props.setInputParameters(this.state.inputs);
 	};
-	checkBoxHeader = (colName, is_numeric) => (key) => {
+	checkBoxHeader = (colName, is_numeric, i) => (key) => {
 		return (
 			<div>
 				<div>
-					{!is_numeric ? (
+					{(this.props.variableInfo && this.props.variableInfo.includes(colName)) ?(
 						<FormControlLabel
 							className="purple-text"
 							value="bottom"
@@ -105,6 +105,7 @@ class DisplayCSV extends Component {
 
 	getColumns = (keyList, firstRow) => {
 		var columns = [];
+		var i = 0;
 		keyList.forEach((key) => {
 			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
@@ -113,7 +114,7 @@ class DisplayCSV extends Component {
 					label={key}
 					dataKey={key}
 					key={key}
-					headerRenderer={this.checkBoxHeader(colName, numeric_col)}
+					headerRenderer={this.checkBoxHeader(colName, numeric_col, i)}
 					width={5000}
 				/>
 			);
@@ -134,6 +135,7 @@ class DisplayCSV extends Component {
 	};
 
 	componentDidMount = () => {
+		console.log(this.props.variableInfo);
 		let thingsToSelect = this.props.selectedVariables;
 		thingsToSelect.forEach((item) => {
 			this.checkBoxChange(item.name)(null);
@@ -147,7 +149,8 @@ class DisplayCSV extends Component {
 				) : (
 					<span></span>
 				)}
-				{(this.props.csvData && this.props.csvData.length) === 0 ? (
+				{(this.props.variableInfo && (this.props.variableInfo.length === 0) 
+			   && this.props.csvData && this.props.csvData.length) === 0 ? (
 					<div className="container center">
 						<CircularProgress />
 					</div>
