@@ -6,8 +6,8 @@ import numpy as np
 class Data:
     def __init__(self, df, target_parameter, df_variables, nan_method="drop"):
         # firestore project source. change this during testing and host locally
-        # self.project_source = "projects"
-        self.project_source = "projects-production"
+        self.project_source = "projects"
+        # self.project_source = "projects-production"
 
         # keep as original data (no in place changes, just in case)
         self.df = df
@@ -118,25 +118,33 @@ class Data:
         REQUIRES: df some valid pandas dataframe, input_variable a valid key
         ENSURES: a dictionary representation of descriptive stats
         """
-        ref = self.df.describe()[input_variable]
-        likely_continuous = 1. * \
-            self.df[input_variable].nunique(
-            )/self.df[input_variable].count() > 0.05
-        info = {
-            "name": input_variable,
-            "lo": ref[3],
-            "hi": ref[7],
-            "q1": ref[4],
-            "q2": ref[5],
-            "q3": ref[6],
-            "continuous": True if likely_continuous else False,
-        }
+        ref = self.df.describe()
+        if input_variable in ref:
+            ref = self.df.describe()[input_variable]
+            likely_continuous = 1. * \
+                self.df[input_variable].nunique(
+                )/self.df[input_variable].count() > 0.05
+            info = {
+                "name": input_variable,
+                "lo": ref[3],
+                "hi": ref[7],
+                "q1": ref[4],
+                "q2": ref[5],
+                "q3": ref[6],
+                "continuous": True if likely_continuous else False,
+            }
 
-        if not info["continuous"]:
-            info["isString"] = True if self.df[input_variable].dtype == np.object else False
-            if info["isString"]:
-                info["values"] = list(self.df[input_variable].unique())
-
+            if not info["continuous"]:
+                info["isString"] = True if self.df[input_variable].dtype == np.object else False
+                if info["isString"]:
+                    info["values"] = list(self.df[input_variable].unique())
+        else:
+            info = {
+                "name": input_variable,
+                "continuous": False,
+            }
+            info["isString"] = True
+            info["values"] = list(self.df[input_variable].unique())
         return info
 
     def get_variables(self, input_list):
