@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { nameMapper } from "../../../../store/actions/nameMapper";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
+import CategoricalDropdown from "./categoricaldropdown";
 import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
 import apiHost from "../../../../config/api.js";
@@ -44,8 +45,14 @@ const getDesc = (name) => {
 const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
-		inputs[v.name] = v.q2;
+		if(!v.isString){
+			inputs[v.name] = v.q2;
+		}else{
+			inputs[v.name] = v.values[0];
+		}
+		
 	});
+	console.log(inputs);
 	return inputs;
 };
 
@@ -64,9 +71,11 @@ class GenerateSliders extends Component {
 	// of event handlers
 	handleSliderChange = (v) => {
 		return (event, newValue) => {
+			console.log(this.state);
 			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
+				console.log(newValue);
 				alterState.inputs[v.name] = newValue;
 				return alterState;
 			});
@@ -129,20 +138,29 @@ class GenerateSliders extends Component {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				output.push(
-					PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
-				);
+				if(!v.isString){
+					output.push(
+						PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
+					);
+				}else{
+					output.push(
+						CategoricalDropdown(v.name, v.values,  this.state[v.name], hic(v))
+					);
+					
+				}
+				
 			});
 			return <div>{output}</div>;
 		} else {
 			return <p> NO SLIDERS YET </p>;
 		}
 	}
-	componentDidUpdate(prev) {
+	componentDidUpdate = (prev) => {
 		const projectNew = this.props.project;
 		if (prev && prev !== this.props) {
 			this.setState(refreshState(projectNew));
 		}
+		console.log(this.state);
 	}
 	render() {
 		const { project } = this.props;
