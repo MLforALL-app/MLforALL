@@ -16,8 +16,8 @@ import { Element, Link } from "react-scroll";
 import { Redirect } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 import { isBrowser } from "react-device-detect";
-// import { firestoreConnect } from "react-redux-firebase";
-// import { compose } from "redux";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
 const Header = () => {
 	return (
@@ -190,7 +190,7 @@ const makePicture = (name, title, link, picture) => {
 			<a target="_blank" rel="noreferrer noopener" href={link}>
 				<img
 					src={picture}
-					alt="Dav"
+					alt={name}
 					style={
 						isBrowser
 							? {
@@ -279,7 +279,7 @@ const landSign = () => {
 
 class About extends Component {
 	render() {
-		const { auth } = this.props;
+		const { auth, project } = this.props;
 		if (!auth.uid) {
 			return (
 				<div className="white-background-landing">
@@ -297,10 +297,21 @@ class About extends Component {
 	}
 }
 
+/* The props we need for this component are the project ID,
+ * auth object, and project object. We get the entire projects
+ * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state) => {
+	const projects = state.firestore.data.business;
+	const project = projects ? projects["example-slide"] : null;
+	console.log(project);
+	// lets change this to somehow query in firestoreConnect
 	return {
+		project,
 		auth: state.firebase.auth
 	};
 };
 
-export default connect(mapStateToProps)(About);
+export default compose(
+	connect(mapStateToProps),
+	firestoreConnect([{ collection: "business" }])
+)(About);
