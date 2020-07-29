@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { signOut } from "../../store/actions/authActions";
+import Avatar from "@material-ui/core/Avatar";
 
 const Signedinlinks = (props) => {
 	return (
@@ -34,11 +35,20 @@ const Signedinlinks = (props) => {
 			<li>
 				<NavLink
 					to={"/user/" + props.auth.uid}
-					key={props.auth.uid}
+					key={props.auth.uid + "lol"}
 					className="btn waves-effect waves-light btn-floating">
 					{props.profile.initials}
 				</NavLink>
 			</li>
+			{/* (Not needed but something to consider if doing profile pictures)
+				<li>
+					<NavLink
+						style={{ height: "100%", marginTop: "12px" }}
+						to={"/user/" + props.auth.uid}
+						key={props.auth.uid}>
+						<Avatar>{props.profile.initials}</Avatar>
+					</NavLink>
+				</li> */}
 		</ul>
 	);
 };
