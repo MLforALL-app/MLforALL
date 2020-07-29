@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import DisplayCSV from "./editpage/editCSV";
+import DisplayCSV from "./editpage/displayCSV";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
@@ -41,10 +41,10 @@ class EditProject extends Component {
 	determineProjectState = () => {
 		if (!this.props.project) {
 			return 0;
-		} else if (this.props.project.csvName === "") {
+		} else if (this.props.project.csvPath === "") {
 			return 1;
 		} else if (
-			this.props.project.csvName !== "" &&
+			this.props.project.csvPath !== "" &&
 			this.props.project.models === []
 		) {
 			return 2;
@@ -70,10 +70,12 @@ class EditProject extends Component {
 				this.props.setWorkingProject(this.props.project, this.props.projectID);
 				//if csv is not in store (not just uploaded) get it
 				if (this.state.projectState === 0) {
+					console.log("initCSV");
 					//if we are loading a project that already has an uploaded csv
 					this.props.initCSV(this.props.project, this.props.projectID);
 				} else {
 					//if we are loading a project with a newly uploaded csv
+					console.log("setUpPreloadedCSV");
 					this.props.setUpPreloadedCsv();
 				}
 				this.props.setWorkingProject(this.props.project, this.props.projectID);

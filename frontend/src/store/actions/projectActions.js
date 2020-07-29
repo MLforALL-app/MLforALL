@@ -99,6 +99,7 @@ export const bigPapa = (url, dispatch) => {
     },
   });
 };
+
 export const parseExisting = (file, dispatch) => {
   Papa.parse(file, {
     worker: true,
@@ -113,7 +114,8 @@ export const parseExisting = (file, dispatch) => {
 export const initCSV = (project, projID) => {
   return (dispatch, getState, { getFirebase }) => {
     const uid = getState().firebase.auth.uid;
-    const csvPath = uid + "/" + projID + "/" + project.csvName;
+    // const csvPath = uid + "/" + projID + "/" + project.csvName;
+    const csvPath = project.csvPath;
     const firebase = getFirebase();
     var csvRef = firebase.storage().ref(csvPath);
     csvRef
@@ -134,6 +136,7 @@ export const setUpPreloadedCsv = () => {
     parseExisting(csv, dispatch);
   };
 };
+
 export const uploadCSVtoStorage = (csv, project, pid) => {
   return (dispatch, getState, { getFirebase }) => {
     dispatch({ type: "QUICK_CSV", csv });
@@ -285,8 +288,6 @@ const initializeDescribe = (csvPath, pid, dispatch) => {
     csvPath: csvPath,
     projId: pid
   };
-  console.log("this is what was passed in", postInput)
-  console.log("this is what was passed in2", JSON.stringify(postInput))
   // After we upload the csv, update firestore with preliminary insights
   axios
     .post(`${apiHost}/describe`, postInput)
@@ -321,7 +322,7 @@ export const initializeCSVForProject = (csv, example, pid) => {
     const uid = getState().firebase.auth.uid;
 
     const isExample = !csv && example !== "";
-    const csvPath = isExample ?`Example/${example}`:`${uid}/${pid}/${csv.name}`;
+    const csvPath = isExample ?`Examples/${example}`:`${uid}/${pid}/${csv.name}`;
     console.log("printing csv path", csvPath);
 
     var csvRef = firebase.storage().ref(csvPath);
@@ -348,7 +349,7 @@ export const initializeCSVForProject = (csv, example, pid) => {
     const projectRef = firestore.collection(projectSource).doc(pid);
     projectRef
       .set(
-        { csvName: isExample ? "" : csv.name, csvPath: csvPath },
+        { csvPath: csvPath },
         { merge: true }
       )
       .then((snapshot) => {

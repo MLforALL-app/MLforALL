@@ -102,7 +102,9 @@ def describe():
     newPath = req_data['csvPath']
     # data = Data.from_csv(uid, proj_id, csv_name)
     #test
+    print("data")
     data = Data.from_csv(newPath)
+    print("description")
     description = data.pre_describe(proj_id)
     return jsonify(description)
 
