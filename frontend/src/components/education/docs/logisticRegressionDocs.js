@@ -93,8 +93,7 @@ function makePlot() {
 
 const logisticRegression = (
 	<div>
-		<h1 className="purple-text"> Help Page </h1>
-		{header("Logistic Regression", "+2")}
+		{header("Logistic Regression")}
 
 		{bodyContent(`
 Logistic regression is used to estimate the probability that objects belong to different categories based on information about those objects. For example, we could measure the height and weight of an animal and give the probability that the animal is a dog versus a cat. In the example below, we estimate the probability that a person likes math based on the number of math classes they've taken.     

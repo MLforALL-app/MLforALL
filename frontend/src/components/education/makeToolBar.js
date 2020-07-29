@@ -4,11 +4,12 @@ import Drawer from "@material-ui/core/Drawer";
 import Toolbar from "@material-ui/core/Toolbar";
 import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
+// import Collapse from "@material-ui/core/Collapse";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link, Element } from "react-scroll";
 
-const drawerWidth = 240;
+const drawerWidth = 260;
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -33,14 +34,63 @@ const useStyles = makeStyles((theme) => ({
 	content: {
 		flexGrow: 1,
 		padding: theme.spacing(3)
+	},
+	listItem: {
+		padding: 0
+	},
+	nested: {
+		paddingLeft: theme.spacing(4),
+		color: "#000"
 	}
 }));
 
+const SmoothLink = ({ to, children }) => {
+	return (
+		<Link to={to} smooth="true" duration={500} offset={-80}>
+			{children}
+		</Link>
+	);
+};
+
 const MakeDrawer = ({ sections }) => {
 	const classes = useStyles();
-
-	return (
-		<div className={classes.root}>
+	// state to open and close nested lists
+	// const [open, setOpen] = React.useState(true);
+	// state handler
+	// const handleClick = () => {
+	// 	setOpen(!open);
+	// };
+	// sidebar component
+	const Sidebar = () => {
+		const makeObjSidebar = (obj) => {
+			return (
+				<SmoothLink to={obj.to} key={`smooth_${obj.to}`}>
+					<ListItem button className={classes.nested} key={obj.text}>
+						<ListItemText primary={obj.text} />
+					</ListItem>
+				</SmoothLink>
+			);
+		};
+		const makeSectionSidebar = (subsection) => {
+			const { header, list } = subsection;
+			return (
+				<List key={`subsec_${header}_sidebar`} disablePadding>
+					<Divider />
+					<SmoothLink to={header}>
+						<ListItem button>
+							<ListItemText
+								className="purple-text"
+								primary={header}
+								primaryTypographyProps={{ color: "inherit", variant: "h6" }}
+							/>
+						</ListItem>
+					</SmoothLink>
+					<Divider />
+					{list.map(makeObjSidebar)}
+				</List>
+			);
+		};
+		return (
 			<Drawer
 				className={classes.drawer}
 				variant="permanent"
@@ -49,39 +99,41 @@ const MakeDrawer = ({ sections }) => {
 				}}>
 				<Toolbar />
 				<div className={classes.drawerContainer}>
-					{sections.map((subsection) => (
-						<List key={`subsec_${subsection && subsection[0].to}`}>
-							{subsection.map((obj) => (
-								<Link
-									key={`link_${obj.to}`}
-									to={obj.to}
-									smooth="true"
-									duration={500}
-									offset={-80}>
-									<ListItem button key={obj.text}>
-										<ListItemText primary={obj.text} />
-									</ListItem>
-								</Link>
-							))}
-						</List>
-					))}
-					<Divider />
+					<List>{sections.map(makeSectionSidebar)}</List>
 				</div>
 			</Drawer>
+		);
+	};
+	// main content component
+	const Content = () => {
+		const makeObjContent = (obj) => {
+			return (
+				<Element name={obj.to} className="element" key={`elem_${obj.to}`}>
+					{obj.content}
+				</Element>
+			);
+		};
+		const makeSubsectionContent = (sub) => {
+			const { header, list } = sub;
+			return (
+				<div key={`subsec_${header}_content`} className="container">
+					<Element name={header}>
+						<h2 className="purple-text"> {header} </h2>
+					</Element>
+					{list.map(makeObjContent)}
+				</div>
+			);
+		};
+		return (
 			<main className={classes.content}>
-				{sections.map((subsection) => {
-					return subsection.map((obj) => {
-						return (
-							<Element name={obj.to} className="element" key={`elem_${obj.to}`}>
-								<div className="container">
-									<h2 className="purple-text">{obj.title}</h2>
-									{obj.content}
-								</div>
-							</Element>
-						);
-					});
-				})}
+				{sections.map(makeSubsectionContent)}
 			</main>
+		);
+	};
+	return (
+		<div className={classes.root}>
+			<Sidebar />
+			<Content />
 		</div>
 	);
 };

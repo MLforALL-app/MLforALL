@@ -3,7 +3,7 @@ import MathJax from "react-mathjax";
 import RemarkMathPlugin from "remark-math";
 
 export function header(str) {
-	return <h4 className="purple-text">{str}</h4>;
+	return <h4>{str}</h4>;
 }
 
 export function bodyContent(str) {

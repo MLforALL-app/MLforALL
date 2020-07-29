@@ -280,6 +280,7 @@ const landSign = () => {
 class About extends Component {
 	render() {
 		const { auth, project } = this.props;
+		console.log(project);
 		if (!auth.uid) {
 			return (
 				<div className="white-background-landing">
@@ -303,7 +304,6 @@ class About extends Component {
 const mapStateToProps = (state) => {
 	const projects = state.firestore.data.business;
 	const project = projects ? projects["example-slide"] : null;
-	console.log(project);
 	// lets change this to somehow query in firestoreConnect
 	return {
 		project,
