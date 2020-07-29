@@ -174,10 +174,8 @@ class UploadCSV extends Component {
               >
                 <br />
                 {this.state.csv === "" ? (
-                  <p className="center">
-                    <div style={{ fontSize: 20 }}>
+                  <p className="center" style={{ fontSize: 20 }}>
                       <strong>Choose a file </strong>or drag it here
-                    </div>
                   </p>
                 ) : (
                   <p className="center " style={{ fontSize: 20 }}>

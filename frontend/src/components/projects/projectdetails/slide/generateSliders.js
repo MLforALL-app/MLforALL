@@ -48,6 +48,7 @@ const initInputs = (variables) => {
 		if(!v.isString){
 			inputs[v.name] = v.q2;
 		}else{
+			console.log("CATEGORICAL VALUES", v.values, v.values[0]);
 			inputs[v.name] = v.values[0];
 		}
 		
@@ -79,6 +80,16 @@ class GenerateSliders extends Component {
 				alterState.inputs[v.name] = newValue;
 				return alterState;
 			});
+		};
+	};
+	handleCategoricalChange = (v) => {
+		return (event, newValue) => {
+			event.preventDefault();
+			this.setState((prevState) => {
+				var alterState = prevState;
+				alterState.inputs[v.name] = newValue["key"];
+				return alterState;
+			})
 		};
 	};
 	handleInputChange = (v) => {
@@ -134,7 +145,7 @@ class GenerateSliders extends Component {
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	getSlides(variables, hsc, hic) {
+	getSlides(variables, hsc, hic, hcc) {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
@@ -143,8 +154,10 @@ class GenerateSliders extends Component {
 						PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
 					);
 				}else{
+					console.log("MAKING A DROP DOWN");
+					console.log(this.state.inputs);
 					output.push(
-						CategoricalDropdown(v.name, v.values,  this.state[v.name], hic(v))
+						CategoricalDropdown(v.name, v.values, this.state.inputs[v.name], hcc(v))
 					);
 					
 				}
@@ -190,7 +203,8 @@ class GenerateSliders extends Component {
 							{this.getSlides(
 								project.variables,
 								this.handleSliderChange,
-								this.handleInputChange
+								this.handleInputChange,
+								this.handleCategoricalChange
 							)}
 							<div
 								className="row"

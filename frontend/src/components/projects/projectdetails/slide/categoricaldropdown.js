@@ -3,6 +3,8 @@ import React from "react";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
 
 /* REQUIRES: project a firestore object, currentModel the ml alg currently
  * 			 selected, handleChange a handler inherited from parent to control
@@ -12,7 +14,7 @@ import Select from "@material-ui/core/Select";
 
 const Dropdown = (param, values, currentSelection, handleChange) => {
 	const getMenuItems = (values) => {
-        console.log("making a dropdown");
+        console.log("making a dropdown", currentSelection);
 		if (values.length === 0) {
 			return (
 				<MenuItem key={"none"} value={""}>
@@ -36,17 +38,27 @@ const Dropdown = (param, values, currentSelection, handleChange) => {
 	};
 
 	return (
-		<div key={"container_" + param} style={{ display: "inline-block", textAlign: "center" }}>
-            {param}
-			<FormControl>
-				<Select
-					value={currentSelection}
-					onChange={handleChange}
-					displayEmpty>
-					{getMenuItems(values)}
-				</Select>
-			</FormControl>
+		<div key={"container_" + param} >
+			
+			<Grid container spacing={1} alignItems="center">
+			<Grid item xs>
+			<Typography id="continuous-slider" gutterBottom>
+				<b>{param}</b>
+			</Typography>
+			</Grid>
+				<Grid item xs>	
+					<FormControl>
+						<Select
+							value={currentSelection}
+							onChange={handleChange}
+							displayEmpty>
+							{getMenuItems(values)}
+						</Select>
+					</FormControl>
+				</Grid>
+			</Grid>
 		</div>
+		
 	);
 };
 
