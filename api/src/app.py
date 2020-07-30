@@ -75,10 +75,10 @@ def store():
             trained_models.append(model)
         # update firestore with descriptive stats (IQR)
         data.send_vars(proj_id, trained_models)
-        return "it worked"
+        return jsonify({"result": "success"}), 200
     except ValueError as e:
         print(f"failed {e}")
-        return f"it failed: {e}"
+        return jsonify({"result" : "failure", "error": "520", "message": f"Build Failed: {e}"}), 500
 
 
 @app.route('/visual', methods=['GET'])
