@@ -137,75 +137,23 @@ export const setUpPreloadedCsv = () => {
   };
 };
 
-export const uploadCSVtoStorage = (csv, project, pid) => {
-  return (dispatch, getState, { getFirebase }) => {
-    dispatch({ type: "QUICK_CSV", csv });
-    const firebase = getFirebase();
-    const uid = getState().firebase.auth.uid;
-    const csvPath = uid + "/" + pid + "/" + csv.name;
-    var csvRef = firebase.storage().ref(csvPath);
-    csvRef
-      .put(csv)
-      .then((snapshot) => {
-        dispatch({ type: "UPLOAD_CSV" });
-        // const path = {
-        //   uid: uid,
-        //   projId: pid,
-        //   csvName: csv.name,
-				// };
-				const path = {
-          csvPath: csvPath,
-          projId: pid,
-				};
-        // After we upload the csv, update firestore with preliminary insights
-        axios
-          .post(`${apiHost}/describe`, path)
-          .then((res) => {
-            dispatch({ type: "UPLOAD_CSV_METADATA" });
-          })
-          .catch((err) => {
-            dispatch({ type: "UPLOAD_CSV_METADATA_ERROR" });
-          });
-      })
-      .catch((err) => {
-        console.log("UploadToCSV Error", err);
-        dispatch({ type: "UPLOAD_CSV_ERROR" });
-      });
-  };
-};
-
-export const updateCsvData = (csv, project, pid, example) => {
-  return (dispatch, getState, { getFirestore }) => {
-    const firestore = getFirestore();
-    const uid = getState().firebase.auth.uid;
-    const projectRef = firestore.collection(projectSource).doc(pid);
-    projectRef
-      .set(
-        { csvName: csv.name, csvPath: uid + "/" + pid + "/" + csv.name },
-        { merge: true }
-      )
-      .then((snapshot) => {
-        dispatch({ type: "UPDATE_CSV_NAME" });
-        // dispatch({
-        //   type: "UPDATE_CURRENT_WORKING_PROJECT",
-        //   project,
-        //   pid,
-        //   uid,
-        // });
-      })
-      .catch((err) => {
-        dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
-      });
-  };
+//Helper function to determine if path is Example
+const pathIsExample = (csvPath) => {
+  return "Examples" === csvPath.split("/")[0];
 };
 
 export const deleteMLProject = (pid, uid, project, update) => {
+  //update is a true or false
   return (dispatch, getState, { getFirestore, getFirebase }) => {
+    // case on whether the path is in Examples using pathIsExample
     // get todelete files
-    const delCSV = project.csvName;
+    const delCSV = project.csvPath.split("/").pop();
     // might be a source of bugs in the future
+    // Grabs the "keys" names of the models and places it in an array
     var delVars = Object.keys(project.models);
-    if (!update) {
+    console.log("real quick here", delVars);
+    //if it is an update or its an example, we will not delete the csv in storage
+    if (!update || !pathIsExample(project.csvPath)) {
       delVars.push(delCSV);
     }
     const storageRef = getFirebase().storage();
@@ -245,10 +193,9 @@ const filterObj = (objState) => {
     .map(([key, val]) => key);
 };
 
-export const buildModels = () => {
+export const buildModels = (project) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const submissionData = getState().project.currentWorkingProject;
-
     const path = {
       uid: submissionData.uid,
       projId: submissionData.projId,
@@ -256,9 +203,10 @@ export const buildModels = () => {
       modelList: filterObj(submissionData.modelList),
       targetParameter: submissionData.targetParameter,
       dfVariables: filterObj(submissionData.inputs),
-      csvName: submissionData.csvName,
+      csvPath: project.csvPath,
       nanMethod: submissionData.nanMethod,
     };
+    console.log("building the model", path);
     axios
       .post(`${apiHost}/store`, path)
       .then((res) => {
@@ -286,7 +234,7 @@ export const clearStore = () => {
 const initializeDescribe = (csvPath, pid, dispatch) => {
   const postInput = {
     csvPath: csvPath,
-    projId: pid
+    projId: pid,
   };
   // After we upload the csv, update firestore with preliminary insights
   axios
@@ -328,7 +276,6 @@ export const initializeCSVForProject = (csv, example, pid) => {
     var csvRef = firebase.storage().ref(csvPath);
     console.log("this is the bool example", isExample);
     if (!isExample) {
-      console.log("if statement ran");
       csvRef
         .put(csv)
         .then((snapshot) => {
@@ -340,23 +287,25 @@ export const initializeCSVForProject = (csv, example, pid) => {
           dispatch({ type: "UPLOAD_CSV_ERROR" });
         });
     } else {
-      console.log("else statement ran");
       initializeDescribe(csvPath, pid, dispatch);
     };
 
     // will need to get rid of csvName in the future
     const firestore = getFirestore();
     const projectRef = firestore.collection(projectSource).doc(pid);
+    console.log("this is projectRef", projectRef);
     projectRef
       .set(
-        { csvPath: csvPath },
+        { csvPath: csvPath , example: isExample },
         { merge: true }
       )
       .then((snapshot) => {
         dispatch({ type: "UPDATE_CSV_NAME" });
+        console.log("rong look here", projectRef);
       })
       .catch((err) => {
         dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
       });
+
   };
 };

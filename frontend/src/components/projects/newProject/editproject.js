@@ -126,7 +126,7 @@ class EditProject extends Component {
 			this.getContent(this.props.project.content),
 			this.props.projectID
 		);
-		this.props.buildModels();
+		this.props.buildModels(project);
 	};
 
 	render() {
@@ -230,7 +230,7 @@ const mapDispatchToProps = (dispatch) => {
 		setWorkingProject: (project, id) =>
 			dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
-		buildModels: () => dispatch(buildModels()),
+		buildModels: (pid) => dispatch(buildModels(pid)),
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
 		resetBuild: () => dispatch(resetBuild()),
 		clearStore: () => dispatch(clearStore()),

@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
-  uploadCSVtoStorage,
-  updateCsvData,
   initializeCSVForProject
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
@@ -45,36 +43,6 @@ class UploadCSV extends Component {
     }
   };
 
-  getFileExtension = (filename) => {
-    return filename.split(".").pop();
-  };
-
-  // dragged files are within the event differently
-  getFileExtensionDrop = (filename) => {
-    return filename.split("/").pop();
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    if (this.state.showError || this.state.csv === "") {
-      return;
-    }
-    console.log(this.state.csv);
-    //case on whether we need to put an example into storage
-    this.props.uploadCSVtoStorage(
-      this.state.csv,
-      this.props.project,
-      this.props.projectID
-    );
-
-    this.props.updateCsvData(
-      this.state.csv,
-      this.props.project,
-      this.props.projectID,
-      false 
-    );
-  };
-
   // The 'handleSubmit' for drag and dropped files
   dropHandler = (e) => {
     e.preventDefault();
@@ -103,6 +71,42 @@ class UploadCSV extends Component {
         fileUploadMessage: "Upload",
       });
     }
+  };
+
+  getFileExtension = (filename) => {
+    return filename.split(".").pop();
+  };
+
+  // dragged files are within the event differently
+  getFileExtensionDrop = (filename) => {
+    return filename.split("/").pop();
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.showError || this.state.csv === "") {
+      return;
+    }
+    //case on whether we need to put an example into storage
+
+    this.props.initializeCSVForProject(
+      this.state.csv,
+      "",
+      this.props.projectID
+    );
+
+    // this.props.uploadCSVtoStorage(
+    //   this.state.csv,
+    //   this.props.project,
+    //   this.props.projectID
+    // );
+
+    // this.props.updateCsvData(
+    //   this.state.csv,
+    //   this.props.project,
+    //   this.props.projectID,
+    //   false 
+    // );
   };
 
   // Prevents files from being downloaded when dragged into the screen
@@ -222,10 +226,10 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    uploadCSVtoStorage: (csv, project, id) =>
-      dispatch(uploadCSVtoStorage(csv, project, id)),
-    updateCsvData: (csv, project, id) =>
-      dispatch(updateCsvData(csv, project, id)),
+    // uploadCSVtoStorage: (csv, project, id) =>
+    //   dispatch(uploadCSVtoStorage(csv, project, id)),
+    // updateCsvData: (csv, project, id) =>
+    //   dispatch(updateCsvData(csv, project, id)),
     initializeCSVForProject: (csv, example, pid) => 
       dispatch(initializeCSVForProject(csv, example, pid)),
   };

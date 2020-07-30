@@ -49,14 +49,13 @@ def store():
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
-    csv_name = req_data['csvName']  # name of uploaded csv
+    csv_path = req_data['csvPath']  # name of uploaded csv
     nan_method = req_data['nanMethod']  # method for dealing with NaN's
 
     # Get firebase stuff
     bucket = fb.bucket_init()
 
-    df = fb.get_csv(bucket, fb.make_path(
-        str(uid), str(proj_id), str(csv_name)))
+    df = fb.get_csv(bucket, csv_path)
 
     data = Data(df, target_param, df_vars, nan_method)
     X_train, X_test, y_train, y_test = data.get_train_test_split()
