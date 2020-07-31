@@ -77,12 +77,12 @@
 	text-align: center;
 	z-index: 0;
 }
+.lp-header {
+	height: calc(30rem + 20vh);
+}
 .infoText {
 	font-size: 24px;
 	line-height: 130%;
-}
-.lp-header {
-	height: calc(30rem + 20vh);
 }
 .lp-header-mobile {
 	height: calc(18rem + 5vh);
