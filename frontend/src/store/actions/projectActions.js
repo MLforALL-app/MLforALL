@@ -113,8 +113,6 @@ export const parseExisting = (file, dispatch) => {
 /* Reduxifying The Papa Parse and Fetch CSV  to Decouple them from the component*/
 export const initCSV = (project, projID) => {
   return (dispatch, getState, { getFirebase }) => {
-    const uid = getState().firebase.auth.uid;
-    // const csvPath = uid + "/" + projID + "/" + project.csvName;
     const csvPath = project.csvPath;
     const firebase = getFirebase();
     var csvRef = firebase.storage().ref(csvPath);
@@ -129,7 +127,7 @@ export const initCSV = (project, projID) => {
       });
   };
 };
-//in cases wehre we just uploaded the csv, use that instead of fetching
+//in cases where we just uploaded the csv, use that instead of fetching
 export const setUpPreloadedCsv = () => {
   return (dispatch, getState, { getFirebase }) => {
     const csv = getState().project.csvHolding;

@@ -95,15 +95,9 @@ def describe():
     print(f'this is the reqdata {req_data}')
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
-    # uid = req_data['uid']  # user id
     proj_id = req_data['projId']  # unique project hash
-    # csv_name = req_data['csvName']
     newPath = req_data['csvPath']
-    # data = Data.from_csv(uid, proj_id, csv_name)
-    #test
-    print("data")
     data = Data.from_csv(newPath)
-    print("description")
     description = data.pre_describe(proj_id)
     return jsonify(description)
 
