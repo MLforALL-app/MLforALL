@@ -193,6 +193,7 @@ const filterObj = (objState) => {
     .map(([key, val]) => key);
 };
 
+//passed in projects as an input from editprojects to acquire the "csvPath"
 export const buildModels = (project) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const submissionData = getState().project.currentWorkingProject;
