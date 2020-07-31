@@ -8,6 +8,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import "../../../../styling/createproject.css";
+
 class BuildProject extends Component {
   // State to keep track of if our pop up is open
   state = {
