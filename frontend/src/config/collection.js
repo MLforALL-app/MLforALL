@@ -1,5 +1,5 @@
 // Test Collection in Firestore
-const projectSource = "projects";
-// const projectSource = "projects-production";
+const projectSource = "projects-dev";
+// const projectSource = "projects-prod";
 
 export { projectSource as default };

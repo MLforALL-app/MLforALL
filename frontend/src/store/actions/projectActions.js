@@ -122,7 +122,6 @@ export const initCSV = (project, projID) => {
         bigPapa(url, dispatch);
       })
       .catch((err) => {
-        // console.log("Init CSV Error", err);
         dispatch({ type: "CSV_FETCH_ERROR" });
       });
   };
@@ -149,7 +148,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
     // might be a source of bugs in the future
     // Grabs the "keys" names of the models and places it in an array
     var delVars = Object.keys(project.models);
-    console.log("real quick here", delVars);
     //if it is an update or its an example, we will not delete the csv in storage
     if (!update || !pathIsExample(project.csvPath)) {
       delVars.push(delCSV);
@@ -163,7 +161,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
           dispatch({ type: "DELETE_PROJECT_STORE" });
         })
         .catch((err) => {
-          console.log("Delete project Cloud Storage error", err);
           dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
         });
     });
@@ -177,7 +174,6 @@ export const deleteMLProject = (pid, uid, project, update) => {
           dispatch({ type: "DELETE_PROJECT_DOC" });
         })
         .catch((err) => {
-          console.log("Delete project Firestore error", err);
           dispatch({ type: "DELETE_PROJECT_DOC_ERROR", err });
         });
     }
@@ -205,7 +201,6 @@ export const buildModels = (project) => {
       csvPath: project.csvPath,
       nanMethod: submissionData.nanMethod,
     };
-    console.log("building the model", path);
     axios
       .post(`${apiHost}/store`, path)
       .then((res) => {
@@ -270,10 +265,7 @@ export const initializeCSVForProject = (csv, example, pid) => {
 
     const isExample = !csv && example !== "";
     const csvPath = isExample ?`Examples/${example}`:`${uid}/${pid}/${csv.name}`;
-    console.log("printing csv path", csvPath);
-
     var csvRef = firebase.storage().ref(csvPath);
-    console.log("this is the bool example", isExample);
     if (!isExample) {
       csvRef
         .put(csv)
@@ -292,7 +284,6 @@ export const initializeCSVForProject = (csv, example, pid) => {
     // will need to get rid of csvName in the future
     const firestore = getFirestore();
     const projectRef = firestore.collection(projectSource).doc(pid);
-    console.log("this is projectRef", projectRef);
     projectRef
       .set(
         { csvPath: csvPath , example: isExample },
@@ -300,7 +291,6 @@ export const initializeCSVForProject = (csv, example, pid) => {
       )
       .then((snapshot) => {
         dispatch({ type: "UPDATE_CSV_NAME" });
-        console.log("rong look here", projectRef);
       })
       .catch((err) => {
         dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });

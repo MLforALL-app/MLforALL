@@ -115,12 +115,10 @@ class UploadCSV extends Component {
   };
 
   dragEnterHandler = () => {
-    console.log("entered");
     this.setState({ drag: true });
   };
 
   dragLeaveHandler = () => {
-    console.log("left");
     this.setState({ drag: false });
   };
 
@@ -129,7 +127,6 @@ class UploadCSV extends Component {
     //case on value "which is name of file, to reference to storage"
     const {initializeCSVForProject, projectID} = this.props;
     initializeCSVForProject(null, value, projectID);
-    // console.log("LOOK HERE", value);
   };
 
   render() {
