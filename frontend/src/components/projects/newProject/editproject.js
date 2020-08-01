@@ -70,12 +70,10 @@ class EditProject extends Component {
 				this.props.setWorkingProject(this.props.project, this.props.projectID);
 				//if csv is not in store (not just uploaded) get it
 				if (this.state.projectState === 0) {
-					console.log("initCSV");
 					//if we are loading a project that already has an uploaded csv
 					this.props.initCSV(this.props.project, this.props.projectID);
 				} else {
 					//if we are loading a project with a newly uploaded csv
-					console.log("setUpPreloadedCSV");
 					this.props.setUpPreloadedCsv();
 				}
 				this.props.setWorkingProject(this.props.project, this.props.projectID);

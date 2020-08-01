@@ -17,7 +17,6 @@ const Navbar = (props) => {
 	) : (
 		<Signedoutlinks />
 	);
-	console.log("Navbar width", width);
 	return (
 		<div className="navbar-fixed">
 			<nav className="nav-wrapper">

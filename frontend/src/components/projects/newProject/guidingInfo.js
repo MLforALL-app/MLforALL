@@ -1,6 +1,4 @@
 import React from "react";
-import firebase from "firebase/app";
-console.log("sup", firebase);
 
 const examples = (clickHandle) => {
   return (

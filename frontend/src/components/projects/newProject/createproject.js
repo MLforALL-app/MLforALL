@@ -9,12 +9,9 @@ class CreateProject extends Component {
     showWarning: false,
   };
   handleChange = (e) => {
-    console.log("name of the project", e.target.value);
     this.setState({
       [e.target.id]: e.target.value,
     });
-    console.log("look", this.state);
-    // console.log("Here", [e.target.id]);
   };
   handleSubmit = (e) => {
     e.preventDefault();
