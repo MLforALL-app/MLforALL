@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect, Link } from "react-router-dom";
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import authImg from "../../pictures/backgrounds/auth.svg";
 import firebase from "../../config/fbConfig";
 import "../../styling/background.css";
@@ -76,6 +77,10 @@ class SignIn extends Component {
 						</div>
 					</form>
 				</div>
+				<StyledFirebaseAuth
+					uiConfig={uiConfig}
+					firebaseAuth={firebase.auth()}
+				/>
 				<img className="auth-image" alt="" src={authImg}></img>
 			</div>
 		);
