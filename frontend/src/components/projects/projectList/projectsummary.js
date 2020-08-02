@@ -8,9 +8,7 @@ const ProjectSummary = ({ project }) => {
   };
 
   const bg = () => {
-    return `url(${project.projPic})`
-      ? `url(${project.projPic})`
-      : `url(${img1})`;
+    return project.projPic ? project.projPic : img1;
   };
 
   return (
@@ -19,7 +17,7 @@ const ProjectSummary = ({ project }) => {
         <div
           className="card-picture"
           style={{
-            backgroundImage: bg(),
+            backgroundImage: `url(${bg()})`,
             backgroundColor: "#283593",
           }}
         ></div>

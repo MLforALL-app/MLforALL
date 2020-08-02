@@ -22,15 +22,17 @@ const ProjectDetails = (props) => {
   if (!auth.emailVerified) return <Redirect to={`/verify`} />;
   if (project) {
     const bg = () => {
-      return `url(${project.projPic})`
-        ? `url(${project.projPic})`
-        : `url(${img1})`;
+      return project.projPic ? project.projPic : img1;
     };
+
     return (
       <div className="project-details">
         <div
           className="project-picture"
-          style={{ backgroundImage: bg(), backgroundColor: "#283593" }}
+          style={{
+            backgroundImage: `url(${bg()})`,
+            backgroundColor: "#283593",
+          }}
         ></div>
         <div className="row container">
           <DescCard project={project} pid={pid} />
