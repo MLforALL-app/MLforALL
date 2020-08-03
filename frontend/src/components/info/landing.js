@@ -44,7 +44,9 @@ const LandSign = () => {
             {" "}
             Be a part of the community and start creating!{" "}
           </h5>
-          <SignUp />
+          <Fade>
+            <SignUp />
+          </Fade>
         </Element>
       </div>
     </div>
