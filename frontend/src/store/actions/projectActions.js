@@ -24,6 +24,7 @@ export const createProject = (project) => {
         models: {},
         variables: [],
         info: {},
+        imgName: "",
       })
       .then((snapshot) => {
         dispatch({ type: "CREATE_PROJECT", project, snapshot });
@@ -181,15 +182,6 @@ export const uploadImgtoStorage = (img, project, pid) => {
           projId: pid,
           imgName: img.name,
         };
-        // After we upload the csv, update firestore with preliminary insights
-        axios
-          .post(`${apiHost}/describe`, path)
-          .then((res) => {
-            dispatch({ type: "UPLOAD_CSV_METADATA" });
-          })
-          .catch((err) => {
-            dispatch({ type: "UPLOAD_CSV_METADATA_ERROR" });
-          });
       })
       .catch((err) => {
         console.log("UploadImg Error", err);

@@ -10,7 +10,6 @@ const initState = {
   buildFail: false,
   imgLoaded: true,
   imgUrl: "",
-  imgHolding: "",
 };
 
 const atLeastOneTrue = (boolObj) => {
@@ -65,6 +64,10 @@ const projectReducer = (state = initState, action) => {
     case "UPLOAD_CSV":
       return state;
     case "UPLOAD_CSV_ERROR":
+      return state;
+    case "UPLOAD_IMG":
+      return state;
+    case "UPLOAD_IMG_ERROR":
       return state;
     case "UPLOAD_CSV_METADATA":
       return { ...state, csvLoaded: true };
