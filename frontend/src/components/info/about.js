@@ -22,7 +22,7 @@ import { isBrowser } from "react-device-detect";
 const Header = () => {
 	return (
 		<div>
-			<div className="row center">
+			<div className="row center" style={{display: "block"}}>
 				<div className="col s0 m3"></div>
 				<div className="col s12 m6 container ap-header">
 					<div>
@@ -31,7 +31,7 @@ const Header = () => {
 							style={isBrowser ? { fontSize: "90px" } : {}}>
 							About Us
 						</h1>
-						<p>Learn more about the team.</p>
+						<p className="infoText">Learn more about the team.</p>
 					</div>
 				</div>
 				<div className="col s0 m3"></div>
@@ -90,9 +90,9 @@ const OurGoal = () => {
 				}>
 				<div className="col s1 m3"></div>
 				<div className="col s10 m6">
-					<h3 className="purple-text boldText OG">Our Goal</h3>
+					<h3 className="purple-text boldText OG purpleHeader">Our Goal</h3>
 					<br />
-					<p>
+					<p className="infoText">
 						MLforALL guides you in learning about and experimenting with machine
 						learning without coding experience. Machine learning is a hot topic
 						and used everywhere. However, it can be difficult to find where to
@@ -124,14 +124,14 @@ const WWA = () => {
 				}>
 				<div className="col s1 m3"></div>
 				<div className="col s10 m6">
-					<h3 className="purple-text boldText OG">Who We Are</h3>
+					<h3 className="purple-text boldText OG purpleHeader">Who We Are</h3>
 					<br />
-					<p>
+					<p className="infoText">
 						Our team is comprised of people from various walks of life and areas
 						of the world. But what brings us together is our background as
 						Carnegie Mellon University students and our desire to educate people
 						about something that's increasingly important and relevant: machine
-						learning. <br />
+						learning. 
 						<strong> #MyHeartIsInTheWork</strong>
 					</p>
 				</div>
@@ -206,8 +206,8 @@ const makePicture = (name, title, link, picture) => {
 					}
 				/>
 			</a>
-			<h5>{name}</h5>
-			<h6>{title}</h6>
+			<h5 style={{fontWeight: "700"}}>{name}</h5>
+			<h6 style={{fontWeight: "400"}}>{title}</h6>
 		</div>
 	);
 };
@@ -215,7 +215,7 @@ const makePicture = (name, title, link, picture) => {
 const headshot = () => {
 	return (
 		<div className="center headShot">
-			<h4 className="purple-text">Meet Our Team</h4>
+			<h4 className="purple-text purpleHeader ">Meet Our Team</h4> <br />
 			<div className="land-row">
 				{teamr1.map((p) => makePicture(p.name, p.title, p.link, p.img))}
 			</div>
@@ -239,7 +239,8 @@ const landSign = () => {
 					<div className="container apland center">
 						<Element name="signup" className="element">
 							<span>
-								<h3 className="purple-text GIT">Get In Touch!</h3>
+								<h3 className="purple-text GIT purpleHeader">Get In Touch!</h3>
+								<br />
 							</span>
 							<div className="container land-row">
 								<SocialIcon

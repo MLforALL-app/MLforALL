@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import DisplayCSV from "./editpage/editCSV";
+import DisplayCSV from "./editpage/displayCSV";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect } from "react-router-dom";
@@ -41,10 +41,10 @@ class EditProject extends Component {
 	determineProjectState = () => {
 		if (!this.props.project) {
 			return 0;
-		} else if (this.props.project.csvName === "") {
+		} else if (this.props.project.csvPath === "") {
 			return 1;
 		} else if (
-			this.props.project.csvName !== "" &&
+			this.props.project.csvPath !== "" &&
 			this.props.project.models === []
 		) {
 			return 2;
@@ -124,7 +124,7 @@ class EditProject extends Component {
 			this.getContent(this.props.project.content),
 			this.props.projectID
 		);
-		this.props.buildModels();
+		this.props.buildModels(project);
 	};
 
 	render() {
@@ -228,7 +228,7 @@ const mapDispatchToProps = (dispatch) => {
 		setWorkingProject: (project, id) =>
 			dispatch(setWorkingProject(project, id)),
 		initCSV: (project, id) => dispatch(initCSV(project, id)),
-		buildModels: () => dispatch(buildModels()),
+		buildModels: (pid) => dispatch(buildModels(pid)),
 		updateContent: (content, pid) => dispatch(updateContent(content, pid)),
 		resetBuild: () => dispatch(resetBuild()),
 		clearStore: () => dispatch(clearStore()),
