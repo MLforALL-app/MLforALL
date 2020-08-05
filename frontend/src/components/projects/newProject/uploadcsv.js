@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import Guide from "./guidingInfo";
 import { connect } from "react-redux";
-import {
-  initializeCSVForProject
-} from "../../../store/actions/projectActions";
+import { initializeCSVForProject } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "../../../styling/createproject.css";
+
+var BoxColor = "#F5F5F5";
 
 class UploadCSV extends Component {
   state = {
@@ -46,6 +46,8 @@ class UploadCSV extends Component {
   // The 'handleSubmit' for drag and dropped files
   dropHandler = (e) => {
     e.preventDefault();
+    this.setState({ drag: false });
+    BoxColor = "#F5F5F5";
     if (!e.dataTransfer.files[0]) {
       return;
     }
@@ -94,38 +96,32 @@ class UploadCSV extends Component {
       "",
       this.props.projectID
     );
-
-    // this.props.uploadCSVtoStorage(
-    //   this.state.csv,
-    //   this.props.project,
-    //   this.props.projectID
-    // );
-
-    // this.props.updateCsvData(
-    //   this.state.csv,
-    //   this.props.project,
-    //   this.props.projectID,
-    //   false 
-    // );
   };
 
   // Prevents files from being downloaded when dragged into the screen
   dragOverHandler = (e) => {
     e.preventDefault();
+    this.setState({ drag: true });
+    BoxColor = "#E3E1E1";
+    console.log("dragOver", BoxColor);
   };
 
   dragEnterHandler = () => {
     this.setState({ drag: true });
+    BoxColor = "#E3E1E1";
+    console.log("dragenter", BoxColor);
   };
 
   dragLeaveHandler = () => {
     this.setState({ drag: false });
+    BoxColor = "#F5F5F5";
+    console.log("dragleave", BoxColor);
   };
 
   // Passed into Guide to handle the event of clicking an example link
   clickHandler = (value) => () => {
     //case on value "which is name of file, to reference to storage"
-    const {initializeCSVForProject, projectID} = this.props;
+    const { initializeCSVForProject, projectID } = this.props;
     initializeCSVForProject(null, value, projectID);
   };
 
@@ -174,29 +170,28 @@ class UploadCSV extends Component {
                 </div>
               </div>
               {/* Drag and Drop box */}
-              <div
-                // finish making conditional rendering when file is dragged over
-                id="drop_zone"
-                className={this.state.drag ? "" : "dborder"}
-                onDrop={this.dropHandler}
-                onDragOver={this.dragOverHandler}
-                onDragEnter={this.dragEnterHandler}
-                onDragLeave={this.dragLeaveHandler}
-                style={{ backgroundColor: "#F5F5F5", color: "#636B7F" }}
-              >
-                <br />
-                {this.state.csv === "" ? (
-                  <p className="center">
-                    <div style={{ fontSize: 20 }}>
-                      <strong>Choose a file </strong>or drag it here
-                    </div>
-                  </p>
-                ) : (
-                  <p className="center " style={{ fontSize: 20 }}>
-                    <strong>File Uploaded</strong>
-                  </p>
-                )}
-              </div>
+                <div
+                  // finish making conditional rendering when file is dragged over
+                  id="drop_zone"
+                  onDrop={this.dropHandler}
+                  onDragOver={this.dragOverHandler}
+                  onDragEnter={this.dragEnterHandler}
+                  onDragLeave={this.dragLeaveHandler}
+                  style={{ backgroundColor: BoxColor, color: "#636B7F" }}
+                >
+                  <br />
+                  {this.state.csv === "" ? (
+                    <p className="center">
+                      <div style={{ fontSize: 20 }}>
+                        <strong>Choose a file </strong>or drag it here
+                      </div>
+                    </p>
+                  ) : (
+                    <p className="center " style={{ fontSize: 20 }}>
+                      <strong>File Uploaded</strong>
+                    </p>
+                  )}
+                </div>
               {/* this is the submit button */}
               <div className="input-field">
                 <button
@@ -223,11 +218,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    // uploadCSVtoStorage: (csv, project, id) =>
-    //   dispatch(uploadCSVtoStorage(csv, project, id)),
-    // updateCsvData: (csv, project, id) =>
-    //   dispatch(updateCsvData(csv, project, id)),
-    initializeCSVForProject: (csv, example, pid) => 
+    initializeCSVForProject: (csv, example, pid) =>
       dispatch(initializeCSVForProject(csv, example, pid)),
   };
 };

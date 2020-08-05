@@ -17,6 +17,9 @@ import { Element, Link } from "react-scroll";
 import { Redirect, NavLink } from "react-router-dom";
 // import is browser
 import { isBrowser } from "react-device-detect";
+// import Swup from 'swup';
+
+// // const swup = new Swup();
 
 const showImg = (img, b) => {
   return isBrowser || b ? `url(${img})` : "";
@@ -44,9 +47,7 @@ const LandSign = () => {
             {" "}
             Be a part of the community and start creating!{" "}
           </h5>
-          <Fade>
-            <SignUp />
-          </Fade>
+          <SignUp id="swup" className="transition-fade"/>
         </Element>
       </div>
     </div>

@@ -7,24 +7,27 @@ const examples = (clickHandle) => {
       <ul>
         <li>
           <button
+            className="waves-effect waves-light btn-flat"
             onClick={clickHandle("Pokemon.csv")}
-            // href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FPokemon.csv?alt=media&token=148e76a0-f9e1-47e7-851c-63935d9cc6ed"
+            style={{ color: "#283593" }}
           >
             Pokemon with Stats
           </button>
         </li>
         <li>
           <button
+            className="waves-effect waves-light btn-flat"
             onClick={clickHandle("Spotify2000.csv")}
-            // href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FSpotify2000.csv?alt=media&token=c06b8002-f3db-46d5-8856-3388587373a7"
+            style={{ color: "#283593" }}
           >
             Spotify All Time Top 2000s Mega Dataset
           </button>
         </li>
         <li>
           <button
+            className="waves-effect waves-light btn-flat"
             onClick={clickHandle("NBAFantasy2019.csv")}
-            // href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FNBAFantasy2019.csv?alt=media&token=78bc0763-9f51-4799-a7f2-6995924112bc"
+            style={{ color: "#283593" }}
           >
             {" "}
             NBA Fantasy Predictions for 2019-2020
@@ -42,36 +45,44 @@ const findMore = () => {
       <ul>
         <li>
           <a
+            className="waves-effect waves-light btn-flat"
             href="https://www.kaggle.com/datasets"
             rel="noopener noreferrer"
             target="_blank"
+            style={{ color: "#283593" }}
           >
             Check out Kaggle,
           </a>
         </li>
         <li>
           <a
+            className="waves-effect waves-light btn-flat"
             href="https://data.world/"
             rel="noopener noreferrer"
             target="_blank"
+            style={{ color: "#283593" }}
           >
             data.world (needs login),
           </a>
         </li>
         <li>
           <a
+            className="waves-effect waves-light btn-flat"
             href="https://registry.opendata.aws/"
             rel="noopener noreferrer"
             target="_blank"
+            style={{ color: "#283593" }}
           >
             Amazon's open registry,
           </a>
         </li>
         <li>
           <a
+            className="waves-effect waves-light btn-flat"
             href="https://datasetsearch.research.google.com/"
             rel="noopener noreferrer"
             target="_blank"
+            style={{ color: "#283593" }}
           >
             {" "}
             or Google's dataset search engine!
