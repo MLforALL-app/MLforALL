@@ -1,4 +1,5 @@
 import React from "react";
+import "../../../styling/createproject.css";
 
 const examples = (clickHandle) => {
   return (
@@ -7,27 +8,24 @@ const examples = (clickHandle) => {
       <ul>
         <li>
           <button
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             onClick={clickHandle("Pokemon.csv")}
-            style={{ color: "#283593" }}
           >
             Pokemon with Stats
           </button>
         </li>
         <li>
           <button
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             onClick={clickHandle("Spotify2000.csv")}
-            style={{ color: "#283593" }}
           >
             Spotify All Time Top 2000s Mega Dataset
           </button>
         </li>
         <li>
           <button
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             onClick={clickHandle("NBAFantasy2019.csv")}
-            style={{ color: "#283593" }}
           >
             {" "}
             NBA Fantasy Predictions for 2019-2020
@@ -45,44 +43,40 @@ const findMore = () => {
       <ul>
         <li>
           <a
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             href="https://www.kaggle.com/datasets"
             rel="noopener noreferrer"
             target="_blank"
-            style={{ color: "#283593" }}
           >
             Check out Kaggle,
           </a>
         </li>
         <li>
           <a
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             href="https://data.world/"
             rel="noopener noreferrer"
             target="_blank"
-            style={{ color: "#283593" }}
           >
             data.world (needs login),
           </a>
         </li>
         <li>
           <a
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             href="https://registry.opendata.aws/"
             rel="noopener noreferrer"
             target="_blank"
-            style={{ color: "#283593" }}
           >
             Amazon's open registry,
           </a>
         </li>
         <li>
           <a
-            className="waves-effect waves-light btn-flat"
+            className="waves-effect waves-light btn-flat example-btns"
             href="https://datasetsearch.research.google.com/"
             rel="noopener noreferrer"
             target="_blank"
-            style={{ color: "#283593" }}
           >
             {" "}
             or Google's dataset search engine!

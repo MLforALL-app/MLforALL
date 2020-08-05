@@ -16,3 +16,8 @@
   border-radius: 15px;
   background-color: #eeeeee;
 }
+.example-btns {
+  color: #283593;
+  padding-left: 0;
+  height: 25px;
+}
