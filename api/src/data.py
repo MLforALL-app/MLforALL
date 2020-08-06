@@ -6,8 +6,8 @@ import numpy as np
 class Data:
     def __init__(self, df, target_parameter, df_variables, nan_method="drop"):
         # firestore project source. change this during testing and host locally
-        # self.project_source = "projects"
-        self.project_source = "projects-production"
+        # self.project_source = "projects-dev"
+        self.project_source = "projects-prod"
 
         # keep as original data (no in place changes, just in case)
         self.df = df
@@ -150,11 +150,13 @@ class Data:
                             "models": self.get_model_obj(model_list), "targetParam": self.target_str})
 
     @staticmethod
-    def from_csv(uid, proj_id, csv_name):
+    # def from_csv(uid, proj_id, csv_name):
+    def from_csv(path):
         bucket = fb.bucket_init()
         # Get the dataframe
-        df = fb.get_csv(bucket, fb.make_path(
-            str(uid), str(proj_id), str(csv_name)))
+        # df = fb.get_csv(bucket, fb.make_path(
+        #     str(uid), str(proj_id), str(csv_name)))
+        df = fb.get_csv(bucket, str(path))
 
         return Data(df, None, None, None)
 

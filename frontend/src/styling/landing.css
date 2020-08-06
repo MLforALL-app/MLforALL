@@ -21,12 +21,13 @@
 	position: relative;
 }
 .land-row {
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center;
-	flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
+
 .land-head {
 	height: calc(12rem + 20vw + 65px);
 }

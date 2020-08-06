@@ -49,14 +49,13 @@ def store():
     model_list = req_data['modelList']  # list of models user uses
     target_param = req_data['targetParameter']  # output
     df_vars = req_data['dfVariables']  # inputs
-    csv_name = req_data['csvName']  # name of uploaded csv
+    csv_path = req_data['csvPath']  # name of uploaded csv
     nan_method = req_data['nanMethod']  # method for dealing with NaN's
 
     # Get firebase stuff
     bucket = fb.bucket_init()
 
-    df = fb.get_csv(bucket, fb.make_path(
-        str(uid), str(proj_id), str(csv_name)))
+    df = fb.get_csv(bucket, csv_path)
 
     data = Data(df, target_param, df_vars, nan_method)
     X_train, X_test, y_train, y_test = data.get_train_test_split()
@@ -75,10 +74,10 @@ def store():
             trained_models.append(model)
         # update firestore with descriptive stats (IQR)
         data.send_vars(proj_id, trained_models)
-        return "it worked"
+        return jsonify({"result": "success"}), 200
     except ValueError as e:
         print(f"failed {e}")
-        return f"it failed: {e}"
+        return jsonify({"result" : "failure", "error": "520", "message": f"Build Failed: {e}"}), 500
 
 
 @app.route('/visual', methods=['GET'])
@@ -93,14 +92,12 @@ def describe():
     # this is a route for getting descriptive statistics about the dataframe
     # necessary to help users make informed decisions when creating models
     req_data = request.get_json()
-
+    print(f'this is the reqdata {req_data}')
     # Brackets require these fields to be present
     # Sort of a safety contract to ensure we always have valid path
-    uid = req_data['uid']  # user id
     proj_id = req_data['projId']  # unique project hash
-    csv_name = req_data['csvName']
-
-    data = Data.from_csv(uid, proj_id, csv_name)
+    newPath = req_data['csvPath']
+    data = Data.from_csv(newPath)
     description = data.pre_describe(proj_id)
     return jsonify(description)
 
