@@ -11,7 +11,7 @@
 
 <p align="center">
 Making visualizations, machine learning, and data analysis easier for you! <b><i> (As seen winning 4th in the CMU UEA Startup Pitch Competion!) </i></b> Also take some time to view our <a href="https://linktr.ee/mlforall" rel="noopener noreferrer" target="_blank">business plan, pitch deck, UI prototypes, and more. </a>
-</p></a> our
+</p></a>
 
 <h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> What is MLforALL </h2>
 
