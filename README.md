@@ -3,15 +3,15 @@
 </p>
 
 <p align="center">
-<a href="https://www.codefactor.io/repository/github/mlforall-app/mlforall"><img src="https://www.codefactor.io/repository/github/mlforall-app/mlforall/badge" alt="CodeFactor" /></a>
-<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
-<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
-<a href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a rel="noopener noreferrer" target="_blank" href="https://www.codefactor.io/repository/github/mlforall-app/mlforall"><img src="https://www.codefactor.io/repository/github/mlforall-app/mlforall/badge" alt="CodeFactor" /></a>
+<a rel="noopener noreferrer" target="_blank" href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a rel="noopener noreferrer" target="_blank" href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:javascript"><img alt="Language grade: JavaScript" src="https://img.shields.io/lgtm/grade/javascript/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
+<a rel="noopener noreferrer" target="_blank" href="https://lgtm.com/projects/g/MLforALL-app/MLforAll/context:python"><img alt="Language grade: Python" src="https://img.shields.io/lgtm/grade/python/g/MLforALL-app/MLforAll.svg?logo=lgtm&logoWidth=18"/></a>
 <p>
 
 <p align="center">
-Making visualizations, machine learning, and data analysis easier for you! <b><i> (As seen winning 4th in the CMU UEA Startup Pitch Competion) </i></b> Click <a href="https://linktr.ee/mlforall"> here to view </a> our business plan, pitch deck, UI prototypes, and more!
-</p>
+Making visualizations, machine learning, and data analysis easier for you! <b><i> (As seen winning 4th in the CMU UEA Startup Pitch Competion!) </i></b> Also take some time to view our <a href="https://linktr.ee/mlforall" rel="noopener noreferrer" target="_blank">business plan, pitch deck, UI prototypes, and more. </a>
+</p></a> our
 
 <h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> What is MLforALL </h2>
 
