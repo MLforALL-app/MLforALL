@@ -11,6 +11,10 @@
 > - `README.md`: added a comma
 > - `frontend/package.json`: updated packages
 
+### Screenshots
+
+> Provide relevant screenshots to better describe the pull request.
+
 ### Additional Information
 
 > Include any additional info that may be necessary
