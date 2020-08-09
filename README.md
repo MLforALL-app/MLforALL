@@ -10,8 +10,16 @@
 <p>
 
 <p align="center">
-Making visualizations, machine learning, and data analysis easier for you!
+Making visualizations, machine learning, and data analysis easier for you! *(As seen winning 4th in the CMU UEA Startup Pitch Competion)* Click [here for more info](https://linktr.ee/mlforall).
 </p>
+
+<h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> What is MLforALL </h2>
+
+MLforALL guides you in **learning about** and **experimenting with** machine learning without coding experience. This is done by providing an **accessible** all-in-one platform for machine learning education. We aspire to act as an equalizer in this important field by exposing people to a personalized machine learning experience with three core ideas: create, explore, play.
+
+- **Create.** To create a project, all users need to do is upload data or select one of our examples! MLforAll guides users through a **_step-by-step process_** of creating a model. Follow explanations as to **why** users are choosing certain parameters and read in-depth explanations of different types of models and math.
+- **Explore.** As users create their projects, they can **share it with our community** of fellow learners. This offers a great way for both new users to get acquainted with projects and old users to present personal projects they are proud of.
+- **Play.** Some learn by doing, others by reading, but most learn by doing both. MLforALL encourages this style of learning with not only an intuitive create process, but also an **in-house platform to test**, experiment with, and play with machine learning models. See what your model would **predict and edit** your models as necessary!
 
 <h2> <img src="frontend/src/pictures/backgrounds/logo.png" height="50"/> MLforALL Tech Stack </h2>
 
@@ -32,7 +40,7 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 - sci-kit learn
 - Pandas
 
-## Links
+## Demo Links
 
 - [In Progress Testing Link](https://mlforall-app.github.io/MLforAll/)
 - [Firebase Deployed Link](https://mlforall-14bf7.firebaseapp.com/)
