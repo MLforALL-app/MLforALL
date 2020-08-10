@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { signUp } from "../../store/actions/authActions";
+import DraftsIcon from "@material-ui/icons/Drafts";
+import MailIcon from "@material-ui/icons/Mail";
+import { signUp, signIn } from "../../store/actions/authActions";
 
 class SignUp extends Component {
   // State to keep track of what user types
   state = {
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
   };
 
   // eventHandler to update our state the way text has
@@ -27,21 +27,13 @@ class SignUp extends Component {
 
   render() {
     // from props, retrieve authError and auth objects
-    const { authError } = this.props;
+    const { authError, signUp, children } = this.props;
     return (
       <div
-        className="container center"
-        style={{ paddingTop: "2rem", maxWidth: "600px" }}
+        className="container"
+        style={{ paddingTop: "2rem", maxWidth: "700px" }}
       >
         <form className="center" onSubmit={this.handleSubmit}>
-          <div className="input-field">
-            <label htmlFor="firstName">First Name</label>
-            <input type="text" id="firstName" onChange={this.handleChange} />
-          </div>
-          <div className="input-field">
-            <label htmlFor="lastName">Last Name</label>
-            <input type="text" id="lastName" onChange={this.handleChange} />
-          </div>
           <div className="input-field">
             <label htmlFor="email">Email</label>
             <input type="email" id="email" onChange={this.handleChange} />
@@ -50,27 +42,25 @@ class SignUp extends Component {
             <label htmlFor="password">Password</label>
             <input type="password" id="password" onChange={this.handleChange} />
           </div>
-          <div className="container">
-            <br />
-            <br />
-            <Link to="/signin" style={{ color: "#0085FF", border: "2em" }}>
-              {" "}
-              Already a user? Sign in here.
-            </Link>
-          </div>
+
           <br />
-          <div className="center land-col">
+          <div className="center">
             <button
-              className="btn waves-effect waves-light anchor z-depth-0"
-              style={{
-                height: "45px",
-                lineHeight: "23px",
-                fontSize: "20px",
-                textTransform: "capitalize",
-              }}
+              id="my-mdl"
+              className="btn mdl-button mdl-js-button mdl-button--raised firebaseui-idp-button firebaseui-id-idp-button"
+              style={{}}
             >
-              <span style={{ marginTop: "3em" }}>Sign up</span>
+              <span
+                style={{ color: "#fff" }}
+                className="firebaseui-idp-icon-wrapper"
+              >
+                {signUp ? <MailIcon /> : <DraftsIcon />}
+              </span>
+              <span className="firebaseui-idp-text ">
+                {signUp ? "Join with Email" : "Log In with Email"}
+              </span>
             </button>
+            {children}
             <div className="red-text center">
               {authError ? <p>{authError}</p> : null}
             </div>

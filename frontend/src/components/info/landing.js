@@ -12,7 +12,6 @@ import img9 from "../../pictures/landing/LP9.svg";
 // Import css files like this
 import "../../styling/landing.css";
 import "../../styling/features.css";
-import SignUp from "../auth/Signup";
 import { Element, Link } from "react-scroll";
 import { Redirect, NavLink } from "react-router-dom";
 // import is browser
@@ -44,7 +43,11 @@ const LandSign = () => {
             {" "}
             Be a part of the community and start creating!{" "}
           </h5>
-          <SignUp />
+          <NavLink to="/join">
+            <button className="btn btn-sec anchor waves-effect waves-light z-depth-0 lpButtons ">
+              Enter MLforALL
+            </button>
+          </NavLink>
         </Element>
       </div>
     </div>
@@ -81,7 +84,7 @@ const Header = () => {
               </button>
             </Link>
             <div className="divider"></div>
-            <NavLink to="/signin">
+            <NavLink to="/join">
               <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0 lpButtons ">
                 Create
               </button>
@@ -114,7 +117,7 @@ const Land2 = () => {
             <br />
           </h5>
           <div style={{ paddingTop: "30px" }}>
-            <NavLink to="/signin">
+            <NavLink to="/join">
               <button className="btn btn-sec anchor-160 waves-effect waves-light z-depth-0 lpButtons ">
                 Create
               </button>

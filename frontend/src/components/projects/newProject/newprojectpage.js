@@ -4,29 +4,29 @@ import { Redirect } from "react-router-dom";
 import CreateLanding from "./createlanding";
 
 class CreateProjectContainer extends Component {
-	goToProjectEdit = () => {
-		this.props.history.push("/edit/" + this.props.projID);
-	};
+  goToProjectEdit = () => {
+    this.props.history.push("/edit/" + this.props.projID);
+  };
 
-	componentDidUpdate(prevProps) {
-		if (this.props.projID !== prevProps.projID) {
-			this.goToProjectEdit();
-		}
-	}
+  componentDidUpdate(prevProps) {
+    if (this.props.projID !== prevProps.projID) {
+      this.goToProjectEdit();
+    }
+  }
 
-	render() {
-		const { auth } = this.props;
-		if (!auth.uid) return <Redirect to="/signin" />;
-		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		return <CreateLanding />;
-	}
+  render() {
+    const { auth } = this.props;
+    if (!auth.uid) return <Redirect to="/" />;
+    if (!auth.emailVerified) return <Redirect to={`/verify`} />;
+    return <CreateLanding />;
+  }
 }
 
 const mapStateToProps = (state) => {
-	return {
-		auth: state.firebase.auth,
-		projID: state.project.curUserProjID
-	};
+  return {
+    auth: state.firebase.auth,
+    projID: state.project.curUserProjID,
+  };
 };
 
 export default connect(mapStateToProps)(CreateProjectContainer);

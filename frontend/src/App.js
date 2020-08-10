@@ -3,7 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { isBrowser } from "react-device-detect";
 // Page layout
 import Navbar from "./components/layouts/Navbar";
-import SignIn from "./components/auth/Signin";
+import Join from "./components/auth/join";
 import Forgot from "./components/auth/resetPass";
 import ScrollToTop from "./components/layouts/scrollToTop";
 import Lost from "./components/info/lost";
@@ -27,51 +27,51 @@ import MainDoc from "./components/education/mainDoc";
 import "./App.css";
 
 function App() {
-	if (isBrowser) {
-		return (
-			<BrowserRouter>
-				<div className="App">
-					<Navbar />
-					<ScrollToTop />
-					<Switch>
-						<Route exact path="/user/:uid" component={UserProfile} />
-						<Route exact path="/myprofile" component={MyProjects} />
-						<Route exact path="/dashboard" component={Dashboard} />
-						<Route exact path="/project/:pid" component={ProjectDetails} />
-						<Route exact path="/edit/:pid" component={EditProject} />
-						<Route exact path="/forgot" component={Forgot} />
-						<Route exact path="/signin" component={SignIn} />
-						<Route exact path="/verify" component={VerifyEmailProject} />
-						<Route exact path="/create" component={CreateProjectContainer} />
-						<Route exact path="/help" component={MainDoc} />
-						<Route exact path="/about" component={About} />
-						<Route exact path="/" component={Landing} />
-						<Route path="/MLforAll" component={GHPages} />
-						<Route component={Lost} />
-					</Switch>
-					{/*<Footer />*/}
-				</div>
-			</BrowserRouter>
-		);
-	} else {
-		return (
-			<BrowserRouter>
-				<div className="App">
-					<Navbar />
-					<ScrollToTop />
-					<Switch>
-						<Route exact path="/verify" component={VerifyEmailProject} />
-						<Route exact path="/forgot" component={Forgot} />
-						<Route exact path="/signin" component={SignIn} />
-						<Route exact path="/about" component={About} />
-						<Route exact path="/" component={Landing} />
-						<Route path="/MLforAll" component={GHPages} />
-						<Route component={Mobile} />
-					</Switch>
-				</div>
-			</BrowserRouter>
-		);
-	}
+  if (isBrowser) {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <ScrollToTop />
+          <Switch>
+            <Route exact path="/user/:uid" component={UserProfile} />
+            <Route exact path="/myprofile" component={MyProjects} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/project/:pid" component={ProjectDetails} />
+            <Route exact path="/edit/:pid" component={EditProject} />
+            <Route exact path="/forgot" component={Forgot} />
+            <Route exact path="/join" component={Join} />
+            <Route exact path="/verify" component={VerifyEmailProject} />
+            <Route exact path="/create" component={CreateProjectContainer} />
+            <Route exact path="/help" component={MainDoc} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/" component={Landing} />
+            <Route path="/MLforAll" component={GHPages} />
+            <Route component={Lost} />
+          </Switch>
+          {/*<Footer />*/}
+        </div>
+      </BrowserRouter>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <ScrollToTop />
+          <Switch>
+            <Route exact path="/verify" component={VerifyEmailProject} />
+            <Route exact path="/forgot" component={Forgot} />
+            <Route exact path="/join" component={Join} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/" component={Landing} />
+            <Route path="/MLforAll" component={GHPages} />
+            <Route component={Mobile} />
+          </Switch>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;
