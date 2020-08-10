@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
-import { signIn } from "../../store/actions/authActions";
-import { Redirect, Link } from "react-router-dom";
-import SignUp from "./form";
+import { Redirect } from "react-router-dom";
+import EnterForm from "./form";
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import authImg from "../../pictures/backgrounds/auth.svg";
 import firebase from "../../config/fbConfig";
@@ -21,62 +20,36 @@ const uiConfig = {
   ],
 };
 
-class Join extends Component {
-  // State to keep track of what user types
-  state = {
-    email: "",
-    password: "",
-  };
-
-  // eventHandler to update our state the way text has
-  handleChange = (e) => {
-    this.setState({
-      [e.target.id]: e.target.value,
-    });
-  };
-
-  // Call REDUX action signIn to sign user in given state
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.signIn(this.state);
-  };
-
-  render() {
-    // from props, retrieve authError and auth objects
-    const { authError, auth } = this.props;
-    // route protection, shouldn't be able to sign in again
-    if (auth.uid) return <Redirect to="/myprofile" />;
-    return (
-      <div className="signin">
-        <div className="container center">
-          <h2 className="purple-text">Get Started</h2>
-          <h4>
+const Join = (props) => {
+  // from props, retrieve authError and auth objects
+  const { auth } = props;
+  // route protection, shouldn't be able to sign in again
+  if (auth.uid) return <Redirect to="/myprofile" />;
+  return (
+    <div className="signin">
+      <div className="container center">
+        <h2 className="purple-text">Get Started</h2>
+        <h6>
+          <i>
             Log in or Sign Up to join our community and start creating machine
-            learning models
-          </h4>
-          <SignUp>
-            <StyledFirebaseAuth
-              uiConfig={uiConfig}
-              firebaseAuth={firebase.auth()}
-            />
-          </SignUp>
-        </div>
-        <img className="auth-image" alt="" src={authImg}></img>
+            learning models.
+          </i>
+        </h6>
+        <EnterForm>
+          <StyledFirebaseAuth
+            uiConfig={uiConfig}
+            firebaseAuth={firebase.auth()}
+          />
+        </EnterForm>
       </div>
-    );
-  }
-}
+      <img className="auth-image" alt="" src={authImg}></img>
+    </div>
+  );
+};
 
 // Redux to associate state of this component with the props its passed in
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return { authError: state.auth.authError, auth: state.firebase.auth };
 };
 
-// Redux to associate action call to a dispatch
-const mapDispatchToProps = (dispatch) => {
-  return {
-    signIn: (creds) => dispatch(signIn(creds)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Join);
+export default connect(mapStateToProps)(Join);

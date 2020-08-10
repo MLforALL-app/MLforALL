@@ -9,7 +9,7 @@
   font-size: 1.25rem !important;
 }
 .firebaseui-idp-button {
-  width: 15.5rem !important;
+  width: 15.6rem !important;
   max-width: 18rem !important;
   padding: 12px 16px !important;
 }
@@ -46,4 +46,16 @@ textarea.materialize-textarea:focus:not([readonly]) + label,
 input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
 input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
   color: #2f81eb !important;
+}
+.fadeOut {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
+}
+.fadeIn {
+  opacity: 1;
+  width: 100px;
+  height: 100px;
+  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
 }
