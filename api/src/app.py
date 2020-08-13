@@ -75,7 +75,7 @@ def store():
         # update firestore with descriptive stats (IQR)
         data.send_vars(proj_id, trained_models)
         return jsonify({"result": "success"}), 200
-    except ValueError as e:
+    except e:
         print(f"failed {e}")
         return jsonify({"result" : "failure", "error": "520", "message": f"Build Failed: {e}"}), 500
 
