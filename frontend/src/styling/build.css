@@ -20,3 +20,29 @@
 	animation-duration: 350ms;
 	animation-iteration-count: 1;
 }
+.option-lists {
+	font-family: Helvetica;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 21.2677px;
+	line-height: 40px;
+}
+.circle {
+  width: 36px;
+  height: 36px;
+	line-height: 24px;
+	border: 1px solid black;
+  border-radius: 50%;
+	font-size: 21px;
+	font-weight: bold;
+  color: black;
+  text-align: center;
+	background: white;
+	padding-top: 5px;
+}
+.number-image {
+	padding-left: 50px;
+	background-position: 0 0;
+	background-size: 36px 36px;
+	background-repeat: no-repeat;
+}

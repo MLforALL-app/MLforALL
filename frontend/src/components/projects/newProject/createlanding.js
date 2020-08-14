@@ -2,28 +2,46 @@ import React, { Fragment } from "react";
 import createImg from "../../../pictures/backgrounds/create.svg";
 import CreateProject from "./createproject";
 import "../../../styling/build.css";
+import No1 from "../../../pictures/project/number1.png";
+import No2 from "../../../pictures/project/number2.png";
+import No3 from "../../../pictures/project/number3.png";
 
 const CreateLanding = () => {
   return (
     <Fragment>
-      <div className="row container ">
+      <div className="row container">
         <h1 className="purple-text">Welcome to Create Project! </h1>
-        <div
-          className="col s12 m6 create-animation"
-          style={{ paddingRight: "5vw" }}
-        >
+        <div className="col s12 m6 create-animation">
           <br />
-          <ul>
-            <li>
-              <h5>1. Download or Upload your own CSV datasets</h5>
+          <ul style={{ listStyleType: "none" }}>
+            <li
+              style={{ backgroundImage: `url(${No1})` }}
+              className="number-image"
+            >
+              <p className="option-lists">
+                Download <strong>or</strong> Upload{" "}
+                <strong> your own CSV datasets</strong>
+              </p>
             </li>
-            <li>
-              <h5>
-                2. Fine tune parameters to and select Machine Learning models
-              </h5>
+            <li
+              style={{ backgroundImage: `url(${No2})` }}
+              className="number-image"
+            >
+              <p className="option-lists">
+                {" "}
+                Customize <strong>your dataset and</strong> create{" "}
+                <strong>your own Machine Learning model</strong>
+              </p>
             </li>
-            <li>
-              <h5> 3. Play, test, and share your models!</h5>
+            <li
+              style={{ backgroundImage: `url(${No3})` }}
+              className="number-image"
+            >
+              <p className="option-lists">
+                {" "}
+                Play, test, <strong>and</strong> share{" "}
+                <strong>your awesome models to the world!</strong>
+              </p>
             </li>
           </ul>
         </div>
@@ -34,7 +52,7 @@ const CreateLanding = () => {
       <div style={{ position: "relative" }}>
         <h4
           className="purple-text"
-          style={{ position: "absolute", left: "15vw" , top: "10px"}}
+          style={{ position: "absolute", left: "15vw", top: "10px" }}
         >
           Start by naming your project
         </h4>
