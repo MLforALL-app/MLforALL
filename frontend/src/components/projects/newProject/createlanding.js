@@ -12,7 +12,7 @@ const CreateLanding = () => {
       <div className="row container">
         <h1 className="purple-text">Welcome to Create Project! </h1>
         <div className="col s12 m6 create-animation">
-          <br />
+          <p style={{color: "gray", fontSize: "24px"}}>Here, you can: </p>
           <ul style={{ listStyleType: "none" }}>
             <li
               style={{ backgroundImage: `url(${No1})` }}

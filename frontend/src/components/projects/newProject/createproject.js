@@ -52,7 +52,7 @@ class CreateProject extends Component {
                   onChange={this.handleChange}
                   style={{
                     width: "50%",
-                    paddingRight: "200px",
+                    // paddingRight: "10%",
                     position: "absolute",
                     left: 0,
                   }}

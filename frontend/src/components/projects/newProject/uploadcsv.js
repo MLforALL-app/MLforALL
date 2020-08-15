@@ -10,6 +10,7 @@ var BoxColor = "#F5F5F5";
 class UploadCSV extends Component {
   state = {
     csv: "",
+    stage: 0,
     fileUploadMessage: "Waiting For File...",
     showError: false,
     errorText: "",
@@ -125,7 +126,20 @@ class UploadCSV extends Component {
     initializeCSVForProject(null, value, projectID);
   };
 
-  render() {
+  firstStage = () => {
+    return (
+      <div>
+        <div className="row container">
+          <h1>
+            <span className="purple-text">{this.props.projectName}</span>
+          </h1>
+        </div>
+        <p>Hello</p>
+      </div>
+    );
+  };
+
+  uploadCSV = () => {
     return (
       <div className="upload-csv">
         <div className="row" style={{ backgroundColor: "#eeeeee" }}>
@@ -170,26 +184,26 @@ class UploadCSV extends Component {
                 </div>
               </div>
               {/* Drag and Drop box */}
-                <div
-                  // finish making conditional rendering when file is dragged over
-                  id="drop_zone"
-                  onDrop={this.dropHandler}
-                  onDragOver={this.dragOverHandler}
-                  onDragEnter={this.dragEnterHandler}
-                  onDragLeave={this.dragLeaveHandler}
-                  style={{ backgroundColor: BoxColor, color: "#636B7F" }}
-                >
-                  <br />
-                  {this.state.csv === "" ? (
-                    <p className="center" style={{ fontSize: 20 }}>
-                      <strong>Choose a file </strong>or drag it here
-                    </p>
-                  ) : (
-                    <p className="center " style={{ fontSize: 20 }}>
-                      <strong>File Uploaded</strong>
-                    </p>
-                  )}
-                </div>
+              <div
+                // finish making conditional rendering when file is dragged over
+                id="drop_zone"
+                onDrop={this.dropHandler}
+                onDragOver={this.dragOverHandler}
+                onDragEnter={this.dragEnterHandler}
+                onDragLeave={this.dragLeaveHandler}
+                style={{ backgroundColor: BoxColor, color: "#636B7F" }}
+              >
+                <br />
+                {this.state.csv === "" ? (
+                  <p className="center" style={{ fontSize: 20 }}>
+                    <strong>Choose a file </strong>or drag it here
+                  </p>
+                ) : (
+                  <p className="center " style={{ fontSize: 20 }}>
+                    <strong>File Uploaded</strong>
+                  </p>
+                )}
+              </div>
               {/* this is the submit button */}
               <div className="input-field">
                 <button
@@ -205,6 +219,11 @@ class UploadCSV extends Component {
         <Guide clickHandle={this.clickHandler} />
       </div>
     );
+  };
+
+  render() {
+    if (this.state.stage === 0) return this.firstStage();
+    else return this.uploadCSV();
   }
 }
 
