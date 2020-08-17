@@ -4,6 +4,8 @@ import { connect } from "react-redux";
 import { initializeCSVForProject } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "../../../styling/createproject.css";
+import searchPic from "../../../pictures/project/search.png";
+import uploadPic from "../../../pictures/project/upload.png";
 
 var BoxColor = "#F5F5F5";
 
@@ -126,15 +128,153 @@ class UploadCSV extends Component {
     initializeCSVForProject(null, value, projectID);
   };
 
-  firstStage = () => {
+  setZerothState = () => {
+    this.setState({
+      stage: 0,
+    });
+  };
+
+  setFirstState = () => {
+    this.setState({
+      stage: 1,
+    });
+  };
+
+  setSecondState = () => {
+    this.setState({
+      stage: 2,
+    });
+  };
+
+  backState = () => {
+    this.setStage({
+      stage: this.state.stage - 1,
+    });
+  };
+
+  backButton = () => {
     return (
       <div>
-        <div className="row container">
+        <button
+          className="btn btn-sec waves-effect waves-light z-depth-0 begin-button"
+          onClick={this.backState}
+        >
+          Back
+        </button>
+      </div>
+    );
+  };
+
+  uploadButton = () => {
+    return (
+      <div>
+        <button
+          className="btn btn-outline anchor-160 waves-effect waves-light z-depth-0"
+          onClick={this.setSecondState}
+        >
+          Upload CSV
+        </button>
+      </div>
+    );
+  };
+
+  zerothStage = () => {
+    return (
+      <div>
+        {/* <div className="row container">
           <h1>
             <span className="purple-text">{this.props.projectName}</span>
           </h1>
+        </div> */}
+        <div className="row container center" style={{ marginTop: "7vh" }}>
+          <h1>
+            <span className="purple-text">
+              Choose your method of data upload
+            </span>
+          </h1>
         </div>
-        <p>Hello</p>
+        <div className="row center">
+          <p className="choose-statement">Please select one:</p>
+          <div className="col s6 m6">
+            <button
+              className="choose-button"
+              style={{
+                backgroundImage: `url(${searchPic})`,
+                right: "57%",
+              }}
+              onClick={this.setFirstState}
+            >
+              <span
+                className="purple-text center button-text"
+                // style={{ fontSize: "2vw" }}
+              >
+                Browse library
+              </span>
+            </button>
+          </div>
+          <div className="col s6 m6">
+            <button
+              className="choose-button"
+              style={{
+                backgroundImage: `url(${uploadPic})`,
+                left: "57%",
+              }}
+              onClick={this.setSecondState}
+            >
+              <span className="purple-text center button-text">
+                Upload file
+              </span>
+            </button>
+          </div>
+        </div>
+        <div className="row center" style={{ marginTop: "24vw" }}>
+          <div className="col s6 m6">
+            <span className="button-desc" style={{ left: "17%" }}>
+              Browse <strong>and</strong> select <strong>existing CSVs</strong>
+            </span>
+          </div>
+          <div className="col s6 m6">
+            <span className="button-desc" style={{ right: "17%" }}>
+              Upload <strong>your own CSVs</strong>
+            </span>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  browseStage = () => {
+    return (
+      <div>
+        <div className="row container center">
+          <h1 className="browse-header">Try some of our datasets!</h1>
+          <span className="browseP">
+            We have gathered fun datasets for you to experiment with:
+          </span>
+        </div>
+        <div className="row container center">{this.uploadButton()}</div>
+        <div className="row container center">
+          <h1 className="browse-header">Other places to find datasets</h1>
+          <span className="browseP">
+            Can't see what you are looking for? Check our the websites below!
+          </span>
+        </div>
+        <p>browse page</p>
+      </div>
+    );
+  };
+
+  uploadStage = () => {
+    return (
+      <div>
+        <div className="row container center">
+          <h1>
+            <span className="purple-text">
+              Upload your data file
+            </span>
+          </h1>
+          <p className="choose-statement">File must be a CSV and under 50MB</p>
+        </div>
       </div>
     );
   };
@@ -222,7 +362,9 @@ class UploadCSV extends Component {
   };
 
   render() {
-    if (this.state.stage === 0) return this.firstStage();
+    if (this.state.stage === 0) return this.zerothStage();
+    else if (this.state.stage === 1) return this.browseStage();
+    else if (this.state.stage === 2) return this.uploadStage();
     else return this.uploadCSV();
   }
 }

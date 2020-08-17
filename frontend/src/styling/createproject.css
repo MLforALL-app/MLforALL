@@ -30,3 +30,57 @@
   font-size: 20px;
   line-height: 23px
 }
+.choose-statement {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+  color: #848484;
+  margin-bottom: 5vw;
+}
+.choose-button {
+  background-color: white;
+  height: 20vw;
+  width: 20vw;
+  background-repeat: no-repeat;
+  background-position: center 40%;
+  background-size: 35% 35%;
+  border-radius: 8px;
+  border-color: #848484;
+  position: absolute
+}
+.choose-button:active {
+  background-color: white
+}
+.button-text {
+  position: relative;
+  top: 6vw;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 2vw;
+  /* line-height: 41px; */
+}
+.button-desc {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.5vw;
+  line-height: 130%;
+  position: relative;
+}
+.browse-header {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 55px;
+}
+.browseP {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+}
