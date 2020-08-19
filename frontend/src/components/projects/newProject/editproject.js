@@ -119,7 +119,7 @@ class EditProject extends Component {
 		this.setState({
 			submitLoad: true
 		});
-		// this.props.deleteMLProject(projectID, auth.uid, project, true);
+		this.props.deleteMLProject(projectID, auth.uid, project, true);
 		this.props.updateContent(
 			this.getContent(this.props.project.content),
 			this.props.projectID
