@@ -67,7 +67,7 @@ class DisplayCSV extends Component {
 		});
 		this.props.setInputParameters(this.state.inputs);
 	};
-	checkBoxHeader = (colName, is_numeric, i) => (key) => {
+	checkBoxHeader = (colName) => (key) => {
 		return (
 			<div>
 				<div>
@@ -105,16 +105,14 @@ class DisplayCSV extends Component {
 
 	getColumns = (keyList, firstRow) => {
 		var columns = [];
-		var i = 0;
 		keyList.forEach((key) => {
-			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
 			columns.push(
 				<Column
 					label={key}
 					dataKey={key}
 					key={key}
-					headerRenderer={this.checkBoxHeader(colName, numeric_col, i)}
+					headerRenderer={this.checkBoxHeader(colName)}
 					width={5000}
 				/>
 			);
