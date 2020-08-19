@@ -115,7 +115,7 @@ class EditProject extends Component {
 	};
 
 	handleSubmit = (e) => {
-		const { project} = this.props;
+		const { project, auth, projectID } = this.props;
 		this.setState({
 			submitLoad: true
 		});
