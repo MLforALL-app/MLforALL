@@ -59,13 +59,14 @@ def store():
 
     data = Data(df, target_param, df_vars, nan_method)
     X_train, X_test, y_train, y_test = data.get_train_test_split()
+    onehot_features = data.get_onehot_dict()
 
     try:
         # populate storage with models
         trained_models = []
         for model_type in model_list:
             model = Model(model_type)
-            model.build(X_train, y_train)
+            model.build(X_train, y_train, onehot_features)
             # get the saved model in byte form
             pickle_bytes = model.pickle()
             # send it to firebase storage
