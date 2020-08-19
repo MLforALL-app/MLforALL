@@ -135,7 +135,6 @@ class DisplayCSV extends Component {
 	};
 
 	componentDidMount = () => {
-		console.log(this.props.variableInfo);
 		let thingsToSelect = this.props.selectedVariables;
 		thingsToSelect.forEach((item) => {
 			this.checkBoxChange(item.name)(null);

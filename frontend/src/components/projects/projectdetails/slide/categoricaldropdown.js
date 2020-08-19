@@ -12,7 +12,7 @@ import Typography from "@material-ui/core/Typography";
  * ENSURES: dropdown menu of existing models for a project in firestore whose
  * 			changes alter the parent component's state. */
 
-const Dropdown = (param, values, currentSelection, handleChange) => {
+const CategoricalDropdown = (param, values, currentSelection, handleChange) => {
 	const getMenuItems = (values) => {
 		if(!currentSelection){
 			console.log("Catching");
@@ -52,7 +52,7 @@ const Dropdown = (param, values, currentSelection, handleChange) => {
 			</Typography>
 			</Grid>
 				<Grid item xs >	
-					<FormControl className="cat-drop-down">
+					<FormControl className="cat-drop-down" >
 						<Select
 							//defaultValue = {currentSelection}
 							value={currentSelection}
@@ -71,4 +71,4 @@ const Dropdown = (param, values, currentSelection, handleChange) => {
 	);
 };
 
-export default Dropdown;
+export default CategoricalDropdown;

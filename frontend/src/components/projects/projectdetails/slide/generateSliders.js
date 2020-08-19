@@ -46,15 +46,8 @@ const getDesc = (name) => {
 const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
-		if(!v.isString){
-			inputs[v.name] = v.q2;
-		}else{
-			console.log("CATEGORICAL VALUES", v.values, v.values[0]);
-			inputs[v.name] = v.values[0];
-		}
-		
+		inputs[v.name] =  v.isString ? v.values[0] : v.q2;		
 	});
-	console.log(inputs);
 	return inputs;
 };
 
@@ -73,11 +66,9 @@ class GenerateSliders extends Component {
 	// of event handlers
 	handleSliderChange = (v) => {
 		return (event, newValue) => {
-			console.log(this.state);
 			event.preventDefault();
 			this.setState((prevState) => {
 				var alterState = prevState;
-				console.log(newValue);
 				alterState.inputs[v.name] = newValue;
 				return alterState;
 			});
@@ -132,7 +123,6 @@ class GenerateSliders extends Component {
 				model: this.state.model,
 				inputs: Object.values(this.state.inputs)
 			};
-			console.log(path);
 			this.setState({ loading: true });
 			axios
 				.post(`${apiHost}/predict`, path)
@@ -157,8 +147,6 @@ class GenerateSliders extends Component {
 						PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
 					);
 				}else{
-					console.log("MAKING A DROP DOWN", v.name, v.values);
-					console.log(this.state.inputs);
 					output.push(
 						CategoricalDropdown(v.name, v.values, this.state.inputs[v.name], hcc(v))
 					);
@@ -176,12 +164,10 @@ class GenerateSliders extends Component {
 		if (prev && prev !== this.props) {
 			this.setState(refreshState(projectNew));
 		}
-		console.log(this.state);
 	}
 	componentDidMount = () => {
 		const projectNew = this.props.project;
 		this.setState(refreshState(projectNew));
-		console.log(this.state);
 	}
 	render() {
 		const { project } = this.props;
