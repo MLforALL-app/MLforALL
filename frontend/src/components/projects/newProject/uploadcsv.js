@@ -247,10 +247,13 @@ class UploadCSV extends Component {
     return (
       <div>
         <div className="row container center">
-          <h1 className="browse-header">Try some of our datasets!</h1>
+          <h1 className="purple-text browse-header">
+            Try some of our datasets!
+          </h1>
           <span className="browseP">
             We have gathered fun datasets for you to experiment with:
           </span>
+          <Guide clickHandle={this.clickHandler} />
         </div>
         <div className="row container center">{this.uploadButton()}</div>
         <div className="row container center">
@@ -269,9 +272,7 @@ class UploadCSV extends Component {
       <div>
         <div className="row container center">
           <h1>
-            <span className="purple-text">
-              Upload your data file
-            </span>
+            <span className="purple-text">Upload your data file</span>
           </h1>
           <p className="choose-statement">File must be a CSV and under 50MB</p>
         </div>

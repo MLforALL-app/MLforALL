@@ -1,44 +1,51 @@
 import React from "react";
 import "../../../styling/createproject.css";
+import buttonPic from "../../../pictures/project/example-button-picture.png";
 
 const examples = (clickHandle) => {
   return (
-    <div className="col s12 m6">
-      <h5> Example Datasets </h5>
-      <ul>
-        <li>
-          <button
-            className="waves-effect waves-light btn-flat example-btns"
-            onClick={clickHandle("Pokemon.csv")}
-          >
-            Pokemon with Stats
-          </button>
-        </li>
-        <li>
-          <button
-            className="waves-effect waves-light btn-flat example-btns"
-            onClick={clickHandle("Spotify2000.csv")}
-          >
-            Spotify All Time Top 2000s Mega Dataset
-          </button>
-        </li>
-        <li>
-          <button
-            className="waves-effect waves-light btn-flat example-btns"
-            onClick={clickHandle("NBAFantasy2019.csv")}
-          >
-            {" "}
-            NBA Fantasy Predictions for 2019-2020
-          </button>
-        </li>
-      </ul>
+    <div className="row center" style={{marginTop: "50px"}}>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("Pokemon.csv")}
+      >
+        <h3 className="browse-buttonsH">Pokémon Stats</h3>
+        <p className="browse-buttonsT">
+          Dataset of different type of Pokémon and their stats!
+        </p>
+      </button>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("Spotify2000.csv")}
+      >
+        <h3 className="browse-buttonsH">
+          Spotify Top 2020
+        </h3>
+        <p className="browse-buttonsT">
+          Spotify All Time Top 2020 collection dataset!
+        </p>
+      </button>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("NBAFantasy2019.csv")}
+      >
+        <h3 className="browse-buttonsH">
+          NBA Fantasy
+        </h3>
+        <p className="browse-buttonsT">
+          NBA Fantasy Predictions for 2019-2020!
+        </p>
+      </button>
     </div>
   );
 };
 
 const findMore = () => {
   return (
-    <div className="col s12 m6">
+    <div className="row container center">
       <h5> Other Places To Find </h5>
       <ul>
         <li>
@@ -90,8 +97,8 @@ const findMore = () => {
 const Guide = (props) => {
   const { clickHandle } = props;
   return (
-    <div className="container">
-      <div className="row">
+    <div className="container" style={{width: "100vw"}}>
+      {/* <div className="row">
         <div className="col s12">
           <h3>
             <span className="purple-text">
@@ -103,11 +110,9 @@ const Guide = (props) => {
           will be plenty of explanation and recourses provided as you get
           started.
         </div>
-      </div>
-      <div className="row">
-        {examples(clickHandle)}
-        {findMore()}
-      </div>
+      </div> */}
+      <div className="row">{examples(clickHandle)}</div>
+      <div className="row">{findMore()}</div>
     </div>
   );
 };
