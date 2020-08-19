@@ -1,3 +1,36 @@
+.MLforAll1 {
+  font-family: Helvetica;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 96px;
+	line-height: 110px;
+	color: #283593;
+}
+.lpButtons {
+	height: 45px;
+	line-height: 23px;
+	font-size: 20px;
+	text-transform: capitalize;
+}
+.MLforAll2 {
+	font-family: Helvetica;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 24px;
+	line-height: 130%;
+	display: flex;
+	align-items: center;
+	text-align: center;
+	color: #000000;
+}
+.WTD {
+	font-family: Helvetica;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 36px;
+	line-height: 41px;
+	padding-top: 3em;
+}
 .lp-img {
 	height: 100%;
 	z-index: -1;
@@ -7,7 +40,6 @@
 	height: auto;
 	display: inline-block;
 }
-
 .row-bg {
 	background-color: white;
 	background-position: center;
@@ -16,13 +48,11 @@
 	background-position-y: 50%;
 	text-align: center;
 }
-
 .left-block {
 	display: inline-block;
 	text-align: left;
 	vertical-align: bottom;
 }
-
 .landing-container {
 	overflow: hidden;
 	margin-left: 0 auto;
@@ -33,9 +63,12 @@
 	overflow: hidden;
 	margin-left: 0 auto;
 	margin-right: 0 auto;
-	padding: 0 0 0 60px;
+	padding: 0 0 0 90px;
 }
-
+.purpleHeader {
+	line-height: 130%; 
+	font-size: 36px
+}
 .fullrow-bg {
 	background-color: white;
 	background-position: center;
@@ -44,9 +77,12 @@
 	text-align: center;
 	z-index: 0;
 }
-
 .lp-header {
 	height: calc(30rem + 20vh);
+}
+.infoText {
+	font-size: 24px;
+	line-height: 130%;
 }
 .lp-header-mobile {
 	height: calc(18rem + 5vh);

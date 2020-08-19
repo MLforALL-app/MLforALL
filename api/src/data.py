@@ -177,11 +177,13 @@ class Data:
                             "models": self.get_model_obj(model_list), "targetParam": self.target_str})
 
     @staticmethod
-    def from_csv(uid, proj_id, csv_name):
+    # def from_csv(uid, proj_id, csv_name):
+    def from_csv(path):
         bucket = fb.bucket_init()
         # Get the dataframe
-        df = fb.get_csv(bucket, fb.make_path(
-            str(uid), str(proj_id), str(csv_name)))
+        # df = fb.get_csv(bucket, fb.make_path(
+        #     str(uid), str(proj_id), str(csv_name)))
+        df = fb.get_csv(bucket, str(path))
 
         return Data(df, None, None, None)
 

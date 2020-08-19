@@ -17,7 +17,7 @@ function print_help () {
 function check_git() {
   printf "Checking that this directory contains MLforALL repo... ಠ_ಠ\n"
   url=$(git config --get remote.origin.url)
-  if [ "$url" != "https://github.com/lenghuang/MLforAll.git" ]
+  if [ "$url" != "https://github.com/MLforALL-app/MLforALL.git" ]
   then
     printf "\nNoooo wrong repo, bring me back! (ಥ﹏ಥ) \n"
     error
@@ -28,10 +28,10 @@ function check_git() {
 function check_dir() {
   printf "Checking you're in the right directory... ಠ╭╮ಠ\n"
   dir=$(pwd)
-  if [ "${dir: -8}" != "MLforAll" ]
+  if [ "${dir: -8}" != "MLforALL" ]
   then
     printf "\nWrong Directory!!! You're in ...${dir: -32}\n"
-    printf "Go back to /MLforAll! ᕙ(⇀‸↼‶)ᕗ \n"
+    printf "Go back to /MLforALL! ᕙ(⇀‸↼‶)ᕗ \n"
     error
     exit 1
   fi

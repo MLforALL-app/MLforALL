@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import Guide from "./guidingInfo";
 import { connect } from "react-redux";
 import {
-  uploadCSVtoStorage,
-  updateCsvData,
+  initializeCSVForProject
 } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "../../../styling/createproject.css";
@@ -44,34 +43,6 @@ class UploadCSV extends Component {
     }
   };
 
-  getFileExtension = (filename) => {
-    return filename.split(".").pop();
-  };
-
-  // dragged files are within the event differently
-  getFileExtensionDrop = (filename) => {
-    return filename.split("/").pop();
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    if (this.state.showError || this.state.csv === "") {
-      return;
-    }
-    console.log(this.state.csv);
-    this.props.uploadCSVtoStorage(
-      this.state.csv,
-      this.props.project,
-      this.props.projectID
-    );
-
-    this.props.updateCsvData(
-      this.state.csv,
-      this.props.project,
-      this.props.projectID
-    );
-  };
-
   // The 'handleSubmit' for drag and dropped files
   dropHandler = (e) => {
     e.preventDefault();
@@ -102,19 +73,60 @@ class UploadCSV extends Component {
     }
   };
 
+  getFileExtension = (filename) => {
+    return filename.split(".").pop();
+  };
+
+  // dragged files are within the event differently
+  getFileExtensionDrop = (filename) => {
+    return filename.split("/").pop();
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    if (this.state.showError || this.state.csv === "") {
+      return;
+    }
+    //case on whether we need to put an example into storage
+
+    this.props.initializeCSVForProject(
+      this.state.csv,
+      "",
+      this.props.projectID
+    );
+
+    // this.props.uploadCSVtoStorage(
+    //   this.state.csv,
+    //   this.props.project,
+    //   this.props.projectID
+    // );
+
+    // this.props.updateCsvData(
+    //   this.state.csv,
+    //   this.props.project,
+    //   this.props.projectID,
+    //   false 
+    // );
+  };
+
   // Prevents files from being downloaded when dragged into the screen
   dragOverHandler = (e) => {
     e.preventDefault();
   };
 
   dragEnterHandler = () => {
-    console.log("entered");
     this.setState({ drag: true });
   };
 
   dragLeaveHandler = () => {
-    console.log("left");
     this.setState({ drag: false });
+  };
+
+  // Passed into Guide to handle the event of clicking an example link
+  clickHandler = (value) => () => {
+    //case on value "which is name of file, to reference to storage"
+    const {initializeCSVForProject, projectID} = this.props;
+    initializeCSVForProject(null, value, projectID);
   };
 
   render() {
@@ -195,7 +207,7 @@ class UploadCSV extends Component {
             </form>
           </div>
         </div>
-        <Guide />
+        <Guide clickHandle={this.clickHandler} />
       </div>
     );
   }
@@ -209,10 +221,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    uploadCSVtoStorage: (csv, project, id) =>
-      dispatch(uploadCSVtoStorage(csv, project, id)),
-    updateCsvData: (csv, project, id) =>
-      dispatch(updateCsvData(csv, project, id)),
+    // uploadCSVtoStorage: (csv, project, id) =>
+    //   dispatch(uploadCSVtoStorage(csv, project, id)),
+    // updateCsvData: (csv, project, id) =>
+    //   dispatch(updateCsvData(csv, project, id)),
+    initializeCSVForProject: (csv, example, pid) => 
+      dispatch(initializeCSVForProject(csv, example, pid)),
   };
 };
 
