@@ -7,6 +7,7 @@ import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
 import apiHost from "../../../../config/api.js";
 import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
 
 const refreshState = (project) => {
 	return {
@@ -84,7 +85,9 @@ class GenerateSliders extends Component {
 	};
 	handleCategoricalChange = (v) => {
 		return (event, newValue) => {
-			event.preventDefault();
+			if(event){
+				event.preventDefault();
+			}
 			this.setState((prevState) => {
 				var alterState = prevState;
 				alterState.inputs[v.name] = newValue["key"];
@@ -154,7 +157,7 @@ class GenerateSliders extends Component {
 						PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
 					);
 				}else{
-					console.log("MAKING A DROP DOWN");
+					console.log("MAKING A DROP DOWN", v.name, v.values);
 					console.log(this.state.inputs);
 					output.push(
 						CategoricalDropdown(v.name, v.values, this.state.inputs[v.name], hcc(v))
@@ -175,10 +178,19 @@ class GenerateSliders extends Component {
 		}
 		console.log(this.state);
 	}
+	componentDidMount = () => {
+		const projectNew = this.props.project;
+		this.setState(refreshState(projectNew));
+		console.log(this.state);
+	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
+		if(!this.state.inputs){
+			return <CircularProgress/>	
+		}
 		return (
+
 			<div className="predict">
 				<div className="row slider-row">
 					<div className="container">

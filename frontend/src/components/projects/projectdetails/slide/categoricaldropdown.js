@@ -14,7 +14,11 @@ import Typography from "@material-ui/core/Typography";
 
 const Dropdown = (param, values, currentSelection, handleChange) => {
 	const getMenuItems = (values) => {
-        console.log("making a dropdown", currentSelection);
+		if(!currentSelection){
+			console.log("Catching");
+			currentSelection = values[0];
+		}
+		console.log("making a dropdown", param, values, currentSelection);
 		if (values.length === 0) {
 			return (
 				<MenuItem key={"none"} value={""}>
@@ -36,7 +40,8 @@ const Dropdown = (param, values, currentSelection, handleChange) => {
 			return result;
 		}
 	};
-
+	
+	
 	return (
 		<div key={"container_" + param} >
 			
@@ -46,12 +51,16 @@ const Dropdown = (param, values, currentSelection, handleChange) => {
 				<b>{param}</b>
 			</Typography>
 			</Grid>
-				<Grid item xs>	
-					<FormControl>
+				<Grid item xs >	
+					<FormControl className="cat-drop-down">
 						<Select
+							//defaultValue = {currentSelection}
 							value={currentSelection}
 							onChange={handleChange}
-							displayEmpty>
+							displayEmpty={true}
+							defaultValue={currentSelection}
+							className="cat-drop-down"
+							>
 							{getMenuItems(values)}
 						</Select>
 					</FormControl>
