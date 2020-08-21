@@ -11,14 +11,15 @@
 }
 #drop_zone {
   /* border: 2px dashed #283593; */
-  margin-left: 2%;
+  margin-left: 1%;
+  margin-bottom: 2%;
   width: 98%;
-  height: 96%;
+  height: 86%;
   border-radius: 15px;
   background-color: white;
   background-repeat: no-repeat;
-  background-position: center 40%;
-  background-size: 35% 35%;
+  background-position: center 50%;
+  background-size: 35% 40%;
   z-index: -1;
 }
 .example-btns {
@@ -151,6 +152,8 @@
   /* border-color: #848484; */
 }
 .dropzone-text {
-  position: relative;
-  right: 3vw;
+  position: absolute;
+  top: 18vw;
+  right: 3.5vw;
+  font-size: 1.6vw;
 }

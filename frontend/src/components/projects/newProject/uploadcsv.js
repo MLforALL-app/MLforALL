@@ -326,11 +326,11 @@ class UploadCSV extends Component {
               >
                 <br />
                 {this.state.csv === "" ? (
-                  <p className="center dropzone-text" style={{ fontSize: 20 }}>
+                  <p className="center dropzone-text" >
                     <strong>Choose a file </strong>or drag it here
                   </p>
                 ) : (
-                  <p className="center dropzone-text" style={{ fontSize: 20 }}>
+                  <p className="center dropzone-text" >
                     <strong>File Uploaded</strong>
                   </p>
                 )}
@@ -339,16 +339,12 @@ class UploadCSV extends Component {
               <div className="input-field">
                 <button
                   className="btn waves-effect waves-light z-depth-0"
-                  style={{ borderRadius: "50px" }}
+                  style={{ borderRadius: "50px" , marginTop: "5vw"}}
                 >
                   {this.state.fileUploadMessage}
                 </button>
               </div>
             </form>
-            {/* New shit starts here */}
-            {/* <div
-              style={{ height: "95%", width: "95%", border: "2px red solid" }}
-            ></div> */}
           </div>
         </div>
       </div>
