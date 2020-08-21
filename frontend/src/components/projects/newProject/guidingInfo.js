@@ -4,7 +4,7 @@ import buttonPic from "../../../pictures/project/example-button-picture.png";
 
 const examples = (clickHandle) => {
   return (
-    <div className="row center" style={{marginTop: "50px"}}>
+    <div className="row center" style={{ marginTop: "50px" }}>
       <button
         className="browse-button"
         style={{ backgroundImage: `url(${buttonPic})` }}
@@ -20,9 +20,7 @@ const examples = (clickHandle) => {
         style={{ backgroundImage: `url(${buttonPic})` }}
         onClick={clickHandle("Spotify2000.csv")}
       >
-        <h3 className="browse-buttonsH">
-          Spotify Top 2020
-        </h3>
+        <h3 className="browse-buttonsH">Spotify Top 2020</h3>
         <p className="browse-buttonsT">
           Spotify All Time Top 2020 collection dataset!
         </p>
@@ -32,9 +30,7 @@ const examples = (clickHandle) => {
         style={{ backgroundImage: `url(${buttonPic})` }}
         onClick={clickHandle("NBAFantasy2019.csv")}
       >
-        <h3 className="browse-buttonsH">
-          NBA Fantasy
-        </h3>
+        <h3 className="browse-buttonsH">NBA Fantasy</h3>
         <p className="browse-buttonsT">
           NBA Fantasy Predictions for 2019-2020!
         </p>
@@ -45,48 +41,55 @@ const examples = (clickHandle) => {
 
 const findMore = () => {
   return (
-    <div className="row container center">
-      <h5> Other Places To Find </h5>
+    <div className="row center">
+      <div className="row center" style={{paddingBottom: "5vh"}}>
+        <h1 className="purple-text browse-header">
+          Other places to find datasets
+        </h1>
+        <span className="browseP">
+          Can't see what you are looking for? Check our the websites below!
+        </span>
+      </div>
       <ul>
-        <li>
+        <li className="dataset-website">
           <a
-            className="waves-effect waves-light btn-flat example-btns"
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://www.kaggle.com/datasets"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Check out Kaggle,
+            Kaggle
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
-            className="waves-effect waves-light btn-flat example-btns"
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://data.world/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            data.world (needs login),
+            Data.world (needs login)
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
-            className="waves-effect waves-light btn-flat example-btns"
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://registry.opendata.aws/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Amazon's open registry,
+            Amazon's open registry
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
-            className="waves-effect waves-light btn-flat example-btns"
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://datasetsearch.research.google.com/"
             rel="noopener noreferrer"
             target="_blank"
           >
             {" "}
-            or Google's dataset search engine!
+            Google's dataset search engine
           </a>
         </li>
       </ul>
@@ -97,7 +100,7 @@ const findMore = () => {
 const Guide = (props) => {
   const { clickHandle } = props;
   return (
-    <div className="container" style={{width: "100vw"}}>
+    <div className="container" style={{ width: "100vw" }}>
       {/* <div className="row">
         <div className="col s12">
           <h3>
@@ -111,7 +114,9 @@ const Guide = (props) => {
           started.
         </div>
       </div> */}
-      <div className="row">{examples(clickHandle)}</div>
+      <div className="row" style={{ paddingBottom: "10vh" }}>
+        {examples(clickHandle)}
+      </div>
       <div className="row">{findMore()}</div>
     </div>
   );

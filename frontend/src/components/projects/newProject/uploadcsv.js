@@ -256,13 +256,6 @@ class UploadCSV extends Component {
           <Guide clickHandle={this.clickHandler} />
         </div>
         <div className="row container center">{this.uploadButton()}</div>
-        <div className="row container center">
-          <h1 className="browse-header">Other places to find datasets</h1>
-          <span className="browseP">
-            Can't see what you are looking for? Check our the websites below!
-          </span>
-        </div>
-        <p>browse page</p>
       </div>
     );
   };
@@ -275,6 +268,88 @@ class UploadCSV extends Component {
             <span className="purple-text">Upload your data file</span>
           </h1>
           <p className="choose-statement">File must be a CSV and under 50MB</p>
+          {this.state.showError ? (
+            <Alert severity="error">
+              <AlertTitle>Error</AlertTitle>
+              <strong>{this.state.errorText}</strong>
+            </Alert>
+          ) : (
+            <span></span>
+          )}
+          {!this.state.showError && this.state.csv !== "" ? (
+            <Alert severity="success">
+              <AlertTitle>Success</AlertTitle>
+              <strong>Successful CSV Upload</strong>
+            </Alert>
+          ) : (
+            <span></span>
+          )}
+          <div className="new-dropBox center">
+            <form
+              onSubmit={this.handleSubmit}
+              style={{ padding: "0", height: "100%" }}
+            >
+              <div className="file-field input-field">
+                <div
+                  className="btn waves-effect waves-light z-depth-0"
+                  style={{ borderRadius: "50px" }}
+                >
+                  <span>Browse</span>
+                  <input
+                    type="file"
+                    id="csvName"
+                    onChange={this.handleChange}
+                  />
+                </div>
+                <div
+                  className="file-path-wrapper"
+                  style={{ position: "absolute", top: "-100vh" }}
+                >
+                  <input
+                    className="file-path validate"
+                    type="text"
+                    placeholder="Upload .csv file"
+                    accept=".csv"
+                  />
+                </div>
+              </div>
+              {/* Drag and Drop box */}
+              <div
+                // finish making conditional rendering when file is dragged over
+                id="drop_zone"
+                onDrop={this.dropHandler}
+                onDragOver={this.dragOverHandler}
+                style={{
+                  color: "#636B7F",
+                  backgroundImage: `url(${uploadPic})`,
+                }}
+              >
+                <br />
+                {this.state.csv === "" ? (
+                  <p className="center dropzone-text" style={{ fontSize: 20 }}>
+                    <strong>Choose a file </strong>or drag it here
+                  </p>
+                ) : (
+                  <p className="center dropzone-text" style={{ fontSize: 20 }}>
+                    <strong>File Uploaded</strong>
+                  </p>
+                )}
+              </div>
+              {/* this is the submit button */}
+              <div className="input-field">
+                <button
+                  className="btn waves-effect waves-light z-depth-0"
+                  style={{ borderRadius: "50px" }}
+                >
+                  {this.state.fileUploadMessage}
+                </button>
+              </div>
+            </form>
+            {/* New shit starts here */}
+            {/* <div
+              style={{ height: "95%", width: "95%", border: "2px red solid" }}
+            ></div> */}
+          </div>
         </div>
       </div>
     );
@@ -332,11 +407,11 @@ class UploadCSV extends Component {
                 onDragOver={this.dragOverHandler}
                 onDragEnter={this.dragEnterHandler}
                 onDragLeave={this.dragLeaveHandler}
-                style={{ backgroundColor: BoxColor, color: "#636B7F" }}
+                style={{ backgroundColor: "white", color: "#636B7F" }}
               >
                 <br />
                 {this.state.csv === "" ? (
-                  <p className="center" style={{ fontSize: 20 }}>
+                  <p style={{ fontSize: 20 }}>
                     <strong>Choose a file </strong>or drag it here
                   </p>
                 ) : (
