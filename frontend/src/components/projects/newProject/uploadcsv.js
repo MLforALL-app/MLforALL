@@ -284,6 +284,7 @@ class UploadCSV extends Component {
           ) : (
             <span></span>
           )}
+          <br />
           <div className="new-dropBox center">
             <form
               onSubmit={this.handleSubmit}
@@ -292,7 +293,11 @@ class UploadCSV extends Component {
               <div className="file-field input-field">
                 <div
                   className="btn waves-effect waves-light z-depth-0"
-                  style={{ borderRadius: "50px" }}
+                  style={{
+                    borderRadius: "50px",
+                    position: "absolute",
+                    top: "27vw",
+                  }}
                 >
                   <span>Browse</span>
                   <input
@@ -303,7 +308,7 @@ class UploadCSV extends Component {
                 </div>
                 <div
                   className="file-path-wrapper"
-                  style={{ position: "absolute", top: "-100vh" }}
+                  style={{ position: "absolute", left: "100px", top: "27vw" }}
                 >
                   <input
                     className="file-path validate"
@@ -326,11 +331,14 @@ class UploadCSV extends Component {
               >
                 <br />
                 {this.state.csv === "" ? (
-                  <p className="center dropzone-text" >
+                  <p className="center dropzone-text">
                     <strong>Choose a file </strong>or drag it here
                   </p>
                 ) : (
-                  <p className="center dropzone-text" >
+                  <p
+                    className="center dropzone-text"
+                    style={{ position: "absolute", right: "8vw" }}
+                  >
                     <strong>File Uploaded</strong>
                   </p>
                 )}
@@ -339,7 +347,7 @@ class UploadCSV extends Component {
               <div className="input-field">
                 <button
                   className="btn waves-effect waves-light z-depth-0"
-                  style={{ borderRadius: "50px" , marginTop: "5vw"}}
+                  style={{ borderRadius: "50px", marginTop: "10vw" }}
                 >
                   {this.state.fileUploadMessage}
                 </button>

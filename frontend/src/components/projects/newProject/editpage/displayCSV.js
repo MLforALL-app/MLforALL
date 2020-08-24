@@ -9,8 +9,10 @@ import "firebase/storage";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "../../../../styling/build.css";
+import "../../../../styling/build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import No1 from "../../../../pictures/project/number1.png";
 
 class DisplayCSV extends Component {
   // Our flip boolean object data structure thing functions
@@ -154,8 +156,15 @@ class DisplayCSV extends Component {
           <div className="isactive">
             <div className="row container">
               <h5>
-                <b>
-                  1. I want to consider these input parameters...{" "}
+                <b
+                  style={{
+                    backgroundImage: `url(${No1})`,
+                    backgroundSize: "36px 36px",
+                    paddingBottom: "7px"
+                  }}
+                  className="number-image"
+                >
+                  I want to consider these input parameters...{" "}
                   <span className="pink-text">
                     <HelpBox
                       header="Click to Toggle Parameters"
