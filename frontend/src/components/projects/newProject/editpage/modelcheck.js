@@ -12,7 +12,7 @@ import log_reg from "../../../../pictures/models/log_reg.svg";
 import gnb from "../../../../pictures/models/gnb.svg";
 import lda from "../../../../pictures/models/lda.svg";
 import clf from "../../../../pictures/models/clf.svg";
-import HelpBox from "../../../layouts/helpbox";
+import "../../../../styling/build.css";
 
 const ModelCheck = ({ handleToggle, nameMapper, models }) => {
   const desc = {
@@ -40,95 +40,32 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
   const makeCard = (value, img) => {
     return (
       <div key={value} className="col s6 m6">
-        <div className="card center">
+        <div
+          className="card center"
+          style={
+            models[value]
+              ? { backgroundColor: "#DCDCDC" }
+              : { backgroundColor: "white" }
+          }
+        >
           <div onClick={handleToggle(value)} style={{ height: "12vw" }}>
-            {/* The header starts here */}
-            {models[value] ? (
-              <div className="" style={{ color: "red" }}>
-                <div>
-                  <b
-                    style={{
-                      color: "#283593",
-                      fontFamily: "Helvetica",
-                      fontStyle: "normal",
-                      fontWeight: "bold",
-                      fontSize: "24px",
-                      lineHeight: "135%",
-                    }}
-                  >
-                    {nameMapper(value)}{" "}
-                  </b>
-                </div>
-                <div style={{ float: "right" }}>
-                </div>
-                <div style={{ clear: "both" }}></div>
+            <div>
+              <div style={{ float: "left" }}>
+                <b className="model-card-name">{nameMapper(value)} </b>
               </div>
-            ) : (
-              <div className="">
-                <div style={{ float: "left" }}>
-                  <b
-                    style={{
-                      color: "#283593",
-                      fontFamily: "Helvetica",
-                      fontStyle: "normal",
-                      fontWeight: "bold",
-                      fontSize: "1.2vw",
-                      lineHeight: "135%",
-                      position: "relative",
-                      top: "1vw",
-                      left: "1.2vw",
-                    }}
-                  >
-                    {nameMapper(value)}{" "}
-                  </b>
-                </div>
-                <div
-                  style={{
-                    float: "right",
-                    position: "relative",
-                    top: "10px",
-                    right: "10px",
-                  }}
-                >
-                </div>
-                <div
-                  style={{
-                    fontFamily: "Helvetica",
-                    fontStyle: "normal",
-                    fontWeight: "normal",
-										fontSize: "1vw",
-										color: "gray",
-										lineHeight: "135%",
-										position: "absolute",
-										left: "1vw",
-										top: "3.5vw",
-										textAlign: "left",
-										width: "55%"
-                  }}
-                >
-                  {desc[value]}
-                </div>
-                <div style={{ clear: "both" }}></div>
-              </div>
-            )}
-            {/* The header ends here */}
-            {models[value] ? (
-              <div className="card-content card-model-clicked">
-                <img src={img} style={{ width: "25%" }} alt={value}></img>
-              </div>
-            ) : (
-              <div
-                className="card-content card-model"
-                style={{
-                  backgroundImage: `url(${img})`,
-                  paddingLeft: "50px",
-                  backgroundPosition: "90% 0%",
-                  backgroundSize: "7vw 7vw",
-                  backgroundRepeat: "no-repeat",
-                }}
-              >
-              </div>
-            )}
+              <div className="model-card-name-desc">{desc[value]}</div>
+              <div style={{ clear: "both" }}></div>
+            </div>
+            <div
+              className="card-content card-model"
+              style={{
+                backgroundImage: `url(${img})`,
+                paddingLeft: "50px",
+                backgroundPosition: "90% 0%",
+                backgroundSize: "7vw 7vw",
+                backgroundRepeat: "no-repeat",
+              }}
+            ></div>
           </div>
         </div>
       </div>

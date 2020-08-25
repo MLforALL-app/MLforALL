@@ -1,35 +1,67 @@
 .evenRow {
-	background-color: #ffffff;
+  background-color: #ffffff;
 }
 .oddRow {
-	background-color: #faf8f8;
+  background-color: #faf8f8;
 }
 .card-model {
-	height: 12.5rem;
+  height: 12.5rem;
 }
 .card-model-clicked {
-	height: 12.5rem;
-	background-color: #dcdcdc;
+  height: 12.5rem;
+  background-color: #dcdcdc;
 }
 .card-action-clicked {
-	color: #dcdcdc !important;
-	background-color: #1d276e !important;
+  color: #dcdcdc !important;
+  background-color: #1d276e !important;
 }
 .create-animation {
-	animation-name: card;
-	animation-duration: 350ms;
-	animation-iteration-count: 1;
+  animation-name: card;
+  animation-duration: 350ms;
+  animation-iteration-count: 1;
 }
 .option-lists {
-	font-family: Helvetica;
-	font-style: normal;
-	font-weight: bold;
-	font-size: 21.2677px;
-	line-height: 40px;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21.2677px;
+  line-height: 40px;
 }
 .number-image {
-	padding-left: 50px;
-	background-position: 0 0;
-	background-size: 36px 36px;
-	background-repeat: no-repeat;
+  padding-left: 50px;
+  background-position: 0 0;
+  background-size: 36px 36px;
+  background-repeat: no-repeat;
+}
+.summaryDesc {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 160%;
+  color: gray;
+}
+.model-card-name {
+  color: #283593;
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 1.2vw;
+  line-height: 135%;
+  position: relative;
+  top: 1vw;
+  left: 1.2vw;
+}
+.model-card-name-desc {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 1vw;
+  color: gray;
+  line-height: 135%;
+  position: absolute;
+  left: 1vw;
+  top: 3.5vw;
+  text-align: left;
+  width: 55%;
 }
