@@ -110,7 +110,7 @@ $$
 
 While we're only discussing logistic regression in the context of two possible categories, it can be extended to more than two categories as well.
 `)}
-		{header("Technical Explanation")}
+		<SeeMore title="Logistic Regression Technical Explanation">
 		{bodyContent(`
 Notice that $g(z) \\in (0, 1)$. We want a model where $p(y=1\\mid x; \\theta) = \\hat{y}$. It follows that $p(y=0\\mid x; \\theta) = 1 - \\hat{y}$. Another way of saying this is
 $$\\begin{equation}
@@ -139,6 +139,7 @@ $$\\begin{equation}
 \\end{equation}$$
 Here, $\\alpha$ is a learning rate. There are other ways to update weights as well, such as Newton's method. Note that this is a similar update rule to others you may have seen. Check out generalized linear models for more information.
 `)}
+        </SeeMore>
 	</div>
 );
 
