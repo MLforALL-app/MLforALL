@@ -1,5 +1,5 @@
 import React from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { isBrowser } from "react-device-detect";
 // Page layout
