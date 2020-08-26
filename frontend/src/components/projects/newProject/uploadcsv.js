@@ -359,93 +359,10 @@ class UploadCSV extends Component {
     );
   };
 
-  uploadCSV = () => {
-    return (
-      <div className="upload-csv">
-        <div className="row" style={{ backgroundColor: "#eeeeee" }}>
-          <div className="container">
-            {this.state.showError ? (
-              <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                <strong>{this.state.errorText}</strong>
-              </Alert>
-            ) : (
-              <span></span>
-            )}
-            {!this.state.showError && this.state.csv !== "" ? (
-              <Alert severity="success">
-                <AlertTitle>Success</AlertTitle>
-                <strong>Successful CSV Upload</strong>
-              </Alert>
-            ) : (
-              <span></span>
-            )}
-            {/* Submit through computer form */}
-            <form onSubmit={this.handleSubmit}>
-              <div className="file-field input-field">
-                <div
-                  className="btn waves-effect waves-light z-depth-0"
-                  style={{ borderRadius: "50px" }}
-                >
-                  <span>Browse</span>
-                  <input
-                    type="file"
-                    id="csvName"
-                    onChange={this.handleChange}
-                  />
-                </div>
-                <div className="file-path-wrapper">
-                  <input
-                    className="file-path validate"
-                    type="text"
-                    placeholder="Upload .csv file"
-                    accept=".csv"
-                  />
-                </div>
-              </div>
-              {/* Drag and Drop box */}
-              <div
-                // finish making conditional rendering when file is dragged over
-                id="drop_zone"
-                onDrop={this.dropHandler}
-                onDragOver={this.dragOverHandler}
-                onDragEnter={this.dragEnterHandler}
-                onDragLeave={this.dragLeaveHandler}
-                style={{ backgroundColor: "white", color: "#636B7F" }}
-              >
-                <br />
-                {this.state.csv === "" ? (
-                  <p style={{ fontSize: 20 }}>
-                    <strong>Choose a file </strong>or drag it here
-                  </p>
-                ) : (
-                  <p className="center " style={{ fontSize: 20 }}>
-                    <strong>File Uploaded</strong>
-                  </p>
-                )}
-              </div>
-              {/* this is the submit button */}
-              <div className="input-field">
-                <button
-                  className="btn waves-effect waves-light z-depth-0"
-                  style={{ borderRadius: "50px" }}
-                >
-                  {this.state.fileUploadMessage}
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <Guide clickHandle={this.clickHandler} />
-      </div>
-    );
-  };
-
   render() {
     if (this.state.stage === 0) return this.zerothStage();
     else if (this.state.stage === 1) return this.browseStage();
-    else if (this.state.stage === 2) return this.uploadStage();
-    else return this.uploadCSV();
+    else return this.uploadStage();
   }
 }
 
