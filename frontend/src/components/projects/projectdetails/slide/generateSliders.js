@@ -2,10 +2,12 @@ import React, { Component } from "react";
 import { nameMapper } from "../../../../store/actions/nameMapper";
 import PredictSlider from "./predictslide";
 import Dropdown from "./dropdown";
+import CategoricalDropdown from "./categoricaldropdown";
 import ResultCard from "./resultCard";
 import HelpBox from "../../../layouts/helpbox";
 import apiHost from "../../../../config/api.js";
 import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
 
 const refreshState = (project) => {
 	return {
@@ -44,7 +46,7 @@ const getDesc = (name) => {
 const initInputs = (variables) => {
 	var inputs = {};
 	variables.forEach((v) => {
-		inputs[v.name] = v.q2;
+		inputs[v.name] =  v.isString ? v.values[0] : v.q2;		
 	});
 	return inputs;
 };
@@ -70,6 +72,18 @@ class GenerateSliders extends Component {
 				alterState.inputs[v.name] = newValue;
 				return alterState;
 			});
+		};
+	};
+	handleCategoricalChange = (v) => {
+		return (event, newValue) => {
+			if(event){
+				event.preventDefault();
+			}
+			this.setState((prevState) => {
+				var alterState = prevState;
+				alterState.inputs[v.name] = newValue["key"];
+				return alterState;
+			})
 		};
 	};
 	handleInputChange = (v) => {
@@ -124,29 +138,45 @@ class GenerateSliders extends Component {
 	};
 	// Higher order fn to create a PredictSlider for each of our variables
 	// using generalized event handlers so we can alter state from here
-	getSlides(variables, hsc, hic) {
+	getSlides(variables, hsc, hic, hcc) {
 		if (variables.length > 0) {
 			var output = [];
 			variables.forEach((v) => {
-				output.push(
-					PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
-				);
+				if(!v.isString){
+					output.push(
+						PredictSlider(v, hsc(v), hic(v), this.state.inputs[v.name])
+					);
+				}else{
+					output.push(
+						CategoricalDropdown(v.name, v.values, this.state.inputs[v.name], hcc(v))
+					);
+					
+				}
+				
 			});
 			return <div>{output}</div>;
 		} else {
 			return <p> NO SLIDERS YET </p>;
 		}
 	}
-	componentDidUpdate(prev) {
+	componentDidUpdate = (prev) => {
 		const projectNew = this.props.project;
 		if (prev && prev !== this.props) {
 			this.setState(refreshState(projectNew));
 		}
 	}
+	componentDidMount = () => {
+		const projectNew = this.props.project;
+		this.setState(refreshState(projectNew));
+	}
 	render() {
 		const { project } = this.props;
 		const { model, resModel, resInputs, loading, output } = this.state;
+		if(!this.state.inputs){
+			return <CircularProgress/>	
+		}
 		return (
+
 			<div className="predict">
 				<div className="row slider-row">
 					<div className="container">
@@ -171,7 +201,8 @@ class GenerateSliders extends Component {
 							{this.getSlides(
 								project.variables,
 								this.handleSliderChange,
-								this.handleInputChange
+								this.handleInputChange,
+								this.handleCategoricalChange
 							)}
 							<div
 								className="row"
