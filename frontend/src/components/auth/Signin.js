@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { signIn } from "../../store/actions/authActions";
 import { Redirect, Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import authImg from "../../pictures/backgrounds/auth.svg";
 import "../../styling/background.css";
 
@@ -31,7 +32,19 @@ class SignIn extends Component {
     // route protection, shouldn't be able to sign in again
     if (auth.uid) return <Redirect to="/myprofile" />;
     return (
-      <div className="signin">
+      <motion.div
+        exit={{ opacity: 0, y: "-100%" }}
+        animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: "-100%" }}
+        className="signin"
+        style={{
+          height: "100vh",
+          backgroundImage: `url(${authImg})`,
+          backgroundAttachment: "fixed",
+          backgroundPosition: "0% 100%",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
         <div className="container">
           <span className="purple-text">
             <h1>Sign In</h1>
@@ -62,8 +75,8 @@ class SignIn extends Component {
             </div>
           </form>
         </div>
-        <img className="auth-image" alt="" src={authImg}></img>
-      </div>
+        {/* <img className="auth-image" alt="" src={authImg}></img> */}
+      </motion.div>
     );
   }
 }

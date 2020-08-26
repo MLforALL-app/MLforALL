@@ -9,9 +9,12 @@ import "firebase/storage";
 import { updateContent } from "../../../../store/actions/projectActions";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "../../../../styling/build.css";
+import "../../../../styling/build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import No1 from "../../../../pictures/project/number1.png";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
+
 
 class DisplayCSV extends Component {
 	// Our flip boolean object data structure thing functions
@@ -132,41 +135,46 @@ class DisplayCSV extends Component {
 		}
 	};
 
-	componentDidMount = () => {
-		let thingsToSelect = this.props.selectedVariables;
-		thingsToSelect.forEach((item) => {
-			this.checkBoxChange(item.name)(null);
-		});
-	};
-	render() {
-		return (
-			<div className="displaycsv">
-				{this.state.redirect ? (
-					<Redirect to={"/project/" + this.props.id} />
-				) : (
-					<span></span>
-				)}
-				{(this.props.variableInfo && (this.props.variableInfo.length === 0) 
-			   && this.props.csvData && this.props.csvData.length) === 0 ? (
-					<div className="container center">
-						<CircularProgress />
-					</div>
-				) : (
-					<div className="isactive">
-						<div className="row container">
-							<h5>
-								<b>
-									1. I want to consider these input parameters...{" "}
-									<span className="pink-text">
-										<HelpBox
-											header="Click to Toggle Parameters"
-											placement="right-end"
-											desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
-										/>
-									</span>
-								</b>
-							</h5>
-
+  componentDidMount = () => {
+    let thingsToSelect = this.props.selectedVariables;
+    thingsToSelect.forEach((item) => {
+      this.checkBoxChange(item.name)(null);
+    });
+  };
+  render() {
+    return (
+      <div className="displaycsv">
+        {this.state.redirect ? (
+          <Redirect to={"/project/" + this.props.id} />
+        ) : (
+          <span></span>
+        )}
+        {(this.props.csvData && this.props.csvData.length) === 0 ? (
+          <div className="container center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <div className="isactive">
+            <div className="row container">
+              <h5>
+                <b
+                  style={{
+                    backgroundImage: `url(${No1})`,
+                    backgroundSize: "36px 36px",
+                    paddingBottom: "7px"
+                  }}
+                  className="number-image"
+                >
+                  I want to consider these input parameters...{" "}
+                  <span className="pink-text">
+                    <HelpBox
+                      header="Click to Toggle Parameters"
+                      placement="right-end"
+                      desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
+                    />
+                  </span>
+                </b>
+              </h5>
 							<Table
 								width={1000}
 								height={400}

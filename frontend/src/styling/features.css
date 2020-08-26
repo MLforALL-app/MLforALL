@@ -92,3 +92,11 @@
 	width: 88%;
 	font-weight: 800;
 }
+.transition-fade {
+  transition: 0.4s;
+  opacity: 1;
+}
+
+html.is-animating .transition-fade {
+  opacity: 0;
+}
