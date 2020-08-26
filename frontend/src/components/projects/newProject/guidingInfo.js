@@ -1,81 +1,107 @@
 import React from "react";
-// import { firestoreConnect } from "react-redux-firebase";
+import "../../../styling/createproject.css";
+import buttonPic from "../../../pictures/project/example-button-picture.png";
 
-const examples = () => {
+const examples = (clickHandle) => {
   return (
-    <div className="col s12 m6">
-      <h5> Example Datasets </h5>
-      <ul>
-        <li>
-          <a href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FPokemon.csv?alt=media&token=148e76a0-f9e1-47e7-851c-63935d9cc6ed">
-            Pokemon with Stats
-          </a>
-        </li>
-        <li>
-          <a href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FSpotify2000.csv?alt=media&token=c06b8002-f3db-46d5-8856-3388587373a7">
-						Spotify All Time Top 2000s Mega Dataset
-          </a>
-        </li>
-        <li>
-          <a href="https://firebasestorage.googleapis.com/v0/b/mlforall-14bf7.appspot.com/o/Examples%2FNBAFantasy2019.csv?alt=media&token=78bc0763-9f51-4799-a7f2-6995924112bc">
-            {" "}
-            NBA Fantasy Predictions for 2019-2020
-          </a>
-        </li>
-      </ul>
+    <div className="row center" style={{ marginTop: "50px" }}>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("Pokemon.csv")}
+      >
+        <h3 className="browse-buttonsH">Pokémon Stats</h3>
+        <p className="browse-buttonsT">
+          Dataset of different type of Pokémon and their stats!
+        </p>
+      </button>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("Spotify2000.csv")}
+      >
+        <h3 className="browse-buttonsH">Spotify Top 2020</h3>
+        <p className="browse-buttonsT">
+          Spotify All Time Top 2020 collection dataset!
+        </p>
+      </button>
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle("NBAFantasy2019.csv")}
+      >
+        <h3 className="browse-buttonsH">NBA Fantasy</h3>
+        <p className="browse-buttonsT">
+          NBA Fantasy Predictions for 2019-2020!
+        </p>
+      </button>
     </div>
   );
 };
+
 const findMore = () => {
   return (
-    <div className="col s12 m6">
-      <h5> Other Places To Find </h5>
+    <div className="row center">
+      <div className="row center" style={{paddingBottom: "5vh"}}>
+        <h1 className="purple-text browse-header">
+          Other places to find datasets
+        </h1>
+        <span className="browseP">
+          Can't see what you are looking for? Check our the websites below!
+        </span>
+      </div>
       <ul>
-        <li>
+        <li className="dataset-website">
           <a
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://www.kaggle.com/datasets"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Check out Kaggle,
+            Kaggle
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://data.world/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            data.world (needs login),
+            Data.world (needs login)
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://registry.opendata.aws/"
             rel="noopener noreferrer"
             target="_blank"
           >
-            Amazon's open registry,
+            Amazon's open registry
           </a>
         </li>
-        <li>
+        <li className="dataset-website">
           <a
+            className="waves-effect waves-light btn-flat example-btns data-link"
             href="https://datasetsearch.research.google.com/"
             rel="noopener noreferrer"
             target="_blank"
           >
             {" "}
-            or Google's dataset search engine!
+            Google's dataset search engine
           </a>
         </li>
       </ul>
     </div>
   );
 };
-const Guide = () => {
+
+const Guide = (props) => {
+  const { clickHandle } = props;
   return (
-    <div className="container">
-      <div className="row">
+    <div className="container" style={{ width: "100vw" }}>
+      {/* <div className="row">
         <div className="col s12">
           <h3>
             <span className="purple-text">
@@ -87,11 +113,11 @@ const Guide = () => {
           will be plenty of explanation and recourses provided as you get
           started.
         </div>
+      </div> */}
+      <div className="row" style={{ paddingBottom: "10vh" }}>
+        {examples(clickHandle)}
       </div>
-      <div className="row">
-        {examples()}
-        {findMore()}
-      </div>
+      <div className="row">{findMore()}</div>
     </div>
   );
 };

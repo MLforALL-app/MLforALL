@@ -18,12 +18,11 @@ class CreateProjectContainer extends Component {
 		const { auth } = this.props;
 		if (!auth.uid) return <Redirect to="/signin" />;
 		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		return <CreateLanding />;
+		return <CreateLanding/>;
 	}
 }
 
 const mapStateToProps = (state) => {
-	// console.log("Look here bro", state);
 	return {
 		auth: state.firebase.auth,
 		projID: state.project.curUserProjID

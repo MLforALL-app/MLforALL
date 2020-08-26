@@ -38,7 +38,9 @@ def get_csv(bucket, source_blob_name):
     ENSURES: returns pandas dataframe representing that CSV 
     """
     blob = bucket.blob(source_blob_name)
+    print("blob")
     csv_bytes = blob.download_as_string()
+    print("csv_bytes")
     s = str(csv_bytes, 'utf-8')
     data = StringIO(s)
 

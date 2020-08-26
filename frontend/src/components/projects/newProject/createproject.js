@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
 import { createProject } from "../../../store/actions/projectActions";
+import "../../../styling/createproject.css";
 
 class CreateProject extends Component {
   state = {
@@ -9,12 +10,9 @@ class CreateProject extends Component {
     showWarning: false,
   };
   handleChange = (e) => {
-    console.log("name of the project", e.target.value);
     this.setState({
       [e.target.id]: e.target.value,
     });
-    console.log("look", this.state);
-    // console.log("Here", [e.target.id]);
   };
   handleSubmit = (e) => {
     e.preventDefault();
@@ -35,11 +33,11 @@ class CreateProject extends Component {
           <div
             className="container"
             style={{
-              backgroundColor: "#F5F5F5",
-              width: "100%"
+              backgroundColor: "white",
+              width: "100%",
             }}
           >
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} style={{ position: "relative" }}>
               {this.state.showWarning ? (
                 <p style={{ color: "red" }}>Please Enter a Project Name</p>
               ) : (
@@ -52,10 +50,16 @@ class CreateProject extends Component {
                   type="text"
                   id="title"
                   onChange={this.handleChange}
+                  style={{
+                    width: "50%",
+                    // paddingRight: "10%",
+                    position: "absolute",
+                    left: 0,
+                  }}
                 />
-              </div>
-              <div className="input-field">
-                <button className="btn btn-sec waves-effect waves-light z-depth-0">
+                <button 
+                  className="btn btn-sec waves-effect 
+                  waves-light z-depth-0 begin-button">
                   Begin
                 </button>
               </div>

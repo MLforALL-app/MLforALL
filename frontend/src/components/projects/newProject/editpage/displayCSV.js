@@ -9,9 +9,12 @@ import "firebase/storage";
 import { updateContent } from "../../../../store/actions/projectActions";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "../../../../styling/build.css";
+import "../../../../styling/build.css";
 import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import No1 from "../../../../pictures/project/number1.png";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
+
 
 class DisplayCSV extends Component {
 	// Our flip boolean object data structure thing functions
@@ -67,11 +70,11 @@ class DisplayCSV extends Component {
 		});
 		this.props.setInputParameters(this.state.inputs);
 	};
-	checkBoxHeader = (colName, is_numeric) => (key) => {
+	checkBoxHeader = (colName) => (key) => {
 		return (
 			<div>
 				<div>
-					{!is_numeric ? (
+					{(this.props.variableInfo && this.props.variableInfo.includes(colName)) ?(
 						<FormControlLabel
 							className="purple-text"
 							value="bottom"
@@ -106,14 +109,13 @@ class DisplayCSV extends Component {
 	getColumns = (keyList, firstRow) => {
 		var columns = [];
 		keyList.forEach((key) => {
-			let numeric_col = this.isNumeric(firstRow[key]);
 			let colName = key;
 			columns.push(
 				<Column
 					label={key}
 					dataKey={key}
 					key={key}
-					headerRenderer={this.checkBoxHeader(colName, numeric_col)}
+					headerRenderer={this.checkBoxHeader(colName)}
 					width={5000}
 				/>
 			);
@@ -133,40 +135,46 @@ class DisplayCSV extends Component {
 		}
 	};
 
-	componentDidMount = () => {
-		let thingsToSelect = this.props.selectedVariables;
-		thingsToSelect.forEach((item) => {
-			this.checkBoxChange(item.name)(null);
-		});
-	};
-	render() {
-		return (
-			<div className="displaycsv">
-				{this.state.redirect ? (
-					<Redirect to={"/project/" + this.props.id} />
-				) : (
-					<span></span>
-				)}
-				{(this.props.csvData && this.props.csvData.length) === 0 ? (
-					<div className="container center">
-						<CircularProgress />
-					</div>
-				) : (
-					<div className="isactive">
-						<div className="row container">
-							<h5>
-								<b>
-									1. I want to consider these input parameters...{" "}
-									<span className="pink-text">
-										<HelpBox
-											header="Click to Toggle Parameters"
-											placement="right-end"
-											desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
-										/>
-									</span>
-								</b>
-							</h5>
-
+  componentDidMount = () => {
+    let thingsToSelect = this.props.selectedVariables;
+    thingsToSelect.forEach((item) => {
+      this.checkBoxChange(item.name)(null);
+    });
+  };
+  render() {
+    return (
+      <div className="displaycsv">
+        {this.state.redirect ? (
+          <Redirect to={"/project/" + this.props.id} />
+        ) : (
+          <span></span>
+        )}
+        {(this.props.csvData && this.props.csvData.length) === 0 ? (
+          <div className="container center">
+            <CircularProgress />
+          </div>
+        ) : (
+          <div className="isactive">
+            <div className="row container">
+              <h5>
+                <b
+                  style={{
+                    backgroundImage: `url(${No1})`,
+                    backgroundSize: "36px 36px",
+                    paddingBottom: "7px"
+                  }}
+                  className="number-image"
+                >
+                  I want to consider these input parameters...{" "}
+                  <span className="pink-text">
+                    <HelpBox
+                      header="Click to Toggle Parameters"
+                      placement="right-end"
+                      desc="Here, you can click the headers to toggle on/off whether or not you want an input column to be considered by your model. Please note that you can choose columns containing ONLY NUMERICAL data."
+                    />
+                  </span>
+                </b>
+              </h5>
 							<Table
 								width={1000}
 								height={400}
