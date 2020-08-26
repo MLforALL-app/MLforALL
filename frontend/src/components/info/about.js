@@ -18,7 +18,7 @@ import { Redirect } from "react-router-dom";
 import { SocialIcon } from "react-social-icons";
 import { isBrowser } from "react-device-detect";
 // import { firestoreConnect } from "react-redux-firebase";
-import { compose } from "redux";
+// import { compose } from "redux";
 
 const Header = () => {
   return (
@@ -321,4 +321,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default compose(mapStateToProps)(About);
+export default connect(mapStateToProps)(About);
