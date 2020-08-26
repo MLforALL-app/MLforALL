@@ -1,5 +1,5 @@
 import React from "react";
-import { header, bodyContent, pinkTheme, purpleLight } from "./fileFormatter";
+import { header, bodyContent, pinkTheme, purpleLight, SeeMore } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
 const PlotlyComponent = createPlotlyComponent(Plotly);
@@ -86,8 +86,7 @@ In this example, if we observe an individual with a height where the left curve 
 Because we use assume that the data is normally distributed, we can determine probabilities that observations belong to one class or the other, but in practice, the classifications based on this model are good while the probability statements are not good.
 `)}
 
-		{header("Technical Explanation")}
-
+		<SeeMore title="Gaussian Naive Bayes Technical Explanation">
 		{bodyContent(`
 Let $x = (x_1, \\dots, x_n)$ be feature vector with label $y$.
 From Bayes' theorem, we have
@@ -112,6 +111,7 @@ $$\\begin{equation*}
 \\end{equation*}$$
 In Gaussian Naive Bayes, we assume $Pr(x_i\\mid y)\\sim \\mathcal{N}(\\mu_y, \\sigma_y^2)$ where $\\mu_y$ and $\\sigma_y^2$ are estimated using maximum likelihood estimation.
 `)}
+        </SeeMore>
 	</div>
 );
 

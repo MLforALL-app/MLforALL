@@ -312,6 +312,9 @@ class About extends Component {
   }
 }
 
+/* The props we need for this component are the project ID,
+ * auth object, and project object. We get the entire projects
+ * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,

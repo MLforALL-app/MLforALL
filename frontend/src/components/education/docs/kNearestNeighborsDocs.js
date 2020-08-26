@@ -4,7 +4,8 @@ import {
 	bodyContent,
 	pinkTheme,
 	purpleTheme,
-	pinkDark
+	pinkDark,
+	SeeMore
 } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
@@ -106,12 +107,13 @@ $k$-nearest neighbors is used to classify objects which belong to different cate
 		{bodyContent(`
 So to classify the unknown example, we look at the $k$ "closest" known examples and take our prediction is some function of those closest known examples (often a majority vote). If $k=2$ in this case, we would classify the unknown example as a cat.        
 `)}
-		{header("Technical Explanation")}
-		{bodyContent(`
+		<SeeMore title="KNN Technical Explanation">
+			{bodyContent(`
 The model is trained on the set of examples $\\{(X^{(1)}, Y^{(1)}), \\dots, (X^{(n)}, Y^{(n)})\\}$ where $X^{(i)}$ is a feature vector and $Y^{(i)}\\in\\{1, 2, \\dots, n\\}$ is the label for example $i$. 
 
 Let $\\lVert X_{new} - X^{(i)} \\rVert$ be the "distance" (e.g. the $l^{2}$ norm) between a new observation and the $i$th training example. Then sort the training examples from least to greatest with respect to this distance from the new observation. The predicted label for $X_{new}$ is the majority vote label for the first $k$ examples in the sorted list of training examples.
 `)}
+		</SeeMore>
 	</div>
 );
 
