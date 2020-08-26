@@ -107,7 +107,7 @@ $k$-nearest neighbors is used to classify objects which belong to different cate
 		{bodyContent(`
 So to classify the unknown example, we look at the $k$ "closest" known examples and take our prediction is some function of those closest known examples (often a majority vote). If $k=2$ in this case, we would classify the unknown example as a cat.        
 `)}
-		<SeeMore title="knn technical explan">
+		<SeeMore title="KNN Technical Explanation">
 			{bodyContent(`
 The model is trained on the set of examples $\\{(X^{(1)}, Y^{(1)}), \\dots, (X^{(n)}, Y^{(n)})\\}$ where $X^{(i)}$ is a feature vector and $Y^{(i)}\\in\\{1, 2, \\dots, n\\}$ is the label for example $i$. 
 

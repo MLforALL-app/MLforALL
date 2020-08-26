@@ -4,7 +4,8 @@ import {
 	bodyContent,
 	pinkTheme,
 	pinkDark,
-	purpleTheme
+	purpleTheme,
+    SeeMore
 } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
