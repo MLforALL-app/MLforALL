@@ -35,6 +35,7 @@ const Join = (props) => {
             learning models.
           </i>
         </h6>
+        {/* todo: animate when button is clicked */}
         <EnterForm>
           <StyledFirebaseAuth
             uiConfig={uiConfig}

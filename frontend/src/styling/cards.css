@@ -1,47 +1,62 @@
 .card-action {
-	border-bottom-left-radius: 30px !important;
-	border-bottom-right-radius: 30px !important;
-	background-color: #283593 !important;
-	color: white;
-	height: 55px;
+  border-bottom-left-radius: 30px !important;
+  border-bottom-right-radius: 30px !important;
+  background-color: #283593 !important;
+  color: white;
+  height: 55px;
 }
 .card {
-	border-radius: 30px;
-	background-color: white;
-	color: black;
-	transition: transform 100ms, box-shadow 100ms;
-	animation-name: card;
-	animation-duration: 310ms;
-	animation-iteration-count: 1;
+  border-radius: 30px;
+  background-color: white;
+  color: black;
+  transition: transform 100ms, box-shadow 100ms;
+  animation-name: card;
+  animation-duration: 310ms;
+  animation-iteration-count: 1;
 }
 @keyframes card {
-	0% {
-		transform: scale(0.95);
-	}
-	5% {
-		transform: scale(0.96);
-	}
-	10% {
-		transform: scale(0.97);
-	}
-	15% {
-		transform: scale(0.98);
-	}
-	20% {
-		transform: scale(0.99);
-	}
-	80% {
-		transform: scale(1.01);
-	}
-	100% {
-		transform: scale(1);
-	}
+  0% {
+    transform: scale(0.95);
+  }
+  5% {
+    transform: scale(0.96);
+  }
+  10% {
+    transform: scale(0.97);
+  }
+  15% {
+    transform: scale(0.98);
+  }
+  20% {
+    transform: scale(0.99);
+  }
+  80% {
+    transform: scale(1.01);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 .card:hover {
-	transform: scale(1.01);
-	box-shadow: 0 0 5px grey !important;
+  transform: scale(1.01);
+  box-shadow: 0 0 5px grey !important;
 }
 .card-content {
-	border-top-left-radius: 30px !important;
-	border-top-right-radius: 30px !important;
+  border-top-left-radius: 30px !important;
+  border-top-right-radius: 30px !important;
+}
+.dialog-onboarding {
+  min-width: 80vw !important;
+  /* height not working */
+  min-height: 80vh !important;
+}
+.MuiDialog-paperWidthSm {
+  max-width: 80vw !important;
+}
+.MuiDialog-paperScrollPaper {
+  max-height: 80vh !important;
+}
+.onboard-image {
+  height: 30rem;
+  margin-bottom: -5rem;
 }

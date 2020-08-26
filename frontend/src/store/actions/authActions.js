@@ -27,26 +27,11 @@ export const signOut = () => {
 };
 
 export const signUp = (newUser) => {
-  return (dispatch, getState, { getFirebase, getFirestore }) => {
+  return (dispatch, getState, { getFirebase }) => {
     const authRef = getFirebase().auth();
-    const firestore = getFirestore();
     authRef
       .createUserWithEmailAndPassword(newUser.email, newUser.password)
       .then((response) => {
-        firestore
-          .collection("users")
-          .doc(response.user.uid)
-          .set({
-            firstName: newUser.firstName,
-            lastName: newUser.lastName,
-            initials: newUser.firstName[0] + newUser.lastName[0],
-            timeJoined: firestore.FieldValue.serverTimestamp(),
-            timeOnboarded: null,
-            badges: [],
-            nickname: "",
-          });
-      })
-      .then(() => {
         dispatch({ type: "SIGNUP_SUCCESS" });
         // Send verification link
         authRef.currentUser
@@ -61,6 +46,28 @@ export const signUp = (newUser) => {
       })
       .catch((err) => {
         dispatch({ type: "SIGNUP_ERROR", err });
+      });
+  };
+};
+
+export const updateUserInfo = (uid, newUser) => {
+  return (dispatch, getState, { getFirestore }) => {
+    const firestore = getFirestore();
+    const userRef = firestore.collection("users");
+    userRef
+      .doc(uid)
+      .set({
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        initials: newUser.firstName[0] + newUser.lastName[0],
+        timeJoined: firestore.FieldValue.serverTimestamp(),
+      })
+      .then((response) => {
+        dispatch({ type: "UPDATE_USER_INFO" });
+      })
+      .catch((err) => {
+        dispatch({ type: "UPDATE_USER_INFO_ERROR", err });
+        console.log(err);
       });
   };
 };

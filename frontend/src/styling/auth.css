@@ -47,15 +47,24 @@ input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
 input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
   color: #2f81eb !important;
 }
-.fadeOut {
-  opacity: 0;
-  width: 0;
-  height: 0;
-  transition: width 0.5s 0.5s, height 0.5s 0.5s, opacity 0.5s;
-}
-.fadeIn {
+.elementToFadeInAndOut {
+  -webkit-animation: fadein 500ms linear forwards;
+  animation: fadein 500ms linear forwards;
   opacity: 1;
-  width: 100px;
-  height: 100px;
-  transition: width 0.5s, height 0.5s, opacity 0.5s 0.5s;
+}
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
