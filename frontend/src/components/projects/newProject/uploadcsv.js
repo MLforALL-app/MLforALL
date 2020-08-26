@@ -16,7 +16,7 @@ class UploadCSV extends Component {
     fileUploadMessage: "Waiting For File...",
     showError: false,
     errorText: "",
-    drag: false,
+    // drag: false,
   };
 
   handleChange = (e) => {
@@ -49,7 +49,7 @@ class UploadCSV extends Component {
   // The 'handleSubmit' for drag and dropped files
   dropHandler = (e) => {
     e.preventDefault();
-    this.setState({ drag: false });
+    // this.setState({ drag: false });
     BoxColor = "#F5F5F5";
     if (!e.dataTransfer.files[0]) {
       return;
@@ -104,19 +104,19 @@ class UploadCSV extends Component {
   // Prevents files from being downloaded when dragged into the screen
   dragOverHandler = (e) => {
     e.preventDefault();
-    this.setState({ drag: true });
+    // this.setState({ drag: true });
     BoxColor = "#E3E1E1";
     console.log("dragOver", BoxColor);
   };
 
   dragEnterHandler = () => {
-    this.setState({ drag: true });
+    // this.setState({ drag: true });
     BoxColor = "#E3E1E1";
     console.log("dragenter", BoxColor);
   };
 
   dragLeaveHandler = () => {
-    this.setState({ drag: false });
+    // this.setState({ drag: false });
     BoxColor = "#F5F5F5";
     console.log("dragleave", BoxColor);
   };
