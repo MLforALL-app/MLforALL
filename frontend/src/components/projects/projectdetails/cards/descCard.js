@@ -32,6 +32,18 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
   };
   return (
     <div className="col s12">
+      <div style={{ color: "#757575", textAlign: "right" }}>
+        made with <span className="hearts">&hearts;</span> by{" "}
+        <span className="purple-text" style={{ fontWeight: "bold" }}>
+          <u>
+            {" "}
+            <Link to={`/user/${project.authorID}`}>
+              {project.authorFirstName} {project.authorLastName}
+            </Link>
+          </u>
+        </span>{" "}
+        on {moment(project.createdAt.toDate()).format("M/D/Y")}
+      </div>
       <h1>
         <span className="purple-text">{project.title}</span>{" "}
         <HelpBox
@@ -51,8 +63,8 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
                 onChange={handleChange}
                 style={{
                   backgroundColor: "#F5F5F5",
-									borderRadius: "15px",
-									border: "3px solid #878787",
+                  borderRadius: "15px",
+                  border: "3px solid #878787",
                   padding: "7px",
                 }}
               />
@@ -62,18 +74,6 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
           <div className="col s12 m6">{project.content}</div>
         )}
         {editButton()}
-      </div>
-      <div style={{ color: "#808080", textAlign: "right" }}>
-        Posted with <span className="hearts">&hearts;</span> by{" "}
-        <span className="purple-text" style={{ fontWeight: "bold" }}>
-          <u>
-            {" "}
-            <Link to={`/user/${project.authorID}`}>
-              {project.authorFirstName} {project.authorLastName}
-            </Link>
-          </u>
-        </span>{" "}
-        on {moment(project.createdAt.toDate()).format("LLL")}
       </div>
     </div>
   );

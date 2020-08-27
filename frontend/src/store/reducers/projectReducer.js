@@ -69,6 +69,10 @@ const projectReducer = (state = initState, action) => {
       return state;
     case "UPLOAD_IMG_ERROR":
       return state;
+    case "UPDATE_IMG_NAME":
+      return state;
+    case "UPDATE_IMG_NAME_ERROR":
+      return state;
     case "UPLOAD_CSV_METADATA":
       return { ...state, csvLoaded: true };
     case "UPLOAD_CSV_METADATA_ERROR":

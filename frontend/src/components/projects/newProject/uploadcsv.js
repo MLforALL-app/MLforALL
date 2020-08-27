@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import Guide from "./guidingInfo";
 import { connect } from "react-redux";
-import {
-  initializeCSVForProject
-} from "../../../store/actions/projectActions";
+import { initializeCSVForProject } from "../../../store/actions/projectActions";
 import { Alert, AlertTitle } from "@material-ui/lab";
 import "../../../styling/createproject.css";
 
@@ -105,7 +103,7 @@ class UploadCSV extends Component {
     //   this.state.csv,
     //   this.props.project,
     //   this.props.projectID,
-    //   false 
+    //   false
     // );
   };
 
@@ -125,7 +123,7 @@ class UploadCSV extends Component {
   // Passed into Guide to handle the event of clicking an example link
   clickHandler = (value) => () => {
     //case on value "which is name of file, to reference to storage"
-    const {initializeCSVForProject, projectID} = this.props;
+    const { initializeCSVForProject, projectID } = this.props;
     initializeCSVForProject(null, value, projectID);
   };
 
@@ -227,7 +225,7 @@ const mapDispatchToProps = (dispatch) => {
     //   dispatch(uploadCSVtoStorage(csv, project, id)),
     // updateCsvData: (csv, project, id) =>
     //   dispatch(updateCsvData(csv, project, id)),
-    initializeCSVForProject: (csv, example, pid) => 
+    initializeCSVForProject: (csv, example, pid) =>
       dispatch(initializeCSVForProject(csv, example, pid)),
   };
 };

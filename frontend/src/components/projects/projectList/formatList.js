@@ -18,13 +18,12 @@ const grouped = (projects) => {
   for (var i = 0; i < projects.length; i++) {
     if (i < projects.length - 2) {
       group.push([projects[i], projects[i + 1], projects[i + 2]]);
-      i += 3;
+      i += 2;
     } else if (i < projects.length - 1) {
       group.push([projects[i], projects[i + 1]]);
-      i += 2;
+      i += 1;
     } else {
       group.push([projects[i]]);
-      i++;
     }
   }
   return group;
