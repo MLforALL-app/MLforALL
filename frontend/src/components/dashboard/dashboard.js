@@ -38,7 +38,6 @@ class Dashboard extends Component {
               orderBy={this.state.orderBy}
             />
           </div>
-
           <ProjectList orderBy={this.state.orderBy} limit={this.state.limit} />
         </div>
       </div>

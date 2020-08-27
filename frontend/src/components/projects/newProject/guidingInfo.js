@@ -16,7 +16,7 @@ const examples = (clickHandle) => {
     );
   };
   return (
-    <div className="row center" style={{ marginTop: "50px" }}>
+    <div className="land-row" style={{ marginTop: "50px" }}>
       {exampleCard(
         "Pokemon.csv",
         "Pokémon Stats",
@@ -32,51 +32,19 @@ const examples = (clickHandle) => {
         "NBA Fantasy",
         "NBA Fantasy Basketball Predictions for 2019-2020!"
       )}
-      <button
-        className="browse-button"
-        style={{ backgroundImage: `url(${buttonPic})` }}
-        onClick={clickHandle("Pokemon.csv")}
-      >
-        <h3 className="browse-buttonsH">Pokémon Stats</h3>
-        <p className="browse-buttonsT">
-          Dataset of different type of Pokémon and their stats!
-        </p>
-      </button>
-      <button
-        className="browse-button"
-        style={{ backgroundImage: `url(${buttonPic})` }}
-        onClick={clickHandle("Spotify2000.csv")}
-      >
-        <h3 className="browse-buttonsH">Spotify Top 2020</h3>
-        <p className="browse-buttonsT">
-          Spotify All Time Top 2020 collection dataset!
-        </p>
-      </button>
-      <button
-        className="browse-button"
-        style={{ backgroundImage: `url(${buttonPic})` }}
-        onClick={clickHandle("NBAFantasy2019.csv")}
-      >
-        <h3 className="browse-buttonsH">NBA Fantasy</h3>
-        <p className="browse-buttonsT">
-          NBA Fantasy Predictions for 2019-2020!
-        </p>
-      </button>
     </div>
   );
 };
 
 const findMore = () => {
   return (
-    <div className="row center">
-      <div className="row center" style={{ paddingBottom: "5vh" }}>
-        <h1 className="purple-text browse-header">
-          Other places to find datasets
-        </h1>
-        <span className="browseP">
-          Can't see what you are looking for? Check our the websites below!
-        </span>
-      </div>
+    <div style={{ marginTop: "-5rem", paddingBottom: "1rem" }}>
+      <h1 className="purple-text browse-header">
+        Other places to find datasets
+      </h1>
+      <span className="browseP">
+        Can't see what you are looking for? Check our the websites below!
+      </span>
       <ul>
         <li className="dataset-website">
           <a
@@ -127,11 +95,9 @@ const findMore = () => {
 const Guide = (props) => {
   const { clickHandle } = props;
   return (
-    <div className="container" style={{ width: "100vw" }}>
-      <div className="row" style={{ paddingBottom: "10vh" }}>
-        {examples(clickHandle)}
-      </div>
-      <div className="row">{findMore()}</div>
+    <div className="container center" style={{ width: "100vw" }}>
+      <div style={{ paddingBottom: "10vh" }}>{examples(clickHandle)}</div>
+      {findMore()}
     </div>
   );
 };

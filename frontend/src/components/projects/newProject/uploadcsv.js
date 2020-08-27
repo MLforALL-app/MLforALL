@@ -236,16 +236,18 @@ class UploadCSV extends Component {
   browseStage = () => {
     return (
       <div>
-        <div className="row container center">
+        <div className="container center">
           <h1 className="purple-text browse-header">
             Try some of our datasets!
           </h1>
           <span className="browseP">
             We have gathered fun datasets for you to experiment with:
           </span>
-          <Guide clickHandle={this.clickHandler} />
         </div>
-        <div className="row container center">{this.uploadButton()}</div>
+        <Guide clickHandle={this.clickHandler} />
+        <div className="row container center" style={{ paddingBottom: "5rem" }}>
+          {this.uploadButton()}
+        </div>
       </div>
     );
   };
