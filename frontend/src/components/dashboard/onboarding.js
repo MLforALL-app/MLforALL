@@ -214,12 +214,20 @@ class Onboarding extends Component {
           {complist[index]}
         </DialogContent>
         <DialogActions className="center">
-          <MakeButton color="purple" inc={-1} complist={complist}>
-            Back
-          </MakeButton>
-          <MakeButton color="purple" inc={1} complist={complist}>
-            Next
-          </MakeButton>
+          {index > 0 ? (
+            <MakeButton color="purple" inc={-1} complist={complist}>
+              Back
+            </MakeButton>
+          ) : (
+            <span></span>
+          )}
+          {index < complist.length - 1 ? (
+            <MakeButton color="purple" inc={1} complist={complist}>
+              Next
+            </MakeButton>
+          ) : (
+            <span></span>
+          )}
         </DialogActions>
       </Dialog>
     );
