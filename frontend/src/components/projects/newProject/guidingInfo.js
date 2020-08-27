@@ -3,8 +3,35 @@ import "../../../styling/createproject.css";
 import buttonPic from "../../../pictures/project/example-button-picture.png";
 
 const examples = (clickHandle) => {
+  const exampleCard = (csvName, title, desc) => {
+    return (
+      <button
+        className="browse-button"
+        style={{ backgroundImage: `url(${buttonPic})` }}
+        onClick={clickHandle(csvName)}
+      >
+        <h3 className="browse-buttonsH">{title}</h3>
+        <p className="browse-buttonsT">{desc}</p>
+      </button>
+    );
+  };
   return (
     <div className="row center" style={{ marginTop: "50px" }}>
+      {exampleCard(
+        "Pokemon.csv",
+        "Pokémon Stats",
+        "Dataset of different type of Pokémon and their stats!"
+      )}
+      {exampleCard(
+        "Spotify2000.csv",
+        "Spotify Top 2020",
+        "Spotify All Time Top 2020 collection dataset!"
+      )}
+      {exampleCard(
+        "NBAFantasy2019.csv",
+        "NBA Fantasy",
+        "NBA Fantasy Basketball Predictions for 2019-2020!"
+      )}
       <button
         className="browse-button"
         style={{ backgroundImage: `url(${buttonPic})` }}
@@ -42,7 +69,7 @@ const examples = (clickHandle) => {
 const findMore = () => {
   return (
     <div className="row center">
-      <div className="row center" style={{paddingBottom: "5vh"}}>
+      <div className="row center" style={{ paddingBottom: "5vh" }}>
         <h1 className="purple-text browse-header">
           Other places to find datasets
         </h1>
@@ -101,19 +128,6 @@ const Guide = (props) => {
   const { clickHandle } = props;
   return (
     <div className="container" style={{ width: "100vw" }}>
-      {/* <div className="row">
-        <div className="col s12">
-          <h3>
-            <span className="purple-text">
-              <b>Choosing a Dataset</b>
-            </span>
-          </h3>
-          To get your project started, type in a project name and click
-          initialize project. If this is your first project, don't worry! There
-          will be plenty of explanation and recourses provided as you get
-          started.
-        </div>
-      </div> */}
       <div className="row" style={{ paddingBottom: "10vh" }}>
         {examples(clickHandle)}
       </div>

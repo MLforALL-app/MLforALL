@@ -180,17 +180,10 @@ class UploadCSV extends Component {
 
   zerothStage = () => {
     return (
-      <div>
-        {/* <div className="row container">
+      <div style={{ minHeight: "85vh" }}>
+        <div className="row container center">
           <h1>
-            <span className="purple-text">{this.props.projectName}</span>
-          </h1>
-        </div> */}
-        <div className="row container center" style={{ marginTop: "7vh" }}>
-          <h1>
-            <span className="purple-text">
-              Choose your method of data upload
-            </span>
+            <span className="purple-text">Choose Your Dataset</span>
           </h1>
         </div>
         <div className="row center">
@@ -204,10 +197,7 @@ class UploadCSV extends Component {
               }}
               onClick={this.setFirstState}
             >
-              <span
-                className="purple-text center button-text"
-                // style={{ fontSize: "2vw" }}
-              >
+              <span className="purple-text center button-text">
                 Browse library
               </span>
             </button>
