@@ -1,4 +1,5 @@
 import React from "react";
+import { AnimatePresence } from "framer-motion";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { isBrowser } from "react-device-detect";
 // Page layout
@@ -30,25 +31,27 @@ function App() {
   if (isBrowser) {
     return (
       <BrowserRouter>
-        <div className="App">
+        <div className="App" style={{ backgroundColor: "white" }}>
           <Navbar />
           <ScrollToTop />
-          <Switch>
-            <Route exact path="/user/:uid" component={UserProfile} />
-            <Route exact path="/myprofile" component={MyProjects} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route exact path="/project/:pid" component={ProjectDetails} />
-            <Route exact path="/edit/:pid" component={EditProject} />
-            <Route exact path="/forgot" component={Forgot} />
-            <Route exact path="/join" component={Join} />
-            <Route exact path="/verify" component={VerifyEmailProject} />
-            <Route exact path="/create" component={CreateProjectContainer} />
-            <Route exact path="/help" component={MainDoc} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/" component={Landing} />
-            <Route path="/MLforAll" component={GHPages} />
-            <Route component={Lost} />
-          </Switch>
+          <AnimatePresence>
+            <Switch>
+              <Route exact path="/user/:uid" component={UserProfile} />
+              <Route exact path="/myprofile" component={MyProjects} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/project/:pid" component={ProjectDetails} />
+              <Route exact path="/edit/:pid" component={EditProject} />
+              <Route exact path="/forgot" component={Forgot} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/verify" component={VerifyEmailProject} />
+              <Route exact path="/create" component={CreateProjectContainer} />
+              <Route exact path="/help" component={MainDoc} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Landing} />
+              <Route path="/MLforAll" component={GHPages} />
+              <Route component={Lost} />
+            </Switch>
+          </AnimatePresence>
           {/*<Footer />*/}
         </div>
       </BrowserRouter>
@@ -59,15 +62,17 @@ function App() {
         <div className="App">
           <Navbar />
           <ScrollToTop />
-          <Switch>
-            <Route exact path="/verify" component={VerifyEmailProject} />
-            <Route exact path="/forgot" component={Forgot} />
-            <Route exact path="/join" component={Join} />
-            <Route exact path="/about" component={About} />
-            <Route exact path="/" component={Landing} />
-            <Route path="/MLforAll" component={GHPages} />
-            <Route component={Mobile} />
-          </Switch>
+          <AnimatePresence>
+            <Switch>
+              <Route exact path="/verify" component={VerifyEmailProject} />
+              <Route exact path="/forgot" component={Forgot} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Landing} />
+              <Route path="/MLforAll" component={GHPages} />
+              <Route component={Mobile} />
+            </Switch>
+          </AnimatePresence>
         </div>
       </BrowserRouter>
     );

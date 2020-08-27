@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { motion } from "framer-motion";
 import davImg from "../../pictures/headshots/davis.jpg";
 import joeImg from "../../pictures/headshots/joe.jpeg";
 import lenImg from "../../pictures/headshots/len.JPG";
@@ -289,13 +290,18 @@ class About extends Component {
     const { auth } = this.props;
     if (!auth.uid) {
       return (
-        <div className="white-background-landing">
+        <motion.div
+          exit={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          initial={{ opacity: 0 }}
+          className="white-background-landing"
+        >
           <Header />
           <OurGoal />
           <WWA />
           {headshot()}
           {landSign()}
-        </div>
+        </motion.div>
       );
     } else {
       // Don't let people see landing page
@@ -304,6 +310,9 @@ class About extends Component {
   }
 }
 
+/* The props we need for this component are the project ID,
+ * auth object, and project object. We get the entire projects
+ * collections so that we can get the current one based off [id] */
 const mapStateToProps = (state) => {
   return {
     auth: state.firebase.auth,
