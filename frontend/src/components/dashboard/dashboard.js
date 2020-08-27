@@ -14,27 +14,33 @@ class Dashboard extends Component {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/" />;
     if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-    //if (refresh) return <Redirect to="/dashboard" />;
+
     return (
-      <div className="dashboard container">
-        <div className="row">
-          <h1>
-            <span className="purple-text">Explore </span>
-          </h1>
-          <h4 style={{ float: "left" }}>See what others are up to.</h4>
-          <SortForm
-            handleDropChange={(e) =>
-              this.setState({
-                orderBy: e.target.value,
-              })
-            }
-            orderBy={this.state.orderBy}
-          />
+      <div
+        style={{
+          backgroundColor: "#f5f5f5",
+          marginTop: "-100vh",
+          minHeight: "190vh",
+        }}
+      >
+        <div className="dashboard container" style={{ paddingTop: "100vh" }}>
+          <div className="row">
+            <h1>
+              <span className="purple-text">Explore </span>
+            </h1>
+            <h4 style={{ float: "left" }}>See what others are up to.</h4>
+            <SortForm
+              handleDropChange={(e) =>
+                this.setState({
+                  orderBy: e.target.value,
+                })
+              }
+              orderBy={this.state.orderBy}
+            />
+          </div>
+
+          <ProjectList orderBy={this.state.orderBy} limit={this.state.limit} />
         </div>
-        {/*<div className="row">
-					<Notifications notifications={notifications} />
-				</div>*/}
-        <ProjectList orderBy={this.state.orderBy} limit={this.state.limit} />
       </div>
     );
   }

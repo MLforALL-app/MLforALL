@@ -33,8 +33,14 @@ class UserProfile extends Component {
     if (!auth.uid) return <Redirect to="/" />;
     if (!auth.emailVerified) return <Redirect to={`/verify`} />;
     return (
-      <div>
-        <div className="dashboard container">
+      <div
+        style={{
+          backgroundColor: "#f5f5f5",
+          marginTop: "-100vh",
+          minHeight: "190vh",
+        }}
+      >
+        <div className="dashboard container" style={{ paddingTop: "100vh" }}>
           <div className="row">
             <h1>
               <span className="purple-text">{poss}</span>
