@@ -144,11 +144,6 @@ class EditProject extends Component {
     }
     return (
       <div className="build-project">
-        {/* <div className="row container">
-          <h1>
-            <span className="purple-text">{project.title}</span>
-          </h1>
-        </div> */}
         {this.state.projectState === 1 ? (
           <UploadCSV
             projectName={project.title}

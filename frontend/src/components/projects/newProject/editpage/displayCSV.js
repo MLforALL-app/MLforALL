@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import "firebase/storage";
 import { updateContent } from "../../../../store/actions/projectActions";
+// import useWindowDimensions from "../../../../store/actions/usewindow";
 import HelpBox from "../../../layouts/helpbox";
 import styles from "../../../../styling/build.css";
 import "../../../../styling/build.css";
@@ -14,6 +15,9 @@ import Checkbox from "@material-ui/core/Checkbox";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import No1 from "../../../../pictures/project/number1.png";
 import { updateCurrentWorkingProject } from "../../../../store/actions/projectActions";
+
+const width = window.innerWidth;
+const height = window.innerHeight;
 
 class DisplayCSV extends Component {
   // Our flip boolean object data structure thing functions
@@ -143,7 +147,7 @@ class DisplayCSV extends Component {
   };
   render() {
     return (
-      <div className="displaycsv">
+      <div className="displaycsv" style={{ marginBottom: "3rem" }}>
         {this.state.redirect ? (
           <Redirect to={"/project/" + this.props.id} />
         ) : (
@@ -176,8 +180,8 @@ class DisplayCSV extends Component {
                 </b>
               </h5>
               <Table
-                width={1000}
-                height={400}
+                width={Math.min(0.7 * width, 1400)}
+                height={0.3 * height + 100}
                 headerHeight={60}
                 rowHeight={25}
                 rowCount={this.props.csvData.length}

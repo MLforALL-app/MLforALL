@@ -45,14 +45,13 @@ class DeleteProject extends Component {
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
-          style={{ maxWidth: "50rem" }}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
           <DialogTitle id="alert-dialog-title">
             Delete this model once and ml for all?
           </DialogTitle>
-          <DialogContent>
+          <DialogContent style={{ maxWidth: "40rem" }}>
             <DialogContentText id="alert-dialog-description">
               Are you sure you want to delete this absolutely awesome machine
               learning model for you and others to experiment with?

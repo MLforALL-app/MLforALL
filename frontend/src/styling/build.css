@@ -46,22 +46,22 @@
   font-family: Helvetica;
   font-style: normal;
   font-weight: bold;
-  font-size: 1.2vw;
+  font-size: calc(1.1rem + 0.5vh);
   line-height: 135%;
   position: relative;
-  top: 1vw;
-  left: 1.2vw;
+  top: calc(1rem + 0.25vh);
+  left: 1.2rem;
 }
 .model-card-name-desc {
   font-family: Helvetica;
   font-style: normal;
   font-weight: normal;
-  font-size: 1vw;
+  font-size: calc(0.9rem + 0.25vh);
   color: gray;
   line-height: 135%;
   position: absolute;
-  left: 1vw;
-  top: 3.5vw;
+  left: 1.2rem;
+  top: calc(3.2rem + 0.25vh);
   text-align: left;
   width: 55%;
 }

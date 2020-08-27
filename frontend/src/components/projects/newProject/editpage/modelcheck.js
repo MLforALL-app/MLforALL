@@ -48,7 +48,10 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
               : { backgroundColor: "white" }
           }
         >
-          <div onClick={handleToggle(value)} style={{ height: "12vw" }}>
+          <div
+            onClick={handleToggle(value)}
+            style={{ height: "calc(10rem + 1vw)" }}
+          >
             <div>
               <div style={{ float: "left" }}>
                 <b className="model-card-name">{nameMapper(value)} </b>
@@ -62,7 +65,7 @@ const ModelCheck = ({ handleToggle, nameMapper, models }) => {
                 backgroundImage: `url(${img})`,
                 paddingLeft: "50px",
                 backgroundPosition: "90% 0%",
-                backgroundSize: "7vw 7vw",
+                backgroundSize: "calc(6.2rem + 0.5vh) calc(6.2rem + 0.5vh)",
                 backgroundRepeat: "no-repeat",
               }}
             ></div>
