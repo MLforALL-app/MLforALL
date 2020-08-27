@@ -42,7 +42,7 @@ function App() {
               <Route exact path="/project/:pid" component={ProjectDetails} />
               <Route exact path="/edit/:pid" component={EditProject} />
               <Route exact path="/forgot" component={Forgot} />
-              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/join" component={Join} />
               <Route exact path="/verify" component={VerifyEmailProject} />
               <Route exact path="/create" component={CreateProjectContainer} />
               <Route exact path="/help" component={MainDoc} />
@@ -66,7 +66,7 @@ function App() {
             <Switch>
               <Route exact path="/verify" component={VerifyEmailProject} />
               <Route exact path="/forgot" component={Forgot} />
-              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/join" component={Join} />
               <Route exact path="/about" component={About} />
               <Route exact path="/" component={Landing} />
               <Route path="/MLforAll" component={GHPages} />

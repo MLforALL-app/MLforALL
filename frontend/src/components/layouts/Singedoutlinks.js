@@ -22,22 +22,6 @@ function Signedoutlinks() {
           </button>
         </NavLink>
       </li>
-      {/* <li>
-				<NavLink to="/signin">
-					<span className="purple-text">Sign In</span>
-				</NavLink>
-			</li>
-			<li>
-				{useLocation().pathName === "/" ? (
-					<Link to="signup" smooth="true" duration={500}>
-						<span className="purple-text">Sign Up</span>
-					</Link>
-				) : (
-					<NavLink to="/">
-						<span className="purple-text">Sign Up</span>
-					</NavLink>
-				)}
-			</li> */}
     </ul>
   );
 }

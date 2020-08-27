@@ -22,7 +22,7 @@ import NanHandler from "./editpage/nanhandler";
 import ModelSelect from "./editpage/modelselect";
 import ModelOutput from "./editpage/modeloutput";
 import ProjectStatus from "./editpage/projectstatus";
-import BuildProject from "./editpage/comfirmbuild";
+import BuildProject from "./editpage/confirmbuild";
 import projectSource from "../../../config/collection";
 
 const filterObj = (objState) => {
