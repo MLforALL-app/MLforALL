@@ -152,8 +152,9 @@ class Onboarding extends Component {
   };
 
   componentDidUpdate(prev) {
+    const { me, user } = this.props;
     if (this.props !== prev) {
-      this.setState({ open: this.props.me && this.props.user === undefined });
+      this.setState({ open: me && user === undefined });
     }
   }
 
