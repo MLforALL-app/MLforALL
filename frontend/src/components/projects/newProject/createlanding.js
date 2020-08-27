@@ -12,7 +12,7 @@ const CreateLanding = () => {
       <div className="row container">
         <h1 className="purple-text">Welcome to Create Project! </h1>
         <div className="col s12 m6 create-animation">
-          <p style={{color: "gray", fontSize: "24px"}}>Here, you can: </p>
+          <p style={{ color: "gray", fontSize: "24px" }}>Here, you can: </p>
           <ul style={{ listStyleType: "none" }}>
             <li
               style={{ backgroundImage: `url(${No1})` }}
@@ -49,16 +49,9 @@ const CreateLanding = () => {
           <img className="create-animation" src={createImg} alt="" />
         </div>
       </div>
-      <div style={{ position: "relative" }}>
-        <h4
-          className="purple-text"
-          style={{ position: "absolute", left: "15vw", top: "10px" }}
-        >
-          Start by naming your project
-        </h4>
-        <div className="row container center" style={{ paddingTop: "5vh" }}>
-          <CreateProject />
-        </div>
+      <div className="row container">
+        <h4 className="purple-text">Start by naming your project</h4>
+        <CreateProject />
       </div>
     </Fragment>
   );

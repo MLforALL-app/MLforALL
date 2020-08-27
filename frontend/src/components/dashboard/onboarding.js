@@ -6,7 +6,7 @@ import logo from "../../pictures/backgrounds/logo.png";
 import createimg from "../../pictures/landing/LP4.svg";
 import playimg from "../../pictures/landing/LP5.svg";
 import exploreimg from "../../pictures/landing/LP8.svg";
-import martial from "../../pictures/backgrounds/temporary.png";
+import martial from "../../pictures/backgrounds/mascot.svg";
 import { updateUserInfo } from "../../store/actions/authActions";
 import { connect } from "react-redux";
 
