@@ -29,9 +29,15 @@ const LandSign = () => {
   return (
     <div
       className="row fullrow-bg"
-      style={{ backgroundImage: `url(${img9})`, backgroundColor: "white" }}
+      style={{
+        backgroundImage: `url(${img9})`,
+        backgroundColor: "white",
+      }}
     >
-      <div className="container land land-sign" style={{ textAlign: "center" }}>
+      <div
+        className="container land land-sign"
+        style={{ textAlign: "center", height: "40vh" }}
+      >
         <Element name="signup" className="element">
           <h2
             className="purpleHeader"
@@ -54,8 +60,6 @@ const LandSign = () => {
     </div>
   );
 };
-
-
 
 const Header = () => {
   return (

@@ -46,17 +46,24 @@
   border-top-right-radius: 30px !important;
 }
 .dialog-onboarding {
-  min-width: 80vw !important;
+  min-width: none !important;
   /* height not working */
-  min-height: 80vh !important;
+  min-height: none !important;
 }
 .MuiDialog-paperWidthSm {
-  max-width: 80vw !important;
+  max-width: none !important;
 }
 .MuiDialog-paperScrollPaper {
-  max-height: 80vh !important;
+  max-height: none !important;
 }
 .onboard-image {
   height: 30rem;
   margin-bottom: -5rem;
+}
+.onboard-comp {
+  width: 65rem;
+  height: 33rem;
+}
+.onboard-mascot {
+  height: 14rem;
 }

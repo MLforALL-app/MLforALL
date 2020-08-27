@@ -31,7 +31,7 @@ function App() {
   if (isBrowser) {
     return (
       <BrowserRouter>
-        <div className="App" style={{ backgroundColor: "white" }}>
+        <div className="App">
           <Navbar />
           <ScrollToTop />
           <AnimatePresence>
