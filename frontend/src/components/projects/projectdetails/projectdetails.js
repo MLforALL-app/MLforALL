@@ -27,7 +27,7 @@ const ProjectDetails = (props) => {
     return (
       <div className="project-details" style={{ backgroundColor: "white" }}>
         <div
-          className="project-picture"
+          className="container project-picture"
           style={{
             backgroundImage: `url(${bg()})`,
             backgroundColor: "#283593",
