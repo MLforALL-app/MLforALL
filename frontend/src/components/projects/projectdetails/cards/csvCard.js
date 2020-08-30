@@ -4,6 +4,7 @@ import DeleteProject from "./confirmDel";
 import "firebase/storage";
 import firebase from "../../../../config/fbConfig";
 import "../../../../styling/projectdetails.css";
+import UploadIMG from "../uploadimg";
 
 const edit = () => {
   return (
@@ -12,7 +13,7 @@ const edit = () => {
       style={{ display: "inline", margin: "7px" }}
     >
       <span className="pd_text3" style={{ color: "#FFFFFF" }}>
-        Edit
+        Edit Project
       </span>
     </button>
   );
@@ -33,7 +34,7 @@ const CSVCard = ({ pid, auth, project, history }) => {
     .catch((err) => {});
 
   return (
-    <div className="col s12" style={{ backgroundColor: "#001064" }}>
+    <div className="col s12">
       <div style={{ textAlign: "left", marginTop: "30px" }}>
         <span className="pd_text1">Project Details</span>
       </div>
@@ -44,11 +45,23 @@ const CSVCard = ({ pid, auth, project, history }) => {
           {" "}
           Curious to learn more? Download the CSV file and create your own!{" "}
         </span>
+        {csvUrl === "" ? (
+          <span></span>
+        ) : (
+          <a target="_blank" rel="noreferrer noopener" href={csvUrl}>
+            <button
+              className="btn-flat waves-effect waves-light"
+              style={{ display: "inline", float: "right", color: "#add8e6" }}
+            >
+              Download the CSV Here
+            </button>
+          </a>
+        )}
       </div>
       {owner ? (
         <div>
           <div style={{ textAlign: "left", marginBottom: "20px" }}>
-            <span className="pd_text1">Project Details</span>
+            <span className="pd_text1">Project Settings</span>
           </div>
           <div style={{ marginBottom: "20px" }}>
             <span>
@@ -59,24 +72,13 @@ const CSVCard = ({ pid, auth, project, history }) => {
                 history={history}
               />
               <Link to={`/edit/${pid}`}>{edit()}</Link>
+              <UploadIMG project={project} projectID={pid} />
             </span>
           </div>
         </div>
       ) : (
         <span></span>
       )}{" "}
-      {csvUrl === "" ? (
-        <span></span>
-      ) : (
-        <a target="_blank" rel="noreferrer noopener" href={csvUrl}>
-          <button
-            className="btn-flat waves-effect waves-light"
-            style={{ display: "inline" }}
-          >
-            Download the CSV Here
-          </button>
-        </a>
-      )}
     </div>
   );
 };

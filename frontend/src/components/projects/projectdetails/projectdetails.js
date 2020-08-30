@@ -2,7 +2,6 @@ import React from "react";
 import GenerateSliders from "./slide/generateSliders";
 import DescCard from "./cards/descCard";
 import CSVCard from "./cards/csvCard";
-import UploadIMG from "./uploadimg";
 import projectSource from "../../../config/collection";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
@@ -28,32 +27,29 @@ const ProjectDetails = (props) => {
     return (
       <div className="project-details" style={{ backgroundColor: "white" }}>
         <div
-          className="container project-picture"
+          className="project-picture"
           style={{
             backgroundImage: `url(${bg()})`,
             backgroundColor: "#283593",
           }}
         ></div>
-        <div className="row container">
+        <div className="row container" style={{ marginTop: "10px" }}>
           <DescCard project={project} pid={pid} />
         </div>
         <GenerateSliders project={project} uid={auth.uid} pid={pid} />
         <div
           className="row container"
           style={{ marginBottom: "75px", padding: "40px" }}
-        >
-          <div className="rwrapper">
-            <UploadIMG project={project} projectID={pid} />
+        ></div>
+        <div style={{ backgroundColor: "#001064", minWidth: "100vw" }}>
+          <div className="row container">
+            <CSVCard
+              pid={pid}
+              auth={auth}
+              project={project}
+              history={history}
+            />
           </div>
-          <div
-            className="pd_text5"
-            style={{ float: "right", marginTop: "-30px", marginRight: "30px" }}
-          >
-            click to add images
-          </div>
-        </div>
-        <div className="row container">
-          <CSVCard pid={pid} auth={auth} project={project} history={history} />
         </div>
       </div>
     );

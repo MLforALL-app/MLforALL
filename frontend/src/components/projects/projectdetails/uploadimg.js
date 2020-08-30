@@ -81,14 +81,18 @@ class UploadIMG extends Component {
     return (
       <span>
         <button
-          className="circle anchor-160 waves-effect waves-light z-depth-0"
+          className="btn btn-outline-edit anchor-160 waves-effect waves-light z-depth-0"
           style={{
             display: "inline",
             margin: "7px",
             backgroundColor: "transparent",
           }}
           onClick={this.handleClickOpen}
-        ></button>
+        >
+          <span className="pd_text3" style={{ color: "#FFFFFF" }}>
+            Add Image
+          </span>
+        </button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}

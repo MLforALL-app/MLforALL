@@ -28,55 +28,55 @@ import MainDoc from "./components/education/mainDoc";
 import "./App.css";
 
 function App() {
-	if (isBrowser) {
-		return (
-			<BrowserRouter>
-				<div className="App" style={{backgroundColor: "white"}}>
-					<Navbar />
-					<ScrollToTop />
-					<AnimatePresence>
-						<Switch>
-							<Route exact path="/user/:uid" component={UserProfile} />
-							<Route exact path="/myprofile" component={MyProjects} />
-							<Route exact path="/dashboard" component={Dashboard} />
-							<Route exact path="/project/:pid" component={ProjectDetails} />
-							<Route exact path="/edit/:pid" component={EditProject} />
-							<Route exact path="/forgot" component={Forgot} />
-							<Route exact path="/signin" component={SignIn} />
-							<Route exact path="/verify" component={VerifyEmailProject} />
-							<Route exact path="/create" component={CreateProjectContainer} />
-							<Route exact path="/help" component={MainDoc} />
-							<Route exact path="/about" component={About} />
-							<Route exact path="/" component={Landing} />
-							<Route path="/MLforAll" component={GHPages} />
-							<Route component={Lost} />
-						</Switch>
-					</AnimatePresence>
-					{/*<Footer />*/}
-				</div>
-			</BrowserRouter>
-		);
-	} else {
-		return (
-			<BrowserRouter>
-				<div className="App">
-					<Navbar />
-					<ScrollToTop />
-					<AnimatePresence>
-						<Switch>
-							<Route exact path="/verify" component={VerifyEmailProject} />
-							<Route exact path="/forgot" component={Forgot} />
-							<Route exact path="/signin" component={SignIn} />
-							<Route exact path="/about" component={About} />
-							<Route exact path="/" component={Landing} />
-							<Route path="/MLforAll" component={GHPages} />
-							<Route component={Mobile} />
-						</Switch>
-					</AnimatePresence>
-				</div>
-			</BrowserRouter>
-		);
-	}
+  if (isBrowser) {
+    return (
+      <BrowserRouter>
+        <div className="App" style={{ backgroundColor: "white" }}>
+          <Navbar />
+          <ScrollToTop />
+          <AnimatePresence>
+            <Switch>
+              <Route exact path="/user/:uid" component={UserProfile} />
+              <Route exact path="/myprofile" component={MyProjects} />
+              <Route exact path="/dashboard" component={Dashboard} />
+              <Route exact path="/project/:pid" component={ProjectDetails} />
+              <Route exact path="/edit/:pid" component={EditProject} />
+              <Route exact path="/forgot" component={Forgot} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/verify" component={VerifyEmailProject} />
+              <Route exact path="/create" component={CreateProjectContainer} />
+              <Route exact path="/help" component={MainDoc} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Landing} />
+              <Route path="/MLforAll" component={GHPages} />
+              <Route component={Lost} />
+            </Switch>
+          </AnimatePresence>
+          {/*<Footer />*/}
+        </div>
+      </BrowserRouter>
+    );
+  } else {
+    return (
+      <BrowserRouter>
+        <div className="App">
+          <Navbar />
+          <ScrollToTop />
+          <AnimatePresence>
+            <Switch>
+              <Route exact path="/verify" component={VerifyEmailProject} />
+              <Route exact path="/forgot" component={Forgot} />
+              <Route exact path="/signin" component={SignIn} />
+              <Route exact path="/about" component={About} />
+              <Route exact path="/" component={Landing} />
+              <Route path="/MLforAll" component={GHPages} />
+              <Route component={Mobile} />
+            </Switch>
+          </AnimatePresence>
+        </div>
+      </BrowserRouter>
+    );
+  }
 }
 
 export default App;

@@ -52,13 +52,6 @@ h6 {
   font-size: 17px;
   text-transform: none;
 }
-.pd_text5 {
-  font-family: Helvetica;
-  font-style: italic;
-  font-weight: normal;
-  font-size: 12px;
-  color: #757575;
-}
 .content-sum {
   height: 150px;
 }
@@ -125,47 +118,6 @@ h6 {
   background-color: transparent;
   vertical-align: middle;
   text-align: center;
-}
-.rwrapper:after {
-  content: " ";
-  width: 90%;
-  height: 1px;
-  margin: 0 10px;
-  vertical-align: super;
-  background-color: #757575;
-  display: inline-block;
-}
-.circle {
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  border-color: #000000;
-  background-color: white;
-  position: relative;
-}
-.circle::after {
-  content: " ";
-  position: absolute;
-  display: block;
-  background-color: #000000;
-  height: 5px;
-  margin-top: -2.5px;
-  top: 50%;
-  left: 8px;
-  right: 8px;
-  z-index: 9;
-}
-.circle::before {
-  content: " ";
-  position: absolute;
-  display: block;
-  background-color: #000000;
-  width: 5px;
-  margin-left: -2.5px;
-  left: 50%;
-  top: 8px;
-  bottom: 8px;
-  z-index: 9;
 }
 .btn-outline:focus {
   background-color: transparent;
@@ -255,6 +207,6 @@ a {
   min-height: 10rem;
 }
 .cat-drop-down {
-	position:relative;
-	float:right;
+  position: relative;
+  float: right;
 }
