@@ -81,14 +81,14 @@ class UploadIMG extends Component {
     return (
       <span>
         <button
-          className="btn btn-outline-edit anchor-160 waves-effect waves-light z-depth-0"
-          style={{ display: "inline", margin: "7px" }}
+          className="circle anchor-160 waves-effect waves-light z-depth-0"
+          style={{
+            display: "inline",
+            margin: "7px",
+            backgroundColor: "transparent",
+          }}
           onClick={this.handleClickOpen}
-        >
-          <span className="pd_text3" style={{ color: "#FFFFFF" }}>
-            Change Picture
-          </span>
-        </button>
+        ></button>
         <Dialog
           open={this.state.open}
           onClose={this.handleClose}
@@ -120,7 +120,11 @@ class UploadIMG extends Component {
           <DialogActions>
             <button
               className="btn-flat waves-effect waves-light"
-              style={{ display: "inline", color: "red" }}
+              style={{
+                display: "inline",
+                color: "red",
+                marginBottom: "-30%",
+              }}
               onClick={this.handleClose}
             >
               Cancel

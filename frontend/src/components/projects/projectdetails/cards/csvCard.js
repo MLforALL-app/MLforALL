@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DeleteProject from "./confirmDel";
-import UploadIMG from "../uploadimg";
 import "firebase/storage";
 import firebase from "../../../../config/fbConfig";
 import "../../../../styling/projectdetails.css";
@@ -60,7 +59,6 @@ const CSVCard = ({ pid, auth, project, history }) => {
                 history={history}
               />
               <Link to={`/edit/${pid}`}>{edit()}</Link>
-              <UploadIMG project={project} projectID={pid} />
             </span>
           </div>
         </div>

@@ -185,10 +185,12 @@ class GenerateSliders extends Component {
                   desc="Click here to generate a prediction based off of the slider values you've chosen above!"
                 />{" "}
                 <button
-                  className="btn waves-effect waves-light anchor"
+                  className="btn btn-outline-gen anchor waves-effect waves-light z-depth-0"
                   onClick={this.handleSubmit}
                 >
-                  <b>Generate</b>
+                  <b className="pd_text4" style={{ color: "#757575" }}>
+                    Generate!
+                  </b>
                 </button>
               </div>
             </div>
