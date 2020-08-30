@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { compose } from "redux";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import { motion } from "framer-motion";
 import { sendVerify } from "../../store/actions/authActions";
 import authImg from "../../pictures/backgrounds/auth.svg";
 
@@ -40,7 +41,12 @@ class VerifyEmailProject extends Component {
       }
     };
     return (
-      <div className="verify">
+      <motion.div
+        exit={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        initial={{ opacity: 0 }}
+        className="verify"
+      >
         <div className="container center">
           <h1 className="purple-text">Please verify your email</h1>
           <h5>
@@ -51,7 +57,7 @@ class VerifyEmailProject extends Component {
           <div className="header-subrow">{message(sentMsg)}</div>
         </div>
         <img className="auth-image" alt="" src={authImg}></img>
-      </div>
+      </motion.div>
     );
   }
 }

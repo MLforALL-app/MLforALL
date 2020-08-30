@@ -144,13 +144,17 @@ class EditProject extends Component {
     }
     return (
       <div className="build-project">
-        <div className="row container">
+        {/* <div className="row container">
           <h1>
             <span className="purple-text">{project.title}</span>
           </h1>
-        </div>
+        </div> */}
         {this.state.projectState === 1 ? (
-          <UploadCSV project={project} projectID={projectID} />
+          <UploadCSV
+            projectName={project.title}
+            project={project}
+            projectID={projectID}
+          />
         ) : (
           <span></span>
         )}

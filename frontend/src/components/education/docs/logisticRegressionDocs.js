@@ -4,7 +4,8 @@ import {
 	bodyContent,
 	pinkTheme,
 	pinkDark,
-	purpleTheme
+	purpleTheme,
+    SeeMore
 } from "./fileFormatter";
 import createPlotlyComponent from "react-plotlyjs";
 import Plotly from "plotly.js/dist/plotly-cartesian";
@@ -93,8 +94,7 @@ function makePlot() {
 
 const logisticRegression = (
 	<div>
-		<h1 className="purple-text"> Help Page </h1>
-		{header("Logistic Regression", "+2")}
+		{header("Logistic Regression")}
 
 		{bodyContent(`
 Logistic regression is used to estimate the probability that objects belong to different categories based on information about those objects. For example, we could measure the height and weight of an animal and give the probability that the animal is a dog versus a cat. In the example below, we estimate the probability that a person likes math based on the number of math classes they've taken.     
@@ -111,7 +111,7 @@ $$
 
 While we're only discussing logistic regression in the context of two possible categories, it can be extended to more than two categories as well.
 `)}
-		{header("Technical Explanation")}
+		<SeeMore title="Logistic Regression Technical Explanation">
 		{bodyContent(`
 Notice that $g(z) \\in (0, 1)$. We want a model where $p(y=1\\mid x; \\theta) = \\hat{y}$. It follows that $p(y=0\\mid x; \\theta) = 1 - \\hat{y}$. Another way of saying this is
 $$\\begin{equation}
@@ -140,6 +140,7 @@ $$\\begin{equation}
 \\end{equation}$$
 Here, $\\alpha$ is a learning rate. There are other ways to update weights as well, such as Newton's method. Note that this is a similar update rule to others you may have seen. Check out generalized linear models for more information.
 `)}
+        </SeeMore>
 	</div>
 );
 

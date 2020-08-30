@@ -17,6 +17,7 @@ import { Element, Link } from "react-scroll";
 import { Redirect, NavLink } from "react-router-dom";
 // import is browser
 import { isBrowser } from "react-device-detect";
+// import { CSSTransition } from "react-transition-group";
 
 const showImg = (img, b) => {
   return isBrowser || b ? `url(${img})` : "";
@@ -50,6 +51,8 @@ const LandSign = () => {
     </div>
   );
 };
+
+
 
 const Header = () => {
   return (
