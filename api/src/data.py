@@ -34,9 +34,14 @@ class Data:
             self.processed_df, self.onehot_features = Data.make_onehot_df(self.processed_df)
 
             # now target contains the labels, and df contains the variables
-            self.X_train, self.X_test, self.y_train, self.y_test = \
-                self.make_train_test_split(
-                    self.processed_df.to_numpy(), self.target.to_numpy())
+            (
+                self.X_train,
+                self.X_test,
+                self.y_train,
+                self.y_test,
+            ) = self.make_train_test_split(
+                self.processed_df.to_numpy(), self.target.to_numpy()
+            )
 
     def nan_handler(self, df, method):
         # take care of nan values
@@ -69,18 +74,17 @@ class Data:
         return self.onehot_features
 
     def make_train_test_split(self, X, y):
-        X_train, X_test, y_train, y_test = train_test_split(
-            X, y, random_state=0)
+        X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
         return X_train, X_test, y_train, y_test
 
     def get_train_test_split(self):
         return self.X_train, self.X_test, self.y_train, self.y_test
 
     def count_NaN(self):
-        '''
+        """
         REQUIRES: df some valid pandas dataframe
         ENSURES:  returns the number of NaN's in the entire dataframe 
-        '''
+        """
         return int(self.df.isnull().sum().sum())
 
     def get_excluded_features(self):
@@ -93,19 +97,19 @@ class Data:
         return excluded_columns
 
     def get_info(self):
-        '''
+        """
         REQUIRES: df some valid pandas dataframe
         ENSURES:  returns a dictionary containing varius info on a CSV
-        '''
+        """
         info = {}
-        info['NaN'] = self.count_NaN()
-        info['excludedFeatures'] = self.get_excluded_features()
+        info["NaN"] = self.count_NaN()
+        info["excludedFeatures"] = self.get_excluded_features()
         return info
 
     def pre_describe(self, proj_id):
-        '''
+        """
         ENSURES:  updates the proj_id firestore document to contain a field with info
-        '''
+        """
         db = fb.firestore_init()
         info = self.get_info()
         project_ref = db.collection(self.project_source).document(proj_id)
@@ -173,8 +177,13 @@ class Data:
         db = fb.firestore.client()
 
         project_ref = db.collection(self.project_source).document(proj_id)
-        project_ref.update({"variables": self.get_variables(self.df_vars_str),
-                            "models": self.get_model_obj(model_list), "targetParam": self.target_str})
+        project_ref.update(
+            {
+                "variables": self.get_variables(self.df_vars_str),
+                "models": self.get_model_obj(model_list),
+                "targetParam": self.target_str,
+            }
+        )
 
     @staticmethod
     # def from_csv(uid, proj_id, csv_name):
@@ -188,14 +197,13 @@ class Data:
         return Data(df, None, None, None)
 
     def get_model_obj(self, model_list):
-        '''
+        """
         REQUIRES: model_list a list of model codes (ie gnb, lda, etc)
         ENSURES: a dictionary/object with keys as these codes. The values 
         of this dictionary are dictionaries with the fields
         "accuracy", and other future model metadata
-        '''
+        """
         models = {}
         for m in model_list:
-            models[m.type] = {"accuracy": m.get_accuracy(
-                self.X_test, self.y_test)}
+            models[m.type] = {"accuracy": m.get_accuracy(self.X_test, self.y_test)}
         return models

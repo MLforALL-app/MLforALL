@@ -1,3 +1,3 @@
 # Pictures
 
-We have many various images throughout our website. With the exception of our personal headshot images, these are all original works by Joseph Kim Copyright 2020 and will be treated accordingly under copyright law.
+We have many various images throughout our website. With the exception of our personal headshot images, these are largely sourced from [undraw.co](https://undraw.co) and curated by [Joseph Kim](https://www.josephkim.design/)

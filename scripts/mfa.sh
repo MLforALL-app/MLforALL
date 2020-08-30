@@ -57,9 +57,9 @@ function api () {
   (
     cd api
     printf "Building Docker Image (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
-    gcloud builds submit --tag gcr.io/mlforall-api/flask-api
+    gcloud builds submit --tag gcr.io/mlforall-api/flask-api --project=mlforall-api
     printf "Loading to Google Cloud Platform (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ \n\n"
-    gcloud run deploy "flask-api" --image gcr.io/mlforall-api/flask-api --platform=managed --region=us-east1
+    gcloud run deploy "flask-api" --image gcr.io/mlforall-api/flask-api --platform=managed --region=us-east1 --project=mlforall-api
   )
 }
 

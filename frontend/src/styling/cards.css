@@ -86,3 +86,22 @@
   border-top-left-radius: 30px !important;
   border-top-right-radius: 30px !important;
 }
+.dialog-onboarding {
+  min-width: none !important;
+  /* height not working */
+  min-height: none !important;
+}
+.MuiDialog-paperWidthSm {
+  max-width: none !important;
+}
+.MuiDialog-paperScrollPaper {
+  max-height: none !important;
+}
+.onboard-image {
+  height: 30rem;
+  margin-bottom: -5rem;
+}
+.onboard-comp {
+  width: 65rem;
+  height: 33rem;
+}

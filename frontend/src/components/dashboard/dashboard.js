@@ -9,13 +9,12 @@ import "../../styling/dashboard.css";
 class Dashboard extends Component {
   state = {
     orderBy: "createdAt",
-    limit: 100,
+    limit: 8,
   };
   render() {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/" />;
     if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-    //if (refresh) return <Redirect to="/dashboard" />;
     return (
       <div style={{ backgroundColor: "white" }}>
         <div className="dashboard container">
@@ -41,9 +40,6 @@ class Dashboard extends Component {
           <br></br>
           <br></br>
           <hr></hr>
-          {/*<div className="row">
-					<Notifications notifications={notifications} />
-				</div>*/}
           <br></br>
           <div style={{ marginTop: "20px" }}>
             <ProjectList

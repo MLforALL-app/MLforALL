@@ -73,8 +73,9 @@ h6 {
   background-color: #283593;
   border-color: #283593;
   border-radius: 30px;
+/*   text-align: center; */
+  display: table-cell;
   vertical-align: middle;
-  text-align: center;
 }
 .btn:focus {
   background-color: #283593;
@@ -168,6 +169,9 @@ h6 {
 .right a:hover,
 .right button:hover {
   background: #db91b67e;
+}
+#nav-cta:hover {
+  background: none !important;
 }
 .hearts {
   color: #f8bbd0;

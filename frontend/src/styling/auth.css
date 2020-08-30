@@ -1,0 +1,70 @@
+.auth-image {
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  z-index: -1;
+}
+.firebaseui-idp-text {
+  font-size: 1.25rem !important;
+}
+.firebaseui-idp-button {
+  width: 15.6rem !important;
+  max-width: 18rem !important;
+  padding: 12px 16px !important;
+}
+.mdl-button {
+  border-radius: 20rem !important;
+}
+#my-mdl {
+  background-color: #283593 !important;
+}
+.firebaseui-container {
+  max-width: 100% !important;
+}
+#firebaseui-container {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: auto !important;
+}
+
+form {
+  border-radius: 30px;
+  background-color: transparent !important;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]),
+input[type="email"]:not(.browser-default):focus:not([readonly]),
+input[type="password"]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: #2f81eb;
+  box-shadow: none;
+}
+
+input[type="text"]:not(.browser-default):focus:not([readonly]) + label,
+textarea.materialize-textarea:focus:not([readonly]) + label,
+input[type="email"]:not(.browser-default):focus:not([readonly]) + label,
+input[type="password"]:not(.browser-default):focus:not([readonly]) + label {
+  color: #2f81eb !important;
+}
+.elementToFadeInAndOut {
+  -webkit-animation: fadein 500ms linear forwards;
+  animation: fadein 500ms linear forwards;
+  opacity: 1;
+}
+@-webkit-keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

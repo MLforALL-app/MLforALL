@@ -36,7 +36,7 @@ _Use the links to view more in-depth `README.md` files throughout the repo._
 
 - Firebase Authentication, Firestore
 - Flask RestAPI
-- Google Cloud Platform, Storage
+- Google Cloud Platform, Storage, Run
 - scikit-learn
 - Pandas
 

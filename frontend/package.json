@@ -25,6 +25,7 @@
     "react-device-detect": "^1.12.1",
     "react-dom": "^16.13.1",
     "react-lazyload": "^3.0.0",
+    "react-firebaseui": "^4.1.0",
     "react-markdown": "^4.3.1",
     "react-mathjax": "^1.0.1",
     "react-plotly.js": "^2.4.0",
@@ -34,6 +35,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
     "react-scroll": "^1.7.16",
+    "react-social-icons": "^4.1.0",
     "react-transition-group": "^4.4.1",
     "react-virtualized": "^9.21.2",
     "react-window": "^1.8.5",
@@ -68,8 +70,6 @@
     ]
   },
   "devDependencies": {
-    "gh-pages": "^3.0.0",
-    "react-social-icons": "^4.1.0",
-    "yargs-parser": "^18.1.3"
+    "gh-pages": "^3.0.0"
   }
 }

@@ -72,15 +72,22 @@ const mapTriples = (trip) => {
 };
 
 const FormatList = ({ projects }) => {
-  if (projects) {
-    return grouped(projects).map(mapTriples);
-  } else {
-    return (
-      <div className="container center">
-        <CircularProgress />
-      </div>
-    );
-  }
+	if (!projects) {
+		return (
+			<div className="container center">
+				<CircularProgress />
+			</div>
+		);
+	} else if (projects.length === 0) {
+		return (
+			<div className="container center">
+				<h4 className="purple-text">There's nothing here yet!</h4>
+				<h5>Get started now by clicking "Create"</h5>
+			</div>
+		);
+	} else {
+		return grouped(projects).map(mapTriples);
+	}
 };
 
 export default FormatList;
