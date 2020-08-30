@@ -9,7 +9,7 @@ import "../../styling/dashboard.css";
 class Dashboard extends Component {
   state = {
     orderBy: "createdAt",
-    limit: 8,
+    limit: 9,
   };
   render() {
     const { auth } = this.props;
