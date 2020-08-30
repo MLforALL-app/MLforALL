@@ -61,7 +61,7 @@ class BuildProject extends Component {
       return <Redirect to="/myprofile" />;
     }
     return (
-      <span>
+      <div className="center">
         <button onClick={this.handleClickOpen} className="btn-large z-depth-0">
           Build the model!
         </button>
@@ -71,7 +71,6 @@ class BuildProject extends Component {
           onClose={this.handleClose}
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
-          classes="card"
         >
           {this.props.submitLoad ? (
             <div>
@@ -94,7 +93,7 @@ class BuildProject extends Component {
               )}
             </div>
           ) : (
-            <div>
+            <div style={{ width: "50rem" }}>
               <DialogTitle id="alert-dialog-title" className="purple-text">
                 Is this the project you want to build
               </DialogTitle>
@@ -124,7 +123,7 @@ class BuildProject extends Component {
           )}
         </Dialog>
         <div style={{ color: "#ff0000" }}>{this.state.incomplete}</div>
-      </span>
+      </div>
     );
   }
 }

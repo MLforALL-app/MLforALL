@@ -2,78 +2,91 @@ import React, { Component } from "react";
 import ProjectList from "../projects/projectList/projectlist";
 import projectSource from "../../config/collection";
 import SortForm from "./sortform";
+import Onboarding from "./onboarding";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
 
 class UserProfile extends Component {
-	state = {
-		orderBy: "createdAt",
-		limit: 8
-	};
-	render() {
-		const { auth, user, pageuid } = this.props;
-		const { orderBy, limit } = this.state;
-		const poss = user ? user.firstName + " " + user.lastName + "'s models" : "";
-		// Route Protection
-		if (!auth.uid) return <Redirect to="/" />;
-		if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-		if (auth.uid === pageuid) return <Redirect to="/myprofile" />;
-		// maybe instead of redirecting, we can have another sign up page here
-		// otws good to go
-		// TODO: change const projects so its only this user's projects
-		// pass this in to project list uid={auth.uid}
-		return (
-			<div>
-				<div className="dashboard container">
-					<div className="row">
-						<h1>
-							<span className="purple-text">{poss}</span>
-						</h1>
-						<SortForm
-							handleDropChange={(e) =>
-								this.setState({
-									orderBy: e.target.value
-								})
-							}
-							orderBy={this.state.orderBy}
-							me={true}
-						/>
-						<h4 style={{ float: "left" }}>View other people's projects</h4>
-					</div>
-					<ProjectList orderBy={orderBy} limit={limit} uid={pageuid} />
-					<div className="center">
-						<Link to="/create">
-							<button className="btn btn-sec z-depth-0">
-								Inspired? Click here to create your own!
-							</button>
-						</Link>
-					</div>
-				</div>
-			</div>
-		);
-	}
+  state = {
+    orderBy: "createdAt",
+    limit: 8,
+    me: this.props.auth.uid === this.props.pageuid,
+  };
+  render() {
+    const { auth, user, pageuid } = this.props;
+    const { orderBy, limit, me } = this.state;
+    var poss = "";
+    var tagline = "";
+    var cta = "";
+    if (me) {
+      poss = "My models.";
+      tagline = "Your central hub.";
+      cta = "Click here to get started!";
+    } else {
+      poss = user ? user.firstName + " " + user.lastName + "'s models." : "";
+      tagline = "View other people's models.";
+      cta = "Want to make models like these? Click here!";
+    }
+    // Route Protection
+    if (!auth.uid) return <Redirect to="/" />;
+    if (!auth.emailVerified) return <Redirect to={`/verify`} />;
+    return (
+      <div
+        style={{
+          backgroundColor: "#f5f5f5",
+          marginTop: "-100vh",
+          minHeight: "190vh",
+        }}
+      >
+        <div className="dashboard container" style={{ paddingTop: "100vh" }}>
+          <div className="row">
+            <h1>
+              <span className="purple-text">{poss}</span>
+            </h1>
+            <SortForm
+              handleDropChange={(e) =>
+                this.setState({
+                  orderBy: e.target.value,
+                })
+              }
+              orderBy={this.state.orderBy}
+              me={me}
+            />
+            <h4 style={{ float: "left" }}>{tagline}</h4>
+          </div>
+          <ProjectList orderBy={orderBy} limit={limit} uid={pageuid} />
+          <div className="center">
+            <Link to="/create">
+              <button className="btn btn-sec z-depth-0">{cta}</button>
+            </Link>
+            <Onboarding me={me} user={user} />
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = (state, ownProps) => {
-	// need better way to do this
-	const pageAuthor = ownProps.match.params.uid;
-	const users = state.firestore.data.users;
-	const user = users ? users[pageAuthor] : null;
-	return {
-		projects: state.firestore.ordered.projects,
-		auth: state.firebase.auth,
-		pageAuthor: ownProps.match.params.uid,
-		user: user,
-		pageuid: pageAuthor
-	};
+  // need better way to do this
+  const pageAuthor = ownProps.match.params.uid;
+  const users = state.firestore.data.users;
+  const user = users ? users[pageAuthor] : null;
+  return {
+    projects: state.firestore.ordered.projects,
+    auth: state.firebase.auth,
+    pageAuthor: ownProps.match.params.uid,
+    user: user,
+    pageuid: pageAuthor,
+  };
 };
 
 export default compose(
-	connect(mapStateToProps),
-	firestoreConnect([
-		{ collection: projectSource, orderBy: ["createdAt", "desc"] },
-		{ collection: "users" }
-	])
+  connect(mapStateToProps),
+  firestoreConnect([
+    { collection: projectSource, orderBy: ["createdAt", "desc"] },
+    { collection: "users" },
+  ])
 )(UserProfile);

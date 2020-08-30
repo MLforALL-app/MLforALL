@@ -2,132 +2,135 @@ h1,
 h2,
 h4,
 h6 {
-	/* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
-	/* font-family: "Roboto", sans-serif; */
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-	font-weight: 600;
-	/* letter-spacing: 0.12rem; */
+  /* font-family: -apple-system, BlinkMacSystemFont, sans-serif; */
+  /* font-family: "Roboto", sans-serif; */
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  /* letter-spacing: 0.12rem; */
 }
 .pres {
-	font-size: 1.2rem;
+  font-size: 1.2rem;
 }
 
 .content-sum {
-	height: 150px;
+  height: 150px;
 }
 .purple-text {
-	color: #283593 !important;
+  color: #283593 !important;
 }
 .pink-text {
-	color: #f8bbd0 !important;
+  color: #f8bbd0 !important;
 }
 .yellow-warning-text {
-	color: #ffcc00 !important;
+  color: #ffcc00 !important;
 }
 .btn-floating {
-	background-color: #283593;
-	display: inline-block !important;
+  background-color: #283593;
+  display: inline-block !important;
 }
 .btn {
-	font-weight: bold;
-	background-color: #283593;
-	border-color: #283593;
-	border-radius: 30px;
-	display: table-cell;
-	vertical-align: middle;
+  font-weight: bold;
+  background-color: #283593;
+  border-color: #283593;
+  border-radius: 30px;
+  display: table-cell;
+  vertical-align: middle;
 }
 .btn:focus {
-	background-color: #283593;
+  background-color: #283593;
 }
 .btn:hover {
-	background-color: #6e689be0;
-	border-color: #6e689be0;
+  background-color: #6e689be0;
+  border-color: #6e689be0;
 }
 .btn-outline {
-	color: #283593;
-	border-color: #283593;
-	border-width: 2px;
-	border-style: solid;
-	background-color: transparent;
+  color: #283593;
+  border-color: #283593;
+  border-width: 2px;
+  border-style: solid;
+  background-color: transparent;
 }
 .btn-outline:focus {
-	background-color: transparent;
+  background-color: transparent;
 }
 .btn-outline:hover {
-	background-color: #9e98d12a;
+  background-color: #9e98d12a;
 }
 .btn-sec {
-	background-color: #f8bbd0;
-	border-color: #f8bbd0;
-	color: black;
+  background-color: #f8bbd0;
+  border-color: #f8bbd0;
+  color: black;
 }
 .btn-sec:focus {
-	background-color: #f8bbd0;
+  background-color: #f8bbd0;
 }
 .btn-sec:hover {
-	background-color: #ffdce8ed;
+  background-color: #ffdce8ed;
 }
 .btn-large {
-	border-radius: 30px;
-	background-color: #283593;
+  border-radius: 30px;
+  background-color: #283593;
 }
 .btn-large:focus {
-	background-color: #283593;
+  background-color: #283593;
 }
 .btn-large:hover {
-	background-color: #6e689be0;
+  background-color: #6e689be0;
 }
 .project-summary {
-	padding-right: 1.5rem;
-	padding-left: 1.5rem;
-	padding-top: 10px;
-	padding-bottom: 10px;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 .nav-wrapper {
-	background-color: #ffffff;
-	box-shadow: 0 0 0 0;
-	z-index: 5;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 0;
+  z-index: 5;
 }
 .right a:hover,
 .right button:hover {
-	background: #db91b67e;
+  background: #db91b67e;
+}
+#nav-cta:hover {
+  background: none !important;
 }
 .hearts {
-	color: #f8bbd0;
+  color: #f8bbd0;
 }
 a {
-	color: #283593;
+  color: #283593;
 }
 .MuiCircularProgress-colorPrimary {
-	color: #f8bbd0 !important;
+  color: #f8bbd0 !important;
 }
 .MuiSvgIcon-root {
-	color: none;
+  color: none;
 }
 .disabled {
-	color: #aaaaaa !important;
+  color: #aaaaaa !important;
 }
 .MuiSlider-root {
-	color: #283593 !important;
+  color: #283593 !important;
 }
 .MuiMenuItem-root {
-	font-size: 1.1rem !important;
+  font-size: 1.1rem !important;
 }
 .MuiSelect-root {
-	font-size: 1.5rem !important;
-	color: #283593 !important;
-	font-weight: 600 !important;
+  font-size: 1.5rem !important;
+  color: #283593 !important;
+  font-weight: 600 !important;
 }
 .slider-title {
-	padding-top: 2rem;
+  padding-top: 2rem;
 }
 .slider-row {
-	background-color: #e9e9e9;
+  background-color: #e9e9e9;
 }
 .slider-contain {
-	padding-top: 1.2rem;
-	padding-bottom: 1.2rem;
-	min-height: 10rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.2rem;
+  min-height: 10rem;
 }
 .cat-drop-down {
 	position:relative;

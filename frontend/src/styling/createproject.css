@@ -43,7 +43,7 @@
   font-size: 24px;
   line-height: 28px;
   color: #848484;
-  margin-bottom: 5vw;
+  margin-bottom: 70px;
 }
 .choose-button {
   background-color: white;
@@ -115,18 +115,18 @@
 }
 .browse-button {
   display: inline-block;
-  margin-right: 30px;
+  margin: 30px;
   width: 290px;
   height: 155px;
   left: 735px;
   top: 339px;
-  background: #FFFFFF;
+  background: #ffffff;
   box-shadow: 0 4px 10px rgba(66, 56, 124, 0.25);
   border-radius: 15px;
   /* padding-left: 50px; */
-	background-position: 15px 15px;
-	background-size: 20px 25px;
-	background-repeat: no-repeat;
+  background-position: 15px 15px;
+  background-size: 20px 25px;
+  background-repeat: no-repeat;
 }
 .browse-button:active {
   background-color: white;
@@ -136,7 +136,7 @@
   padding: 40px;
 }
 .data-link {
-  color: #0085FF;
+  color: #0085ff;
 }
 .new-dropBox {
   background-color: white;
