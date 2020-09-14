@@ -56,8 +56,8 @@ class UploadCSV extends Component {
   dropHandler = (e) => {
     e.preventDefault();
     // this.setState({ drag: false });
-    console.log("files", e.dataTransfer.files[0]);
-    console.log("items", e.dataTransfer.items[0]);
+    // console.log("files", e.dataTransfer.files[0]);
+    // console.log("items", e.dataTransfer.items[0]);
     BoxColor = "#F5F5F5";
     if (!e.dataTransfer.files[0]) {
       return;
