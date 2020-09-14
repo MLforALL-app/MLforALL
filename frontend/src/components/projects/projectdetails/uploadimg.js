@@ -66,8 +66,8 @@ class UploadIMG extends Component {
 
   //handles a confirmation of new photo
   handleSubmit = (e) => {
-    const { project, auth, projectID } = this.props;
-    console.log("submission");
+    // const { project, auth, projectID } = this.props;
+    // console.log("submission");
 
     e.preventDefault();
     //if there is an error in state or no image, return
