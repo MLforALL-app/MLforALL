@@ -8,6 +8,7 @@ import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import { Redirect, Link } from "react-router-dom";
 import "../../../styling/projectdetails.css";
+import img1 from "../../../pictures/default_image/banner_2.jpeg";
 
 /* MAIN COMPONENT
  * Uses the helper components DescCard, Generate Sliders, and CSV Card
@@ -20,14 +21,40 @@ const ProjectDetails = (props) => {
   if (!auth.uid) return <Redirect to="/" />;
   if (!auth.emailVerified) return <Redirect to={`/verify`} />;
   if (project) {
+    const bg = () => {
+      return project.imgRef ? project.imgRef : img1;
+    };
     return (
-      <div className="project-details">
-        <div className="row container">
+      <div className="project-details" style={{ backgroundColor: "white" }}>
+        <div
+          className="project-picture"
+          style={{
+            backgroundImage: `url(${bg()})`,
+            backgroundColor: "#283593",
+          }}
+        ></div>
+        <div className="row container" style={{ marginTop: "10px" }}>
           <DescCard project={project} pid={pid} />
         </div>
         <GenerateSliders project={project} uid={auth.uid} pid={pid} />
-        <div className="row container">
-          <CSVCard pid={pid} auth={auth} project={project} history={history} />
+        <div
+          className="row container"
+          style={{ marginBottom: "75px", padding: "40px" }}
+        ></div>
+        <div
+          style={{
+            backgroundColor: "#001064",
+            minWidth: "100vw",
+          }}
+        >
+          <div className="row container">
+            <CSVCard
+              pid={pid}
+              auth={auth}
+              project={project}
+              history={history}
+            />
+          </div>
         </div>
       </div>
     );

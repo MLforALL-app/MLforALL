@@ -36,11 +36,13 @@ class DeleteProject extends Component {
     return (
       <span>
         <button
-          className="btn-flat waves-effect waves-light"
-          style={{ display: "inline" }}
+          className="btn btn-outline-del anchor-160 waves-effect waves-light z-depth-0"
+          style={{ display: "inline", margin: "7px" }}
           onClick={this.handleClickOpen}
         >
-          <span className="purple-text">Delete This Project</span>
+          <span className="pd_text3" style={{ color: "#ff4545" }}>
+            Delete Project
+          </span>
         </button>
         <Dialog
           open={this.state.open}

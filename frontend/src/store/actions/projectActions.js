@@ -19,13 +19,15 @@ export const createProject = (project) => {
         authorID: uid,
         createdAt: firestore.FieldValue.serverTimestamp(),
         csvName: "",
+        imgName: "",
         targetParam: "",
         content: "",
-				csvPath: "",
-				example: false,
+        csvPath: "",
+        example: false,
         models: {},
         variables: [],
         info: {},
+        imgRef: "",
       })
       .then((snapshot) => {
         dispatch({ type: "CREATE_PROJECT", project, snapshot });
@@ -143,14 +145,18 @@ export const deleteMLProject = (pid, uid, project, update) => {
   //update is a true or false
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     // case on whether the path is in Examples using pathIsExample
-    // get todelete files
+    // get to delete files
     const delCSV = project.csvPath.split("/").pop();
     // might be a source of bugs in the future
     // Grabs the "keys" names of the models and places it in an array
     var delVars = Object.keys(project.models);
-    //if it is an update or its an example, we will not delete the csv in storage
-    if (!update || !pathIsExample(project.csvPath)) {
+    // Only scenario in which you delete is if it's not an update and a custom set
+    if (!update && !pathIsExample(project.csvPath)) {
       delVars.push(delCSV);
+    }
+    //adding uploaded picture to list
+    if (!update && project.imgName !== "") {
+      delVars.push(project.imgName);
     }
     const storageRef = getFirebase().storage();
     delVars.forEach((filename) => {
@@ -234,7 +240,7 @@ const initializeDescribe = (csvPath, pid, dispatch) => {
   axios
     .post(`${apiHost}/describe`, postInput)
     .then((res) => {
-      console.log(res)
+      // console.log(res);
       dispatch({ type: "UPLOAD_CSV_METADATA" });
     })
     .catch((err) => {
@@ -258,18 +264,23 @@ that was passed from then handler in guidinginfo
 */
 
 export const initializeCSVForProject = (csv, example, pid) => {
-  return (dispatch, getState, { getFirestore , getFirebase }) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
     dispatch({ type: "QUICK_CSV", csv });
     const firebase = getFirebase();
     const uid = getState().firebase.auth.uid;
 
+    console.log("csv: ", csv);
     const isExample = !csv && example !== "";
-    const csvPath = isExample ?`Examples/${example}`:`${uid}/${pid}/${csv.name}`;
+    const csvPath = isExample
+      ? `Examples/${example}`
+      : `${uid}/${pid}/${csv.name}`;
     var csvRef = firebase.storage().ref(csvPath);
     if (!isExample) {
+      console.log("New CSV");
       csvRef
         .put(csv)
         .then((snapshot) => {
+          console.log("snapshot", snapshot);
           dispatch({ type: "UPLOAD_CSV" });
           initializeDescribe(csvPath, pid, dispatch);
         })
@@ -279,22 +290,67 @@ export const initializeCSVForProject = (csv, example, pid) => {
         });
     } else {
       initializeDescribe(csvPath, pid, dispatch);
-    };
-
+    }
     // will need to get rid of csvName in the future
     const firestore = getFirestore();
     const projectRef = firestore.collection(projectSource).doc(pid);
     projectRef
-      .set(
-        { csvPath: csvPath , example: isExample },
-        { merge: true }
-      )
+      .set({ csvPath: csvPath, example: isExample }, { merge: true })
       .then((snapshot) => {
         dispatch({ type: "UPDATE_CSV_NAME" });
       })
       .catch((err) => {
         dispatch({ type: "UPDATE_CSV_NAME_ERROR", err });
       });
+  };
+};
 
+// This function initializes an image for a project; if one already
+// exists, then it deletes that one from storage
+export const initializeIMGForProject = (img, project, pid) => {
+  return (dispatch, getState, { getFirestore, getFirebase }) => {
+    const firebase = getFirebase();
+    const uid = getState().firebase.auth.uid;
+    const imgPath = `${uid}/${pid}/${img.name}`;
+    var imgRef = firebase.storage().ref(imgPath);
+
+    //deleting previous picture
+    if (project.imgName !== "") {
+      const storageRef = getFirebase().storage();
+      storageRef
+        .ref(`${uid}/${pid}/${project.imgName}`)
+        .delete()
+        .then(() => {
+          dispatch({ type: "DELETE_PROJECT_STORE" });
+        })
+        .catch((err) => {
+          dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
+        });
+    }
+
+    imgRef
+      .put(img)
+      .then((snapshot) => {
+        // console.log("First");
+        const firestore = getFirestore();
+        const projectRef = firestore.collection(projectSource).doc(pid);
+        imgRef.getDownloadURL().then((url) => {
+          // console.log("inside get download url");
+          projectRef
+            .set({ imgRef: url, imgName: img.name }, { merge: true })
+            .then((snapshot) => {
+              dispatch({ type: "UPDATE_IMG_NAME" });
+            })
+            .catch((err) => {
+              console.log("Error", err);
+              dispatch({ type: "UPDATE_IMG_NAME_ERROR", err });
+            });
+        });
+        dispatch({ type: "UPLOAD_IMG" });
+      })
+      .catch((err) => {
+        console.log("UploadIMG Error", err);
+        dispatch({ type: "UPLOAD_IMG_ERROR" });
+      });
   };
 };

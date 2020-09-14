@@ -14,6 +14,47 @@
   animation-duration: 310ms;
   animation-iteration-count: 1;
 }
+.card-action-sum {
+  border-bottom-left-radius: 30px !important;
+  border-bottom-right-radius: 30px !important;
+  background-color: white !important;
+  color: grey;
+  height: 55px;
+}
+.card-picture {
+  border-top-left-radius: 15px !important;
+  border-top-right-radius: 15px !important;
+  background-color: #eeeeee;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  height: 150px;
+}
+.card-title-sum {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+
+  color: #283593;
+
+  border: 1px solid #ffffff;
+}
+.card-summary {
+  border-radius: 15px;
+  background-color: white;
+  color: black;
+  transition: transform 100ms, box-shadow 100ms;
+  animation-name: card;
+  animation-duration: 310ms;
+  animation-iteration-count: 1;
+}
 @keyframes card {
   0% {
     transform: scale(0.95);

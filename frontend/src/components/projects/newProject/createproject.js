@@ -57,9 +57,10 @@ class CreateProject extends Component {
                     left: 0,
                   }}
                 />
-                <button 
+                <button
                   className="btn btn-sec waves-effect 
-                  waves-light z-depth-0 begin-button">
+                  waves-light z-depth-0 begin-button"
+                >
                   Begin
                 </button>
               </div>

@@ -4,31 +4,36 @@ import ProjectList from "../projects/projectList/projectlist";
 import SortForm from "./sortform";
 import { connect } from "react-redux";
 import { Redirect } from "react-router-dom";
+import "../../styling/dashboard.css";
 
 class Dashboard extends Component {
   state = {
     orderBy: "createdAt",
-    limit: 8,
+    limit: 9,
   };
   render() {
     const { auth } = this.props;
     if (!auth.uid) return <Redirect to="/" />;
     if (!auth.emailVerified) return <Redirect to={`/verify`} />;
-
     return (
-      <div
-        style={{
-          backgroundColor: "#f5f5f5",
-          marginTop: "-100vh",
-          minHeight: "190vh",
-        }}
-      >
-        <div className="dashboard container" style={{ paddingTop: "100vh" }}>
+      <div style={{ backgroundColor: "white" }}>
+        <div className="dashboard container">
           <div className="row">
-            <h1>
-              <span className="purple-text">Explore </span>
-            </h1>
-            <h4 style={{ float: "left" }}>See what others are up to.</h4>
+            <span
+              className="title-dash"
+              style={{ paddingTop: "10vh", paddingBottom: "5vh" }}
+            >
+              {" "}
+              See what others are up to.
+            </span>
+            <div
+              className="subtitle-dash"
+              style={{ float: "left", whiteSpace: "nowrap" }}
+            >
+              Explore, play, and share!
+            </div>
+          </div>
+          <span>
             <SortForm
               handleDropChange={(e) =>
                 this.setState({
@@ -37,8 +42,17 @@ class Dashboard extends Component {
               }
               orderBy={this.state.orderBy}
             />
+          </span>
+          <br></br>
+          <br></br>
+          <hr></hr>
+          <br></br>
+          <div style={{ marginTop: "20px" }}>
+            <ProjectList
+              orderBy={this.state.orderBy}
+              limit={this.state.limit}
+            />
           </div>
-          <ProjectList orderBy={this.state.orderBy} limit={this.state.limit} />
         </div>
       </div>
     );

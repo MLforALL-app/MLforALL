@@ -11,7 +11,47 @@ h6 {
 .pres {
   font-size: 1.2rem;
 }
+.pd_text1 {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 28px;
+  /* identical to box height */
 
+  color: #ffffff;
+}
+.pd_text2 {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 15px;
+  line-height: 23px;
+  /* identical to box height */
+
+  /* display: flex; */
+  /* align-items: center; */
+
+  color: #ffffff;
+}
+.pd_text3 {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  text-transform: none;
+  /* identical to box height */
+
+  align-items: center;
+  text-align: center;
+}
+.pd_text4 {
+  font-family: Helvetica;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 17px;
+  text-transform: none;
+}
 .content-sum {
   height: 150px;
 }
@@ -33,6 +73,7 @@ h6 {
   background-color: #283593;
   border-color: #283593;
   border-radius: 30px;
+/*   text-align: center; */
   display: table-cell;
   vertical-align: middle;
 }
@@ -46,9 +87,38 @@ h6 {
 .btn-outline {
   color: #283593;
   border-color: #283593;
-  border-width: 2px;
+  border-width: 1.5px;
   border-style: solid;
   background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
+}
+.btn-outline-gen {
+  color: #757575;
+  border-color: #757575;
+  border-width: 1.5px;
+  border-style: solid;
+  background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
+}
+.btn-outline-del {
+  color: #ff4545;
+  border-color: #ff4545;
+  border-width: 1.5px;
+  border-style: solid;
+  background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
+}
+.btn-outline-edit {
+  color: #ffffff;
+  border-color: #ffffff;
+  border-width: 1.5px;
+  border-style: solid;
+  background-color: transparent;
+  vertical-align: middle;
+  text-align: center;
 }
 .btn-outline:focus {
   background-color: transparent;
@@ -82,6 +152,14 @@ h6 {
   padding-left: 1.5rem;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+.project-picture {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: #eeeeee;
+  background-position: center;
+  color: white;
+  height: 250px;
 }
 .nav-wrapper {
   background-color: #ffffff;
@@ -133,6 +211,6 @@ a {
   min-height: 10rem;
 }
 .cat-drop-down {
-	position:relative;
-	float:right;
+  position: relative;
+  float: right;
 }
