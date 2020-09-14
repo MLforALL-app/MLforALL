@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import img1 from "../../../pictures/default_image/default-image.jpg";
+import img1 from "../../../pictures/default_image/banner_2.jpeg";
 import "../../../styling/cards.css";
 import LazyLoad from "react-lazyload";
 

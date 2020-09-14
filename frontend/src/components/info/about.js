@@ -22,8 +22,8 @@ const Header = () => {
   return (
     <div>
       <div className="row center" style={{ display: "block" }}>
-        <div className="col s0 m3"></div>
-        <div className="col s12 m6 container ap-header">
+        {/* <div className="col s0 m3"></div> */}
+        <div className=" container ap-header">
           <div>
             <h1
               className="purple-text abt"
@@ -34,7 +34,7 @@ const Header = () => {
             <p className="infoText">Learn more about the team.</p>
           </div>
         </div>
-        <div className="col s0 m3"></div>
+        {/* <div className="col s0 m3"></div> */}
       </div>
       <br />
       <div className="row center aplearn">

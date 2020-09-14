@@ -19,7 +19,13 @@ class Dashboard extends Component {
       <div style={{ backgroundColor: "white" }}>
         <div className="dashboard container">
           <div className="row">
-            <span className="title-dash"> See what others are up to.</span>
+            <span
+              className="title-dash"
+              style={{ paddingTop: "10vh", paddingBottom: "5vh" }}
+            >
+              {" "}
+              See what others are up to.
+            </span>
             <div
               className="subtitle-dash"
               style={{ float: "left", whiteSpace: "nowrap" }}

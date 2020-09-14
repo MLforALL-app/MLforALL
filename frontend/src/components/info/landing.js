@@ -67,9 +67,9 @@ const Header = () => {
       className="row fullrow-bg "
       style={{ backgroundImage: `url(${img1})`, backgroundColor: "white" }}
     >
-      <div className="col s0 m3"></div>
+      {/* <div className="col s0 m3"></div> */}
       <div
-        className={"container col s12 m6 land-col" + lpHeader}
+        className={"container land-col" + lpHeader}
         style={{ textAlign: "center" }}
       >
         <div>
@@ -99,7 +99,7 @@ const Header = () => {
           </span>
         </div>
       </div>
-      <div className="col s0 m3"></div>
+      {/* <div className="col s0 m3"></div> */}
     </div>
   );
 };
