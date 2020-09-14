@@ -240,7 +240,7 @@ const initializeDescribe = (csvPath, pid, dispatch) => {
   axios
     .post(`${apiHost}/describe`, postInput)
     .then((res) => {
-      console.log(res);
+      // console.log(res);
       dispatch({ type: "UPLOAD_CSV_METADATA" });
     })
     .catch((err) => {
@@ -331,11 +331,11 @@ export const initializeIMGForProject = (img, project, pid) => {
     imgRef
       .put(img)
       .then((snapshot) => {
-        console.log("First");
+        // console.log("First");
         const firestore = getFirestore();
         const projectRef = firestore.collection(projectSource).doc(pid);
         imgRef.getDownloadURL().then((url) => {
-          console.log("inside get download url");
+          // console.log("inside get download url");
           projectRef
             .set({ imgRef: url, imgName: img.name }, { merge: true })
             .then((snapshot) => {
