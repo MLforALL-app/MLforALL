@@ -25,9 +25,8 @@ const CSVCard = ({ pid, auth, project, history }) => {
   const [csvUrl, setcsvUrl] = useState("");
   const owner = auth.uid === project.authorID;
   const csvPath = project.csvPath;
-  firebase
-    .storage()
-    .ref(csvPath)
+  var csvRef = firebase.storage().ref(csvPath);
+  csvRef
     .getDownloadURL()
     .then((url) => {
       setcsvUrl(url);

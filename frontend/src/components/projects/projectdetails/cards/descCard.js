@@ -42,7 +42,7 @@ const DescCard = ({ project, pid, updateContent, auth }) => {
             </Link>
           </u>
         </span>{" "}
-        on {moment(project.createdAt.toDate()).format("M/D/Y")}
+        on {project ? moment(project.createdAt.toDate()).format("M/D/Y") : ""}
       </div>
       <h1>
         <span className="purple-text">{project.title}</span>{" "}

@@ -46,10 +46,18 @@ class UploadCSV extends Component {
     }
   };
 
+  // This fails when the extension type is not a CSV, but rather an
+  // Microsoft Excel notebook. Subtle difference, but causes Megha's
+  // cesd.csv to fail. Will avoid using getFileExtensionDrop in favor
+  // of getFileExtension for now (guaranteeing only .csv files, even
+  // if technically or rendered weirdly through xlsx files)
   // The 'handleSubmit' for drag and dropped files
+  // items[0].type is actually "application/vnd.ms-excel"
   dropHandler = (e) => {
     e.preventDefault();
     // this.setState({ drag: false });
+    console.log("files", e.dataTransfer.files[0]);
+    console.log("items", e.dataTransfer.items[0]);
     BoxColor = "#F5F5F5";
     if (!e.dataTransfer.files[0]) {
       return;
@@ -61,9 +69,15 @@ class UploadCSV extends Component {
         errorText: "Files above 50 Megabytes are not supported",
         fileUploadMessage: "File Too Large",
       });
-    } else if (
-      this.getFileExtensionDrop(e.dataTransfer.items[0].type) !== "csv"
-    ) {
+      // } else if (
+      //   this.getFileExtensionDrop(e.dataTransfer.items[0].type) !== "csv"
+      // ) {
+      //   this.setState({
+      //     fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
+      //     errorText: "Invalid File Type",
+      //     showError: true,
+      //   });
+    } else if (this.getFileExtension(file.name) !== "csv") {
       this.setState({
         fileUploadMessage: "Invalid File Type. Upload a CSV Please.",
         errorText: "Invalid File Type",

@@ -145,20 +145,19 @@ export const deleteMLProject = (pid, uid, project, update) => {
   //update is a true or false
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     // case on whether the path is in Examples using pathIsExample
-    // get todelete files
+    // get to delete files
     const delCSV = project.csvPath.split("/").pop();
     // might be a source of bugs in the future
     // Grabs the "keys" names of the models and places it in an array
     var delVars = Object.keys(project.models);
-    //if it is an update or its an example, we will not delete the csv in storage
-    if (!update || !pathIsExample(project.csvPath)) {
+    // Only scenario in which you delete is if it's not an update and a custom set
+    if (!update && !pathIsExample(project.csvPath)) {
       delVars.push(delCSV);
     }
     //adding uploaded picture to list
-    if (!update || project.imgName !== "") {
+    if (!update && project.imgName !== "") {
       delVars.push(project.imgName);
     }
-
     const storageRef = getFirebase().storage();
     delVars.forEach((filename) => {
       storageRef
@@ -270,6 +269,7 @@ export const initializeCSVForProject = (csv, example, pid) => {
     const firebase = getFirebase();
     const uid = getState().firebase.auth.uid;
 
+    console.log("csv: ", csv);
     const isExample = !csv && example !== "";
     const csvPath = isExample
       ? `Examples/${example}`
@@ -280,6 +280,7 @@ export const initializeCSVForProject = (csv, example, pid) => {
       csvRef
         .put(csv)
         .then((snapshot) => {
+          console.log("snapshot", snapshot);
           dispatch({ type: "UPLOAD_CSV" });
           initializeDescribe(csvPath, pid, dispatch);
         })
@@ -304,13 +305,29 @@ export const initializeCSVForProject = (csv, example, pid) => {
   };
 };
 
-// This function
-export const initializeIMGForProject = (img, pid) => {
+// This function initializes an image for a project; if one already
+// exists, then it deletes that one from storage
+export const initializeIMGForProject = (img, project, pid) => {
   return (dispatch, getState, { getFirestore, getFirebase }) => {
     const firebase = getFirebase();
     const uid = getState().firebase.auth.uid;
     const imgPath = `${uid}/${pid}/${img.name}`;
     var imgRef = firebase.storage().ref(imgPath);
+
+    //deleting previous picture
+    if (project.imgName !== "") {
+      const storageRef = getFirebase().storage();
+      storageRef
+        .ref(`${uid}/${pid}/${project.imgName}`)
+        .delete()
+        .then(() => {
+          dispatch({ type: "DELETE_PROJECT_STORE" });
+        })
+        .catch((err) => {
+          dispatch({ type: "DELETE_PROJECT_STORE_ERROR" });
+        });
+    }
+
     imgRef
       .put(img)
       .then((snapshot) => {

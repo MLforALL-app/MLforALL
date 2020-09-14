@@ -66,14 +66,20 @@ class UploadIMG extends Component {
 
   //handles a confirmation of new photo
   handleSubmit = (e) => {
+    const { project, auth, projectID } = this.props;
     console.log("submission");
+
     e.preventDefault();
     //if there is an error in state or no image, return
     if (this.state.showError || this.state.img === "") {
       return;
     }
 
-    this.props.initializeIMGForProject(this.state.img, this.props.projectID);
+    this.props.initializeIMGForProject(
+      this.state.img,
+      this.props.project,
+      this.props.projectID
+    );
     this.setState({ open: false });
   };
 
@@ -179,10 +185,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    initializeIMGForProject: (img, id) =>
-      dispatch(initializeIMGForProject(img, id)),
-    // updateImgData: (img, project, id) =>
-    //   dispatch(updateImgData(img, project, id)),
+    initializeIMGForProject: (img, project, id) =>
+      dispatch(initializeIMGForProject(img, project, id)),
   };
 };
 
